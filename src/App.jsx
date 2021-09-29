@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import AddColumn from "./components/AddColumn";
+import AddCard from "./components/AddCard";
 import Button from "./components/Button";
 import Tasks from "./components/Tasks";
 
@@ -11,6 +12,7 @@ import Global from "./styles/global"
 
 
 function App() {
+
 
   const [ tasks, setTasks] = useState([
     {
@@ -27,7 +29,24 @@ function App() {
   }
   ])
 
+  const [ card, setCard] = useState([
+    {
+    id: '0',
+    title: 'To do'
+  },
+  {
+    id: '1',
+    title: 'In progress'
+  },
+  {
+    id: '2',
+    title: 'Done'
+  }
+  ])
+
   let quantidade = tasks.length
+  let quantidade2 = card.length
+
 
   const handleColumn = (taskTitle) => {
     const newColumn = [ ...tasks, {
@@ -37,11 +56,23 @@ function App() {
     setTasks(newColumn)
     setDisplay('none')
   }
+  const handleCard = (cardTitle) => {
+    const newCard = [ ...card, {
+      id: quantidade2,
+      title: cardTitle
+    }]
+    setCard(newCard)
+    setDisplay('none')
+  }
 
 
   const [display, setDisplay] = useState('none')
   const handleClick = () =>{
     setDisplay('block')
+  }
+  const [display2, setDisplay2] = useState('none')
+  const handleClick2 = () =>{
+    setDisplay2('block')
   }
 
   return (
@@ -49,7 +80,8 @@ function App() {
       <Header />
       <div className="App">
         <AddColumn display={display} handleColumn={handleColumn} />
-        <Tasks tasks={tasks}/>
+        <AddCard display={display2} handleCard={handleCard} />
+        <Tasks onClick={handleClick2} card={card} tasks={tasks}/>
         <Button onClick={handleClick}>+</Button>
       </div>
       <Global />

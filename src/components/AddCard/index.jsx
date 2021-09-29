@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import Button from "../Button";
 import { Modal } from "./style";
 
-const AddColumn = (props) => {
+const AddCard = (props) => {
+
+
+
     const [inputData, setData] = useState('')
 
     const handleInputChange = (e) => {
@@ -10,7 +13,7 @@ const AddColumn = (props) => {
     }
 
     const handleClick = () => {
-        props.handleColumn(inputData)
+        props.handleCard(inputData)
     }
 
     return(
@@ -31,4 +34,4 @@ const AddColumn = (props) => {
     )
 }
 
-export default AddColumn;
+export default AddCard;

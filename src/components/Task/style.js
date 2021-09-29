@@ -8,34 +8,11 @@ export const Container = styled.div`
     background-color: #d62828;
     box-shadow: 3px 3px 3px gray;
 
-    /*
-    & + div{
-        border-left: 1px solid rgba(0,0,0, 0.05);
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+
+    h1{
+        height: 45px;
     }
-
-    header{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 38px;
-
-        h2{
-            font-weight: 500;
-            font-size: 16px;
-            padding: 0 10px;
-        }
-
-        button{
-            width: 38px;
-            height: 38px;
-            border-radius: 18px;
-            background-color: #3b5b;
-            border: 0;
-            cursor: pointer;
-        }
-    }
-
-    ul{
-        margin-top: 30px;
-    } */
 `;
