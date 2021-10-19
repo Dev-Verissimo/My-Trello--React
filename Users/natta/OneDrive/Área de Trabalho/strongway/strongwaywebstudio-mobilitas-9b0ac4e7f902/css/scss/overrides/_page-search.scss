@@ -1,0 +1,59 @@
+.page--search {
+	h1.color {
+		@extend .page__title;	
+	}
+
+	#div_erro {
+		@extend %base_box;
+		@include rem(margin-bottom, 15);
+
+		center {
+			text-align: left;
+
+			br {
+				display: none;
+			}
+		}
+	}
+
+	#Vitrine [name="form1"] {
+		overflow-x: auto;
+
+		input {
+			margin-bottom: 0;
+		}
+
+		fieldset {
+			@include rem(min-width, 580);
+			position: relative;
+
+			> br:first-child {
+				display: none;
+			}
+
+			p {
+				@include rem(margin-bottom, 20);
+			}
+
+			&:after {
+				@extend %base_bt_no_states;
+				content: "OK";
+				position: absolute;
+				@include rem(left, 15);
+				@include rem(bottom, 15);
+				margin: 0;
+				pointer-events: none;
+			}
+
+			[name="imageField"] {
+				opacity: 0;
+				@include rem(width, 70);
+				@include rem(height, 35);
+			}
+		}
+	}
+
+	#ProdBlock {
+		display: none;
+	}
+}

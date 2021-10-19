@@ -1,0 +1,22 @@
+{% if paginate.params.pageCount > 1 %}
+	<div class="pagination">
+		{% if paginate.hasPrev %}
+			{{ paginate.prev('Anterior', {'class': 'pagination__link pagination__prev pagination__prev--active'}) }}
+		{% else %}
+			{{ paginate.prev('Anterior', {'class': 'pagination__link pagination__prev pagination__prev--disabled'}) }}
+		{% endif %}	
+		
+		{{ paginate.numbers({
+			'modulus': 9,
+			'separator': '',
+			'class': 'pagination__link',
+			'currentClass': 'pagination__link--active'
+		}) }}
+
+		{% if paginate.hasNext %}
+			{{ paginate.next('Próxima', {'class': 'pagination__link pagination__next pagination__next--active'}) }}
+		{% else %}
+			{{ paginate.next('Próxima', {'class': 'pagination__link pagination__next pagination__next--disabled'}) }}
+		{% endif %}
+	</div>
+{% endif %}

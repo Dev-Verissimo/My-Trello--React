@@ -1,0 +1,134 @@
+{% set prevent_lazy_load = (settings.is_banner_lazy_load_enabled) ? false : true %}
+
+{# Categorias Destacadas #}
+{% if settings.is_featured_categories_enabled %}
+	<div class="featured-categories-slider">
+		{% for index in 1..6 %}
+			{% if settings['featured_category_' ~ index ~ '_id'] %}
+				{% element 'snippets/featured-category' { featured_category_number: index } %}
+			{% endif %}
+		{% endfor %}
+	</div>
+
+	<hr>
+{% endif %}
+
+{# Vitrine 1 #}
+{% element 'snippets/configurable-showcase' { showcase_number: 1 } %}
+
+{# Banners Extra #}
+{% if banner.extra1 or banner.extra2 or banner.extra3 %}
+	<div class="grid-container">
+		{% if banner.extra1 %}
+			<div class="b-xs-12 b-md-4">
+				{% element 'snippets/banner' {
+					"banner_data": banners.extra1,
+					"prevent_lazy_load": prevent_lazy_load
+				} %}
+			</div>
+		{% endif %}
+
+		{% if banner.extra2 %}
+			<div class="b-xs-12 b-md-4">
+				{% element 'snippets/banner' {
+					"banner_data": banners.extra2,
+					"prevent_lazy_load": prevent_lazy_load
+				} %}
+			</div>
+		{% endif %}
+
+		{% if banner.extra3 %}
+			<div class="b-xs-12 b-md-4">
+				{% element 'snippets/banner' {
+					"banner_data": banners.extra3,
+					"prevent_lazy_load": prevent_lazy_load
+				} %}
+			</div>
+		{% endif %}
+	</div>
+{% endif %}
+
+{# Vitrine 2 #}
+{% element 'snippets/configurable-showcase' { showcase_number: 2 } %}
+
+{# Banners Extra #}
+{% if banner.extra4 or banner.extra5 %}
+	<div class="grid-container">
+		{% if banner.extra4 %}
+			<div class="b-xs-12 b-md-6">
+				{% element 'snippets/banner' {
+					"banner_data": banners.extra4,
+					"prevent_lazy_load": prevent_lazy_load
+				} %}
+			</div>
+		{% endif %}
+
+		{% if banner.extra5 %}
+			<div class="b-xs-12 b-md-6">
+				{% element 'snippets/banner' {
+					"banner_data": banners.extra5,
+					"prevent_lazy_load": prevent_lazy_load
+				} %}
+			</div>
+		{% endif %}
+	</div>
+{% endif %}
+
+{# Vitrine 3 #}
+{% element 'snippets/configurable-showcase' { showcase_number: 3 } %}
+
+{% if settings.is_reviews_enabled %}
+	<hr>
+	
+	<section class="customer-reviews">
+		<header class="customer-reviews__header">
+			{% if settings.headings == "1" %}
+				<h2 class="customer-reviews__title">Depoimentos</h2>
+			{% else %}
+				<h1 class="customer-reviews__title">Depoimentos</h1>
+			{% endif %}
+			{% for page in pages.custom %}
+				{% if page.slug == 'depoimentos-de-clientes' %}
+					<a href="{{ page.url }}" class="customer-reviews__link">
+						<span class="customer-reviews__link__text">Ver todos</span>
+						<span class="customer-reviews__link__icon icon-chevron-right"></span>
+					</a>
+				{% endif %}
+			{% endfor %}
+		</header>
+
+		{% element 'CustomerReview.reviews' %}
+	</section>
+{% endif %}
+
+{% if settings.is_news_enabled %}
+	<hr>
+
+	<section class="latest-news">
+		<header class="latest-news__header">
+			{% if settings.headings == "1" %}
+				<h2 class="latest-news__title">&Uacute;ltimas Not&iacute;cias</h2>
+			{% else %}
+				<h1 class="latest-news__title">&Uacute;ltimas Not&iacute;cias</h1>
+			{% endif %}
+			{% for page in pages.custom %}
+				{% if page.slug == 'noticias' %}
+					<a href="{{ page.url }}" class="latest-news__link">
+						<span class="latest-news__link__text">Ver todas</span>
+						<span class="latest-news__link__icon icon-chevron-right"></span>
+					</a>
+				{% endif %}
+			{% endfor %}
+		</header>
+
+		{% element 'News.news' %}
+
+		<div class="news-ajax"></div>
+	</section>
+{% endif %}
+
+{% if utils.is_mobile and settings.brands_mobile_enabled %}
+	{% element 'snippets/brands' %}
+{% elseif not utils.is_mobile and settings.brands_desktop_enabled %}
+	{% element 'snippets/brands' %}
+{% endif %}

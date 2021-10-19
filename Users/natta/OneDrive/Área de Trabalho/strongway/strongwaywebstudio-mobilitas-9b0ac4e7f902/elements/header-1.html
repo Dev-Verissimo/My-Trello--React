@@ -1,0 +1,203 @@
+<header
+	class="header
+	{{ (settings.layout_style == 'boxed_layout') ? 'header--boxed' : 'header--full-width' }}
+	{{ (settings.is_header_fixed) ? 'is-fixed' }}
+">
+	{% if settings.is_header_fixed %}
+		<div class="header__placeholder"></div>
+
+		<div class="header__fixer clearfix">
+	{% endif %}
+
+		{% if settings.layout_style != "fullwidth_layout" %}
+			<div class="centralizado">
+				<div class="b-xs-12">
+		{% endif %}
+		
+		{%
+			if (settings.header_link_1_text and settings.header_link_1_url)
+			or (settings.header_link_2_text and settings.header_link_2_url)
+			or settings.show_header_contacts
+			or settings.show_header_social
+		%}
+		<div class="header__line-1 header__line-1--model-{{ settings.header_line_1_model }}">
+			<div class="centralizado">
+				<div class="b-xs-12">
+					<div class="header__line-1__content">
+						{%
+							if (settings.header_link_1_text and settings.header_link_1_url)
+							or (settings.header_link_2_text and settings.header_link_2_url)
+						%}
+							<div class="header__links">
+								{% if settings.header_link_1_text and settings.header_link_1_url %}
+									<a
+										class="header__link header__link--1"
+										href="{{ settings.header_link_1_url }}"
+									>
+										{{ settings.header_link_1_text }}
+									</a>
+								{% endif %}
+								
+								{% if settings.header_link_2_text and settings.header_link_2_url %}
+									<a
+										class="header__link header__link--2"
+										href="{{ settings.header_link_2_url }}"
+									>
+										{{ settings.header_link_2_text }}
+									</a>
+								{% endif %}
+							</div>
+						{% endif %}
+						
+						{% if settings.show_header_contacts %}
+							<div class="hidden-xs hidden-sm">
+								{% element 'snippets/contact-info' { modifier: 'header' } %}
+							</div>
+						{% endif %}
+						
+						{% if settings.show_header_social %}
+							<div class="hidden-xs hidden-sm">
+								{% element 'snippets/social' { modifier: 'header' } %}
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="header__line-2 header__line-2--model-{{ settings.header_line_2_model }}">
+		
+		{% else %}
+
+		<div class="header__line-2 header__line-2--model-{{ settings.header_line_2_model }} header__line-2--no-line-1">
+		
+		{% endif %}
+		
+			<div class="centralizado">
+				<div class="b-xs-12">
+					<div class="header__line-2__content">
+						{# Tecla de atalho para facilitar a navega��o por cegos e pessoas sem mouse #}
+						<a href="{{ store.current_url }}#conteudo-principal" title="Pular navega&ccedil;&atilde;o" accesskey="s" class="visuallyhidden" tabindex="1">
+							Pular Navega&ccedil;&atilde;o (s)
+						</a>
+		
+						<div class="logo__wrapper">
+							<a class="logo" href="{{ links.home }}" title="{{ store.name }}" accesskey="h">
+							{% if settings.headings == "1" %}
+								<h1>
+									{%
+										if settings.main_logo
+										or settings.main_logo_2x
+										or settings.mobile_logo
+										or settings.mobile_logo_2x
+									%}
+										{% if settings.main_logo or settings.main_logo_2x %}
+											<img
+												src="{{ ( settings.main_logo ) ? asset(settings.main_logo) : asset(settings.main_logo_2x) }}"
+												{% if settings.main_logo and settings.main_logo_2x %}
+													srcset="{{ asset(settings.main_logo) }} 1x, {{ asset(settings.main_logo_2x) }} 2x"
+												{% endif %}
+												class="{{ (settings.mobile_logo or settings.mobile_logo_2x) ? 'hidden-xs hidden-sm' }}"
+												alt="{{ store.name }}"
+												title="{{ store.name }}"
+											>
+										{% endif %}
+										{% if settings.mobile_logo or settings.mobile_logo_2x %}
+											<img
+												src="{{ ( settings.mobile_logo ) ? asset(settings.mobile_logo) : asset(settings.mobile_logo_2x) }}"
+												{% if settings.mobile_logo and settings.mobile_logo_2x %}
+													srcset="{{ asset(settings.mobile_logo) }} 1x, {{ asset(settings.mobile_logo_2x) }} 2x"
+												{% endif %}
+												class="{{ (settings.main_logo or settings.main_logo_2x) ? 'hidden-md hidden-lg hidden-xl' }}"
+												alt="{{ store.name }}"
+												title="{{ store.name }}"
+											>
+										{% endif %}
+									{% else %}
+										{{ Image('logo') }}
+									{% endif %} 
+										</h1>
+								{% else %}
+									<strong>
+										{%
+											if settings.main_logo
+											or settings.main_logo_2x
+											or settings.mobile_logo
+											or settings.mobile_logo_2x
+										%}
+											{% if settings.main_logo or settings.main_logo_2x %}
+												<img
+													src="{{ ( settings.main_logo ) ? asset(settings.main_logo) : asset(settings.main_logo_2x) }}"
+													{% if settings.main_logo and settings.main_logo_2x %}
+														srcset="{{ asset(settings.main_logo) }} 1x, {{ asset(settings.main_logo_2x) }} 2x"
+													{% endif %}
+													class="{{ (settings.mobile_logo or settings.mobile_logo_2x) ? 'hidden-xs hidden-sm' }}"
+													alt="{{ store.name }}"
+													title="{{ store.name }}"
+												>
+											{% endif %}
+											{% if settings.mobile_logo or settings.mobile_logo_2x %}
+												<img
+													src="{{ ( settings.mobile_logo ) ? asset(settings.mobile_logo) : asset(settings.mobile_logo_2x) }}"
+													{% if settings.mobile_logo and settings.mobile_logo_2x %}
+														srcset="{{ asset(settings.mobile_logo) }} 1x, {{ asset(settings.mobile_logo_2x) }} 2x"
+													{% endif %}
+													class="{{ (settings.main_logo or settings.main_logo_2x) ? 'hidden-md hidden-lg hidden-xl' }}"
+													alt="{{ store.name }}"
+													title="{{ store.name }}"
+												>
+											{% endif %}
+										{% else %}
+											{{ Image('logo') }}
+										{% endif %} 
+										</strong>
+							{% endif %}
+							</a>
+						</div>
+		
+						<div class="menu-toggle__wrapper hidden-md hidden-lg hidden-xl">
+							<button class="menu-toggle js-toggle-mobile" aria-expanded="false" aria-controls="menuMobile">
+								<span class="icon icon-menu" aria-hidden="true"></span>
+								<span class="visuallyhidden">Clique para abrir o menu</span>
+							</button>
+						</div>
+						
+						<div class="search-form__wrapper">
+							{% element 'snippets/search' %}
+						</div>
+						
+						<div class="icons__wrapper">
+							<div class="account__wrapper">
+								{% element 'snippets/user-account' %}
+							</div>
+			
+							<div class="cart__wrapper">
+								{% element 'snippets/cart' %}
+							</div>
+						</div>
+						
+						<div class="menu-mobile__wrapper" id="menuMobile">
+							{% element 'snippets/menu-mobile'  %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="header__line-3 hidden-xs hidden-sm">
+			<div class="centralizado">
+				<div class="b-xs-12">
+					{% element 'snippets/categories-list' { 'menu_name' : 'main-menu' } %}
+				</div>
+			</div>
+		</div>
+
+		{% if settings.layout_style != "fullwidth_layout" %}
+				</div>
+			</div>
+		{% endif %}
+
+	{% if settings.is_header_fixed %}
+		</div>
+	{% endif %}
+</header>

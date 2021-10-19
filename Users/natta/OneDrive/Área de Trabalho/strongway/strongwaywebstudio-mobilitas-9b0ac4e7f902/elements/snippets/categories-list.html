@@ -1,0 +1,260 @@
+<nav class="{{ menu_name }}__navigation" aria-label="Menu Principal" id="menuPrincipal">
+	{# Define o limite de categorias no primeiro nível #}
+	{% set categories_limit = 8 %}
+
+	{% if settings.categories_limit %}
+		{% set categories_limit = settings.categories_limit %}
+	{% endif %}
+
+	<ul
+		class="
+			{{ menu_name }}__lista
+			{% if settings.categories_aligmnent %}
+				{{ menu_name }}__lista--{{ settings.categories_aligmnent }}
+			{% endif %}
+			{{ (categories|length > categories_limit) ? 'has-limit' : null }}
+		"
+		role="menubar"
+	>
+		{% for category in categories  %}
+			{% if loop.index <= categories_limit or not categories_limit %}
+				{% if category.children %}
+					<li class="{{ menu_name }}__item {{ menu_name }}__item-lvl1 has-subnivel" role="menuitem" aria-haspopup="true">
+				{% else %}
+					<li class="{{ menu_name }}__item {{ menu_name }}__item-lvl1" role="menuitem">
+				{% endif %}
+
+				<a class="{{ menu_name }}__link" href="{{ category.link }}">
+					{% if category.images %}
+						<img src="{{ category.images.0 }}" aria-hidden="true" alt="" class="{{ menu_name }}__image" />
+					{% endif %}
+
+					<span class="{{ menu_name }}__link-texto">
+						{{ category.name }}
+					</span>
+				</a>
+
+				{% if category.children %}
+
+				{% if settings.is_featured_product_menu %}
+					{# Carrega o produto mais vendido #}
+					{% set best_selling = Products({
+						'categories': [category.id],
+						'filter': 'featured',
+						'order': {'quantity_sold': 'desc'},
+						'limit': 1
+					}) %}
+				{% endif %}
+
+				<div
+					class="
+						{{ menu_name }}__subnivel
+						clearfix
+						{{ (settings.is_featured_product_menu and best_selling) ? 'has-product' }}
+						{{ (category.children|batch(6)|length < 2) ? 'is-narrow' }}
+						{{ (category.children|batch(6)|length == 2) ? 'is-medium' }}
+						{{ (category.children|batch(6)|length > 2) ? 'is-wide' }}"
+				>
+					
+					<div class="{{ menu_name }}__subnivel-wrapper">
+						{% if best_selling %}
+							<div
+								class="{{ (category.children|batch(6)|length < 2) ? 'b-xs-6' : 'b-xs-4' }}"
+							>
+								<div class="{{ menu_name }}__product-container">
+									{% element 'snippets/product' {
+										"product": best_selling[0],
+										"prevent_lazy_load": true,
+										"prevent_buy": true,
+										"modifier": "compact"
+									} %}
+								</div>
+							</div>
+						{% endif %}
+						
+						{% if settings.is_featured_product_menu and best_selling %}
+							<div
+								class="{{ (settings.is_featured_product_menu and best_selling and category.children|batch(6)|length >= 2) ? 'b-xs-8' : 'b-xs-6' }}"
+							>
+						{% else %}
+							<div class="b-xs-12">
+						{% endif %}
+							<div class="grid-container">
+								{# Cria listas de 6 em 6 filhos #}
+								{% for batch in category.children|batch(6) %}
+									{# Clearfix para colunas #}
+									{% if category.children|batch(6)|length > 3 %}
+										{# Se for o primeiro item do batch, abre o clearfix #}
+										{% if loop.first %}
+											<div class="{{ menu_name }}__divider">
+										{% endif %}
+										{% if loop.index % 3 == 1 and not loop.first %}
+											{# Fecha o clearfix e abre outro #}
+											</div>
+											<div class="{{ menu_name }}__divider">
+										{% endif %}
+									{% endif %}
+
+									{% if category.children|batch(6)|length >= 3 %}
+										<div class="b-xs-12 b-md-4">
+									{% elseif category.children|batch(6)|length == 2 %}
+										<div class="b-xs-12 b-md-6">
+									{% else %}
+										<div class="b-xs-12">
+									{% endif %}
+										<ul class="{{ menu_name }}__subnivel-lista" role="menu">
+											{% for child in batch %}
+												{% if child.children %}
+													<li class="{{ menu_name }}__item {{ menu_name }}__item-lvl2 has-subnivel" role="menuitem" aria-haspopup="true">
+												{% else %}
+													<li class="{{ menu_name }}__item {{ menu_name }}__item-lvl2" role="menuitem">
+												{% endif %}
+
+													<a class="{{ menu_name }}__link" href="{{ child.link }}">
+														{% if child.images %}
+															<img src="{{ child.images.0 }}" aria-hidden="true" alt="" class="{{ menu_name }}__image" />
+														{% endif %}
+														<span class="{{ menu_name }}__link-texto">
+															{{ child.name }}
+														</span>
+													</a>
+
+													{# Menu de netos #}
+													{% if child.children %}
+														<ul class="{{ menu_name }}__subnivel-neto-lista" role="menu">
+															{% for grandchild in child.children %}
+																<li class="{{ menu_name }}__item {{ menu_name }}__item-lvl3" role="menuitem">
+																	<a class="{{ menu_name }}__link" href="{{ grandchild.link }}">
+																		{% if grandchild.images %}
+																			<img src="{{ grandchild.images.0 }}" aria-hidden="true" alt="" class="{{ menu_name }}__image" />
+																		{% endif %}
+																		<span class="{{ menu_name }}__link-texto">
+																			{{ grandchild.name }}
+																		</span>
+																	</a>
+																</li>
+															{% endfor %}
+														</ul>
+													{% endif %}
+												</li>
+											{% endfor %}
+										</ul>
+									</div>
+									
+									{% if category.children|batch(6)|length > 3 and loop.last %}
+										</div> {# Fecha o clearfix no último loop #}
+									{% endif %}
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+				</li>
+			{% endif %}
+		{% endfor %}
+
+		{% if categories|length > categories_limit %}
+			{% set remaining_categories = [] %}
+
+			{% for category in categories %}
+				{% if loop.index > categories_limit %}
+					{% set remaining_categories = remaining_categories|merge([category]) %}
+				{% endif %}
+			{% endfor %}
+
+			<li class="{{ menu_name }}__item {{ menu_name }}__item-lvl1 has-subnivel" role="menuitem" aria-haspopup="true">
+				<span class="{{ menu_name }}__link">
+					{% if settings.more_categories_icon %}
+						<img
+							src="{{ asset(settings.more_categories_icon) }}"
+							aria-hidden="true"
+							alt=""
+							class="{{ menu_name }}__image"
+						/>
+					{% endif %}
+					<span class="{{ menu_name }}__link-texto">
+						<abbr title="Mais">+</abbr> Categorias
+					</span>
+				</span>
+
+				<div
+					class="
+					{{ menu_name }}__subnivel
+					clearfix
+					{{ (remaining_categories|batch(6)|length < 2) ? 'is-narrow' }}
+					{{ (remaining_categories|batch(6)|length == 2) ? 'is-medium' }}
+					{{ (remaining_categories|batch(6)|length > 2) ? 'is-wide' }}"
+				>
+					
+					<div class="{{ menu_name }}__subnivel-wrapper">
+						{% for batch in remaining_categories|batch(6) %}
+							{# Clearfix para colunas #}
+							{% if remaining_categories|batch(6)|length > 3 %}
+								{# Se for o primeiro item do batch, abre o clearfix #}
+								{% if loop.first %}
+									<div class="{{ menu_name }}__divider">
+								{% endif %}
+								{% if loop.index % 3 == 1 and not loop.first %}
+									{# Fecha o clearfix e abre outro #}
+									</div>
+									<div class="{{ menu_name }}__divider">
+								{% endif %}
+							{% endif %}
+							
+							{% if remaining_categories|batch(6)|length >= 3 %}
+								<div class="b-xs-12 b-md-4">
+							{% elseif remaining_categories|batch(6)|length == 2 %}
+								<div class="b-xs-12 b-md-6">
+							{% else %}
+								<div class="b-xs-12">
+							{% endif %}
+								<ul class="{{ menu_name }}__subnivel-lista" role="menu">
+									{% for child in batch %}
+										{% if child.children %}
+											<li class="{{ menu_name }}__item {{ menu_name }}__item-lvl2 has-subnivel" role="menuitem" aria-haspopup="true">
+										{% else %}
+											<li class="{{ menu_name }}__item {{ menu_name }}__item-lvl2" role="menuitem">
+										{% endif %}
+
+											<a class="{{ menu_name }}__link" href="{{ child.link }}">
+												{% if child.images %}
+													<img src="{{ child.images.0 }}" aria-hidden="true" alt="" class="{{ menu_name }}__image" />
+												{% endif %}
+												<span class="{{ menu_name }}__link-texto">
+													{{ child.name }}
+												</span>
+											</a>
+
+											{# Menu de netos #}
+											{% if child.children %}
+												<ul class="{{ menu_name }}__subnivel-neto-lista" role="menu">
+													{% for grandchild in child.children %}
+														<li class="{{ menu_name }}__item {{ menu_name }}__item-lvl3" role="menuitem">
+															<a class="{{ menu_name }}__link" href="{{ grandchild.link }}">
+																{% if grandchild.images %}
+																	<img src="{{ grandchild.images.0 }}" aria-hidden="true" alt="" class="{{ menu_name }}__image" />
+																{% endif %}
+																<span class="{{ menu_name }}__link-texto">
+																	{{ grandchild.name }}
+																</span>
+															</a>
+														</li>
+													{% endfor %}
+												</ul>
+											{% endif %}
+										</li>
+									{% endfor %}
+								</ul>
+							</div>
+
+							{% if remaining_categories|batch(6)|length > 3 and loop.last %}
+								</div> {# Fecha o clearfix no último loop #}
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			</li>
+		{% endif %}
+	</ul>
+</nav>

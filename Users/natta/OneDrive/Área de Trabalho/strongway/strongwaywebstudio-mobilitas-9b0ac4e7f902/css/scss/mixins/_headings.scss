@@ -1,0 +1,44 @@
+// Este arquivo define os estilos dos cabeçalhos (headings).
+// O seu propósito é abstrair os estilos de cabeçalhos, de modo
+// que possam ser reutilizados em outros elementos que, visualmente,
+// sejam similares a eles, como subtítulos. Também é útil para
+// estilizar títulos de seções e asides como headings de nível
+// inferior, mesmo que, na verdade, sejam tags h1.
+
+// Obviamente, Esses estilos são incluídos nos headings em si.
+@mixin base-headings {
+	font-weight: normal;
+	line-height: 1;
+	margin-bottom: 0.5em;
+	color: $texto-escuro;
+	font-family: $fonte-2;
+}
+
+@mixin h1 { 
+	font-size: 8vw;
+
+	@include bp(min-width, $bp-sm + 1) {
+		font-size: 5.75vw;
+	}
+
+	@include bp(min-width, $bp-md + 1) {
+		@include rem(font-size, 35);
+	}
+}
+
+@mixin h2 { 
+	font-size: 7vw;
+
+	@include bp(min-width, $bp-sm + 1) {
+		font-size: 5vw;
+	}
+
+	@include bp(min-width, $bp-md + 1) {
+		@include rem(font-size, 30);
+	}
+}
+
+@mixin h3 { @include rem(font-size, 25); }
+@mixin h4 { @include rem(font-size, 20); }
+@mixin h5 { @include rem(font-size, 16); font-weight: bold; }
+@mixin h6 { @include rem(font-size, 14); font-weight: bold; }

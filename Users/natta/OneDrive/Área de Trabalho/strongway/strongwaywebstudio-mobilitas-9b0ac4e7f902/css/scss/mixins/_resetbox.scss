@@ -1,0 +1,5 @@
+// Elimina paddings e margins
+@mixin resetbox {
+	padding:0;
+	margin:0;
+}

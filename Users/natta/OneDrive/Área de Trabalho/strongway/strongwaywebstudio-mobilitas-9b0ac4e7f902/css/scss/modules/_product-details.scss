@@ -1,0 +1,153 @@
+.product-details {
+	@extend %base_shadow;
+	background-color: transparent;
+	@include rem(border-radius, 3);
+	@include rem(margin-bottom, 30);
+	display: flex;
+	flex-flow: column;
+	align-items: stretch;
+	width: 100%;
+
+	@include bp(min-width, $bp-md + 1) {
+		flex-flow: row;
+	}
+
+	&__gallery-container {
+		background-color: rgba($cinza-1, 0.9);
+		@include rem(padding, 15);
+		@include rem(border-radius, 3 3 0 0);
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(padding, 20);
+			border-right: 1px solid rgba(black, 0.05);
+		}
+
+		@include bp(min-width, $bp-lg + 1) {
+			@include rem(padding, 30);
+		}
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(border-radius, 3 0 0 3);
+			min-width: 50%;
+		}
+		
+		@include bp(min-width, $bp-lg + 1) {
+			min-width: 41%;
+		}
+	}
+
+	&__shop-container {
+		@extend %base_box;
+		box-shadow: none;
+		flex: 1 100%;
+		@include rem(border-radius, 0 0 3 3);
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(border-radius, 0 3 3 0);
+		}
+
+		@include bp(min-width, $bp-lg + 1) {
+			@include rem(padding, 30 50);
+		}
+	}
+
+	&__gallery {
+		@include rem(margin-bottom, 30);
+	}
+
+	&__video {
+		@include rem(margin-bottom, 20);
+	}
+
+	&__no-image {
+		display: block;
+		position: relative;
+		padding-top: percentage(10/16);
+		overflow: hidden;
+		@include rem(border-radius, 3);
+		@include rem(margin-bottom, 10);
+		background-color: $bg-claro;
+
+		&:before {
+			@extend .product__no-image;
+		}
+	}
+
+	&__no-image-message {
+		text-align: center;
+		@include rem(margin-bottom, 15);
+	}
+
+	&__social {
+	}
+
+	&__name {
+		@include h3;
+		@include rem(margin-bottom, 15);
+	}
+
+	&__price {
+		&__loader {
+			@include rem(max-width, 16);
+			@include rem(margin, 7 0);
+		}		
+	}
+
+	// RATINGS
+
+	&__additional-message {
+		@include rem(margin, 15 0);
+	}
+
+	// LABELS
+	.product__labels {
+		display: block;
+		@include rem(margin-top, 10);
+
+		@include bp(max-width, $bp-md) {
+			transform: none;
+		}
+	}
+
+	&__icons {
+		> br:first-child {
+			display: none;
+		}
+	}
+
+	&__form {
+
+	}
+
+	&__tabs {
+		@extend %base_box;
+
+		// Esconde títulos e quebras de linha que vêm com o conteúdo
+		// por padrão
+		.board_htm,
+		#downloads_holder,
+		.board {
+			> br:first-child {
+				display: none;				
+			}
+		}
+
+		.board_htm {
+			padding: 0;
+			margin: 0;
+			box-shadow: none;
+		}
+
+		h2.color {
+			display: none;
+
+			+ br {
+				display: none;
+			}
+		}
+	}
+
+	&__details {
+		@include rem(margin-top, 5);
+	}
+}

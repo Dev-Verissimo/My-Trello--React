@@ -1,0 +1,160 @@
+.page--noticia {
+	.dataNoticia {
+		float: none;
+	}
+	
+	#ProdBlock {
+		@include rem(padding, 30 0);
+		@include separator-border('top');
+	}
+
+	#ProdAbas {
+		@include rem(margin-bottom, 20);
+	}
+
+	.container3 {
+		> .container2 {
+			> .board:first-child {
+			}
+		}
+	}
+}
+
+.imagemNoticia {
+	float: none;
+	padding: 0;
+	@include rem(margin, 0 15 15 0);
+	@include rem(width, 70);
+	vertical-align: top;
+
+	@include bp(min-width, $bp-md + 1) {
+		float: left;
+		@include rem(width, 150);
+	}
+
+	@include bp(min-width, $bp-lg + 1) {
+		@include rem(width, 200);
+	}
+
+	+ #noticiaArquivos {
+		display: inline-block;
+		vertical-align: top;
+	}
+}
+
+// Arquivos
+#noticiaArquivos {
+	float: none;
+	padding: 0;
+	margin: 0;
+	width: auto;
+
+	h2 {
+		@include rem(font-size, $basefont);
+		color: $link-color;
+		height: auto;
+		@include rem(margin, 10 0);
+		text-align: left;
+		cursor: pointer;
+
+		&:before {
+			@extend %icons_theme;
+			content: $icon-download;
+			@include rem(margin, -2 5 0 0);
+			@include rem(font-size, 20);
+			display: inline-block;
+			vertical-align: middle;
+		}
+	}
+}
+
+#listaNoticiaArquivos {
+	padding: 0;
+	list-style: none;
+	@include rem(margin, 0 0 15);
+
+	&.is-hidden {
+		opacity: 0;
+		height: 0;
+		margin: 0;
+		overflow: hidden;
+	}
+
+	li {
+		@include separator-border;
+		padding: 0;
+		margin: 0;
+		list-style: none;
+
+		a {
+			display: block;
+			@include rem(padding, 5 0);
+		}
+	}
+}
+
+// Produtos Relacionados
+#listaNoticiaProdutos {
+	margin: 0;
+
+	li {
+		@extend %clearfix;
+		@include rem(margin, 0 0 15);
+		@include rem(padding, 0 0 20 85);
+		border: none;
+		@include separator-border();
+		height: auto;
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(padding-left, 105);
+		}
+	}
+
+	#produto_imagem {
+		float: left;
+		@include rem(margin, 0 0 0 -85);
+		@include square(70);
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(margin, 0 0 0 -105);
+			@include square(90);
+		}
+	}
+
+	#produto_dados {
+		float: left;
+		width: 50%;
+
+		h3 {
+			@include rem(font-size, $basefont);
+		}
+	}
+
+	#produto_comprar {
+		float: right;
+		text-align: right;
+		width: 50%;
+		@include rem(font-size, 12);
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(font-size, $basefont);
+		}
+
+		a {
+			@extend %base_bt_highlight;
+
+			&:before {
+				content: "Comprar";				
+			}
+
+			img {
+				@extend %visuallyhidden;
+			}
+		}
+	}
+	
+	.precoAvista,
+	.precoparc {
+		font-weight: bold;
+	}
+}

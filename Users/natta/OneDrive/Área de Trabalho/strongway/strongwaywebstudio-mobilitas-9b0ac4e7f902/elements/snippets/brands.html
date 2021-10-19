@@ -1,0 +1,31 @@
+{% set brands = Brands({ "no_paging":1 }) %}
+{% set selected_brands = settings.selected_brands|replace({' ' : ''})|split(',') %}
+
+{% if brands %}
+	<div class="site-brands">
+		{% if settings.brands_title %}
+			{% if settings.headings == "1" %}
+				<h2 class="site-brands__title">{{ settings.brands_title }}</h2>
+				{% else %}
+				<h1 class="site-brands__title">{{ settings.brands_title }}</h1>
+			{% endif %}
+		{% endif %}
+
+		<div class="site-brands__slider">
+			{% for brand in brands if brand.slug in selected_brands %}
+				<a
+					href="{{ store.url ~ '/' ~ brand.slug }}"
+					title="{{ brand.name }}"
+					class="site-brand"
+				>
+					<img
+						data-lazy="{{ asset( 'img/' ~ brand.slug ~ '.png' ) }}"
+						alt="{{ brand.name }}"
+						title="{{ brand.name }}"
+						class="site-brand__logo lazy"
+					>
+				</a>
+			{% endfor %}
+		</div>
+	</div>
+{% endif %}

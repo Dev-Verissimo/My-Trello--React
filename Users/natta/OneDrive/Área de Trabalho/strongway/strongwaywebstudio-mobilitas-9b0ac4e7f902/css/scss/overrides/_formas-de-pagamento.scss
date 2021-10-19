@@ -1,0 +1,114 @@
+#atualizaFormas {
+	+ br {
+		display: none;
+	}
+
+	> p:first-child {
+		@include rem(margin, 0 0 20);
+		@include rem(padding, 0 0 20);
+		@include separator-border;
+	}
+
+	// Forma 1 - Lista Aberta
+	.Forma1 {
+		li {
+			@include separator-border;
+			@include rem(padding, 10 0);
+
+			> [id^="anchor_"] {
+				color: $texto-escuro;
+
+				&:visited {
+					color: $texto-escuro;
+				}
+			}
+		}
+
+		.tablePags {
+			td {
+				font-family: $fonte;
+				@include rem(font-size, 11);
+				vertical-align: top;
+
+				@include bp(min-width, $bp-md + 1) {
+					@include rem(font-size, 13);
+				}
+
+				&:first-child {
+					display: none;
+					@include rem(width, 50);
+					@include rem(padding-right, 10);
+
+					@include bp(min-width, $bp-sm + 1) {
+						display: table-cell;
+					}
+					
+					@include bp(min-width, $bp-md + 1) {
+						@include rem(width, 100);
+					}
+				}
+			}
+		}
+	}
+
+	// Forma 2 - Ícones
+	.Forma2 {
+		@extend %clearfix;
+		@include separator-border;
+
+		.caixa-forma-order,
+		.caixa-forma-credit,
+		.caixa-forma-discount {
+			width: 50%;
+			@include rem(padding, 0 5 20 0);
+			float: left;
+
+			@include bp(min-width, $bp-md + 1) {
+				@include rem(padding, 0 20 20);
+			}
+		}
+
+		ul {
+			font-size: 0;
+
+			li {
+				@include rem(font-size, $basefont);
+				display: inline-block;
+				@include rem(margin-right, 5);
+			}
+		}
+	}
+
+	// Forma 3 - Lista Padrão
+	.Forma3 {
+		border-collapse: collapse;
+
+		td {
+			border: none;
+			@include separator-border;
+			vertical-align: top;
+			@include rem(padding, 10 5 10 0);
+			@include rem(font-size, 11);
+
+			@include bp(min-width, $bp-md + 1) {
+				@include rem(font-size, 13);
+			}
+
+			&:first-child {
+				font-weight: bold;
+
+				@include bp(min-width, $bp-md + 1) {
+					font-weight: normal;
+				}
+			}
+
+			> br:first-child {
+				display: none;
+			}
+		}
+	}
+}
+
+#linkPagParcelado {
+	@extend %base_bt_secondary;
+}

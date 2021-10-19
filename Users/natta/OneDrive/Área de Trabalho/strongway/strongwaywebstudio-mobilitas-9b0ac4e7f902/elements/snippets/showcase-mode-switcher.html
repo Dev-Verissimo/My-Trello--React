@@ -1,0 +1,13 @@
+<div class="showcase-mode-switcher">
+	<button class="showcase-mode-switcher__button" data-showcase-mode="list" aria-label="Mostrar produtos como Lista">
+		<span class="icon-list"></span>
+	</button>
+	<button class="showcase-mode-switcher__button" data-showcase-mode="grid" aria-label="Mostrar produtos como Grade" disabled>
+		<span class="icon-grid"></span>
+	</button>
+</div>
+<script>
+	if ( !localStorage.showcase_mode ) {
+		localStorage.showcase_mode = '{{ settings.showcase_mode }}';
+	}
+</script>

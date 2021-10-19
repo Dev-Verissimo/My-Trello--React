@@ -1,0 +1,5 @@
+// Retorna o valor em REMs, equivalente ao tamanho em pixels solicitado
+// Utiliza o valor de fonte básico declarado nas variáveis
+@function rems($pxsize, $base:$basefont) {
+	@return #{$pxsize/$base}rem;
+}

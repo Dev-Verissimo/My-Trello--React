@@ -1,0 +1,76 @@
+<div id="modal-lgpd" class="modal-lgpd hidden">
+    <div class="modal-lgpd__text">
+        <p id="lgpd-description" class="modal-lgpd__text__description">
+            {% if settings.privacy_policy_version_update and settings.privacy_policy_text %}
+                {{ settings.privacy_policy_text }}
+            {% elseif settings.privacy_policy_text and settings.privacy_policy_version_update == false %}
+                {{ settings.privacy_policy_text }}
+            {% else %}
+                Utilizamos cookies para melhorar a sua experi&ecirc;ncia em nosso site. Ao continuar voc&ecirc; concorda com a nossa pol&iacute;tica de privacidade.
+            {% endif %}
+        </p>
+        <a 
+            class="modal__lgpd__text__link"
+            href="
+                {% if settings.privacy_policy_link_url %}
+                    {{ settings.privacy_policy_link_url }}
+                {% else %}
+                    #
+                {% endif %}
+            "
+        >
+            {% if settings.privacy_policy_link_text %}
+                {{ settings.privacy_policy_link_text }}
+            {% else %}
+                Veja nossa pol&iacute;tica de privacidade >
+            {% endif %}
+        </a>
+    </div>
+
+    <button id="btn-lgpd" class="modal-lgpd__btn bt bt--highlight">
+        {% if settings.privacy_policy_btn_text %}
+            {{ settings.privacy_policy_btn_text }}
+        {% else %}
+            Continuar e Fechar
+        {% endif %}
+    </button>
+</div>
+
+<script type="text/javascript">
+    jQuery( function ($) {
+        function getLgpd() {
+            if (!localStorage.lgpdHasAgreed || !localStorage.lgpdAgreedVersion) {
+                $('#modal-lgpd').removeClass('hidden');
+            } else {
+                $('#modal-lgpd').addClass('hidden');
+            }
+        }
+
+        function handleLgpdVersion() {
+           if (localStorage.lgpdAgreedVersion && localStorage.lgpdAgreedVersion != settings.lgpdVersion) {
+                $('#modal-lgpd').removeClass('hidden');
+                $('#lgpd-description').html(`
+                    {% if settings.privacy_policy_version_update and settings.privacy_policy_text == false %}
+                        {{ settings.privacy_policy_version_update }}
+                    {% elseif settings.privacy_policy_version_update and settings.privacy_policy_text %}
+                        {{ settings.privacy_policy_version_update }}
+                    {% else %}
+                        Nossa Pol&iacute;tica de privacidade foi atualizada
+                    {% endif %}
+                `);
+                localStorage.lgpdHasAgreed = false;
+           }
+        }
+
+        getLgpd();
+        handleLgpdVersion();
+
+        document.getElementById('btn-lgpd').addEventListener('click', () => {
+            localStorage.lgpdHasAgreed = true;
+            localStorage.lgpdAgreedVersion = settings.lgpdVersion;
+            console.log(`Concordou com a pol&iacute;tica de privacidade vers&atilde;o ${localStorage.lgpdAgreedVersion}`);
+
+            getLgpd();
+        })
+    });
+</script>

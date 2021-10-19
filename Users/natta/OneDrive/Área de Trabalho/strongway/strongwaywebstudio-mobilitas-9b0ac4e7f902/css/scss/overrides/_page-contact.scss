@@ -1,0 +1,159 @@
+.page--contact{
+	h1.color{
+		@include h2;
+	}
+	
+	.formulario-contato button,
+	.formulario-contato input,
+	.formulario-contato textarea{
+		@include rem(margin-top, 3);
+	}
+
+	.formulario-contato {
+		@include rem(padding, 15 15 10);
+		border: 1px solid $hr-border-color;
+		@include rem(border-radius, 3);
+		@include rem(max-width, 625);
+
+		label {
+			@include rem(margin-bottom, 5);
+		}
+	}
+
+	#div_erro {
+		@include rem(max-width, 625);		
+	}
+	
+	#texto_captcha{
+		@include rem(width, 130);
+	}
+	
+	.Seguro,
+	.carrinho-heading,
+	.msg-obriga {
+		display: none;
+	}
+	
+	.contato-telefones {
+		span{
+			display: block;
+			@include rem(font-size, 20);
+			@include rem(margin-bottom, 5);
+		}
+	}
+	
+	.container2 {
+		@include bp(max-width, $bp-md) {
+			padding: 0;
+		}
+
+		> .board {
+			@include rem(margin-bottom, 20);
+		}
+		
+		.container2 {
+			padding: 0;
+		}
+		
+		h3 {
+			@include base-headings;
+			@include h4;
+		}
+		
+		h3 + span,
+		h3 + p{
+		}
+		
+		.tit-contato{
+			@include h2;
+			@include separator-border('top');
+			@include rem(padding-top, 20);
+			@include rem(margin-top, 20);
+		}
+	}
+
+	.container3 + .board {
+		@include rem(margin-bottom, 20);
+	}
+
+	.Mapa + .board {
+		margin-bottom: 0;
+	}
+	
+	> .board {
+		p {
+			@include separator-border;
+			@include rem(padding-bottom, 15);
+			@include rem(margin-bottom, 15);
+		}
+	}
+	
+	.block {
+	}
+	
+	.formulario-contato {
+		@include rem(padding-bottom, 30);
+		
+		#nome_contato{
+			@include rem(width, 573);
+			
+			@include bp(max-width, $bp-md) {
+				width: 100%;
+			}
+		}
+		
+		#empresa{
+			@include rem(width, 457);
+			
+			@include bp(max-width, $bp-md) {
+				width: 100%;
+			}
+		}
+		
+		#email_contato{
+			@include rem(width, 394);
+			
+			@include bp(max-width, $bp-md) {
+				width: 100%;
+			}
+		}
+		
+		#telefone_contato{
+			@include rem(width, 200);
+			
+			@include bp(max-width, $bp-md) {
+				width: 100%;
+			}
+		}
+		
+		#assunto{
+			@include rem(width, 200);
+			
+			@include bp(max-width, $bp-md) {
+				width: 100%;
+			}
+		}
+		
+		#mensagem_contato{
+			@include rem(min-height, 190);
+			@include rem(width, 573);
+			
+			@include bp(max-width, $bp-md) {
+				width: 100%;
+			}
+		}
+		
+		// Botão de Enviar
+		#imagem{
+		}
+	}
+	
+	.topBorder + .container2 + .board .block {
+	}
+	
+	@include bp(max-width, $bp-md) {
+		.page-content{
+			@include rem(padding, 15);
+		}
+	}
+}

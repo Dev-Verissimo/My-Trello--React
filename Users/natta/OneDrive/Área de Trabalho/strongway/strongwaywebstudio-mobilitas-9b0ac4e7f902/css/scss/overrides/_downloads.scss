@@ -1,0 +1,53 @@
+#downloads_holder {
+	p.color {
+		+ br {
+			display: none;
+		}
+	}
+}
+
+.downloads {
+	li {
+		@extend %base_box;
+		@extend %clearfix;
+		height: auto;
+		border: none;
+		@include rem(margin, 10 0);
+		@include separator-border;
+		display: table;
+		width: 100%;
+
+		> div {
+			float: none;
+			display: table-cell;
+			vertical-align: middle;
+			@include square(50);
+			@include rem(border-radius, 3);
+			padding: 0;
+
+			@include bp(min-width, $bp-md + 1) {
+				@include square(95);
+			}
+
+			a {
+				display: block;
+			}
+
+			img {
+				@include rem(padding, 5);
+				border: 1px solid $cinza-2;				
+			}
+		}
+
+		h3 {
+			float: none;
+			display: table-cell;
+			vertical-align: middle;
+			@include rem(padding-left, 15);
+
+			a {
+				display: block;
+			}
+		}
+	}
+}

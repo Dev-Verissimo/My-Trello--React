@@ -1,0 +1,1812 @@
+{% spaceless %}
+
+{# Bordas arredondadas gerais #}
+{% if settings.general_border_radius is not empty %}
+	{% set general_border_radius = (settings.general_border_radius/14)|number_format(5,'.', '') ~ "rem" %}
+{% endif %}
+
+{% if general_border_radius %}
+	.blocoAlerta,
+	.blocoSucesso,
+	.message,
+	.bonus_cupom,
+	.mensagensErro,
+	html .botao-commerce,
+	html .remove-bg .botao-comprar,
+	html .news.implantation .news-botao,
+	html .botao-continuar-comprando,
+	html .botao-sob-consulta,
+	.bt,
+	#produto_preco .botao_tire_duvidas,
+	#letMeKnow,
+	.newsletter-form__button,
+	.precoCompreJunto .comprejunto_botao .botao-commerce,
+	#acceptTerm,
+	.page--register .botao-prosseguir-cadastro,
+	.bts,
+	.page--depoimentos #aviso_depoimento + a,
+	.bt--secondary,
+	#produto_preco .botao_tire_duvidas,
+	#letMeKnow,
+	.bts,
+	#cepbox .botao-simular-frete,
+	#linkPagParcelado,
+	#comentario_cliente > a:first-child,
+	#modal-form .perguntasProdutoBTimg,
+	#modal-form .modal-body button,
+	.clearVisiteds,
+	.page--checkout_cart .caixa-forma-frete .botao-simular-frete,
+	.page--checkout_cart .caixa-forma-frete .caixa-cupom .botao-cupom-desconto,
+	.page--checkout_cart .caixa-botoes .botao-commerce.botao-continuar-comprando,
+	.page--checkout_cart .Seguro + .board a,
+	.page--login fieldset .botao-commerce,
+	#multi-endereco-controla .adicionar_mais,
+	.page--central_detalhe_pedido b > a,
+	.page--central_detalhe_pedido .central_recompra a,
+	.page--depoimentos br + h2.color,
+	#listaCategoriasNoticias li a b,
+	.brinde_detalhes .botao:before,
+	.page--finalizar_presentes .container3 .container2 .board:before,
+	.page--central_senha fieldset:after,
+	.bt--highlight,
+	.cart-preview-footer .botao-prosseguir-compra,
+	.page--checkout_cart .botao-prosseguir-compra,
+	#bt_comprar .botao-comprar,
+	#listaNoticiaProdutos #produto_comprar a,
+	.page--finalizar_presentes .container3 .container2 .board:after,
+	.page--central_recompra .board + [align="center"]:after,
+	.page--central_troca form[name="form1"]:after,
+	.page--central_gera_troca form .Pedidos tr:last-child td:after,
+	.page--search #Vitrine [name="form1"] fieldset:after,
+	.base-box,
+	.compare-button-container,
+	.page__description__limiter,
+	.page__description,
+	.smart-filter__not-applied,
+	.product,
+	.product-details__tabs,
+	.customer-menu__box,
+	.featured-category,
+	.compreJunto > li,
+	.downloads li,
+	.dep_item,
+	#listaUltimasNoticias,
+	#NavTagCloud span,
+	#NavVisitados,
+	.page--login .caixa-login,
+	.page--login .caixa-cadastro,
+	.page--register #frm2,
+	.icoFilho,
+	.page--depoimentos #comentario_cliente,
+	.page--depoimentos .editDep > li,
+	.noticias > li,
+	.page--search #div_erro,
+	[type="text"],
+	#produto_nao_disp input,
+	.page--checkout_cart .caixa-forma-frete input[type=tel],
+	[type="password"],
+	[type="search"],
+	[type="email"],
+	[type="url"],
+	textarea,
+	select,
+	.select,
+	.text,
+	fieldset,
+	.footer--boxed .footer__line-1,
+	.cart__product-badge,
+	.smart-filter__thumb,
+	.product__image-outline,
+	.pagination,
+	.product-details,
+	.product-details__no-image,
+	.slick-arrow,
+	.banner__image,
+	.featherlight .featherlight-content,
+	.featherlight .featherlight-close-icon,
+	.showcase-mode-switcher__button,
+	#colFotos .produto-imagem,
+	#colFotos .produto-imagem.zoom-on #wrap .container_thumb:after,
+	#colFotos .produto-imagem.zoom-on a,
+	#add .imgLinks:after,
+	#foto_a li,
+	.jcarousel-skin-tango .jcarousel-next-horizontal:after,
+	.jcarousel-skin-tango .jcarousel-prev-horizontal:after,
+	.produto-bonus strong.code,
+	.produto-bonus strong.color,
+	.lista_cor_variacao > li div,
+	.lista_cor_variacao > li img,
+	.icones img,
+	.icones .carac-descricao,
+	.brinde_produto .mais:after,
+	.brinde_produto .menos:after,
+	.compreJunto > li div.produto,
+	.downloads li > div,
+	.cart-preview-footer .botao-prosseguir-compra,
+	.tray-kit,
+	.tray-kit-variation li div,
+	.tray-kit-variation li img,
+	.page--login fieldset .botao-commerce:hover,
+	.page--register .botao-prosseguir-cadastro:hover,
+	.editComment li,
+	.noticias #noticia_imagem,
+	.page--contact .formulario-contato,
+	.discounts__banner,
+	.discounts--small .discounts__tag,
+	.botao-commerce:hover
+	{
+		border-radius: {{ general_border_radius }};
+	}
+
+	.footer--boxed .footer__line-2,
+	.footer--boxed .footer__line-4,
+	.page__description__toggle,
+	.user-account__dropdown,
+	.cart__dropdown,
+	.main-menu__subnivel,
+	.menu-mobile,
+	.suggestion,
+	.discounts__description
+	{
+		border-bottom-right-radius: {{ general_border_radius }};
+		border-bottom-left-radius: {{ general_border_radius }};
+	}
+	
+	{% if (settings.general_border_radius == 0) %}
+		.header--boxed .header__line-3,
+		.product__offer .product__label--sale
+		{
+			border-radius: {{ settings.general_border_radius }}
+		}
+	{% endif %}
+
+	.footer--boxed .footer__line-3,
+	.discounts__tag
+	{
+		border-top-right-radius: {{ general_border_radius }};
+		border-top-left-radius: {{ general_border_radius }};
+	}
+
+	@media only screen and (max-width: 768px) {
+		.fotosCompreJunto,
+		.page--finalizar_presentes .container2,
+		.page--central_anteriores .central-conteudo + .board,
+		.page--central_bonus .central-conteudo + .board,
+		.page--central_cliente .central-conteudo + .board,
+		.page--central_comissoes .central-conteudo + .board,
+		.page--central_comissoes_extrato .central-conteudo + .board,
+		.page--central_confirmar_pagamento .central-conteudo + .board,
+		.page--central_comentarios .central-conteudo + .board,
+		.page--central_detalhe_pedido .central-conteudo + .board,
+		.page--central_gera_troca .central-conteudo + .board,
+		.page--central_lista_espera .central-conteudo + .board,
+		.page--central_listas .central-conteudo + .board,
+		.page--central_listas_cliente .central-conteudo + .board,
+		.page--central_premiacao .central-conteudo + .board,
+		.page--central_premiacao_ativas .central-conteudo + .board,
+		.page--central_premiacao_classificacao .central-conteudo + .board,
+		.page--central_premiacao_historico .central-conteudo + .board,
+		.page--central_premiacao_indique .central-conteudo + .board,
+		.page--central_rastrear .central-conteudo + .board,
+		.page--central_recompra .central-conteudo + .board,
+		.page--central_senha .central-conteudo + .board,
+		.page--central_troca .central-conteudo + .board,
+		.page--central_recompra .container3 + .board,
+	  	.page--central_troca .board
+	  	{
+			border-radius: {{ general_border_radius }};
+		}
+	}
+
+	@media only screen and (min-width: 769px) {
+		.product-details__gallery-container {
+			border-top-left-radius: {{ general_border_radius }};
+			border-bottom-left-radius: {{ general_border_radius }};
+		}
+		
+		.product-details__shop-container {
+			border-top-right-radius: {{ general_border_radius }};
+			border-bottom-right-radius: {{ general_border_radius }};
+		}
+
+		.header--boxed .header__line-2 {
+			border-radius: {{ general_border_radius }};
+		}
+		
+		.header__line-2 {
+			margin-bottom: -{{ general_border_radius }};
+		}
+
+		.smart-filter__applied {
+			border-top-left-radius: {{ general_border_radius }};
+			border-top-right-radius: {{ general_border_radius }};
+		}
+	}
+
+	.footer__line-1 {
+		margin-bottom: -{{ general_border_radius }};
+	}
+
+	.header__line-1 {
+		padding-bottom: {{ ((settings.general_border_radius + 5)/14)|number_format(5,'.', '') ~ "rem" }};
+	}
+
+	.footer__line-2 {
+		padding-top: {{ ((settings.general_border_radius + 33)/14)|number_format(5,'.', '') ~ "rem" }};
+	}
+
+	@media only screen and (min-width: 769px) {
+		.header__line-2 {
+			margin-top: -{{ general_border_radius }};
+		}
+		
+		.footer__line-2 {
+			padding-top: {{ ((settings.general_border_radius + 58)/14)|number_format(5,'.', '') ~ "rem" }};
+		}
+	}
+{% endif %}
+
+{# Geral #}
+{% if settings.site_background_color %}
+	body {
+		background-color: {{ settings.site_background_color }};
+	}
+{% endif %}
+
+{% if settings.site_background_image %}
+	body {
+		background-repeat: {{ settings.site_background_repeat }};
+		background-position: {{ settings.site_background_position }};
+		
+		{% if settings.is_site_background_cover %}
+			background-size: cover;
+		{% endif %}
+
+		{% if settings.is_site_background_fixed %}
+			background-attachment: fixed;
+		{% endif %}
+	}
+{% endif %}
+
+
+{% if settings.site_color %}
+	.page__title,
+	.showcase__title,
+	.customer-reviews__header,
+	.latest-news__header,
+	.site-brands__title,
+	.breadcrumb:not(.central-breadcrumb),
+	.catalogo-form-filtros,
+	.showcase-mode-switcher__button,
+	.page__subtitle,
+	.footer__line-4,
+	.page--search h1.color
+	{
+		color: {{ settings.site_color }};
+	}
+{% endif %}
+
+{% if settings.special_font_family or settings.is_special_font_caps %}
+	html .botao-commerce,
+	html .remove-bg .botao-comprar,
+	html .news.implantation .news-botao,
+	html .botao-continuar-comprando,
+	html .botao-sob-consulta,
+	.bt,
+	#produto_preco .botao_tire_duvidas,
+	#letMeKnow,
+	.newsletter-form__button,
+	.precoCompreJunto .comprejunto_botao .botao-commerce,
+	#acceptTerm,
+	.page--register .botao-prosseguir-cadastro,
+	.bts,
+	.page--depoimentos #aviso_depoimento + a,
+	.bt--secondary,
+	#produto_preco .botao_tire_duvidas,
+	#letMeKnow,
+	.dep_link a,
+	.dep_link a:visited,
+	.bts,
+	#cepbox .botao-simular-frete,
+	#linkPagParcelado,
+	#comentario_cliente > a:first-child,
+	#modal-form .perguntasProdutoBTimg,
+	#modal-form .modal-body button,
+	.clearVisiteds,
+	.page--checkout_cart .caixa-forma-frete .botao-simular-frete,
+	.page--checkout_cart .caixa-forma-frete .caixa-cupom .botao-cupom-desconto,
+	.page--checkout_cart .caixa-botoes .botao-commerce.botao-continuar-comprando,
+	.page--checkout_cart .Seguro + .board a,
+	.page--login fieldset .botao-commerce,
+	#multi-endereco-controla .adicionar_mais,
+	.page--central_detalhe_pedido b > a,
+	.page--central_detalhe_pedido .central_recompra a,
+	.page--depoimentos br + h2.color,
+	#listaCategoriasNoticias li a b,
+	.brinde_detalhes .botao:before,
+	.page--finalizar_presentes .container3 .container2 .board:before,
+	.page--central_senha fieldset:after,
+	.bt--highlight,
+	.cart-preview-footer .botao-prosseguir-compra,
+	#bt_comprar .botao-comprar .botao-commerce-img,
+	.page--checkout_cart .botao-prosseguir-compra,
+	#bt_comprar .botao-comprar,
+	#listaNoticiaProdutos #produto_comprar a,
+	.page--finalizar_presentes .container3 .container2 .board:after,
+	.page--central_recompra .board + [align="center"]:after,
+	.page--central_troca form[name="form1"]:after,
+	.page--central_gera_troca form .Pedidos tr:last-child td:after,
+	.page--search #Vitrine [name="form1"] fieldset:after,
+	.board_htm h1,
+	.board_htm h2,
+	.board_htm h3,
+	.board_htm h4,
+	.board_htm h5,
+	.board_htm h6,
+	.board_htm .h1,
+	.board_htm .h2,
+	.board_htm .page--downloads .container3 > .container2 > .board h1.color,
+	.page--downloads .container3 > .container2 > .board .board_htm h1.color,
+	.board_htm .page--checkout_cart .carrinho-heading,
+	.page--checkout_cart .board_htm .carrinho-heading,
+	.board_htm .page--login .titulo-login,
+	.page--login .board_htm .titulo-login,
+	.board_htm .page--register .board h1,
+	.page--register .board .board_htm h1,
+	.board_htm .page--central_anteriores h1,
+	.page--central_anteriores .board_htm h1,
+	.board_htm .page--central_bonus h1,
+	.page--central_bonus .board_htm h1,
+	.board_htm .page--central_cliente h1,
+	.page--central_cliente .board_htm h1,
+	.board_htm .page--central_comissoes h1,
+	.page--central_comissoes .board_htm h1,
+	.board_htm .page--central_comissoes_extrato h1,
+	.page--central_comissoes_extrato .board_htm h1,
+	.board_htm .page--central_confirmar_pagamento h1,
+	.page--central_confirmar_pagamento .board_htm h1,
+	.board_htm .page--central_comentarios h1,
+	.page--central_comentarios .board_htm h1,
+	.board_htm .page--central_detalhe_pedido h1,
+	.page--central_detalhe_pedido .board_htm h1,
+	.board_htm .page--central_gera_troca h1,
+	.page--central_gera_troca .board_htm h1,
+	.board_htm .page--central_lista_espera h1,
+	.page--central_lista_espera .board_htm h1,
+	.board_htm .page--central_listas h1,
+	.page--central_listas .board_htm h1,
+	.board_htm .page--central_listas_cliente h1,
+	.page--central_listas_cliente .board_htm h1,
+	.board_htm .page--central_premiacao h1,
+	.page--central_premiacao .board_htm h1,
+	.board_htm .page--central_premiacao_ativas h1,
+	.page--central_premiacao_ativas .board_htm h1,
+	.board_htm .page--central_premiacao_classificacao h1,
+	.page--central_premiacao_classificacao .board_htm h1,
+	.board_htm .page--central_premiacao_historico h1,
+	.page--central_premiacao_historico .board_htm h1,
+	.board_htm .page--central_premiacao_indique h1,
+	.page--central_premiacao_indique .board_htm h1,
+	.board_htm .page--central_rastrear h1,
+	.page--central_rastrear .board_htm h1,
+	.board_htm .page--central_recompra h1,
+	.page--central_recompra .board_htm h1,
+	.board_htm .page--central_senha h1,
+	.page--central_senha .board_htm h1,
+	.board_htm .page--central_troca h1,
+	.page--central_troca .board_htm h1,
+	.board_htm .page--central_anteriores .board.central-saudacao,
+	.page--central_anteriores .board_htm .board.central-saudacao,
+	.board_htm .page--central_bonus .board.central-saudacao,
+	.page--central_bonus .board_htm .board.central-saudacao,
+	.board_htm .page--central_cliente .board.central-saudacao,
+	.page--central_cliente .board_htm .board.central-saudacao,
+	.board_htm .page--central_comissoes .board.central-saudacao,
+	.page--central_comissoes .board_htm .board.central-saudacao,
+	.board_htm .page--central_comissoes_extrato .board.central-saudacao,
+	.page--central_comissoes_extrato .board_htm .board.central-saudacao,
+	.board_htm .page--central_confirmar_pagamento .board.central-saudacao,
+	.page--central_confirmar_pagamento .board_htm .board.central-saudacao,
+	.board_htm .page--central_comentarios .board.central-saudacao,
+	.page--central_comentarios .board_htm .board.central-saudacao,
+	.board_htm .page--central_detalhe_pedido .board.central-saudacao,
+	.page--central_detalhe_pedido .board_htm .board.central-saudacao,
+	.board_htm .page--central_gera_troca .board.central-saudacao,
+	.page--central_gera_troca .board_htm .board.central-saudacao,
+	.board_htm .page--central_lista_espera .board.central-saudacao,
+	.page--central_lista_espera .board_htm .board.central-saudacao,
+	.board_htm .page--central_listas .board.central-saudacao,
+	.page--central_listas .board_htm .board.central-saudacao,
+	.board_htm .page--central_listas_cliente .board.central-saudacao,
+	.page--central_listas_cliente .board_htm .board.central-saudacao,
+	.board_htm .page--central_premiacao .board.central-saudacao,
+	.page--central_premiacao .board_htm .board.central-saudacao,
+	.board_htm .page--central_premiacao_ativas .board.central-saudacao,
+	.page--central_premiacao_ativas .board_htm .board.central-saudacao,
+	.board_htm .page--central_premiacao_classificacao .board.central-saudacao,
+	.page--central_premiacao_classificacao .board_htm .board.central-saudacao,
+	.board_htm .page--central_premiacao_historico .board.central-saudacao,
+	.page--central_premiacao_historico .board_htm .board.central-saudacao,
+	.board_htm .page--central_premiacao_indique .board.central-saudacao,
+	.page--central_premiacao_indique .board_htm .board.central-saudacao,
+	.board_htm .page--central_rastrear .board.central-saudacao,
+	.page--central_rastrear .board_htm .board.central-saudacao,
+	.board_htm .page--central_recompra .board.central-saudacao,
+	.page--central_recompra .board_htm .board.central-saudacao,
+	.board_htm .page--central_senha .board.central-saudacao,
+	.page--central_senha .board_htm .board.central-saudacao,
+	.board_htm .page--central_troca .board.central-saudacao,
+	.page--central_troca .board_htm .board.central-saudacao,
+	.board_htm .page--central_troca .tablePage h3,
+	.page--central_troca .tablePage .board_htm h3,
+	.board_htm .page--depoimentos h1.color,
+	.page--depoimentos .board_htm h1.color,
+	.board_htm .page--busca_noticias h1.color,
+	.page--busca_noticias .board_htm h1.color,
+	.board_htm .page--newsletter h1.color,
+	.page--newsletter .board_htm h1.color,
+	.board_htm .page--contact h1.color,
+	.page--contact .board_htm h1.color,
+	.board_htm .page--contact .container2 .tit-contato,
+	.page--contact .container2 .board_htm .tit-contato,
+	.board_htm .h3,
+	.board_htm .product-details__name,
+	.board_htm .h4,
+	.board_htm .customer-menu__sub-title,
+	.board_htm .h5,
+	.board_htm .h6,
+	.page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board h2,
+	.page--noticia .container3 .container2 .board h3,
+	.page--noticia .container3 .container2 .board h4,
+	.page--noticia .container3 .container2 .board h5,
+	.page--noticia .container3 .container2 .board h6,
+	.page--noticia .container3 .container2 .board .h1,
+	.page--noticia .container3 .container2 .board .h2,
+	.page--noticia .page--downloads .container3 > .container2 > .board .container2 .board h1.color,
+	.page--downloads .page--noticia .container3 > .container2 > .board .container2 .board h1.color,
+	.page--noticia .container3 .container2 .board .page--checkout_cart .carrinho-heading,
+	.page--checkout_cart .page--noticia .container3 .container2 .board .carrinho-heading,
+	.page--noticia .container3 .container2 .board .page--login .titulo-login,
+	.page--login .page--noticia .container3 .container2 .board .titulo-login,
+	.page--noticia .container3 .container2 .page--register .board h1,
+	.page--register .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_anteriores h1,
+	.page--central_anteriores .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_bonus h1,
+	.page--central_bonus .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_cliente h1,
+	.page--central_cliente .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_comissoes h1,
+	.page--central_comissoes .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_comissoes_extrato h1,
+	.page--central_comissoes_extrato .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_confirmar_pagamento h1,
+	.page--central_confirmar_pagamento .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_comentarios h1,
+	.page--central_comentarios .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_detalhe_pedido h1,
+	.page--central_detalhe_pedido .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_gera_troca h1,
+	.page--central_gera_troca .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_lista_espera h1,
+	.page--central_lista_espera .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_listas h1,
+	.page--central_listas .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_listas_cliente h1,
+	.page--central_listas_cliente .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_premiacao h1,
+	.page--central_premiacao .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_premiacao_ativas h1,
+	.page--central_premiacao_ativas .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_premiacao_classificacao h1,
+	.page--central_premiacao_classificacao .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_premiacao_historico h1,
+	.page--central_premiacao_historico .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_premiacao_indique h1,
+	.page--central_premiacao_indique .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_rastrear h1,
+	.page--central_rastrear .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_recompra h1,
+	.page--central_recompra .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_senha h1,
+	.page--central_senha .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_troca h1,
+	.page--central_troca .page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board .page--central_anteriores .board.central-saudacao,
+	.page--central_anteriores .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_bonus .board.central-saudacao,
+	.page--central_bonus .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_cliente .board.central-saudacao,
+	.page--central_cliente .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_comissoes .board.central-saudacao,
+	.page--central_comissoes .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_comissoes_extrato .board.central-saudacao,
+	.page--central_comissoes_extrato .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_confirmar_pagamento .board.central-saudacao,
+	.page--central_confirmar_pagamento .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_comentarios .board.central-saudacao,
+	.page--central_comentarios .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_detalhe_pedido .board.central-saudacao,
+	.page--central_detalhe_pedido .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_gera_troca .board.central-saudacao,
+	.page--central_gera_troca .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_lista_espera .board.central-saudacao,
+	.page--central_lista_espera .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_listas .board.central-saudacao,
+	.page--central_listas .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_listas_cliente .board.central-saudacao,
+	.page--central_listas_cliente .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_premiacao .board.central-saudacao,
+	.page--central_premiacao .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_premiacao_ativas .board.central-saudacao,
+	.page--central_premiacao_ativas .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_premiacao_classificacao .board.central-saudacao,
+	.page--central_premiacao_classificacao .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_premiacao_historico .board.central-saudacao,
+	.page--central_premiacao_historico .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_premiacao_indique .board.central-saudacao,
+	.page--central_premiacao_indique .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_rastrear .board.central-saudacao,
+	.page--central_rastrear .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_recompra .board.central-saudacao,
+	.page--central_recompra .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_senha .board.central-saudacao,
+	.page--central_senha .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_troca .board.central-saudacao,
+	.page--central_troca .page--noticia .container3 .container2 .board .board.central-saudacao,
+	.page--noticia .container3 .container2 .board .page--central_troca .tablePage h3,
+	.page--central_troca .tablePage .page--noticia .container3 .container2 .board h3,
+	.page--noticia .container3 .container2 .board .page--depoimentos h1.color,
+	.page--depoimentos .page--noticia .container3 .container2 .board h1.color,
+	.page--noticia .container3 .container2 .board .page--busca_noticias h1.color,
+	.page--busca_noticias .page--noticia .container3 .container2 .board h1.color,
+	.page--noticia .container3 .container2 .board .page--newsletter h1.color,
+	.page--newsletter .page--noticia .container3 .container2 .board h1.color,
+	.page--noticia .container3 .container2 .board .page--contact h1.color,
+	.page--contact .page--noticia .container3 .container2 .board h1.color,
+	.page--noticia .container3 .page--contact .container2 .board .tit-contato,
+	.page--contact .page--noticia .container3 .container2 .board .tit-contato,
+	.page--noticia .container3 .container2 .board .h3,
+	.page--noticia .container3 .container2 .board .product-details__name,
+	.page--noticia .container3 .container2 .board .h4,
+	.page--noticia .container3 .container2 .board .customer-menu__sub-title,
+	.page--noticia .container3 .container2 .board .h5,
+	.page--noticia .container3 .container2 .board .h6,
+	#texto-termo h1,
+	#texto-termo h2,
+	#texto-termo h3,
+	#texto-termo h4,
+	#texto-termo h5,
+	#texto-termo h6,
+	#texto-termo .h1,
+	#texto-termo .h2,
+	#texto-termo .page--downloads .container3 > .container2 > .board h1.color,
+	.page--downloads .container3 > .container2 > .board #texto-termo h1.color,
+	#texto-termo .page--checkout_cart .carrinho-heading,
+	.page--checkout_cart #texto-termo .carrinho-heading,
+	#texto-termo .page--login .titulo-login,
+	.page--login #texto-termo .titulo-login,
+	#texto-termo .page--register .board h1,
+	.page--register .board #texto-termo h1,
+	#texto-termo .page--central_anteriores h1,
+	.page--central_anteriores #texto-termo h1,
+	#texto-termo .page--central_bonus h1,
+	.page--central_bonus #texto-termo h1,
+	#texto-termo .page--central_cliente h1,
+	.page--central_cliente #texto-termo h1,
+	#texto-termo .page--central_comissoes h1,
+	.page--central_comissoes #texto-termo h1,
+	#texto-termo .page--central_comissoes_extrato h1,
+	.page--central_comissoes_extrato #texto-termo h1,
+	#texto-termo .page--central_confirmar_pagamento h1,
+	.page--central_confirmar_pagamento #texto-termo h1,
+	#texto-termo .page--central_comentarios h1,
+	.page--central_comentarios #texto-termo h1,
+	#texto-termo .page--central_detalhe_pedido h1,
+	.page--central_detalhe_pedido #texto-termo h1,
+	#texto-termo .page--central_gera_troca h1,
+	.page--central_gera_troca #texto-termo h1,
+	#texto-termo .page--central_lista_espera h1,
+	.page--central_lista_espera #texto-termo h1,
+	#texto-termo .page--central_listas h1,
+	.page--central_listas #texto-termo h1,
+	#texto-termo .page--central_listas_cliente h1,
+	.page--central_listas_cliente #texto-termo h1,
+	#texto-termo .page--central_premiacao h1,
+	.page--central_premiacao #texto-termo h1,
+	#texto-termo .page--central_premiacao_ativas h1,
+	.page--central_premiacao_ativas #texto-termo h1,
+	#texto-termo .page--central_premiacao_classificacao h1,
+	.page--central_premiacao_classificacao #texto-termo h1,
+	#texto-termo .page--central_premiacao_historico h1,
+	.page--central_premiacao_historico #texto-termo h1,
+	#texto-termo .page--central_premiacao_indique h1,
+	.page--central_premiacao_indique #texto-termo h1,
+	#texto-termo .page--central_rastrear h1,
+	.page--central_rastrear #texto-termo h1,
+	#texto-termo .page--central_recompra h1,
+	.page--central_recompra #texto-termo h1,
+	#texto-termo .page--central_senha h1,
+	.page--central_senha #texto-termo h1,
+	#texto-termo .page--central_troca h1,
+	.page--central_troca #texto-termo h1,
+	#texto-termo .page--central_anteriores .board.central-saudacao,
+	.page--central_anteriores #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_bonus .board.central-saudacao,
+	.page--central_bonus #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_cliente .board.central-saudacao,
+	.page--central_cliente #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_comissoes .board.central-saudacao,
+	.page--central_comissoes #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_comissoes_extrato .board.central-saudacao,
+	.page--central_comissoes_extrato #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_confirmar_pagamento .board.central-saudacao,
+	.page--central_confirmar_pagamento #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_comentarios .board.central-saudacao,
+	.page--central_comentarios #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_detalhe_pedido .board.central-saudacao,
+	.page--central_detalhe_pedido #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_gera_troca .board.central-saudacao,
+	.page--central_gera_troca #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_lista_espera .board.central-saudacao,
+	.page--central_lista_espera #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_listas .board.central-saudacao,
+	.page--central_listas #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_listas_cliente .board.central-saudacao,
+	.page--central_listas_cliente #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_premiacao .board.central-saudacao,
+	.page--central_premiacao #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_premiacao_ativas .board.central-saudacao,
+	.page--central_premiacao_ativas #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_premiacao_classificacao .board.central-saudacao,
+	.page--central_premiacao_classificacao #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_premiacao_historico .board.central-saudacao,
+	.page--central_premiacao_historico #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_premiacao_indique .board.central-saudacao,
+	.page--central_premiacao_indique #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_rastrear .board.central-saudacao,
+	.page--central_rastrear #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_recompra .board.central-saudacao,
+	.page--central_recompra #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_senha .board.central-saudacao,
+	.page--central_senha #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_troca .board.central-saudacao,
+	.page--central_troca #texto-termo .board.central-saudacao,
+	#texto-termo .page--central_troca .tablePage h3,
+	.page--central_troca .tablePage #texto-termo h3,
+	#texto-termo .page--depoimentos h1.color,
+	.page--depoimentos #texto-termo h1.color,
+	#texto-termo .page--busca_noticias h1.color,
+	.page--busca_noticias #texto-termo h1.color,
+	#texto-termo .page--newsletter h1.color,
+	.page--newsletter #texto-termo h1.color,
+	#texto-termo .page--contact h1.color,
+	.page--contact #texto-termo h1.color,
+	#texto-termo .page--contact .container2 .tit-contato,
+	.page--contact .container2 #texto-termo .tit-contato,
+	#texto-termo .h3,
+	#texto-termo .product-details__name,
+	#texto-termo .h4,
+	#texto-termo .customer-menu__sub-title,
+	#texto-termo .h5,
+	#texto-termo .h6,
+	.h1.h1,
+	.h2.h2,
+	.page__subtitle,
+	.showcase__title,
+	.customer-reviews__title,
+	.latest-news__title,
+	.page--downloads .container3 > .container2 > .board h1.color,
+	.page--checkout_cart .carrinho-heading,
+	.page--login .titulo-login,
+	.page--register .board h1,
+	.page--central_anteriores h1,
+	.page--central_bonus h1,
+	.page--central_cliente h1,
+	.page--central_comissoes h1,
+	.page--central_comissoes_extrato h1,
+	.page--central_confirmar_pagamento h1,
+	.page--central_comentarios h1,
+	.page--central_detalhe_pedido h1,
+	.page--central_gera_troca h1,
+	.page--central_lista_espera h1,
+	.page--central_listas h1,
+	.page--central_listas_cliente h1,
+	.page--central_premiacao h1,
+	.page--central_premiacao_ativas h1,
+	.page--central_premiacao_classificacao h1,
+	.page--central_premiacao_historico h1,
+	.page--central_premiacao_indique h1,
+	.page--central_rastrear h1,
+	.page--central_recompra h1,
+	.page--central_senha h1,
+	.page--central_troca h1,
+	.page--central_anteriores .board.central-saudacao,
+	.page--central_bonus .board.central-saudacao,
+	.page--central_cliente .board.central-saudacao,
+	.page--central_comissoes .board.central-saudacao,
+	.page--central_comissoes_extrato .board.central-saudacao,
+	.page--central_confirmar_pagamento .board.central-saudacao,
+	.page--central_comentarios .board.central-saudacao,
+	.page--central_detalhe_pedido .board.central-saudacao,
+	.page--central_gera_troca .board.central-saudacao,
+	.page--central_lista_espera .board.central-saudacao,
+	.page--central_listas .board.central-saudacao,
+	.page--central_listas_cliente .board.central-saudacao,
+	.page--central_premiacao .board.central-saudacao,
+	.page--central_premiacao_ativas .board.central-saudacao,
+	.page--central_premiacao_classificacao .board.central-saudacao,
+	.page--central_premiacao_historico .board.central-saudacao,
+	.page--central_premiacao_indique .board.central-saudacao,
+	.page--central_rastrear .board.central-saudacao,
+	.page--central_recompra .board.central-saudacao,
+	.page--central_senha .board.central-saudacao,
+	.page--central_troca .board.central-saudacao,
+	.page--central_troca .tablePage h3,
+	.page--depoimentos h1.color,
+	.page--busca_noticias h1.color,
+	.page--newsletter h1.color,
+	.page--contact h1.color,
+	.page--contact .container2 .tit-contato,
+	.h3.h3,
+	.product-details__name,
+	.h4.h4,
+	.customer-menu__sub-title,
+	.h5.h5,
+	.h6.h6,
+	.footer__title,
+	.page__title,
+	.site-brands__title,
+	#NavTagCloud .fundo_nuvem,
+	.page--search h1.color,
+	.user-account__label,
+	.user-account__title,
+	.user-account__welcome-message,
+	.cart__price,
+	.cart__title,
+	.cart__product-price,
+	.cart__total-price,
+	.smart-filter__title,
+	.smart-filter__sub-title,
+	.newsletter-form__cta,
+	.product__name,
+	.NomeProdLista,
+	.product__price--regular,
+	.product__price--special,
+	.PrecoPrincipal,
+	.tabs ul.tabs-list,
+	.accordion__header,
+	#multi-endereco-controla .multienderecos fieldset > h3,
+	.main-menu__link,
+	.menu-mobile__link,
+	.precoCompreJunto > div > strong,
+	#coments h2.color,
+	.suggestion-title,
+	.dep_nome,
+	.featured-category__name,
+	.page--depoimentos .editDep > li h3.color,
+	.visitados_itens h4,
+	.page--checkout_cart .caixa-total h3,
+	.page--login .caixa-login h3,
+	.page--login .caixa-cadastro h3,
+	.page--register #frm2 h2,
+	.editComment li > h3,
+	.noticias #noticia_dados h3 a,
+	.page--contact .container2 h3,
+	.page--rastreio .main .base-box h3
+	{
+		font-family: {{ settings.special_font_family }};
+
+		{% if settings.is_special_font_caps %}
+			text-transform: uppercase !important;
+		{% endif %}
+	}
+{% endif %}
+
+{% if settings.primary_color %}
+	.bgcolor,
+	.header .header__line-3,
+	.footer__line-1,
+	.popup-newsletter__form-container,
+	.cart__product-badge,
+	.product__label--sale,
+	.product__offer .product__label--sale:before,
+	.menu-mobile__item-lvl1 .menu-mobile__image,
+	.main-menu__item-lvl1 .main-menu__image
+	{
+		background-color: {{ settings.primary_color }};
+	}
+
+	.myNavigation,
+	.product__price--regular,
+	.product__price--special,
+	.PrecoPrincipal,
+	.smart-filter__applied-item,
+	.smart-filter__applied-item:visited,
+	.smart-filter__checkbox:checked + .smart-filter__text,
+	.smart-filter__checkbox:focus + .smart-filter__text,
+	.filter__input:checked+.filter__label,
+	.filter__input:focus+.filter__label,
+	.header .menu-toggle .icon,
+	.user-account__name,
+	.cart__product-price,
+	.cart__total-price,
+	.contact-info__icon,
+	.social__link,
+	.social__link:visited,
+	.product__status--upon-request,
+	.product__status--upon-request:visited,
+	.main-menu__toggle .icon,
+	.menu-mobile__toggle,
+	.customer-menu__list a,
+	.customer-menu__list a:visited,
+	.txt-por,
+	.produto-bonus strong,
+	.suggestion-words span,
+	.suggestion-products span,
+	.page--depoimentos .editDep > li > ul > li:nth-child(2),
+	.address-info__text:before,
+	.opening-hours__text:before,
+	.product__star.is-active,
+	.precoCompreJunto ul li.comprejunto_economize,
+	#multi-endereco-controla .multienderecos fieldset>h3[aria-expanded="true"],
+	.smart-filter__link,
+	.smart-filter__link:visited,
+	#multi-endereco-controla .multienderecos fieldset>h3.active,
+	.search-form__button__icon,
+	.cart__icon,
+	.user-account__icon,
+	.search-form__icon,
+	.product__compare-link--checked,
+	.page--comparador .comparator .ranking [class^="star"]
+	{
+		color: {{ settings.primary_color }};
+	}
+
+	#NavTagCloud h2 {
+		color: {{ settings.primary_color }} !important;		
+	}
+	
+	.produto-bonus strong,
+	.pages-menu__list,
+	.footer--2 .pages-menu__list:after
+	{
+		border-color: {{ settings.primary_color }};
+	}
+
+	.user-account__toggle.is-opened,
+	.cart__toggle.is-opened,
+	.menu-toggle.is-opened,
+	.search-form__toggle.is-opened
+	{
+		border-bottom-color: {{ settings.primary_color }};
+	}
+{% endif %}
+
+{% if settings.secondary_color %}
+	.header__line-1,
+	.footer__line-2 {
+		background-color: {{ settings.secondary_color }};
+	}
+{% endif %}
+
+{% if settings.title_color %}
+	.board_htm h1,
+	.board_htm h2,
+	.board_htm h3,
+	.board_htm h4,
+	.board_htm h5,
+	.board_htm h6,
+	.board_htm .h1,
+	.board_htm .h2,
+	.board_htm .h3,
+	.board_htm .h4,
+	.board_htm .h5,
+	.board_htm .h6,
+	.page--noticia .container3 .container2 .board h1,
+	.page--noticia .container3 .container2 .board h2,
+	.page--noticia .container3 .container2 .board h3,
+	.page--noticia .container3 .container2 .board h4,
+	.page--noticia .container3 .container2 .board h5,
+	.page--noticia .container3 .container2 .board h6,
+	.page--noticia .container3 .container2 .board .h1,
+	.page--noticia .container3 .container2 .board .h2,
+	.page--noticia .container3 .container2 .board .h3,
+	.page--noticia .container3 .container2 .board .h4,
+	.page--noticia .container3 .container2 .board .h5,
+	.page--noticia .container3 .container2 .board .h6,
+	#texto-termo h1,
+	#texto-termo h2,
+	#texto-termo h3,
+	#texto-termo h4,
+	#texto-termo h5,
+	#texto-termo h6,
+	#texto-termo .h1,
+	#texto-termo .h2,
+	#texto-termo .h3,
+	#texto-termo .h4,
+	#texto-termo .h5,
+	#texto-termo .h6,
+	.h1.h1,
+	.h2.h2,
+	.h3.h3,
+	.h4.h4,
+	.h5.h5,
+	.h6.h6,
+	#NavTagCloud .fundo_nuvem,
+	.page--downloads .container3 > .container2 > .board h1.color,
+	.page--checkout_cart .carrinho-heading,
+	.page--login .titulo-login,
+	.page--register .board h1,
+	.page--central_anteriores h1,
+	.page--central_bonus h1,
+	.page--central_cliente h1,
+	.page--central_comissoes h1,
+	.page--central_comissoes_extrato h1,
+	.page--central_confirmar_pagamento h1,
+	.page--central_comentarios h1,
+	.page--central_detalhe_pedido h1,
+	.page--central_gera_troca h1,
+	.page--central_lista_espera h1,
+	.page--central_listas h1,
+	.page--central_listas_cliente h1,
+	.page--central_premiacao h1,
+	.page--central_premiacao_ativas h1,
+	.page--central_premiacao_classificacao h1,
+	.page--central_premiacao_historico h1,
+	.page--central_premiacao_indique h1,
+	.page--central_rastrear h1,
+	.page--central_recompra h1,
+	.page--central_senha h1,
+	.page--central_troca h1,
+	.page--central_anteriores .board.central-saudacao,
+	.page--central_bonus .board.central-saudacao,
+	.page--central_cliente .board.central-saudacao,
+	.page--central_comissoes .board.central-saudacao,
+	.page--central_comissoes_extrato .board.central-saudacao,
+	.page--central_confirmar_pagamento .board.central-saudacao,
+	.page--central_comentarios .board.central-saudacao,
+	.page--central_detalhe_pedido .board.central-saudacao,
+	.page--central_gera_troca .board.central-saudacao,
+	.page--central_lista_espera .board.central-saudacao,
+	.page--central_listas .board.central-saudacao,
+	.page--central_listas_cliente .board.central-saudacao,
+	.page--central_premiacao .board.central-saudacao,
+	.page--central_premiacao_ativas .board.central-saudacao,
+	.page--central_premiacao_classificacao .board.central-saudacao,
+	.page--central_premiacao_historico .board.central-saudacao,
+	.page--central_premiacao_indique .board.central-saudacao,
+	.page--central_rastrear .board.central-saudacao,
+	.page--central_recompra .board.central-saudacao,
+	.page--central_senha .board.central-saudacao,
+	.page--central_troca .board.central-saudacao,
+	.page--central_troca .tablePage h3,
+	.page--depoimentos h1.color,
+	.page--busca_noticias h1.color,
+	.page--search h1.color,
+	.page--newsletter h1.color,
+	.page--contact h1,
+	.page--contact h1.color,
+	.page--contact .container2 .tit-contato,
+	.accordion__header[aria-expanded="true"],
+	#multi-endereco-controla .multienderecos fieldset > h3[aria-expanded="true"],
+	.precoCompreJunto > div > strong,
+	#coments h2.color,
+	.visitados_itens h4,
+	.page--login .caixa-login h3,
+	.page--login .caixa-cadastro h3,
+	.page--register #frm2 h2,
+	#multi-endereco-controla .multienderecos fieldset > h3.active
+	.editComment li > h3,
+	.page--contact .container2 h3,
+	.smart-filter__title,
+	.cart__title,
+	.dep_nome,
+	.featured-category__name,
+	.page--depoimentos .editDep > li h3.color,
+	#listaUltimasNoticias > li a,
+	#listaUltimasNoticias > li a:visited,
+	#visualAbas.produto-imagem-abas ul li.aberta a,
+	.page--register #CadastroAbas ul li.aberta a,
+	.precoCompreJunto > div > strong,
+	.accordion__header[aria-expanded="true"],
+	.noticias #noticia_dados h3 a,
+	.tabs ul.tabs-list li.is-active a,
+	.product-details__name,
+	.page--rastreio .main .base-box h3
+	{
+		color: {{ settings.title_color }};
+	}
+{% endif %}
+
+{% if settings.sale_label_background_color %}
+	.product__label--sale,
+	.product__offer .product__label--sale:before
+	{
+		background-color: {{ settings.sale_label_background_color }};
+	}
+{% endif %}
+
+{% if settings.sale_label_color %}
+	.product__label--sale {
+		color: {{ settings.sale_label_color }};
+	}
+{% endif %}
+
+{% if settings.price_color %}
+	.product__price--regular,
+	.product__price--special,
+	.PrecoPrincipal,
+	.cart__product-price,
+	.cart__total-price,
+	.precoCompreJunto ul li.comprejunto_economize
+	{
+		color: {{ settings.price_color }};
+	}
+{% endif %}
+
+{% 
+	if settings.primary_button_background_color
+	or settings.primary_button_color
+%}
+	html .botao-commerce,
+	html .remove-bg .botao-comprar,
+	html .news.implantation .news-botao,
+	html .botao-continuar-comprando,
+	html .botao-sob-consulta,
+	.bt,
+	#produto_preco .botao_tire_duvidas,
+	#letMeKnow,
+	.smart-filter__button,
+	.newsletter-form__button,
+	.popup-newsletter__button,
+	.precoCompreJunto .comprejunto_botao .botao-commerce,
+	#acceptTerm,
+	.page--register .botao-prosseguir-cadastro,
+	.bts,
+	.page--depoimentos #aviso_depoimento + a,
+	.pagination__link--active,
+	.btns-paginator.selectedPg,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [alt="Comprar"],
+
+	.bt--secondary,
+	#produto_preco .botao_tire_duvidas,
+	#letMeKnow,
+	.bts,
+	#cepbox .botao-simular-frete,
+	#linkPagParcelado,
+	#comentario_cliente > a:first-child,
+	#modal-form .perguntasProdutoBTimg,
+	#modal-form .modal-body button,
+	.clearVisiteds,
+	.page--checkout_cart .caixa-forma-frete .botao-simular-frete,
+	.page--checkout_cart .caixa-forma-frete .caixa-cupom .botao-cupom-desconto,
+	.page--checkout_cart .caixa-botoes .botao-commerce.botao-continuar-comprando,
+	.page--checkout_cart .Seguro + .board a,
+	.page--login fieldset .botao-commerce,
+	#multi-endereco-controla .adicionar_mais,
+	.page--central_detalhe_pedido b > a,
+	.page--central_detalhe_pedido .central_recompra a,
+	.page--depoimentos br + h2.color,
+	#listaCategoriasNoticias li a b,
+	.page--search #Vitrine [name="form1"] fieldset:after,
+	.dep_link a,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [title="Escolher"],
+
+	.bt--highlight,
+	.cart-preview-footer .botao-prosseguir-compra,
+	.page--checkout_cart .botao-prosseguir-compra,
+	#bt_comprar .botao-comprar,
+	#listaNoticiaProdutos #produto_comprar a,
+	.page--central_troca form[name="form1"]:after,
+
+	html .botao-commerce:visited,
+	html .remove-bg .botao-comprar:visited,
+	html .news.implantation .news-botao:visited,
+	html .botao-continuar-comprando:visited,
+	html .botao-sob-consulta:visited,
+	.bt:visited,
+	#produto_preco .botao_tire_duvidas:visited,
+	#letMeKnow:visited,
+	.smart-filter__button:visited,
+	.newsletter-form__button:visited,
+	.popup-newsletter__button:visited,
+	.precoCompreJunto .comprejunto_botao .botao-commerce:visited,
+	#acceptTerm:visited,
+	.page--register .botao-prosseguir-cadastro:visited,
+	.bts:visited,
+	.page--depoimentos #aviso_depoimento + a:visited,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [alt="Comprar"]:visited,
+
+	.bt--secondary:visited,
+	#produto_preco .botao_tire_duvidas:visited,
+	#letMeKnow:visited,
+	.bts:visited,
+	#cepbox .botao-simular-frete:visited,
+	#linkPagParcelado:visited,
+	#comentario_cliente > a:first-child:visited,
+	#modal-form .perguntasProdutoBTimg:visited,
+	#modal-form .modal-body button:visited,
+	.clearVisiteds:visited,
+	.page--checkout_cart .caixa-forma-frete .botao-simular-frete:visited,
+	.page--checkout_cart .caixa-forma-frete .caixa-cupom .botao-cupom-desconto:visited,
+	.page--checkout_cart .caixa-botoes .botao-commerce.botao-continuar-comprando:visited,
+	.page--checkout_cart .Seguro + .board a:visited,
+	.page--login fieldset .botao-commerce:visited,
+	#multi-endereco-controla .adicionar_mais:visited,
+	.page--central_detalhe_pedido b > a:visited,
+	.page--central_detalhe_pedido .central_recompra a:visited,
+	.page--depoimentos br + h2.color:visited,
+	#listaCategoriasNoticias li a b:visited,
+	.dep_link a:visited,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [title="Escolher"]:visited,
+
+	.bt--highlight:visited,
+	.cart-preview-footer .botao-prosseguir-compra:visited,
+	.page--checkout_cart .botao-prosseguir-compra:visited,
+	#bt_comprar .botao-comprar:visited,
+	#listaNoticiaProdutos #produto_comprar a:visited,
+
+	.cart__icon-qtd
+
+	{
+		background-color: {{ settings.primary_button_background_color }};
+		color: {{ settings.primary_button_color }};
+	}
+{% endif %}
+
+{% 
+	if settings.primary_button_hover_background_color
+	or settings.primary_button_hover_color
+%}
+	html .botao-commerce:hover,
+	html .remove-bg .botao-comprar:hover,
+	html .news.implantation .news-botao:hover,
+	html .botao-continuar-comprando:hover,
+	html .botao-sob-consulta:hover,
+	.bt:hover,
+	#produto_preco .botao_tire_duvidas:hover,
+	#letMeKnow:hover,
+	.smart-filter__button:hover,
+	.newsletter-form__button:hover,
+	.popup-newsletter__button:hover,
+	.precoCompreJunto .comprejunto_botao .botao-commerce:hover,
+	#acceptTerm:hover,
+	.page--register .botao-prosseguir-cadastro:hover,
+	.bts:hover,
+	.page--depoimentos #aviso_depoimento + a:hover,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [alt="Comprar"]:hover,
+	
+	.bt--secondary:hover,
+	#produto_preco .botao_tire_duvidas:hover,
+	#letMeKnow:hover,
+	.bts:hover,
+	#cepbox .botao-simular-frete:hover,
+	#linkPagParcelado:hover,
+	#comentario_cliente > a:first-child:hover,
+	#modal-form .perguntasProdutoBTimg:hover,
+	#modal-form .modal-body button:hover,
+	.clearVisiteds:hover,
+	.page--checkout_cart .caixa-forma-frete .botao-simular-frete:hover,
+	.page--checkout_cart .caixa-forma-frete .caixa-cupom .botao-cupom-desconto:hover,
+	.page--checkout_cart .caixa-botoes .botao-commerce.botao-continuar-comprando:hover,
+	.page--checkout_cart .Seguro + .board a:hover,
+	.page--login fieldset .botao-commerce:hover,
+	#multi-endereco-controla .adicionar_mais:hover,
+	.page--central_detalhe_pedido b > a:hover,
+	.page--central_detalhe_pedido .central_recompra a:hover,
+	.page--depoimentos br + h2.color:hover,
+	#listaCategoriasNoticias li a b:hover,
+	.dep_link a:hover,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [title="Escolher"]:hover,
+
+	.bt--highlight:hover,
+	.cart-preview-footer .botao-prosseguir-compra:hover,
+	.page--checkout_cart .botao-prosseguir-compra:hover,
+	#bt_comprar .botao-comprar:hover,
+	#listaNoticiaProdutos #produto_comprar a:hover,
+	.page--central_troca form[name="form1"]:after,
+
+	html .botao-commerce:focus,
+	html .remove-bg .botao-comprar:focus,
+	html .news.implantation .news-botao:focus,
+	html .botao-continuar-comprando:focus,
+	html .botao-sob-consulta:focus,
+	.bt:focus,
+	#produto_preco .botao_tire_duvidas:focus,
+	#letMeKnow:focus,
+	.smart-filter__button:focus,
+	.newsletter-form__button:focus,
+	.popup-newsletter__button:focus,
+	.precoCompreJunto .comprejunto_botao .botao-commerce:focus,
+	#acceptTerm:focus,
+	.page--register .botao-prosseguir-cadastro:focus,
+	.bts:focus,
+	.page--depoimentos #aviso_depoimento + a:focus,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [alt="Comprar"]:focus,
+	
+	.bt--secondary:focus,
+	#produto_preco .botao_tire_duvidas:focus,
+	#letMeKnow:focus,
+	.bts:focus,
+	#cepbox .botao-simular-frete:focus,
+	#linkPagParcelado:focus,
+	#comentario_cliente > a:first-child:focus,
+	#modal-form .perguntasProdutoBTimg:focus,
+	#modal-form .modal-body button:focus,
+	.clearVisiteds:focus,
+	.page--checkout_cart .caixa-forma-frete .botao-simular-frete:focus,
+	.page--checkout_cart .caixa-forma-frete .caixa-cupom .botao-cupom-desconto:focus,
+	.page--checkout_cart .caixa-botoes .botao-commerce.botao-continuar-comprando:focus,
+	.page--checkout_cart .Seguro + .board a:focus,
+	.page--login fieldset .botao-commerce:focus,
+	#multi-endereco-controla .adicionar_mais:focus,
+	.page--central_detalhe_pedido b > a:focus,
+	.page--central_detalhe_pedido .central_recompra a:focus,
+	.page--depoimentos br + h2.color:focus,
+	#listaCategoriasNoticias li a b:focus,
+	.dep_link a:focus,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [title="Escolher"]:focus,
+
+	.bt--highlight:focus,
+	.cart-preview-footer .botao-prosseguir-compra:focus,
+	.page--checkout_cart .botao-prosseguir-compra:focus,
+	#bt_comprar .botao-comprar:focus,
+	#listaNoticiaProdutos #produto_comprar a:focus
+	{
+		background-color: {{ settings.primary_button_hover_background_color }};
+		color: {{ settings.primary_button_hover_color }};
+	}
+{% endif %}
+
+{% 
+	if settings.secondary_button_background_color
+	or settings.secondary_button_color
+%}
+	.bt--secondary,
+	#produto_preco .botao_tire_duvidas,
+	#letMeKnow,
+	.bts,
+	#cepbox .botao-simular-frete,
+	#linkPagParcelado,
+	#comentario_cliente > a:first-child,
+	#modal-form .perguntasProdutoBTimg,
+	#modal-form .modal-body button,
+	.clearVisiteds,
+	.page--checkout_cart .caixa-forma-frete .botao-simular-frete,
+	.page--checkout_cart .caixa-forma-frete .caixa-cupom .botao-cupom-desconto,
+	.page--checkout_cart .caixa-botoes .botao-commerce.botao-continuar-comprando,
+	.page--checkout_cart .Seguro + .board a,
+	.page--login fieldset .botao-commerce,
+	#multi-endereco-controla .adicionar_mais,
+	.page--central_detalhe_pedido b > a,
+	.page--central_detalhe_pedido .central_recompra a,
+	.page--depoimentos br + h2.color,
+	#listaCategoriasNoticias li a b,
+	.dep_link a,
+	.page--search #Vitrine [name="form1"] fieldset:after,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [title="Escolher"],
+
+	.bt--secondary:visited,
+	#produto_preco .botao_tire_duvidas:visited,
+	#letMeKnow:visited,
+	.bts:visited,
+	#cepbox .botao-simular-frete:visited,
+	#linkPagParcelado:visited,
+	#comentario_cliente > a:first-child:visited,
+	#modal-form .perguntasProdutoBTimg:visited,
+	#modal-form .modal-body button:visited,
+	.clearVisiteds:visited,
+	.page--checkout_cart .caixa-forma-frete .botao-simular-frete:visited,
+	.page--checkout_cart .caixa-forma-frete .caixa-cupom .botao-cupom-desconto:visited,
+	.page--checkout_cart .caixa-botoes .botao-commerce.botao-continuar-comprando:visited,
+	.page--checkout_cart .Seguro + .board a:visited,
+	.page--login fieldset .botao-commerce:visited,
+	#multi-endereco-controla .adicionar_mais:visited,
+	.page--central_detalhe_pedido b > a:visited,
+	.page--central_detalhe_pedido .central_recompra a:visited,
+	.page--depoimentos br + h2.color:visited,
+	#listaCategoriasNoticias li a b:visited,
+	.dep_link a:visited,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [title="Escolher"]:visited
+	{
+		background-color: {{ settings.secondary_button_background_color }};
+		color: {{ settings.secondary_button_color }};
+	}
+{% endif %}
+
+{% 
+	if settings.secondary_button_hover_background_color
+	or settings.secondary_button_hover_color
+%}
+	.bt--secondary:hover,
+	#produto_preco .botao_tire_duvidas:hover,
+	#letMeKnow:hover,
+	.bts:hover,
+	#cepbox .botao-simular-frete:hover,
+	#linkPagParcelado:hover,
+	#comentario_cliente > a:first-child:hover,
+	#modal-form .perguntasProdutoBTimg:hover,
+	#modal-form .modal-body button:hover,
+	.clearVisiteds:hover,
+	.page--checkout_cart .caixa-forma-frete .botao-simular-frete:hover,
+	.page--checkout_cart .caixa-forma-frete .caixa-cupom .botao-cupom-desconto:hover,
+	.page--checkout_cart .caixa-botoes .botao-commerce.botao-continuar-comprando:hover,
+	.page--checkout_cart .Seguro + .board a:hover,
+	.page--login fieldset .botao-commerce:hover,
+	#multi-endereco-controla .adicionar_mais:hover,
+	.page--central_detalhe_pedido b > a:hover,
+	.page--central_detalhe_pedido .central_recompra a:hover,
+	.page--depoimentos br + h2.color:hover,
+	#listaCategoriasNoticias li a b:hover,
+	.dep_link a:hover,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [title="Escolher"]:hover,
+
+	.bt--secondary:focus,
+	#produto_preco .botao_tire_duvidas:focus,
+	#letMeKnow:focus,
+	.bts:focus,
+	#cepbox .botao-simular-frete:focus,
+	#linkPagParcelado:focus,
+	#comentario_cliente > a:first-child:focus,
+	#modal-form .perguntasProdutoBTimg:focus,
+	#modal-form .modal-body button:focus,
+	.clearVisiteds:focus,
+	.page--checkout_cart .caixa-forma-frete .botao-simular-frete:focus,
+	.page--checkout_cart .caixa-forma-frete .caixa-cupom .botao-cupom-desconto:focus,
+	.page--checkout_cart .caixa-botoes .botao-commerce.botao-continuar-comprando:focus,
+	.page--checkout_cart .Seguro + .board a:focus,
+	.page--login fieldset .botao-commerce:focus,
+	#multi-endereco-controla .adicionar_mais:focus,
+	.page--central_detalhe_pedido b > a:focus,
+	.page--central_detalhe_pedido .central_recompra a:focus,
+	.page--depoimentos br + h2.color:focus,
+	#listaCategoriasNoticias li a b:focus,
+	.dep_link a:focus,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [title="Escolher"]:focus
+	{
+		background-color: {{ settings.secondary_button_hover_background_color }};
+		color: {{ settings.secondary_button_hover_color }};
+	}
+{% endif %}
+
+{% 
+	if settings.forward_button_background_color
+	or settings.forward_button_color
+%}
+	.bt--highlight,
+	.cart-preview-footer .botao-prosseguir-compra,
+	.page--checkout_cart .botao-prosseguir-compra,
+	#bt_comprar .botao-comprar,
+	#listaNoticiaProdutos #produto_comprar a,
+	.page--finalizar_presentes .container3 .container2 .board:after,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [alt="Comprar"],
+
+	.bt--highlight:visited,
+	.cart-preview-footer .botao-prosseguir-compra:visited,
+	.page--checkout_cart .botao-prosseguir-compra:visited,
+	#bt_comprar .botao-comprar:visited,
+	#listaNoticiaProdutos #produto_comprar a:visited,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [alt="Comprar"]:visited,
+
+	.cart__icon-qtd
+	
+	{
+		background-color: {{ settings.forward_button_background_color }};
+		color: {{ settings.forward_button_color }};
+	}
+{% endif %}
+
+{% 
+	if settings.forward_button_hover_background_color
+	or settings.forward_button_hover_color
+%}
+	.bt--highlight:hover,
+	.cart-preview-footer .botao-prosseguir-compra:hover,
+	.page--checkout_cart .botao-prosseguir-compra:hover,
+	#bt_comprar .botao-comprar:hover,
+	#listaNoticiaProdutos #produto_comprar a:hover,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [alt="Comprar"]:hover,
+
+	.bt--highlight:focus,
+	.cart-preview-footer .botao-prosseguir-compra:focus,
+	.page--checkout_cart .botao-prosseguir-compra:focus,
+	#bt_comprar .botao-comprar:focus,
+	#listaNoticiaProdutos #produto_comprar a:focus,
+	.page--comparador .comparator > ul > li > ul > li.comparsionFoto [alt="Comprar"]:focus
+	{
+		background-color: {{ settings.forward_button_hover_background_color }};
+		color: {{ settings.forward_button_hover_color }};
+	}
+{% endif %}
+
+{# Header #}
+{% if settings.header_line_1_background_color %}
+	.header__line-1 {
+		background-color: {{ settings.header_line_1_background_color }}
+	}
+{% endif %}
+
+{% if settings.header_line_1_color %}
+	.header__line-1,
+	.contact-info--header .contact-info__item,
+	.contact-info--header .contact-info__item:visited,
+	.contact-info--header .contact-info__telephone,
+	.contact-info--header .contact-info__email
+	{
+		color: {{ settings.header_line_1_color }}
+	}
+{% endif %}
+
+{% if settings.header_line_1_icon_color %}
+	.contact-info--header .contact-info__icon,
+	.social--header .social__icon
+	{
+		color: {{ settings.header_line_1_icon_color }}
+	}
+{% endif %}
+
+{% if settings.header_line_2_background_color %}
+	.header__line-2 {
+		background-color: {{ settings.header_line_2_background_color }}
+	}
+{% endif %}
+
+{% if settings.header_line_2_color %}
+	.header__line-2,
+	input.search-form__input {
+		color: {{ settings.header_line_2_color }}
+	}
+
+	input.search-form__input::-webkit-input-placeholder
+	{
+		color: {{ settings.header_line_2_color }};
+	}
+
+	input.search-form__input:-moz-placeholder
+	{
+		color: {{ settings.header_line_2_color }};
+	}
+
+	input.search-form__input::-moz-placeholder
+	{
+		color: {{ settings.header_line_2_color }};
+	}
+
+	input.search-form__input:-ms-input-placeholder
+	{
+		color: {{ settings.header_line_2_color }};
+	}
+{% endif %}
+
+{% if settings.header_line_2_icon_color %}
+	.search-form__button__icon,
+	.user-account__icon,
+	.header .menu-toggle .icon,
+	.cart__icon
+	{
+		color: {{ settings.header_line_2_icon_color }}
+	}
+
+	.user-account__toggle.is-opened,
+	.cart__toggle.is-opened,
+	.menu-toggle.is-opened,
+	.search-form__toggle.is-opened
+	{
+		border-bottom-color: {{ settings.header_line_2_icon_color }};
+	}
+{% endif %}
+
+{% if settings.category_list_background_color %}
+	.header .header__line-3,
+	.menu-mobile__item-lvl1 .menu-mobile__image,
+	.main-menu__item-lvl1 .main-menu__image
+	{
+		background-color: {{ settings.category_list_background_color }};
+	}
+{% endif %}
+
+{% if settings.category_list_color %}
+	.main-menu__link,
+	.main-menu__link:visited,
+	.main-menu__link-texto:after
+	{
+		color: {{ settings.category_list_color }};
+	}
+{% endif %}
+
+{% if settings.cart_icon_background_color %}
+	.cart__icon-qtd {
+		background-color: {{ settings.cart_icon_background_color }};
+	}
+{% endif %}
+
+{% if settings.cart_icon_color %}
+	.cart__icon-qtd {
+		color: {{ settings.cart_icon_color }};
+	}
+{% endif %}
+
+{# Footer #}
+{% if settings.footer_background_color %}
+	.footer__line-2 {
+		background-color: {{ settings.footer_background_color }}
+	}
+{% endif %}
+
+{% if settings.footer_color %}
+	.footer__line-2,
+	.pages-menu__link,
+	.pages-menu__link:visited,
+	.footer__line-2 .contact-info__item,
+	.footer__line-2 .contact-info__item:visited,
+	.footer__line-2 .contact-info__telephone,
+	.footer__line-2 .contact-info__email,
+	.footer__line-2 .contact-info__icon,
+	.footer__line-2 .social__link,
+	.footer__line-2 .social__link:visited,
+	.footer__line-2 .address-info__text:before,
+	.footer__line-2 .opening-hours__text:before
+	{
+		color: {{ settings.footer_color }};
+	}
+
+	.pages-menu__list,
+	.footer--2 .pages-menu__list:after {
+		border-color: {{ settings.footer_color }};
+	}
+{% endif %}
+
+{% if settings.footer_link_color %}
+	.pages-menu__link,
+	.pages-menu__link:visited,
+	.footer__line-2 .contact-info__item,
+	.footer__line-2 .contact-info__item:visited,
+	.footer__line-2 .contact-info__telephone,
+	.footer__line-2 .contact-info__email
+	{
+		color: {{ settings.footer_link_color }}
+	}
+{% endif %}
+
+{% if settings.footer_icon_color %}
+	.footer__line-2 .contact-info__icon,
+	.footer__line-2 .social__icon,
+	.footer__line-2 .address-info__icon,
+	.footer__line-2 .address-info__text:before,
+	.footer__line-2 .opening-hours__text:before
+	{
+		color: {{ settings.footer_icon_color }}
+	}
+
+	.pages-menu__list,
+	.footer--2 .pages-menu__list:after {
+		border-color: {{ settings.footer_icon_color }};
+	}
+{% endif %}
+
+{% if settings.footer_seals_background_color %}
+	.footer__line-3 {
+		background-color: {{ settings.footer_seals_background_color }}
+	}
+{% endif %}
+
+{% if settings.footer_seals_color %}
+	.footer__line-3,
+	.footer__line-3 .footer__title
+	{
+		color: {{ settings.footer_seals_color }}
+	}
+{% endif %}
+
+{% if settings.footer_seals_title_color %}
+	.footer__line-3 .footer__title {
+		color: {{ settings.footer_seals_title_color }}
+	}
+{% endif %}
+
+.footer__line-4 {
+	{% if settings.footer_message_background_color %}
+		background-color: {{ settings.footer_message_background_color }};
+	{% endif %}
+
+	{% if settings.footer_message_border_color %}
+		border-color: {{ settings.footer_message_border_color }};
+	{% endif %}
+
+	{% if settings.footer_message_color %}
+		color: {{ settings.footer_message_color }}
+	{% endif %}
+}
+
+{# Newsletter #}
+{% if settings.is_newsletter_enabled %}
+	{% if settings.newsletter_background_color %}
+		.footer__line-1,
+		.popup-newsletter__form-container
+		{
+			background-color: {{ settings.newsletter_background_color }};
+		}
+	{% endif %}
+
+	{% if settings.newsletter_color %}
+		.footer__line-1,
+		.popup-newsletter__form-container,
+		input.popup-newsletter__input,
+		input.newsletter-form__input
+		{
+			color: {{ settings.newsletter_color }};
+		}
+
+		input.newsletter-form__input::-webkit-input-placeholder,
+		input.popup-newsletter__input::-webkit-input-placeholder
+		{
+			color: {{ settings.newsletter_color }};
+		}
+
+		input.newsletter-form__input:-moz-placeholder,
+		input.popup-newsletter__input:-moz-placeholder
+		{
+			color: {{ settings.newsletter_color }};
+		}
+
+		input.newsletter-form__input::-moz-placeholder,
+		input.popup-newsletter__input::-moz-placeholder
+		{
+			color: {{ settings.newsletter_color }};
+		}
+
+		input.newsletter-form__input:-ms-input-placeholder,
+		input.popup-newsletter__input:-ms-input-placeholder
+		{
+			color: {{ settings.newsletter_color }};
+		}
+	{% endif %}
+
+	{% if settings.newsletter_background_image %}
+		.footer__line-1 {
+			background-repeat: {{ settings.newsletter_background_repeat }};
+			background-position: {{ settings.newsletter_background_position }};
+			
+			{% if settings.is_newsletter_background_cover %}
+				background-size: cover;
+			{% endif %}
+
+			{% if settings.is_newsletter_background_fixed %}
+				background-attachment: fixed;
+			{% endif %}
+		}
+	{% endif %}
+
+	{% if settings.newsletter_button_background_color %}
+		.newsletter-form__button,
+		.newsletter-form__button:active,
+		.popup-newsletter__button,
+		.popup-newsletter__button:active
+		{
+			background-color: {{ settings.newsletter_button_background_color }};
+			border-color: {{ settings.newsletter_button_background_color }};			
+		}
+	{% endif %}
+
+	{% if settings.newsletter_button_color %}
+		.newsletter-form__button,
+		.newsletter-form__button:active
+		.popup-newsletter__button,
+		.popup-newsletter__button:active
+		{
+			color: {{ settings.newsletter_button_color }};			
+		}
+	{% endif %}
+
+	{% if settings.newsletter_button_hover_background_color %}
+		.newsletter-form__button:hover,
+		.newsletter-form__button:focus,
+		.popup-newsletter__button:hover,
+		.popup-newsletter__button:focus
+		{
+			background-color: {{ settings.newsletter_button_hover_background_color }};
+			border-color: {{ settings.newsletter_button_hover_background_color }};			
+		}
+	{% endif %}
+
+	{% if settings.newsletter_button_hover_color %}
+		.newsletter-form__button:hover,
+		.newsletter-form__button:focus,
+		.popup-newsletter__button:hover,
+		.popup-newsletter__button:focus
+		{
+			color: {{ settings.newsletter_button_hover_color }};			
+		}
+	{% endif %}
+{% endif %}
+
+{# Newsletter Modal #}
+{% if settings.is_newsletter_modal_enabled %}
+	{% if settings.newsletter_modal_background_color %}
+		.popup-newsletter__form-container
+		{
+			background-color: {{ settings.newsletter_modal_background_color }};
+		}
+	{% endif %}
+
+	{% if settings.newsletter_modal_color %}
+		.popup-newsletter__form-container,
+		input.popup-newsletter__input
+		{
+			color: {{ settings.newsletter_modal_color }};
+		}
+
+		input.popup-newsletter__input::-webkit-input-placeholder
+		{
+			color: {{ settings.newsletter_modal_color }};
+		}
+
+		input.popup-newsletter__input:-moz-placeholder
+		{
+			color: {{ settings.newsletter_modal_color }};
+		}
+
+		input.popup-newsletter__input::-moz-placeholder
+		{
+			color: {{ settings.newsletter_modal_color }};
+		}
+
+		input.popup-newsletter__input:-ms-input-placeholder
+		{
+			color: {{ settings.newsletter_modal_color }};
+		}
+	{% endif %}
+
+	{% if settings.newsletter_modal_button_background_color %}
+		.popup-newsletter__button,
+		.popup-newsletter__button:active
+		{
+			background-color: {{ settings.newsletter_modal_button_background_color }};
+			border-color: {{ settings.newsletter_modal_button_background_color }};			
+		}
+	{% endif %}
+
+	{% if settings.newsletter_modal_button_color %}
+		.popup-newsletter__button,
+		.popup-newsletter__button:active
+		{
+			color: {{ settings.newsletter_modal_button_color }};			
+		}
+	{% endif %}
+
+	{% if settings.newsletter_modal_button_hover_background_color %}
+		.popup-newsletter__button:hover,
+		.popup-newsletter__button:focus
+		{
+			background-color: {{ settings.newsletter_modal_button_hover_background_color }};
+			border-color: {{ settings.newsletter_modal_button_hover_background_color }};			
+		}
+	{% endif %}
+
+	{% if settings.newsletter_modal_button_hover_color %}
+		.popup-newsletter__button:hover,
+		.popup-newsletter__button:focus
+		{
+			color: {{ settings.newsletter_modal_button_hover_color }};			
+		}
+	{% endif %}
+{% endif %}
+
+{# Progressive Discounts #}
+{% if settings.progressive_discount_background_color %}
+	.discounts__tag
+	{
+		background-color: {{ settings.progressive_discount_background_color }};
+	}
+{% endif %}
+
+{% if settings.progressive_discount_color %}
+	.discounts__tag
+	{
+		color: {{ settings.progressive_discount_color }};
+	}
+{% endif %}
+
+{% endspaceless %}

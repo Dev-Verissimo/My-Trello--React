@@ -1,0 +1,138 @@
+<div class="cart">
+	<button class="cart__toggle" aria-expanded="false" title="Meu Carrinho">
+		<div class="cart__icon-wrapper">
+			<span class="cart__icon icon icon-shopping-cart" aria-hidden="true"></span>
+			<span class="cart__icon-qtd js-qtd-cart"></span>
+		</div>
+		<span class="cart__price hidden-xs hidden-sm">
+			{{ settings.currency }}
+			<span class="js-cart-price"></span>
+		</span>
+	</button>
+	<div class="cart__dropdown js-vue-cart">
+		<div class="cart__heading">
+			<div class="clearfix grid-container">
+				<div class="b-xs-6">
+					<span class="cart__title">
+						Carrinho
+					</span>
+				</div>
+				<div class="b-xs-6 align-right">
+					<button class="cart__close js-close-dropdown" v-on:click="closeDropdown()">
+						<span class="icon icon-x" aria-label="Fechar carrinho"></span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<template v-if="!products.length">
+			<div class="cart__empty">
+				<div class="clearfix grid-container">
+					<div class="b-xs-12">
+						<p>
+							Seu carrinho est&aacute; vazio.
+						</p>
+					</div>
+				</div>
+			</div>
+		</template>
+		<template v-else-if="true === loading">
+			<div class="cart__empty">
+				<div class="clearfix grid-container">
+					<div class="b-xs-12 align-center">
+						<img src="{{ asset('img/loading.gif') }}" width="24" alt="" title="Carregando informa&ccedil;&otilde;es">
+					</div>
+				</div>
+			</div>
+		</template>
+		<template v-else>	
+			<div class="cart__produtos">
+				<template v-for="product in products">
+					<div class="cart__produto">
+						<div class="clearfix grid-container">
+							<div class="b-xs-3">
+								<div class="product__image-container">
+									{% if utils.is_https %}
+                                        {% set url_ending = 'https' %}
+                                    {% else %}
+                                        {% set url_ending = 'http' %}
+                                    {% endif %}
+
+									<a v-bind:href="product.productDetails.url.{{ url_ending }}" class="product__link">
+										<template v-if="product.productImage.length != 0 && product.productImage.thumbs[90].{{ url_ending }}">
+											<img class="product__image" v-bind:src="product.productImage.thumbs[90].{{ url_ending }}" v-bind:title="product.productDetails.name">							
+										</template>
+										<template v-else>
+											<span class="icon-camera-off product__no-image product__no-image--small"></span>
+										</template>
+									</a>
+								</div>
+							</div>
+
+							<div class="b-xs-9">
+								<div class="cart__product-details">
+									<div class="cart__product-row1">
+										<div class="clearfix grid-container">
+											<div class="b-xs-10">
+												<a v-bind:href="product.productDetails.url.{{ url_ending }}" class="cart__product-name" v-text="product.productDetails.name"></a>	
+											</div>
+											<div class="b-xs-2 align-right">
+												<span class="cart__product-qtd" v-text="'x' + product.quantity"></span>
+											</div>
+										</div>
+									</div>
+
+									<div class="cart__product-row2">
+										<div class="clearfix grid-container">
+											<div class="b-xs-12">
+												<span class="cart__product-price" v-text="'R$ ' + (product.cartPrice).toFixed(2).replace('.',',')"></span>
+											</div>
+										</div>
+									</div>
+									
+									<template v-if="product.productVariant">
+										<div class="cart__product-row3">
+											<ul class="cart__product-list">
+												<template v-for="variant in product.productVariant.Sku">
+													<li class="cart__product-listItem" v-text="variant.type + ': ' + variant.value"></li>
+												</template>
+											</ul>
+										</div>
+									</template>
+									<div class="cart__product-row4 align-right">
+										<button class="cart__link cart__link--remove" v-on:click=deleteProduct(product.cart.product_id,product.cart.variant_id,product.productDetails.name,product.cart.additional_information)>
+											<span class="icon-x"></span>
+											Remover
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</template>
+			</div>
+			<div class="cart__footer">
+				<div class="cart__options">
+					<div class="clearfix grid-container">
+						<div class="b-xs-12 align-right">
+							<button class="cart__link" v-on:click="deleteAll()">
+								<span class="icon-x"></span>
+								Remover tudo
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix grid-container cart__footer-wrapper">
+					<div class="b-xs-6">
+						<span class="cart__total-label">Total:</span>
+						<span class="cart__total-price" v-text="'R$ ' + (totalPrice).toFixed(2).replace('.',',')"></span>
+					</div>
+					<div class="b-xs-6 align-right">
+						<a href="{{ links.cart }}" class="cart__bt bt bt--highlight">
+							Avan&ccedil;ar
+						</a>
+					</div>
+				</div>		
+			</div>
+		</template>
+	</div>
+</div>

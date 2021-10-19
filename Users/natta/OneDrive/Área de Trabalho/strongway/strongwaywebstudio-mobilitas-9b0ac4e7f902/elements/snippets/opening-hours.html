@@ -1,0 +1,19 @@
+{# Telefone 1 #}
+{% if Translation('ag_atendimento') %}
+	{% set opening_hours_text = Translation('ag_atendimento') %}
+{% endif %}
+{% if settings.opening_hours_text %}
+	{% set opening_hours_text = settings.opening_hours_text %}
+{% endif %}
+
+{% if opening_hours_text %}
+	<aside class="opening-hours">
+		<h4 class="visuallyhidden">
+			Atendimento
+		</h4>
+		
+		<div class="opening-hours__text">
+			{{ opening_hours_text|nl2br }}
+		</div>			
+	</aside>
+{% endif %}

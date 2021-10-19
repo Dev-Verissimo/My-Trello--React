@@ -1,0 +1,16 @@
+<div class="search-form">
+	<form class="search-form__form" action="{{ links.search }}" data-search="suggestion">
+		<input type="hidden" name="loja" value="{{ store.id }}">
+		<div class="search-form__container">
+			<input class="search-form__input" type="search" placeholder="Busca" name="palavra_busca" data-input="suggestion">
+			
+			<button class="search-form__button">
+				<span class="search-form__button__icon icon icon-search" aria-hidden="true"></span>
+
+				<span class="visuallyhidden">
+					Buscar
+				</span>
+			</button>
+		</div>
+	</form>
+</div>

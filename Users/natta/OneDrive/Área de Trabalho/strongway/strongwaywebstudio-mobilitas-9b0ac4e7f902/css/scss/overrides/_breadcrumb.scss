@@ -1,0 +1,28 @@
+.central-breadcrumb {
+	color: $texto-escuro;
+	
+	.breadcrumb-text {
+		@extend %visuallyhidden;
+
+		+ .breadcrumb-spacer {
+			display: none;
+		}
+	}
+
+	.breadcrumb-item {
+		@extend .breadcrumb__item;
+
+		a {
+			@extend .breadcrumb__link;
+		}
+	}
+
+	.breadcrumb-spacer {
+		font-size: 0;
+
+		&:before {
+			@extend .breadcrumb__separator;
+			content: "/";
+		}
+	}
+}

@@ -1,0 +1,333 @@
+.page--register {
+	.board {
+		h1 {
+			@include h2;
+		}
+	}
+
+	.breadcrumb {
+		h1 {
+			// Corrige problema da breadcrumb em certas páginas, que envolve o título
+			color: $texto-escuro;
+		}
+	}
+
+	.Seguro {
+		display: none;
+	}
+
+	#CadastroAbas {
+		@extend #visualAbas.produto-imagem-abas;
+	}
+	
+	#frm2 {
+		@extend %base_box;
+		border-top: 0;
+		@include rem(margin-bottom, 25);
+		float: none;
+
+		h2 {
+			@include base-headings;
+			@include h3;
+		}
+
+		> .board {
+		}
+
+		.text {
+			vertical-align: middle;
+			display: inline-block;
+
+			&#cep_2,
+			&#cobranca_cep_2 {
+			}
+			
+			&#cobranca_numero_endereco,
+			&#numero_endereco {
+				display: block
+			}
+		}
+		
+		label {
+			display: block;
+			@include rem(margin-top, 10);
+			vertical-align: top;
+			@include rem(font-size, $basefont);
+			line-height: 1.5;
+			
+			&.dif {
+				display: inline-block;
+				margin-top: 0
+			}
+		}
+	}
+   
+   	#ad_fisica {
+   		@include separator-border();
+
+   		br {
+   			display: none;
+   		}
+   	}
+
+	#endereco_cobranca_diferente {
+		@include rem(margin-top, 5);
+	}
+
+	#cobranca_estado_principal {
+		@include rem(margin-right, 25);
+	}
+
+	input {
+		&#cep+label,
+		&#habilita_ajax2+label {
+			display: inline-block;
+			vertical-align: top
+		}
+
+		&#cep+label+label,
+		&#habilita_ajax2+label+label {
+			display: inline-block;
+			vertical-align: top;
+
+			@include bp(min-width, $bp-md + 1) {
+				@include rem(margin-left, 20);
+			}
+		}
+
+		&#cep+label+label input,
+		&#habilita_ajax2+label+label & {
+			display: block
+		}        
+	}
+	
+	// Hack pesado
+	fieldset {
+		font-size: 0;
+		line-height: 0;
+		padding: 0;
+		border: none;
+
+		@include bp(max-width, $bp-md) {
+			padding: 0;
+			border: none;
+
+			label {
+				display: block;
+				font-size: 0;
+				line-height: 0
+			}
+			br {
+				display: none
+			}            
+		}
+	}
+
+	#ou_estado_envio_nacional {
+		display: inline-block;
+		width: 100%
+	}
+	
+	@include bp(min-width, $bp-md + 1) {
+		@include bp(max-width, $bp-lg) {
+			#pf_nome_cliente,
+			#pj_nome_cliente,
+			#razao_social {
+				width: 100%
+			}
+			input#cep+label {
+				width: 80%
+			}
+			input#cep+label input {
+				width: 100%
+			}
+			#frm2 .text#cep_1,
+			#frm2 .text.cep_1,
+			#frm2 .text.cep1,
+			#frm2 .text#cobranca_cep_1  {
+				margin-left: 0
+			}            
+		}
+	}
+	
+	@include bp(max-width, $bp-md) {
+		#cobranca_endereco,
+		#endereco_cliente,
+		#pf_nome_cliente {
+			width: 100%
+		}
+		#pf_data_nascimento {
+			@include rem(min-width, 120);
+		}
+		#telefone_cliente {
+			@include rem(min-width, 200);
+		}
+		#senha_cliente,
+		#senha_cliente2 {
+			@include rem(min-width, 180);
+		}
+		#cobranca_complemento,
+		#complemento {
+			@include rem(min-width, 170);
+		}
+		.dif {
+			@include rem(font-size, 10);
+		}
+		#email_cliente2_erro+br+label {
+			@include rem(font-size, 12);
+		}
+		#cep_nacional_span,
+		#span_cep_nacional {
+			display: block
+		}
+		.breadcrumb-item,
+		.breadcrumb-spacer {
+			display: none
+		}
+		.central-breadcrumb {
+			padding: 0
+		}
+		#frm2 .text:not(#cep_1):not(#cep_2):not(#cobranca_cep_1):not(#cobranca_cep_2):not(.cep1):not(.cep2):not(.cep_1):not(.cep_2) {
+			display: block;
+			width: 100%
+		}
+		#cep_1, #cobranca_cep_1, .cep1, .cep_1 {
+			@supports (-webkit-touch-callout: none) {
+				@include rem(min-width, 72);
+			}
+		}
+		#cep_2, #cobranca_cep_2, .cep2, .cep_2 {
+			@supports (-webkit-touch-callout: none) {
+				@include rem(min-width, 58);
+			}
+		}
+		#frm2 .txt-dados-cobranca,
+		#frm2 .txt-dados-entrega,
+		#frm2 .txt-dados-loja,
+		#frm2 .txt-dados-pessoais {
+			@include rem(margin, 30 0 0);
+		}
+		#frm2 .txt-dados-cobranca+br,
+		#frm2 .txt-dados-entrega+br,
+		#frm2 .txt-dados-loja+br,
+		#frm2 .txt-dados-pessoais+br {
+			display: none
+		}
+		#frm2 .dif {
+			display: inline
+		}
+		#frm2 label {
+			display: block
+		}
+		.botao-prosseguir-cadastro {
+			display: block;
+			float: none;
+			@include rem(margin, 15 0 0);
+		}
+	}
+	
+	.botao-prosseguir-cadastro {
+		@extend %base_bt;
+		margin-right: 0;
+
+		&:hover {
+			border: none;
+			@include rem(border-radius, 3);
+		}
+	}
+
+	.botoes_personalizados_enviar {
+	
+		img {
+			display: block;
+		}
+	}
+}
+
+// Multi Endereços
+#multi-endereco-controla {
+	.multienderecos {
+		> br {
+			display: none;
+		}
+
+		&.disabled {
+			height: auto;
+		}
+
+		fieldset {
+			> h3 {
+				@extend .accordion__header;
+				@include rem(padding-left, 25);
+				
+				input[type="radio"] {
+					@include rem(margin, 3 0 0 -17);
+					float: left;
+				}
+
+				label {
+					margin-top: 0;
+					display: inline-block;
+					vertical-align: middle;
+				}
+				
+				&.active {
+					color: $texto-escuro;
+				}
+			}			
+		}
+	}
+
+	.adicionar_mais {
+		@extend %base_bt_secondary;
+		@include rem(padding, 0 10);
+
+		&:before,
+		h3 {
+			line-height: 1;
+		}
+
+		&:before {
+			content: "+";
+			font-weight: normal;
+			display: inline-block;
+			@include rem(margin-right, 5);
+			vertical-align: middle;
+			position: relative;
+		}
+
+		h3 {
+			display: inline-block;
+			vertical-align: middle;
+		}
+
+		img {
+			display: none;
+		}
+	}
+
+	.excluir-endereco {
+		color: $texto-escuro;
+
+		@include bp(max-width, $bp-md) {
+			float: none;
+		}
+
+		&:before {
+			@extend %icons_theme;
+			content: $icon-x;
+			font-weight: normal;
+			display: inline-block;
+			@include rem(margin-right, 3);
+			@include rem(font-size, 16);
+			vertical-align: middle;
+			position: relative;
+			@include rem(top, -1);
+		}
+
+		img {
+			display: none;
+		}
+	}
+}
+

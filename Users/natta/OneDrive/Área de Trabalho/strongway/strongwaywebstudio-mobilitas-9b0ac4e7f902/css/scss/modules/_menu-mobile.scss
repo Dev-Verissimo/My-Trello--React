@@ -1,0 +1,151 @@
+.menu-mobile {
+	@extend %base_dropdown_shadow;
+	@include rem(border-radius, 0 0 3 3);
+	position: relative;
+	@include rem(font-size, 16);
+	overflow: auto;
+	background-color: $bg-claro;
+
+	&__wrapper {
+		transition: all 200ms ease-in-out;
+		top: 100%;
+		position: absolute;
+		z-index: 999;
+		@include rem(right, 10);
+		@include rem(left, 10);
+		visibility: hidden;
+		opacity: 0;
+		transform: translateY(20px);
+
+		@include bp(max-width, $bp-md) {
+			top: calc(100% - 35px);
+		}
+		
+		&.is-opened {
+			@include bp(max-width, $bp-md) {
+				visibility: visible;
+				opacity: 1;
+				height: auto;
+				transform: translateY(0);
+			}
+		}
+	}
+
+	&__item {
+		position: relative;
+	}
+
+	&__toggle {
+		@include rem(height, 25);
+		@include rem(width, 25);
+		@include rem(top, 8);
+		@include rem(right, 0);
+		background-color: transparent;
+		color: $primaria;
+		position: absolute;
+		transition: all 200ms;
+
+		&:focus {
+			outline: 0;
+		}
+
+		&.is-opened {
+			transition: all 200ms;
+			transform: rotate(90deg);
+
+			+ .menu-mobile__subnivel-lista {
+				display: block;
+				@include rem(margin-top, 10);
+				@include separator-border('top');
+			}
+		}
+	}
+
+	&__image {
+		@include rem(width, 30);
+		@include rem(padding, 5);
+		@include rem(top, -1);
+		position: relative;
+		background-color: $primaria;
+		@include rem(border-radius, 3);
+	}
+
+	&__link {
+		display: block;
+		font-family: $fonte-2;
+	}
+
+	&__lista {
+		@include rem(padding, 15 20);
+	}
+
+	&__item-lvl1 {
+		&:not(:last-child) {
+			@include separator-border('bottom');   
+		}
+	}
+
+	&__item-lvl2,
+	&__item-lvl3 {
+		@include rem(padding-left, 10);
+
+		.menu-mobile__image {
+			@include rem(width, 20);
+			@include rem(padding, 3);
+			@include rem(margin, 0 5 0 0);
+			background-color: $primaria;
+			@include rem(border-radius, 3);
+			@include rem(top, -2);
+			position: relative;
+		}
+	}
+
+	&__link-lvl1 {
+		color: $texto-escuro;
+
+		&:visited {
+			color: $texto-escuro;
+		}
+	}
+
+	&__link-lvl2 {
+		color: $texto-escuro;
+
+		&:visited {
+			color: $texto-escuro;
+		}
+	}
+
+	&__link-lvl3 {
+		color: $texto-cinza;
+
+		&:visited {
+			color: $texto-cinza;
+		}
+	}
+
+	&__item-lvl1 {
+		@include rem(padding, 10 0);
+	}
+
+	&__item-lvl2,
+	&__item-lvl3 {
+		@include rem(padding, 5 0 5 10);
+	}
+
+	&__neto-lista {
+		@include rem(margin-top, 5px);
+		@include rem(margin-bottom, -5px);
+		@include rem(font-size, 14);
+	}
+	
+	&__subnivel-lista {
+		display: none;
+
+		.menu-mobile__item-lvl2 {
+			&:first-child {
+				@include rem(padding-top, 10);
+			}
+		}
+	}
+}

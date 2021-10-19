@@ -1,0 +1,52 @@
+contador {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 997;
+
+	.bf_contador .bf_contador__container {
+		width: 100%;
+		max-width: $max_width;
+		flex: 0 1 auto;
+		@include rem(padding, 5 0);
+	}
+
+	.bf_contador .flip-clock-label {
+		@include rem(font-size, 12);
+	}
+
+	.countdown-full .icon {
+		background-position: center;
+		@include rem(height, 40);
+		@include rem(border-radius, 20);
+		background-size: 55%;
+		background-color: rgba(0,0,0,0.2);
+		background-position: center;
+		z-index: 998;
+	}
+
+	.floating input[type=checkbox]:checked~.countdown-full .icon {
+		@include rem(height, 22);
+		@include rem(width, 30);
+		border-radius: 0;
+	}
+
+	.countdown-clock.bf_contador__countdown-clock {
+		display: flex;
+		justify-content: center;
+		width: 80%;
+		background-color: rgba(0,0,0,0.2);
+		@include rem(border-radius, 3);
+		@include rem(margin, 0 0 0 20);
+		@include rem(padding, 8 10 12 0);
+
+		@include bp(min-width, $bp-md + 1) {
+			margin: 0 auto;
+			width: 55%;
+		}
+		
+		@include bp(min-width, $bp-xl + 1) {
+			width: 45%;
+		}
+	}
+}

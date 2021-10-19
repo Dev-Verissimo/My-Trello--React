@@ -1,0 +1,9 @@
+.page--newsletter {
+	h1.color {
+		@include h2;
+	}
+
+	.newsletterBTimg {
+		@extend %base_bt_secondary;
+	}
+}

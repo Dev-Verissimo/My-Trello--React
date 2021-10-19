@@ -1,0 +1,123 @@
+// MAPA DE UTILIDADES
+// .hidden: Hide from both screenreaders and browsers: h5bp.com/u 
+// .visuallyhidden: Hide from both screenreaders and browsers: h5bp.com/u 
+// .hidden: Hide only visually, but have it available for screenreaders: h5bp.com/v  
+// .invisible: // Hide visually and from screenreaders, but maintain layout  
+
+$utilities: (
+	hidden: (
+		display: none!important,
+		visibility: hidden!important,
+	),
+	visuallyhidden: (
+		border: 0,
+		clip: rect(0 0 0 0),
+		height: 1px,
+		margin: -1px,
+		overflow: hidden,
+		padding: 0,
+		position: absolute,
+		width: 1px
+	),
+	visible-inline: (
+		display: inline!important,
+	),
+	visible-block: (
+		display: block!important,
+	),
+	visible-inline-block: (
+		display: inline-block!important,
+	),
+	invisible: (
+		visibility: hidden!important,
+	),
+	align-left: (
+		text-align: left!important,
+	),
+	align-right: (
+		text-align: right!important,
+	),
+	align-center: (
+		text-align: center!important,
+	),
+	float-left: (
+		float: left!important,
+	),
+	float-right: (
+		float: right!important,
+	)
+);
+
+// DECLARAÇÃO DE UTILIDADES, sem Breakpoints
+@mixin standard-utilities($utilities: $utilities) {
+	@each $utility, $properties in $utilities {
+		.#{$utility} {
+			@each $property, $value in $properties {
+				#{$property}: $value;
+			}
+		}
+	}
+}
+
+// DECLARAÇÃO DE UTILIDADES, para cada Breakpoint
+@mixin responsive-utilities($breakpoints: $breakpoints, $utilities: $utilities) {
+	// Separa as larguras em uma lista
+	$bp-widths: map-values($breakpoints);
+	// Guarda o tamanho da lista
+	$length: length($bp-widths);
+	// Inicia contador
+	$i: 1;
+	
+	@include standard-utilities($utilities);
+		
+	// Para cada breakpoint...
+	@each $bp-name, $bp-width in $breakpoints {
+
+		@if $i == 1 {
+			// Se for o primeiro
+			// Guarda o valor do breakpoint seguinte
+			$next-bp-width: nth($bp-widths, $i + 1);
+
+			// Declara classe em uma media-query com tamanho máximo apenas
+			@include bp(max-width, $next-bp-width) {
+				@each $utility, $properties in $utilities {
+					.#{$utility}-#{$bp-name} {
+						@each $property, $value in $properties {
+							#{$property}: $value;
+						}
+					}
+				}		
+			}
+		} @elseif $i < $length {
+			// Se o contador for menor que o tamanho da lista...
+			// Guarda o valor do breakpoint seguinte
+			$next-bp-width: nth($bp-widths, $i + 1);
+			
+			// Declara classe em uma media-query com tamanho mínimo e máximo
+			@include bp(min-width, $bp-width + 1) {
+				@include bp(max-width, $next-bp-width) {
+					@each $utility, $properties in $utilities {
+						.#{$utility}-#{$bp-name} {
+							@each $property, $value in $properties {
+								#{$property}: $value;
+							}
+						}
+					}		
+				}
+			}		
+		} @else {
+			// Se o contador chegar ao fim, cria media query para o último breakpoint, apenas com tamanho mínimo
+			@include bp(min-width, $bp-width + 1) {
+				@each $utility, $properties in $utilities {
+					.#{$utility}-#{$bp-name} {
+						@each $property, $value in $properties {
+							#{$property}: $value;
+						}
+					}
+				}
+			}
+		}
+		
+		$i: $i+1;
+	}
+}

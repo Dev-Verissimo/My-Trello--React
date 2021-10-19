@@ -1,0 +1,840 @@
+// tabs
+.carrinho-tabs{
+	display: none;
+}
+
+// page
+.page--checkout_cart{
+	.container.caixa-produto + .container,
+	.Seguro
+	{
+		display: none;
+	}
+
+	.carrinho-heading {
+		@include h2;
+	}
+	
+	.board {
+		@extend %clearfix;
+		@include rem(margin-bottom, 15);
+	}
+
+	.AvancarTopo {
+		float: left;
+		width: auto;
+	}
+
+	.botao-prosseguir-compra {
+		@extend %base_bt_highlight;;
+		margin-right: 0;
+		@include rem(margin-bottom, 10);
+		float: right;
+
+		&:hover {
+		}
+
+		.botao-commerce-img {
+			font-weight: inherit;
+		}
+	}
+	
+	.caixa-produto{
+		padding: 0;
+		width: 100%;
+	}
+	
+	#cesta_produtos{
+		margin: 0;
+		
+		> .board:first-child{
+			font-size: 0;
+		}
+	}
+	
+	#tabela_carrinho{
+		background: #fff;
+		border: 1px solid $hr-border-color;
+		margin: 0;
+		
+		@include bp(max-width, $bp-md) {
+			background: none;
+			border: none;
+		}
+		
+		tr {
+			background: #fff;
+			position: relative;
+			@include separator-border();
+			
+			@include bp(max-width, $bp-md) {
+				display: block;
+				@include rem(margin-bottom, 15px);
+				@include rem(padding, 15px);
+				border: 1px solid $hr-border-color;
+				
+				&:first-child {
+					display: none;
+				}
+			}
+			
+			&:last-child {
+				td {
+					border-bottom: none;
+				}
+			}
+		}
+		
+		th {
+			@include rem(font-size, $basefont);
+			@include rem(padding, 10 15);
+			vertical-align: top;
+			white-space: nowrap;
+			background-color: $bg-cinza;
+			@include separator-border();
+			
+			@include bp(min-width, $bp-md + 1) {
+				@include bp(max-width, $bp-lg + 1) {
+					@include rem(padding, 10 0);
+				}				
+			}
+			
+			&:first-child{
+				@include rem(padding-left, 94);
+				@include rem(padding-right, 40);
+			}
+			
+			&:last-child{
+				@include rem(padding-left, 32);
+				@include rem(padding-right, 10);
+
+				@include bp(min-width, $bp-md + 1) {
+					border-right: 0;
+
+					@include bp(max-width, $bp-lg + 1) {
+						padding-left: 0;
+					}				
+				}
+			}
+		}
+		
+		td {
+			border-top: none;
+			@include rem(padding, 20 10);
+
+			@include bp(min-width, $bp-md + 1) {
+				@include separator-border();                
+			}
+			
+			&:first-child{
+				vertical-align: middle;
+				
+				a {
+					display: block;
+					@include rem(padding, 0 5 5 0);
+				}
+				
+				img {
+					border: none;
+					max-height: 100%;
+					max-width: 100%;
+				}
+			}
+
+			&:last-child {
+				@include bp(min-width, $bp-md + 1) {
+					border-right: 0;
+				}
+			}
+			
+			&:nth-child(2) ~ td {
+				text-align: center;
+				@include rem(font-size, $basefont);
+			}
+			
+			@include bp(max-width, $bp-md) {
+				border-bottom: none;
+				border-top: none;
+				display: block;
+				padding: 0;
+				text-align: left;
+				
+				&:nth-child(1){
+					float: left;
+					@include rem(padding, 0 0 10);
+					text-align: center;
+					width: 40%;
+				}
+				
+				&:nth-child(2){
+					@include rem(margin-bottom, 20);
+					overflow: hidden;
+				}
+				
+				&:nth-child(3){
+					clear: left;
+					float: left;
+					width: 40%;
+				}
+				
+				// Esta seção é bastante bagunçada porque só conseguimos
+				// identificar o conteúdo da coluna pela posição na
+				// tabela, mas a posição muda quando há cartão para presente.
+				&:nth-child(4)[align="center"] {
+					float: right;
+					text-align: left;
+					width: 60%;
+					@include rem(padding-bottom, 5);
+					
+					&:before{
+						content: 'Op\00e7 \00f5 es para presente?';
+						vertical-align: middle;
+						font-weight: bold;
+					}
+
+					.checkbox {
+						display: inline-block;
+						vertical-align: middle;
+						@include rem(margin-top, -1);
+					}
+
+					br, .bgcolor {
+						display: none;
+					}
+				}
+				
+				&:nth-child(4)[align="right"] {
+					float: right;
+					text-align: left;
+					width: 60%;
+					
+					&:before{
+						content: 'Valor uni.:';
+					}
+				}
+
+				&:nth-child(5)[align="right"] {
+					float: right;
+					text-align: left;
+					width: 60%;
+				}
+				
+				&:nth-child(6)[align="right"] {
+					float: right;
+					text-align: left;
+					width: 60%;
+					
+					h3 {
+						display: inline;
+					}
+					
+					&:before{
+						content: 'Valor total:';
+					}
+				}
+
+				&:last-child{
+					clear: both;
+				}
+			}
+		}
+		
+		a strong {
+			color: $texto-escuro;
+			@include rem(font-size, $basefont);
+			font-weight: bold;
+			margin: 0;
+			padding: 0;
+			text-transform: none;
+		}
+		
+		h5 {
+			color: $texto-escuro;
+			@include rem(font-size, $basefont);
+			margin: 0;
+			padding: 0;
+			text-transform: none;
+		}
+		
+		.qntd {
+			font-weight: normal;
+			text-align: center;
+			vertical-align: middle;
+			display: inline-block;
+			@include rem(width, 40);
+			margin-bottom: 0;
+		}
+
+		.qntdEstoque {
+			@include rem(font-size, $basefont);
+			vertical-align: middle;
+		}
+		
+		.refresh {
+			cursor: pointer;
+			display: block;
+			
+			&:after{
+				@extend %icons_theme;
+				content: $icon-refresh-cw;
+				color: $secundaria;
+				@include rem(margin, 5 auto);
+				@include rem(font-size, 24);
+				display: block;
+			}
+			
+			img {
+				display: none;
+			}
+		}
+		
+		.bt-excluir{
+			@extend %base_shadow;
+			background: none;
+			cursor: pointer;
+			display: block;
+			@include square(30);
+			margin: 0 auto;
+			text-align: center;
+
+			&:after {
+				@extend %icons_theme;
+				content: $icon-trash-2;
+				color: $secundaria;
+				@include rem(font-size, 20);
+				line-height: 1.2;
+			}
+
+			@include bp(max-width, $bp-md) {
+				background-color: #fff;
+				background-position: center;
+				border-radius: 100%;
+				position: absolute;
+				@include rem(right, -10);
+				@include rem(top, -10);
+				border: 1px solid $terciaria;
+			}
+			
+			@include bp(min-width, $bp-md + 1) {
+				box-shadow: none;
+			}
+			
+			img{
+				display: none;
+			}
+			
+			@include bp(max-width, $bp-md) {
+				margin: 0 auto;
+			}
+		}
+	}
+	
+	div.bt-continuar-comprando{
+		
+		@include bp(max-width, $bp-md) {
+			display: block;
+			@include rem(margin-bottom, 20);
+			@include rem(top, 70);
+			position: relative;
+			right: 0;
+			text-align: center;
+			width: 100%;
+			float: none !important;
+		}
+	
+		a {
+			float: none;
+		}
+	}
+	
+	.caixa-frete {
+		display: none
+	}
+
+	.caixa-forma-frete {
+		@include rem(margin-top, 10);
+
+		tr {
+			display: block;
+			overflow: hidden;
+			@include separator-border();
+			@include rem(margin-bottom, 10);
+
+			@include bp(min-width, $bp-md + 1) {
+				@include rem(margin-bottom, 5);
+			}
+
+			&:last-child {
+				border-bottom: 0;
+			}
+		}
+
+		> table > tbody > tr {
+			// Exclusão de células vazias
+			&:nth-child(1) {
+				> th:nth-child(2),
+				> th:nth-child(3) {
+					display: none;
+				}
+			}
+			
+			// Valores de frete
+			&:nth-child(2) {
+				> td {
+					display: block;
+				}
+			}            
+		}
+
+		th {
+			display: block
+		}
+
+		td {
+			h3 {
+			  display: none;  
+			}
+
+		}
+		input[type=tel] {
+			@extend [type="text"];
+			text-align: center;
+			margin-bottom: 0;
+		}
+
+		.bt-cep {
+			@include rem(margin-top, 4);
+
+			@include bp(max-width, $bp-md) {
+				display: inline-block;
+			}
+		}
+
+		.botao-simular-frete {
+			@extend %base_bt_secondary;
+			@include rem(margin, 0 0 0 5);
+			@include rem(padding, 0 10);
+		}
+
+		.carFretePara {
+			display: block;
+			@include rem(padding, 10 0);
+		}
+
+		#formas_envio_frete {
+			display: block;
+			overflow: hidden;
+
+			@include bp(max-device-width, $bp-lg) {
+				padding-left: 0;
+				width: 100%;                
+			}
+
+			> table {
+				@include bp(max-width, $bp-md) {
+					width: 100%;                    
+				}
+
+				[type="radio"] {
+					float: left;
+					@include rem(margin-left, -15);
+				}
+
+				[for^="radio_frete."] {
+					vertical-align: middle;
+
+					br {
+						display: none;
+					}
+				}
+			}
+		}
+	   
+		#calculoFrete {
+			@include rem(padding-bottom, 10);
+
+			label {
+				color: $texto-escuro;
+				display: inline-block;
+				vertical-align: middle;
+			}
+		   
+			@include bp(max-width, $bp-md) {
+				input {
+					@include rem(margin, 0 3);
+					@include rem(padding, 0 3);
+					@include rem(width, 70);
+				}
+				input#cep2 {
+					@include rem(width, 40);
+				}
+			}
+		}
+
+		.blocoAlerta {
+			@include rem(margin, 20 0);
+		}
+		
+		.caixa-cupom {
+			@include rem(padding, 15 0);
+
+			label {
+				color: $texto-escuro;
+				display: inline-block;
+				vertical-align: middle;
+
+				@include bp(max-width, $bp-sm) {
+					display: block;
+					text-align: right;					
+				}
+			}
+			input {
+				vertical-align: middle;
+				margin-bottom: 0;                    
+			}
+			.bt-cupom {
+				display: inline-block;
+				vertical-align: middle;
+				@include bp(max-width, $bp-sm) {
+					@include rem(margin-top, 5);
+				}                
+			}
+			.botao-cupom-desconto {
+				@extend %base_bt_secondary;
+				vertical-align: middle;
+				display: inline-block;
+				@include rem(margin, 0 0 0 5px);
+				@include rem(padding, 0 10);
+				vertical-align: middle;
+				background-image: none;
+				@include rem(font-size, 12);
+				
+			}
+			.blocoSucesso {
+				@include rem(margin, 0 0 15);
+			}            
+		}
+		
+		// Tabela de frete
+		#tab {
+			tr {
+				@include bp(max-width, $bp-md) {
+					@include separator-border;
+					@include rem(padding-bottom, 15);
+					@include rem(margin-bottom, 15);
+				}
+			}
+
+			td {
+				color: $texto-escuro;
+				vertical-align: top;
+				@include rem(padding, 5);
+				@include rem(font-size, $basefont);
+
+				@include bp(min-width, $bp-md + 1) {
+					@include rem(padding, 10);
+				}
+				
+				&:first-child {
+					@include rem(min-width, 150);
+					@include rem(padding-left, 15);
+				}
+
+				&:first-child,
+				&:nth-child(2),
+				&:nth-child(3) {
+					width: auto;
+
+					@include bp(max-width, $bp-md) {
+						display: block;
+						@include rem(padding-left, 15);
+						text-align: left;                        
+					}
+				}
+				
+				&:nth-child(2) {
+					text-align: left;
+					@include bp(min-width, $bp-md + 1) {
+						@include rem(width, 150);
+					}
+				}
+				&:nth-child(3) {
+					margin-top: 0;
+
+					@include bp(max-device-width, $bp-md) {
+						display: block;
+					}
+				}
+			}
+
+			a {
+				color: $texto-escuro
+			}
+
+			label {
+				color: $texto-escuro;
+				display: inline-block;
+				vertical-align: middle;
+			}            
+		}
+	}
+	
+	.cupom-wrapper,
+	.frete-wrapper {
+		clear: both;
+		float: left;
+		text-align: left;
+
+		@include bp(max-width, $bp-md) {
+			float: none;
+			width: 100%;            
+		}
+	}
+	
+	.cupom-wrapper {
+		background: #fff;
+		border: 1px solid #e2e2e2;
+		margin-top: 30px;
+		padding: 15px 30px;
+		width: 100%;
+
+		@include bp(max-width, $bp-md) {
+			padding: 15px;            
+		}
+		
+		th {
+			float: left;
+			text-align: left
+		}
+
+		th:nth-child(2) {
+			line-height: 30px
+		}
+
+		@include bp(max-width, $bp-md) {
+			th:nth-child(2) {
+				line-height: 12px;
+				padding: 30px 0 30px 30px
+			}
+			.botao-cupom-desconto {
+				margin: 0!important;
+				width: 100%
+			}
+			#cupon {
+				display: block;
+				font-size: 1.6rem;
+				margin: 5px 0 10px;
+				width: 100%
+			}
+		}
+
+		#cupon,
+		input[type=tel] {
+			border: 1px solid #bcc0bd;
+			color: $texto-escuro;
+			font-size: 1.5rem;
+			font-weight: normal;
+			height: 40px;
+			padding: 0 10px;
+			text-align: center
+		}
+
+		@include bp(max-width, $bp-md) {
+			#cupon {
+				padding: 0
+			}
+			input[type=tel] {
+				padding: 0
+			}
+		}
+
+		@include bp(max-width, $bp-md) {
+			.botao-commerce {
+				margin-top: 15px
+			}
+		}
+	}
+
+	.margem_imagem_frete {
+		float: left;
+		@include rem(margin, -4 5 0 0);
+	}
+	
+	.frete-wrapper {
+		@include rem(padding, 0 30);
+		padding: 0 30px;
+
+		@include bp(max-width, $bp-md) {
+			padding: 0
+		}
+		
+		+ tr {
+			clear: both
+		}
+		+ tr > td > h3 {
+			display: none
+		}
+	}
+
+	
+	.caixa-total{
+		@include rem(margin-bottom, 15);
+		
+		.tit-total{
+			display: none;
+		}
+		
+		table{
+			margin: 0;
+		}
+		
+		tr{
+			background: none;
+			border: none;
+		}
+		
+		th{
+			border: none !important;
+			font-size: 0;
+			padding: 0 !important;
+			
+			&:nth-child(2){
+				text-align: right;
+				width: 50%;
+			}
+			
+			&:last-child{
+				width: 1px;
+			}
+		}
+		
+		h3{
+			color: $texto-escuro;
+			@include rem(font-size, 24);
+			font-weight: normal;
+			white-space: nowrap;
+			font-family: $fonte-2;
+			
+			div{
+				color: $texto-escuro;
+				font-weight: normal;
+			}
+			
+			&:before{
+				color: $texto-cinza;
+				content: 'Total: ';
+				text-transform: none;
+			}
+		}
+	}
+	
+	.caixa-botoes{
+		@include rem(margin-bottom, 30);
+
+		.botao-commerce{
+			@include bp(max-width, $bp-md) {
+				text-align: center;
+				width: 100%;
+			}
+			
+			&.botao-prosseguir-compra{
+				@include bp(max-width, $bp-md) {
+					text-align: center;
+					width: 100%;
+					position: relative;
+
+					@include rem(top, -40);
+				}
+			}
+			
+			&.botao-continuar-comprando{
+				@extend %base_bt_secondary;
+				@include rem(font-size, 14);
+
+				.botao-commerce-img {
+					font-weight: inherit;
+					text-transform: inherit;
+					font-size: inherit;
+				}
+			}
+		}
+	}
+	
+	
+	// cart without items
+	.Seguro + .board{
+		background: #fff;
+		text-align: center;
+		@include rem(padding, 30 0 15);
+		font-size: 0;
+		
+		h2{
+			@include rem(margin-bottom, 20);
+			
+			&:before{
+				@extend %icons_theme;
+				content: $icon-shopping-cart;
+				display: block;
+				@include rem(font-size, 80);
+				@include rem(margin, 0 auto 15);
+				color: $bg-cinza;
+			}
+		}
+		
+		br{
+			display: none;
+		}
+		
+		a {
+			@extend %base_bt_secondary;
+			@include rem(font-size, $basefont);
+		}
+	}
+	
+	// @todo: verificar quando há lista de desejos ligada
+	// resource gift list
+	.bloco-lista{
+		background: #fff;
+		margin-bottom: 30px;
+		padding: 15px;
+	}
+	
+	.imagem-alerta-lista{
+		float: left;
+		margin-right: 15px;
+		
+		&:before{
+			background: url('../img/gift.svg');
+			content: '';
+			display: block;
+			height: 50px;
+			width: 50px;
+		}
+		
+		img{
+			display: none;
+		}
+	}
+	
+	.msg-alerta-lista{
+		overflow: hidden;
+		font-size: 1.2rem;
+		
+		strong{
+			font-size: 1.2rem !important;
+			
+			u{
+				color: red;
+			}
+		}
+		
+		#atencao-lista{
+			font-weight: bold;
+		}
+	}
+	
+	.imagem-sair-lista{
+		margin-top: 15px;
+		text-align: center;
+	}
+}

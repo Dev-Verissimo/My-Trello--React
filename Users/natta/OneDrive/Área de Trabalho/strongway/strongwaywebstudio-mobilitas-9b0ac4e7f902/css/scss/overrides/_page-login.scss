@@ -1,0 +1,75 @@
+.page--login{
+	.mensagensErro{
+		@include rem(margin, -20 0 10);
+	}
+
+	.titulo-login {
+		@include h2;
+	}
+	
+	.caixa-login {
+		@extend %base_box;
+		float: none;
+		@include rem(padding, 15);
+		@include rem(margin-bottom, 25);
+		width: 100%;
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(min-height, 265);
+			float: left;
+			margin-right: 3%;
+			width: 48.5%;
+		}
+		
+		h3{
+			@include base-headings;
+			@include h3;
+			@include rem(padding-bottom, 10);
+			@include separator-border();
+		}
+	}
+	
+	.caixa-cadastro {
+		@extend .caixa-login;
+		margin-right: 0;
+	}
+	
+	label {
+		display: block;
+		text-align: left;
+
+		&[for="cep_cadastro"] {
+			display: inline-block;
+		}
+	}
+	
+	#email_cadastro,
+	#email_login,
+	#senha_login{
+		display: block;
+		@include rem(margin, 5 0 15);
+		width: 100% !important;
+	}
+	
+	fieldset {
+		border: 0;
+		padding: 0;
+		
+		br {
+			display: none;
+		}
+		
+		.botao-commerce {
+			@extend %base_bt_secondary;
+
+			&:hover {
+				color: $sec-bt-color;
+				@include rem(border-radius, 3);
+			}
+		}
+	}
+	
+	.cadastro-desc{
+		margin-bottom: 1em;
+	}
+}

@@ -1,0 +1,62 @@
+{# Se o produto está em promoção... #}
+{%
+	if product.price_offer > 0
+	and product.price_offer != '0.00' 
+	and product.stock > 0 
+	and product.available == 1 
+	and product.available_for_purchase == 1 
+	and product.upon_request != 1
+%}
+	{# Calcula o valor de desconto #}
+	{% if product.percentage_discount and product.percentage_discount|number_format > 0 %}
+		{% set desconto = -(product.percentage_discount) %}
+	{% else %}
+		{% set desconto = -(((product.price_offer * 100) / product.price) - 100) %}
+	{% endif %}
+	{% if product.has_variation and product.has_other_prices %}
+		{% if not product.variants.sku %}
+			{% for variation in product.variants %}
+				{%
+					if variation.price_offer > 0
+					and variation.price_offer != '0.00'
+				%}
+					{% set desconto_variacao = -(((variation.price_offer * 100) / variation.price) - 100) %}
+					{% if desconto_variacao > desconto %}
+						{% set desconto = desconto_variacao %}
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	{% endif %}
+
+	{#
+		Se houver diferenca de preco, ha mais de um possível
+		desconto. Mostra-se entao o texto "Ate", para indicar
+		que representa apenas o desconto maximo
+	#}
+	{% if product.has_variation and product.has_other_prices %}
+		{% set prefixo = 'At&eacute; ' %}
+	{% else %}
+		{% set prefixo = null %}
+	{% endif %}
+
+	{% if desconto > 0 %}
+		<span class="product__label product__label--sale {{ modifier }}">
+			{% if product.has_variation and product.has_other_prices %}
+				{# Se nao esta na pagina de produto, onde a estrutura das variantes e diferente #}
+				{% if not product.variants.sku %}
+					{{ prefixo }}-{{ desconto|round(0, 'floor') }}%
+					<span aria-hidden="true">Off</span>
+					<span class="visuallyhidden">de desconto</span>
+				{% else %}
+					{# Se esta na pagina de produto e as variacoes tem preco diferente, nao temos informacoes suficientes para mostrar a tag com o maximo desconto #}
+					Varia&ccedil;&otilde;es com desconto!
+				{% endif %}
+			{% else %}
+				{{ prefixo }}-{{ desconto|round(0, 'floor') }}%
+				<span aria-hidden="true">Off</span>
+				<span class="visuallyhidden">de desconto</span>
+			{% endif %}
+		</span>
+	{% endif %}
+{% endif %}

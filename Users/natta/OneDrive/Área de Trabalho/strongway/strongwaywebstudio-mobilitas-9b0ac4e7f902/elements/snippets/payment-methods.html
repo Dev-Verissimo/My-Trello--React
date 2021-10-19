@@ -1,0 +1,30 @@
+{% if paymentMethods %}
+	<aside class="payment-methods">
+		<h4 class="footer__title payment-methods__title">Formas de Pagamento</h4>
+
+		{% for payment_type, payment_options in paymentMethods %}
+			<div class="payment-methods__block">
+				<h5 class="payment-methods__type">
+					{% if payment_type == 'order' %}
+						&Agrave; Vista
+					{% else %}
+						Parcelado
+					{% endif %}					
+				</h5>
+
+				<ul class="payment-methods__options">
+					{% for payment_option in payment_options %}
+						<li class="payment-methods__option">
+							<img
+								class="payment-methods__icon"
+								src="{{ payment_option.thumbnail.url }}"
+								alt="{{ payment_option.display_name }}"
+								title="{{ payment_option.display_name }}"
+							>
+						</li>
+					{% endfor %}					
+				</ul>
+			</div>
+		{% endfor %}		
+	</aside>
+{% endif %}

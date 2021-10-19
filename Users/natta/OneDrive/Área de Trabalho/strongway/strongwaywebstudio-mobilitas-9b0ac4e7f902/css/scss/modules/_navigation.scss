@@ -1,0 +1,395 @@
+$module-name: '.main-menu';
+
+#{$module-name} {
+	&__navigation {
+		@extend %clearfix;
+		position: relative;
+	}
+
+	&__toggle {
+		.icon {
+			@include rem(font-size, 30);
+			color: $primaria;
+		}
+	}
+
+	&__lista {
+		display: none;
+
+		@include bp(min-width, $bp-md + 1) {
+			display: flex;
+			flex-flow: row wrap;
+			border-left: 1px solid $hr-border-color;
+			border-right: 1px solid $hr-border-bottom-color;
+		}
+
+		&--left {
+			@include bp(min-width, $bp-md + 1) {
+				border-right: 0;
+
+				#{$module-name}__item {
+					&:last-child {
+						border-right: 0;
+					}
+				}
+
+				.header--boxed & {
+					border-left: 0;
+
+					#{$module-name}__item {
+						&:first-child {
+							border-left: 0;
+						}
+					}
+				}
+			}
+		}
+
+		&--center {
+			@include bp(min-width, $bp-md + 1) {
+				justify-content: center;
+				border: 0;
+
+				#{$module-name}__item {
+					&:first-child {
+						border-left: 0;
+					}
+
+					&:last-child {
+						border-right: 0;
+					}
+				}
+			}
+		}
+
+		&--right {
+			@include bp(min-width, $bp-md + 1) {
+				justify-content: flex-end;
+				border-left: 0;
+
+				#{$module-name}__item {
+					&:first-child {
+						border-left: 0;
+					}
+				}
+
+				.header--boxed & {
+					border-right: 0;
+
+					#{$module-name}__item {
+						&:last-child {
+							border-right: 0;
+						}
+					}
+				}
+			}
+		}
+
+		&--spaced {
+			@include bp(min-width, $bp-md + 1) {
+				justify-content: space-between;
+
+				#{$module-name}__item {
+					flex: 1 auto;
+				}
+
+				.header--boxed & {
+					border: 0;
+
+					#{$module-name}__item {
+						&:first-child {
+							border-left: 0;
+						}
+
+						&:last-child {
+							border-right: 0;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	&__item {
+		position: relative;
+
+		// Gradiente
+		&:after {
+			@extend %base_transition;
+			@include overlay;
+			content: ""; 
+			z-index: 0;
+			opacity: 0;
+			pointer-events: none;
+			background: linear-gradient(to bottom, rgba(0,0,0,0.05) 0%,rgba(255,255,255,0.15) 100%);
+		}
+
+		@include bp(min-width, $bp-md + 1) {
+			display: flex;
+			flex-flow: column wrap;
+			justify-content: center;
+			vertical-align: middle;
+			border-right: 1px solid $hr-border-color;
+			border-left: 1px solid $hr-border-bottom-color;
+		}
+
+		// Se o item tem um subnível
+		&.has-subnivel {
+			@include bp(min-width, $bp-md + 1) {
+				> #{$module-name}__link {
+					> #{$module-name}__link-texto {
+						@include rem(padding-right, 8);
+
+						&:after {
+							content: $icon-chevron-down;
+						}
+					}
+				}
+
+				&:hover {
+					> #{$module-name}__subnivel {
+						transition: all 0.5s ease;
+						transition-property: opacity, visibility, transform;
+						transition-delay: 0s;
+						opacity: 1;
+						visibility: visible;
+						z-index: 99;
+						transform: translateY(0);
+
+						&.is-wide {
+							@include rem(width, 450);
+
+							@include bp(min-width, $bp-lg + 1) {
+								width: auto;
+								@include rem(min-width, 600);
+							}
+						}
+
+						&.is-medium {
+							@include rem(min-width, 350);
+						}
+
+						&.is-narrow {
+							@include rem(min-width, 200);
+						}
+
+						&.has-product {
+							&.is-wide {
+								@include rem(width, 680);
+
+								@include bp(min-width, $bp-lg + 1) {
+									width: auto;
+									@include rem(min-width, 880);
+								}
+							}
+
+							&.is-medium {
+								@include rem(min-width, 680);
+							}
+
+							&.is-narrow {
+								@include rem(min-width, 480);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		&:hover {
+			&:after {
+				opacity: 1;
+			}
+		}
+	}
+
+	&__item-lvl2,
+	&__item-lvl3 {
+		position: relative;
+		max-width: none;
+		
+		#{$module-name}__image {
+		    position: static;
+		}
+	}
+
+	&__product-container {
+		@include rem(margin-right, 20);
+	}
+
+	&__image {
+		@include rem(max-width, 30);
+		position: static;
+		display: block;
+		@include rem(margin, 0 auto 5);
+	}
+
+	&__link {
+		@include rem(font-size, 16);
+		@include rem(padding, 15 0 12); // Se trocar aqui é necessário trocar no custom.css
+		display: inline-block;
+		vertical-align: middle;
+		color: $texto-claro;
+		text-align: center;
+		font-family: $fonte-2;
+		position: relative;
+		z-index: 1;
+
+		&:visited {
+			color: $texto-claro;
+		}
+	}
+
+	&__link-texto {
+		@include rem(padding, 0 14);
+		display: inline-block;
+		
+		// Seta de dropdown
+		&:after {
+			@extend %icons_theme;
+			@include rem(font-size, 12);
+			color: $texto-claro;
+			cursor: pointer;
+		}
+	}
+
+	&__subnivel-wrapper {
+		overflow-y: auto;
+		@include rem(padding-top, 3);
+	}
+
+	&__subnivel:before {
+		content: "";
+	    display: block;
+	    @include rem(height, 15);
+	    position: absolute;
+	    @include rem(top, -15);
+	    width: 100%;
+	    background-color: transparent;
+	    @include rem(margin-left, -20);
+	}
+
+	&__subnivel {
+		@extend %base_shadow;
+		@include rem(padding, 20);
+		@include rem(border-radius, 0 0 3 3);
+		@include rem(width, 0);
+		@include rem(min-width, 0);
+		background-color: $bg-claro;
+		position: absolute;
+		top: 100%;
+		left: 0;
+		visibility: hidden;
+		opacity: 0;
+		display: block;
+		transition: none;
+		transform: translateY(20px);
+
+		&.open-left {
+			left: auto;
+    		right: 0;
+		}
+
+		&.open-center {
+		}
+
+		#{$module-name}__item {
+			@include rem(padding-bottom, 10);
+			display: block;
+			line-height: 1.1;
+			border: none;
+
+			&:hover {
+				background-color: transparent;
+			}
+
+			&.has-subnivel {
+				@include rem(padding-right, 0);
+			}
+
+			&:after {
+				content: none;
+				display: none;
+			}
+		}
+
+		#{$module-name}__link {
+			@include rem(padding, 0);
+			color: $texto-escuro;
+			text-align: left;
+			display: flex;
+			flex-flow: row;
+			align-items: flex-start;
+
+			&:visited {
+				color: $texto-escuro;
+			}
+
+			&:hover {
+				color: tint($texto-cinza, 40%);
+			}
+		}
+
+		#{$module-name}__link-texto {
+			padding-left: 0px;
+
+			&:after {
+				display: none;
+			}
+		}
+
+		#{$module-name}__image {
+			@include rem(width, 20);
+			@include rem(padding, 3);
+			@include rem(margin, 0 5 0 0);
+			background-color: $primaria;
+			@include rem(border-radius, 3);
+			@include rem(top, -2);
+			position: relative;
+		}
+	}
+
+	&__subnivel-neto-lista {
+		@include rem(margin-top, 10);
+		@include rem(margin-left, 10);
+
+		#{$module-name}__item {
+			@include rem(padding-bottom, 7);
+			border: none;
+		}
+
+		#{$module-name}__link {
+			color: $texto-cinza;
+			text-align: left;
+			text-transform: none;
+			@include rem(font-size, 14);
+
+			&:visited {
+				color: $texto-cinza;
+			}
+
+			&:hover {
+				color: tint($texto-cinza, 20%);
+			}
+		}
+
+		#{$module-name}__link-texto {
+			&:after {
+				display: none;
+			}
+		}
+	}
+
+	&__divider {
+		@extend %clearfix;
+		@include rem(padding-bottom, 10);
+		@include rem(margin-bottom, 15);
+		@include separator-border;
+
+		&:last-child {
+			padding: 0;
+			margin: 0;
+			border: none;
+		}
+	}
+}

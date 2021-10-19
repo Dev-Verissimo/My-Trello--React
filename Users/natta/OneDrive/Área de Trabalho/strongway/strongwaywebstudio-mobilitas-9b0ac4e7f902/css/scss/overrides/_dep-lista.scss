@@ -1,0 +1,101 @@
+.customer-reviews {
+	@extend .latest-news;
+
+	&__header {
+		@extend .latest-news__header;
+	}
+
+	&__title {
+		@extend .latest-news__title;
+	}
+
+	&__link {
+		@extend .latest-news__link;
+
+		&__text {
+			@extend .latest-news__link__text;
+		}
+
+		&__icon {
+			@extend .latest-news__link__icon;
+		}
+	}
+}
+
+.dep {
+	&_lista {
+		@extend %clearfix;
+		@include rem(margin, 0 -10 20);
+		
+		.slick-track {
+			@include rem(padding, 5 0);
+		}
+
+		.slick-prev {
+			@include rem(left, 20);
+		}
+
+		.slick-next {
+			@include rem(right, 20);
+		}
+	}
+
+	&_item {
+		@extend %base_box;
+		@include rem(margin, 0 11 10);
+
+		@include bp(min-width, $bp-md + 1) {
+			margin-bottom: 0;
+		}
+	}
+
+	&_dados {
+
+	}
+
+	&_img {
+		@include rem(margin-bottom, 5);
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(margin-bottom, 10);
+		}
+	}
+
+	&_nome,
+	&_nota,
+	&_msg,
+	&_data {
+		> span:first-child {
+			@extend %visuallyhidden;
+		}
+	}
+
+	&_nome {
+		font-weight: regular;
+		color: $texto-escuro;
+		font-family: $fonte-2;
+		@include rem(font-size, 20);
+	}
+
+	&_nota {
+		@include rem(font-size, 12);
+		@include rem(margin-bottom, 5);
+		font-weight: bold;
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(margin-bottom, 10);
+		}
+	}
+
+	&_msg {
+		@include rem(margin-bottom, 5);		
+	}
+
+	&_data {
+		@include rem(font-size, 12);
+	}
+
+	&_link {
+		display: none;
+	}
+}

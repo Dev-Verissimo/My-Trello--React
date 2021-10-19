@@ -1,0 +1,41 @@
+{#
+	Padrões que são removidos dos números de
+	telefone para colocá-los como atributos
+#}
+
+{% set phone_replacements = {
+	' ':'',
+	'-':'',
+	'.':'',
+	'+':'',
+	'(':'',
+	')':'',
+	'{':'',
+	'}':'',
+	'[':'',
+	']':'',
+	'"':'',
+	'\'':''
+} %}
+
+{% set telefone = settings.country_code|replace(phone_replacements) ~ settings.whatsapp_number|replace(phone_replacements) %}
+
+{% if settings.whatsapp_number and settings.country_code %}
+	<div
+		class="
+			floating-whatsapp
+			floating-whatsapp--{{ settings.floating_whatsapp_position }}
+			{{ modifier ? 'floating-whatsapp--' ~ modifier : ''}}
+		"
+	>
+		<a
+			href="https://api.whatsapp.com/send?phone={{ telefone }}"
+			class="bt bt--whatsapp "
+			target="_blank"
+			rel="noreferrer external"
+		>
+			<i class="icon-whatsapp bt__icon" aria-hidden="true"></i>
+			<span class="bt__text">{{ settings.whatsapp_number }}</span>
+		</a>
+	</div>
+{% endif %}

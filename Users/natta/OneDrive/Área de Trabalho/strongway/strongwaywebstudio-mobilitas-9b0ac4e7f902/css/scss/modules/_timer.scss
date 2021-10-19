@@ -1,0 +1,43 @@
+.timer {
+	@include rem(max-width, 300);
+	@include rem(margin-bottom, 10);
+
+	&__title {
+		
+	}
+
+	&__time {
+		display: flex;
+		flex-flow: row;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__unit {
+		flex: 0 1 25%;
+		text-align: center;
+		@include rem(padding, 5 5 15);
+		background-color: $cinza-6;
+		color: $texto-claro;
+		@include rem(border-radius, 3); // @todo: personalizar
+		font-family: $fonte-2;
+		@include rem(font-size, 16);
+		overflow: hidden;
+		position: relative;
+
+		&:after {
+			content: attr(data-label);
+			text-align: center;
+			position: absolute;
+			@include rem(bottom, 2);
+			left: 0;
+			right: 0;
+			font-family: $fonte;
+			@include rem(font-size, 11);
+		}
+	}
+
+	&__separator {
+		margin: 0 0.15em;
+	}
+}

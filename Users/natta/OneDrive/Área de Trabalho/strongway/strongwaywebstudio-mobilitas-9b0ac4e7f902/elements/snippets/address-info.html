@@ -1,0 +1,52 @@
+{%
+	if settings.address_street
+	or settings.address_number
+	or settings.address_additional
+	or settings.address_borough
+	or settings.address_city
+	or settings.address_state
+	or settings.address_state_ext
+	or settings.address_postal_code
+	or settings.address_map_url
+%}
+	<aside class="address-info">
+		<h4 class="visuallyhidden">
+			Localiza&ccedil;&atilde;o
+		</h4>
+
+		<div class="address-info__text">
+			{{ settings.address_street }}
+			{{ settings.address_number ? ", " ~ settings.address_number : null }}
+			{{ settings.address_additional ? ", " ~ settings.address_additional : null }}
+			{{ settings.address_borough ? "- " ~ settings.address_borough : null }}
+			{{ settings.address_city ? ", " ~ settings.address_city : null }}
+			{% if settings.address_state and not settings.address_state_ext %}
+				, {{ settings.address_state }}
+			{% elseif settings.address_state_ext and not settings.address_state %}
+				, {{ settings.address_state_ext }}
+			{% elseif settings.address_state_ext and settings.address_state %}
+				, <abbr title="{{ settings.address_state_ext }}">
+					{{ settings.address_state }}
+				</abbr>
+			{% endif %}
+			{{ settings.address_postal_code ? ", " ~ settings.address_postal_code : null }}
+			
+			{% if settings.address_map_url %}
+				<div>
+					<a
+						href="{{ settings.address_map_url }}"
+						target="_blank"
+						rel="noreferrer external"
+						class="address-info__map-link"
+						aria-label="Ver no Mapa"
+						title="Ver no Mapa"
+					>
+						Ver no mapa
+						<span class="address-info__icon icon-external-link"></span>
+					</a>
+				</div>
+			{% endif %}
+		</div>			
+	</aside>
+{% endif %}
+

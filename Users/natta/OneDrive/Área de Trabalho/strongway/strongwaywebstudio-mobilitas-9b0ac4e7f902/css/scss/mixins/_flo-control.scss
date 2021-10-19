@@ -1,0 +1,107 @@
+// BREAKPOINT GENERATION MIXIN - FLO-CONTROL
+// Depende de _strip-unit.scss
+$column-number: 12 !default;
+$column-margin: 1 !default;
+
+@mixin flo-control-create($breakpoints, $verbose: true, $separator: '_') {
+	$column-number: strip-unit($column-number);
+	$column-margin: strip-unit($column-margin);
+
+	// Separates the breakpoint names on a list
+	$bp-names: map-keys($breakpoints);
+	// Starts iterator
+	$i: 1;
+
+	$labels: (
+		break: 'b',
+		push: 'ps',
+		pull: 'pl',
+		clear: 'c'
+	);
+
+	@if $verbose == true {
+		$labels: (
+			break: 'break',
+			push: 'push',
+			pull: 'pull',
+			clear: 'clear'
+		);
+	}
+
+	@each $bp-name, $bp-width in $breakpoints {
+		@if $i == 1 {
+			$bp-width: $bp-width;
+		} @else {
+			$bp-width: $bp-width + 1;
+		}
+
+		@include bp(min-width, $bp-width) {
+			$group:"";
+			$pushpull_group:"";
+
+			// Loops through the number of grid columns
+			@for $i from 1 through $column-number {
+				// Concatenate .break_n_n classes to the $group variable
+				$group: $group + ".#{map-get($labels, 'break')}#{$separator}#{$bp-name}#{$separator}#{$i}, ";
+
+				// Concatenate .break_n_push_n and .break_n_pull_n classes to the $pushpull_group variable
+				$pushpull_group: $pushpull_group + ".#{map-get($labels, 'break')}#{$separator}#{$bp-name}#{$separator}#{map-get($labels, 'push')}#{$separator}#{$i}, .#{map-get($labels, 'break')}#{$separator}#{$bp-name}#{$separator}#{map-get($labels, 'pull')}#{$separator}#{$i},";
+				
+				// Calculate width based on $column-number and loop count
+				$width:(((100 - $column-number*2)/$column-number)*$i) + (($i - $column-margin)*2);
+				
+				// Declares .break_n_n class for this iteration
+				.#{map-get($labels, 'break')}#{$separator}#{$bp-name}#{$separator}#{$i} {
+					width: percentage($width/100);
+				}
+
+				// Declares .break_n_push_n class for this iteration
+				.#{map-get($labels, 'break')}#{$separator}#{$bp-name}#{$separator}#{map-get($labels, 'push')}#{$separator}#{$i} {
+					left: percentage(($width + $column-margin*2)/100);
+				}
+
+				// Declares .break_n_pull_n class for this iteration
+				.#{map-get($labels, 'break')}#{$separator}#{$bp-name}#{$separator}#{map-get($labels, 'pull')}#{$separator}#{$i} {
+					left: percentage(-($width + $column-margin*2)/100);
+				}
+			}
+
+			// Declares general atributes using $group as selector
+			#{$group} {
+				display: inline;
+				float: left;
+				margin-left: percentage($column-margin/100);
+				margin-right: percentage($column-margin/100);
+				min-height: 1px;
+			}
+
+			// Declares Push and Pull General Attributes
+			#{$pushpull_group} {
+				position: relative;
+			}
+
+			// Unclear classes from previous breakpoints, so they lose the clear effect
+			$unclear_group:"";
+
+			@if $i > 1 {
+				@for $i from 1 through ($i - 1) {
+					// Concatenate .break_n_clear classes to the $unclear_group variable
+					$previous-bp: nth($bp-names, $i);
+
+					$unclear_group: $unclear_group + ".#{map-get($labels, 'break')}#{$separator}#{$previous-bp}#{$separator}#{map-get($labels, 'clear')}, ";
+				}
+
+				#{$unclear_group} {
+					clear: none;
+				}		
+			}
+			// Create grid clearing class for this breakpoint. Used to avoid layout breaks due to different height columns.
+			.#{map-get($labels, 'break')}#{$separator}#{$bp-name}#{$separator}#{map-get($labels, 'clear')} {
+				clear: left;
+			}
+		}
+
+		$i: $i+1;
+	}
+
+}// END: BREAKPOINT GENERATION MIXIN

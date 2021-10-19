@@ -1,0 +1,187 @@
+{# Inicializa um array para reorganizar os filtros #}
+{% set pre_reorganized_filters = [] %}
+
+{% for filter_type, filter_values in filters %}
+	{% if filter_type != 'features' %}
+		{% set pre_reorganized_filters = pre_reorganized_filters|merge({ (filter_type) : filter_values }) %}
+	{% else %}
+		{# Se o filtro for de 'feature' (caracter�stica), ele � colocado no mesmo n�vel que os demais filtros #}
+		{% for feature_name, feature_values in filter_values %}
+			{% set pre_reorganized_filters = pre_reorganized_filters|merge({ (feature_name) : feature_values }) %}
+		{% endfor %}
+	{% endif %}
+{% endfor %}
+
+{# Inicializa arrays para reordenar os pre�os em primeiro lugar #}
+{% set stored_prices = [] %}
+{% set other_stored_filters = [] %}
+
+{% for filter_type, filter_values in pre_reorganized_filters %}
+	{% if filter_type == 'prices' %}
+		{# Se forem pre�os, cria um array s� para os pre�os #}
+		{% set stored_prices = stored_prices|merge({ (filter_type) : filter_values }) %}
+	{% else %}
+		{# Sen�o, cria outro array com os demais #}
+		{% set other_stored_filters = other_stored_filters|merge({ (filter_type) : filter_values }) %}
+	{% endif %}
+{% endfor %}
+
+{# Une os dois arrays, mas com os pre�os no in�cio #}
+{% set reorganized_filters = stored_prices|merge( other_stored_filters ) %}
+
+{# Verifica se h� algum filtro do tipo "checkbox" #}
+{% set has_checkbox_filter = false %}
+{% set break = false %}
+
+{% for filter_group in reorganized_filters if not break %}
+	{% for item in filter_group.items %}
+		{% if item.type == "checkbox" %}
+			{% set has_checkbox_filter = true %}
+			{% set break = true %}
+		{% endif %}
+	{% endfor %}
+{% endfor %}
+
+{% if reorganized_filters %}
+	<aside class="smart-filter">
+		<h2 class="visuallyhidden">Filtrar Produtos</h2>
+
+		{# Toggle usado para abrir e fechar em mobile #}
+		<button
+			class="bt smart-filter__toggle"
+			aria-label="Filtros"
+			aria-controls="smart-filter"
+			data-expanded="true"
+		>
+			<span class="icon-filter"></span>
+			<span aria-hidden="true">Filtrar</span>
+		</button>
+		
+		<form
+			class="smart-filter__form"
+			id="smart-filter"
+			name="form-filter"
+			method="get"
+		>
+			{# Inputs hidden necess�rios para a busca #}
+			<input type="hidden" name="loja" value="{{ store.id }}">
+
+			{% if search.word %}
+				<input name="palavra_busca" type="hidden" value="{{ search.word }}">
+			{% endif %}
+		
+			{% if category.id %}
+				<input type="hidden" name="categoria" value="{{ category.id }}">
+			{% endif %}
+			
+			{# Filtros aplicados #}
+			{% if reorganized_filters.applied %}
+				<div class="smart-filter__applied">
+					{% if settings.headings == "1" %}
+					<h3 class="smart-filter__title">Filtros Aplicados</h3>		
+					{% else %}
+					<h2 class="smart-filter__title">Filtros Aplicados</h2>		
+					{% endif %}
+					<ul class="smart-filter__applied-list">
+						{% for applied_key, applied_items in reorganized_filters.applied %}
+							{% for item in applied_items  %}
+								<li class="smart-filter__applied-item">
+									{{ item.title }}
+									<a
+										href="{{ item.url }}"
+										class="icon-x smart-filter__remove"
+										aria-label="Remover filtro"
+									></a>
+								</li>
+							{% endfor %}
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+			
+			<div class="smart-filter__not-applied">
+				{# Lista de Categorias #}
+				{%
+					for filter_type, filter_values
+					in reorganized_filters
+					if filter_type == 'categories'
+				%}
+					{% if filter_values.items %}
+						{% if settings.headings == "1" %}
+						<h3 class="smart-filter__title">{{ filter_values.title }}</h3>
+						{% else %}
+						<h2 class="smart-filter__title">{{ filter_values.title }}</h2>
+						{% endif %}
+						<div class="smart-filter__box">
+							{% element 'snippets/smart-filter-list' { filter_values : filter_values } %}
+						</div>					
+					{% endif %}
+				{% endfor %}
+				
+				{# Demais listas, sem Categorias #}
+				{%
+					for filter_type, filter_values
+					in reorganized_filters
+					if filter_type != 'categories'
+				%}
+					{% if loop.first %}
+						{% if settings.headings == "1" %}
+						<h3 class="smart-filter__title">Filtros</h3>
+						{% else %}
+						<h2 class="smart-filter__title">Filtros</h2>
+						{% endif %}
+					{% endif %}
+				
+					{% if filter_type == 'variations' %}
+						{% for variation in filter_values %}
+							{% if variation.items %}
+								<div class="smart-filter__box">
+									{% if settings.headings == "1" %}
+									<h4 class="smart-filter__sub-title">
+										{{ variation.title }}
+									</h4>									
+									{% else %}
+									<h3 class="smart-filter__sub-title">
+										{{ variation.title }}
+									</h3>
+									{% endif %}
+				
+									{% element 'snippets/smart-filter-list' { filter_values : variation } %}		
+								</div>
+							{% endif %}
+						{% endfor %}
+					{% else %}
+						{% if filter_values.items %}
+							<div class="smart-filter__box">
+								{% if settings.headings == "1" %}
+								<h4 class="smart-filter__sub-title">
+									{{
+										( filter_values.title|lower == 'filtrar por marca' )
+										? 'Marca'
+										: filter_values.title
+									}}
+								</h4>									
+								{% else %}
+								<h3 class="smart-filter__sub-title">
+									{{
+										( filter_values.title|lower == 'filtrar por marca' )
+										? 'Marca'
+										: filter_values.title
+									}}
+								</h3>
+								{% endif %}
+				
+								{% element 'snippets/smart-filter-list' { filter_values : filter_values } %}		
+							</div>
+						{% endif %}					
+					{% endif %}
+				{% endfor %}
+				
+				{# Apenas mostra o bot�o se houver filtros do tipo "checkbox" #}
+				{% if has_checkbox_filter %}
+					<button type="submit" class="bt bt--secondary smart-filter__button">{{ Translation('filtrar') }}</button>
+				{% endif %}
+			</div>
+		</form>
+	</aside>
+{% endif %}

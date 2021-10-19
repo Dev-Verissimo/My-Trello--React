@@ -1,0 +1,16 @@
+<template id='vue-timer-template'>
+	<div class="timer">
+		<div class="timer__title">A promo&ccedil;&atilde;o acaba em:</div>
+		<time class="visuallyhidden" datetime="{{ product.end_promotion|date('Y-m-d') }}">{{ product.end_promotion|date('d/m/Y') }}</time>
+
+		<div class="timer__time" aria-hidden="true">
+			<span class="timer__unit timer__unit--day" data-label="d" v-text="remaining_time.days"></span>
+			<span class="timer__separator">:</span>
+			<span class="timer__unit timer__unit--hours" data-label="h" v-text="(remaining_time.hours < 10) ? '0' + remaining_time.hours : remaining_time.hours"></span>
+			<span class="timer__separator">:</span>	
+			<span class="timer__unit timer__unit--minutes" data-label="m" v-text="(remaining_time.minutes < 10) ? '0' + remaining_time.minutes : remaining_time.minutes"></span>
+			<span class="timer__separator">:</span>
+			<span class="timer__unit timer__unit--seconds" data-label="s" v-text="(remaining_time.seconds < 10) ? '0' + remaining_time.seconds : remaining_time.seconds"></span>
+		</div>
+	</div>
+</template>

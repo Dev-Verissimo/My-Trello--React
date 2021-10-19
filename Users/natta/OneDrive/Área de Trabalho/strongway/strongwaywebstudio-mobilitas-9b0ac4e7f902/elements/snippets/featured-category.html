@@ -1,0 +1,31 @@
+{% set featured_category = Categories({ id: settings['featured_category_' ~ featured_category_number ~ '_id'] }) %}
+
+<div class="featured-category">
+	<div class="featured-category__info">
+		{% if settings.headings == "1" %}
+			<h3 class="featured-category__name">
+				{{ featured_category.name }}
+			</h3>		
+		{% else %}
+			<h2 class="featured-category__name">
+				{{ featured_category.name }}
+			</h2>		
+		{% endif %}
+		
+		{% if settings['featured_category_' ~ featured_category_number ~ '_excerpt'] %}
+			<p class="featured-category__excerpt">
+				{{ settings['featured_category_' ~ featured_category_number ~ '_excerpt'] }}
+			</p>
+		{% endif %}
+		
+		<a href="{{ featured_category.link }}" class="bt bt--secondary featured-category__button">Ver Produtos</a>
+	</div>
+
+	{% if settings['featured_category_' ~ featured_category_number ~ '_image'] %}
+		<img
+			data-lazy="{{ asset(settings['featured_category_' ~ featured_category_number ~ '_image']) }}"
+			alt="{{ featured_category.name }}"
+			class="featured-category__image"
+		>
+	{% endif %}
+</div>

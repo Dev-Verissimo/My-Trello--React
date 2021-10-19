@@ -1,0 +1,661 @@
+// Ajustes Gerais
+.page--central_anteriores,
+.page--central_bonus,
+.page--central_cliente,
+.page--central_comissoes,
+.page--central_comissoes_extrato,
+.page--central_confirmar_pagamento,
+.page--central_comentarios,
+.page--central_detalhe_pedido,
+.page--central_gera_troca,
+.page--central_lista_espera,
+.page--central_listas,
+.page--central_listas_cliente,
+.page--central_premiacao,
+.page--central_premiacao_ativas,
+.page--central_premiacao_classificacao,
+.page--central_premiacao_historico,
+.page--central_premiacao_indique,
+.page--central_rastrear,
+.page--central_recompra,
+.page--central_senha,
+.page--central_troca {
+	.page-content {
+		background-color: $bg-claro;
+		@include rem(padding, 15);
+		border: 1px solid $hr-border-color;
+		
+		@include bp(min-width, $bp-md) {
+			@include rem(padding, 30);        
+		}        
+	}
+	
+	.breadcrumb {
+		h1 {
+			// Corrige problema da breadcrumb em certas páginas, que envolve o título
+			color: $texto-escuro;
+		}
+	}
+
+	.central-titulo {
+		display: none;
+	}
+
+	h1 {
+		@include h2;
+	}
+
+	.central-conteudo {
+		+ .board {
+
+			@include bp(max-width, $bp-md) {
+				overflow: auto;
+				@include rem(padding, 10);
+				border: 1px solid $hr-border-color;
+				@include rem(border-radius, 3);
+				@include rem(margin-bottom, 20);
+			}
+
+			form[name="form1"]{
+				overflow: auto
+			}
+		}
+	}
+
+	.board.central-saudacao {
+		@include h2;
+		font-weight: normal;
+
+		> br:first-child {
+			display: none;
+		}
+
+		> h2 {
+			color: $texto-cinza;
+			@include rem(font-size, 16);
+			@include rem(margin, 10 0 7);
+			font-weight: bold;
+			text-transform: none;
+		}
+
+		p {
+			color: $texto-cinza;
+			@include rem(font-size, $basefont);            
+			font-weight: normal;
+			text-transform: none;
+		}
+	}
+
+	table {
+		td,
+		th {
+			@include separator-border();
+			@include rem(padding, 10);
+		}
+
+		th {
+			background: $bg-cinza;
+			white-space: nowrap            
+		}
+	}
+
+	.Pedidos,
+	.tablePage {
+		th {
+			white-space: initial!important;
+			@include rem(font-size, 12);           
+		}
+
+		td {
+			@include rem(font-size, 12);           
+		}
+
+		td:hover,
+		tr:hover {
+			background-color: transparent;
+		}
+
+		a {
+			font-weight: bold;
+		}
+	}
+
+	.board {
+		> br:first-child {
+			display: none;
+		}
+	}
+
+	.capitalize {
+		text-transform: inherit;
+	}
+}
+
+// Ajuste de responsividade para páginas específicas
+.page--central_recompra .container3 + .board,
+.page--central_troca .board {
+	@include bp(max-width, $bp-md) {
+		overflow: auto;
+		@include rem(padding, 10);
+		border: 1px solid $hr-border-color;
+		@include rem(border-radius, 3);
+		@include rem(margin-bottom, 20);
+	}
+}
+
+.Mapa {
+	display: none;
+}
+
+// Página inicial da Central
+.page--central_cliente {
+	.board.central-saudacao {
+		overflow: visible;
+	}
+
+	#ProdBlock {
+		display: none;
+	}
+}
+
+.central-menu {
+	div[style="clear:both"] {
+		display: none;
+	}
+}
+
+.icoPai {
+	display: none
+}
+
+.icoFilho {
+	@extend %base_transition;
+	@extend %base_box;
+	float: left;
+	text-align: center;
+	width: percentage((1/4) - 0.01);
+	margin-right: percentage(0.01);
+	margin-bottom: percentage(0.01);
+	@include rem(min-height, 100);
+	@include rem(padding, 10);
+	position: relative;
+
+	@include bp(max-width, $bp-md) {
+		width: percentage((2/4) - 0.01);
+	}
+
+	@include bp(min-width, $bp-md + 1) {
+		@include rem(min-height, 172);		
+	}
+
+	p {
+		line-height: 1;
+		@include rem(font-size, 16);
+		@include rem(padding, 10);
+		margin: 0;
+		position: absolute;
+		top: 50%;
+		left: 0;
+		right: 0;
+		transform: translateY(-50%);
+	}
+
+	a {
+		display: block;
+		@include rem(padding, 10);
+		@include overlay;
+	}
+
+	img {
+		display: none;
+	}
+
+	&:hover {
+		background-color: $bg-cinza;
+	}
+}
+
+// Código bastante frágil, feito apenas porque não temos controle sobre esse HTML
+// .icoFilho {
+// 	$excluded: 15;
+
+// 	@each $child in $excluded {
+// 		&:nth-child(#{$child}) {
+// 			display: none;
+// 		}
+// 	}
+// }
+
+// Meus Pedidos
+.page--central_anteriores {
+	#div_erro {
+		+ br {
+			display: none;
+		}
+	}
+}
+
+// Detalhes do Pedido
+.page--central_detalhe_pedido {
+	.TimeLine5,
+	.TimeLine7 {
+		background: none;
+		border: none;
+		@include rem(margin-bottom, 25);
+		padding: 0;
+		
+		ul {
+			margin-top: 0;
+
+			li {
+				line-height: 1;
+				@include rem(padding, 8 10 10);
+				@include rem(font-size, 12);
+
+				@include bp(max-width, $bp-md) {
+					display: none;
+
+					&.ok {
+						display: block;
+						width: 100%;
+						background-image: none;
+					}
+				}
+			}
+		}
+		
+		+ p {
+			@include rem(font-size, $basefont);
+			text-align: left;
+			
+			span,
+			a {
+				display: inline-block;
+				padding: 0;
+				margin: 0;
+			}
+		}
+		
+		~ p {
+			@include rem(font-size, $basefont);
+		}
+	}
+
+	.tablePage {
+		@include rem(margin-top, 15);
+	}
+
+	#modificar_pagamento {
+		&:before {
+			@extend %icons_theme;
+			content: $icon-credit-card $icon-refresh-cw;
+			@include rem(font-size, 22);
+			vertical-align: middle;
+			position: relative;
+			@include rem(top, -2);
+		}
+
+		&:after {
+			content: "Modificar Pagamento";
+		}
+
+		img {
+			display: none;
+		}
+	}
+
+	.red {
+		color: $texto-escuro;
+	}
+
+	b > a,
+	.central_recompra a {
+		@extend %base_bt_secondary;
+		margin-right: 0;
+	}
+
+	.central_recompra {
+		text-align: left;
+	}
+
+	.central_recompra a {
+		&:before {
+			content: "Nova Compra";
+		}
+
+		img {
+			@extend %visuallyhidden;
+		}
+	}
+
+	// Esconde o botão de rastreio, que não está funcionando
+	center {
+		[align="center"] {
+			input {
+				display: none;
+			}
+		}
+	}
+}
+
+// Recompra do Pedido
+.page--central_recompra {
+	.tablePage {
+		@include rem(margin-top, 15);
+	}
+
+	.qntd {
+		text-align: center;
+		@include rem(max-width, 70);
+	}
+
+	.valores_carrinho {
+		margin-right: 0;
+	}
+
+	.board {
+		+ [align="center"] {
+			@include rem(margin-top, 15);
+			position: relative;
+
+			br {
+				display: none;
+			}
+
+			&:after {
+				@extend %base_bt_no_states;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%);
+				position: absolute;
+				pointer-events: none;
+				z-index: 3;
+				content: "Comprar";
+			}
+
+			input {
+				opacity: 0;
+			}
+		}
+	}
+}
+
+// Trocas ou Devoluções
+.page--central_troca {
+	.tablePage {
+		h3 {
+			@include h2;
+			margin-bottom: 0;
+		}
+
+		+ br,
+		+ br + br {
+			display: none;
+		}
+	}
+
+	form[name="form1"] {
+		position: relative;
+
+		&:after {
+			@extend %base_bt_no_states;
+			bottom: 0;
+			left: 0;
+			position: absolute;
+			pointer-events: none;
+			z-index: 3;
+			content: "Gerar Ordem de Devolu\00e7 \00e3 o";
+		}
+
+		[name="imageField"] {
+			@include rem(width, 253);
+			@include rem(height, 35);
+			opacity: 0;
+		}
+	}
+}
+
+// Geração de ordem de devolução
+.page--central_gera_troca {
+	#form10 {
+		> br {
+			display: none;
+		}
+	}
+	
+	form {
+		.Pedidos {
+			@include rem(margin-top, 15);
+
+			tr:last-child {
+				td {
+					position: relative;
+
+					&:after {
+						@extend %base_bt_no_states;
+						@include rem(top, 10);
+						left: 50%;
+						transform: translateX(-50%);
+						position: absolute;
+						pointer-events: none;
+						z-index: 3;
+						content: "Gerar Ordem de Devolu\00c7 \00c3 o";
+					}
+
+					[type="image"] {
+						@include rem(width, 253);
+						@include rem(height, 35);
+						opacity: 0;
+					}
+
+				}
+			}
+		}		
+	}
+}
+
+// Recuperação de Senha
+.page--central_senha {
+	#nova_senha,
+	#nova_senha2,
+	#senha_atual {
+		@include rem(font-size, 20);
+		width: 100%
+	}
+
+	fieldset {
+		position: relative;
+		@include rem(max-width, 500);
+
+		> br {
+			display: none;
+		}
+
+		&:after {
+			@extend %base_bt_secondary_no_states;
+			content: "Alterar Senha";
+			@include rem(bottom, 20);
+			@include rem(left, 20);
+			position: absolute;
+			pointer-events: none;
+			z-index: 3;
+		}
+
+		[type="image"] {
+			opacity: 0;
+			@include rem(width, 160);
+		}
+	}
+
+	label:first-of-type {
+		display: block;
+		@include rem(margin-top, 10);
+	}
+}
+
+// Rastreio de Pedidos
+.page--central_rastrear {
+	@include bp(max-width, $bp-md) {
+		table {
+			margin-top: 0             
+		}
+	}
+}
+
+// Comentários
+.page--central_comentarios {
+	h1.color {
+		+ hr {
+			display: none;
+		}
+	}
+}
+
+.editComment {
+	margin: 0;
+
+	@include bp(min-width, $bp-md + 1) {
+		@include rem(margin, 0 0 15);		
+	}
+	
+	li {
+		border: none;
+		@include separator-border;
+		@include rem(margin-bottom, 10);
+		@include rem(padding, 15);
+		border: 1px solid $hr-border-color;  
+		@include rem(border-radius, 3);
+		background: none;
+		width: 100%;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		// Link da imagem 
+		> a {
+			display: block;
+			@include rem(margin-bottom, 15);
+
+			@include bp(min-width, $bp-md + 1) {
+				float: left;
+				@include rem(max-width, 250);
+				@include rem(margin-right, 10);               
+			}
+		}
+
+		> h3 {
+			@include base-headings;
+			@include h4;
+
+			@include bp(min-width, $bp-md) {
+				float: left;                
+			}
+		}
+	}
+
+	.relativity {
+		clear: both;
+		@include rem(padding, 5 0);
+		border: none;
+		margin: 0;
+		@include separator-border('top');
+
+		@include bp(min-width, $bp-md) {
+			@include rem(padding, 10 0);
+		}
+
+		&:last-child {
+			padding-bottom: 0;
+		}
+
+		.ranking {
+			margin-top: 0;
+		}
+	}
+}
+
+.change {
+	display: block;
+	@include rem(margin, 7 0 0);
+	color: $texto-cinza;
+	text-align: left;
+}
+
+.bts {
+	@extend %base_bt;
+	@extend %base_bt_secondary;
+	display: block;
+	@include rem(margin, 2);
+	@include rem(padding, 0 10);
+	@include rem(line-height, 25);
+	@include rem(height, 25);
+	width: auto;
+}
+
+// Lista de Espera
+.page--central_lista_espera {
+	h1.color {
+		+ hr {
+			display: none;
+		}
+	}
+
+	.relativity {
+		padding: 0;
+		border: 0;
+
+		// Link da imagem 
+		> a {
+			display: block;
+			@include rem(margin-bottom, 15);
+
+			@include bp(min-width, $bp-md) {
+				float: left;
+				@include rem(max-width, 250);
+				@include rem(margin-right, 10);               
+			}
+		}
+
+		> h3 {
+			font-weight: bold;
+
+			@include bp(min-width, $bp-md) {
+				float: left;                
+			}
+		}
+	}
+}
+
+// Bônus
+.page--central_bonus {
+	.bonus_value {
+		font-size: inherit;
+		@include rem(margin-bottom, 10);
+		text-align: left;
+	}
+}
+
+// Histórico de Pontos
+.page--central_premiacao_historico {
+	.board {
+		form {
+			@include rem(min-width, 530);
+		}		
+	}
+}
+
+// Listas
+.page--central_listas {
+	.board {
+	}
+}
+
+// Extrato de comissões
+.page--central_comissoes_extrato {
+	.board {
+		form {
+			@include rem(min-width, 530);
+		}		
+	}
+}

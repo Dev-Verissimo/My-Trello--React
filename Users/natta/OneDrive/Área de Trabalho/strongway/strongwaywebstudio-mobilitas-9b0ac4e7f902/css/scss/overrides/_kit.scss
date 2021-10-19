@@ -1,0 +1,149 @@
+.tray-kit {
+	border: 1px solid $hr-border-color;
+	@include rem(padding, 15);
+	@include rem(margin-bottom, 15);
+	@include rem(border-radius, 3);
+}
+
+.tray-kit div[style="clear:both;"] {
+	display: none;
+}
+
+.tray-kit-item {
+	@include rem(padding, 15 0 25);
+	@include separator-border('top');
+}
+
+.tray-kit-item:first-child {
+	border-top: none;
+}
+
+.tray-kit-item:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.tray-kit-item > div {
+	position: relative;
+}
+
+.tray-kit-image {
+	float: left;
+	@include rem(width, 90);
+	@include rem(margin-right, 15);
+	border: 1px solid $hr-border-color;
+}
+
+.tray-kit-name {
+	font-weight: normal;
+	@include rem(padding, 5 0);
+}
+
+.tray-kit-info {
+	overflow: hidden;
+	@include rem(margin-left, 105);
+}
+
+.tray-kit-unity {
+	overflow: hidden;
+	margin-left: 0;
+	position: absolute;
+	left: 0;
+	@include rem(top, 95);
+	@include rem(width, 90);
+	text-align: center;
+}
+
+.tray-kit-show-all {
+	@include rem(font-size, $basefont);
+	text-align: center;
+	@include rem(margin-top, 10);
+}
+
+.tray-kit-title h3 {
+	font-weight: bold;
+	@include separator-border;
+	@include rem(padding-bottom, 10);
+	@include rem(margin-bottom, 10);
+}
+
+.tray-kit-additional-info .onVar,
+.tray-kit-additional-info .onVar:hover{
+	color: #000;
+	@include rem(font-size, $basefont);
+}
+
+.tray-kit-additional-info .select,
+.tray-kit-additional-info .text,
+.tray-kit-additional-info .textarea,
+.tray-kit-additional-info .table,
+.tray-kit-additional-info .dd,
+.tray-kit-additional-info .ddTitle{
+	display: block;
+	width: 100% !important;
+	@include rem(font-size, $basefont);
+	@include rem(height, $input-height);
+	font-weight: normal;
+}
+
+.tray-kit-additional-info .table {
+	height: auto;
+}
+
+.tray-kit-additional-info .text,
+.tray-kit-additional-info .textarea{
+	margin-bottom: 5px !important;
+}
+
+.tray-kit-additional-info .dd .ddTitle span.ddTitleText{
+	font-weight: normal;
+	@include rem(font-size, $basefont);
+}
+
+.tray-kit-additional-info .textarea{
+	@include rem(font-size, $basefont);
+	@include rem(height, 100);
+}
+
+.tray-kit-additional-info .varCont > *{
+	display: block;
+}
+
+.tray-kit-variation li {
+	display: inline-block;
+	@include rem(margin, 0 5 5 0);
+	@include rem(font-size, $basefont);
+	text-align: center;
+	border: none;
+
+	div,
+	img {
+		@include rem(border-radius, 3);
+		@include rem(padding, 2);
+		border: 2px solid $cinza-2;
+		@include rem(min-width, 38);
+		@include rem(height, 38);
+		@include rem(line-height, 30);
+		display: block;
+		overflow: hidden;
+		
+		&:hover {
+			border-color: $cinza-3;         
+		}
+
+		&.cor_selecionada {
+			color: $texto-escuro;
+			border: 2px solid $secundaria !important;
+		}
+	}
+}
+
+.tray-kit .texto_variacao h2 {
+	@include rem(font-size, $basefont);
+}
+
+// Kit no carrinho
+.div-products-kit {
+	@include rem(font-size, $basefont);	
+}

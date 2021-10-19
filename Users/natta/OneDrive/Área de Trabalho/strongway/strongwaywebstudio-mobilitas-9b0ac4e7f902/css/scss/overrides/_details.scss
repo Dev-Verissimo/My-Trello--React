@@ -1,0 +1,16 @@
+.dados-campo {
+	font-weight: bold;
+}
+
+.dados-valor {
+	font-weight: normal;
+
+	&.brand,
+	&.brand:visited {
+		text-decoration: underline;
+
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}

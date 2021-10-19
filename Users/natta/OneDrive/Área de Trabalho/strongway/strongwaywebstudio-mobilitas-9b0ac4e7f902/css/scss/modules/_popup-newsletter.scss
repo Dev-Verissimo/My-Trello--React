@@ -1,0 +1,64 @@
+.popup-newsletter {
+	@include bp(min-width, $bp-sm + 1) {
+		display: flex;
+		align-items: stretch;
+		justify-content: space-around;
+		background-color: $bg-claro;
+		flex-flow: row;
+	}
+
+	&__banner {
+		@include bp(min-width, $bp-sm + 1) {
+			flex: 1 auto;
+		}
+
+		@include bp(min-width, $bp-md + 1) {
+			flex: 1 0 350px;
+		}
+
+		img {
+			width: 100%;
+		}
+	}
+
+	&__form-container {
+		@include rem(padding, 20);
+		display: flex;
+		flex-flow: column;
+		justify-content: space-around;
+		background-color: $primaria;
+		color: $texto-claro;
+		
+		@include bp(min-width, $bp-sm + 1) {
+			flex: 1 auto;
+		}
+	}
+
+	&__cta {
+		@include rem(margin-bottom, 7);		
+	}
+
+	&__input {
+		@include rem(margin-bottom, 7);
+		color: $texto-claro;
+		width: 100%;
+
+		&::-webkit-input-placeholder {
+		   color: rgba($texto-claro, 0.75);
+		}
+		&:-moz-placeholder {
+		   color: rgba($texto-claro, 0.75);
+		}
+		&::-moz-placeholder {
+		   color: rgba($texto-claro, 0.75);
+		}
+		&:-ms-input-placeholder {  
+		   color: rgba($texto-claro, 0.75);
+		}
+	}
+
+	&__button {
+		width: 100%;
+		margin: 0;
+	}
+}

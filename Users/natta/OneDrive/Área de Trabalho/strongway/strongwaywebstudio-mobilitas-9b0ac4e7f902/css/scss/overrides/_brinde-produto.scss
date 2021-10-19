@@ -1,0 +1,89 @@
+.brinde_produto {
+	border: 0;
+	padding: 0;
+	@include rem(margin-bottom, 20);
+	position: relative;
+	z-index: 0;
+
+	.varTit {
+		.onVar {
+		}
+	}
+
+	.mais,
+	.menos {
+		@include rem(height, 110);
+		@include rem(width, 30);
+		position: relative;
+		background: none;
+		z-index: 2;
+
+		&:after {
+			@extend %base_shadow;
+			@extend %icons_theme;
+			content: $icon-chevron-right;
+			@include rem(font-size, 24);
+			@include square(24);
+			line-height: 24px;
+			background-color: rgba($bg-claro, 0.75);
+			@include rem(border-radius, 3);
+			text-align: center;
+			@include rem(padding, 3);
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
+
+	.mais {
+		&:after {
+			content: $icon-chevron-right;
+		}
+	}
+
+	.menos {
+		&:after {
+			content: $icon-chevron-left;
+		}
+	}
+}
+
+.brinde_produto_lista {
+	@include rem(margin, 0 35);
+	z-index: 1;
+}
+
+// Modal de Brinde
+.detalhesBrinde {
+	width: 100%;
+}
+
+.brinde_detalhes {
+	@extend %clearfix;
+	@include separator-border('top');
+	@include rem(padding, 15 0);
+	height: auto;
+
+	.botao {
+		position: relative;
+
+		&:before {
+			@extend %base_bt_secondary_no_states;
+			content: "Escolher";
+		}
+
+		img {
+			position: absolute;
+			@include overlay;
+			opacity: 0;
+		}
+	}
+}
+
+#erro_brinde_var {
+	@include rem(margin-top, 5);
+}
+
+#nomeBrinde {
+	font-weight: normal;
+}

@@ -1,0 +1,21 @@
+.aviso {
+	@extend %base_msg;
+	background-color: $aviso;
+	border-color: darken($aviso, 10%);
+	color: darken($aviso, 15%);
+	background-image:url(../imagens/ico_aviso.png);
+}
+.erro {
+	@extend %base_msg;
+	background-color: $erro;
+	border-color: darken($erro, 10%);
+	color: darken($erro, 15%);
+	background-image:url(../imagens/ico_erro.png);
+}
+.acerto {
+	@extend %base_msg;
+	background-color: $acerto;
+	border-color: darken($acerto, 10%);
+	color: darken($acerto, 15%);
+	background-image:url(../imagens/ico_acerto.png);
+}

@@ -1,0 +1,89 @@
+// Formulário Avise-me
+// ========================
+// unavailable product alert
+#produto_nao_disp {
+	color: $texto-escuro;
+
+	#nao_disp{
+		clear: both;
+		@include rem(margin, 5 0 20);
+		@include rem(font-size, 16);
+
+		> br {
+			display: none;
+		}
+
+		label {
+			// Se o produto agrupador estiver disponível, esconde a label supérflua
+			.is-available & {
+				font-size: 0;
+				line-height: 0;
+				color: transparent;
+				
+				> br {
+					display: none;
+				}
+			}
+		}
+	}
+
+	.botao-nao_indisponivel {
+		font-size: 0;
+		line-height: 0;
+		color: transparent;
+		@include rem(margin-bottom, 7);
+		background-color: transparent;
+		border: none;
+		padding: 0;
+		height: auto;
+	}
+	
+	input {
+		@extend [type="text"];
+		@include rem(margin, 0 5 0 0);
+
+		@include bp(min-width, $bp-md) {
+			width: auto;
+		}
+	}
+
+	.color {
+		// font-size: 0;
+		// line-height: 0;
+		// color: transparent; 
+		margin-top: 5px;
+	}
+}
+
+#img_nao_disp {
+	font-weight: bold;
+}
+
+#letmeknow_response {
+	h5 {
+		font-size: 14px;
+		margin-bottom: 5px;
+	}
+
+	> br {
+		display: none;
+	}
+}
+
+#letMeKnow {
+	@extend %base_bt;
+	@extend %base_bt_secondary;
+	@include rem(line-height, $bt-height - 2);
+	position: relative;
+	top: 2px;
+		
+	img{
+		display: none;
+	}
+	
+	&:before{
+		content: 'Enviar';
+		@include rem(font-size, $basefont);
+	}
+}
+

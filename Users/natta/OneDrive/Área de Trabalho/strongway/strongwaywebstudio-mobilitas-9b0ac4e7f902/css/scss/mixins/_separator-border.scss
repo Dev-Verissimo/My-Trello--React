@@ -1,0 +1,9 @@
+@mixin separator-border(
+	$side: 'bottom',
+	$width: $hr-border-width,
+	$style: $hr-border-style,
+	$color: $hr-border-color) {
+
+	border-#{$side}: $width $style $color;
+
+}

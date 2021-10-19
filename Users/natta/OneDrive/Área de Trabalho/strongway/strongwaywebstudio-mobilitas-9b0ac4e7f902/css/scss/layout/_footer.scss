@@ -1,0 +1,181 @@
+.footer {
+	@include rem(margin, 30 -8 10);
+	@extend %clearfix;
+	
+	&__title {
+		font-family: $fonte-2;
+		@include rem(font-size, 12);
+		@include rem(margin-bottom, 10);
+		color: inherit;
+	}
+
+	&__line-1 {
+		@extend %base_shadow;
+		@include rem(padding, 25 15);
+		@include rem(margin-bottom, -3);
+		background-color: $primaria;
+		color: $texto-claro;
+		position: relative;
+		z-index: 3;
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(padding, 30);
+		}
+	}
+
+	&__line-2 {
+		@extend %base_shadow;
+		@include rem(padding, 33 15 10);
+		background-color: $bg-escuro-2;
+		color: $texto-claro;
+		z-index: 2;
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(padding, 58 30 50);			
+		}
+	}
+
+	&__line-3 {
+		@extend %base_shadow;
+		@include rem(padding, 15 15);
+		background-color: $bg-claro;
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(padding, 15 30 10);
+		}
+	}
+	
+	&__line-4 {
+		@include rem(padding, 30 15);
+		@include separator-border('top');
+		text-align: center;
+		@include rem(font-size, 12);
+		color: $texto-claro;
+	}
+	
+	// elements/footer-1.html
+	&--1  {
+	}
+
+	// elements/footer-2.html
+	&--2 {
+		text-align: center;
+
+		.footer__line-2 {
+			.footer__title {
+				@extend %visuallyhidden;
+			}
+		}
+
+		.pages-menu {
+			&__list {
+				border-left: none;
+				padding-left: 0;
+				@include rem(padding-bottom, 15);
+				position: relative;
+
+				&:after {
+					content: "";
+					position: absolute;
+					top: 100%;
+					left: 0;
+					right: 0;
+					border-bottom: 2px solid $primaria;
+
+					@include bp(min-width, $bp-md + 1) {
+						left: 50%;
+						right: auto;
+						transform: translateX(-50%);
+						width: 66%;
+					}
+				}
+			}
+
+			&__item {
+				@include bp(min-width, $bp-sm + 1) {
+					@include rem(font-size, 20);
+				}
+
+				@include bp(min-width, $bp-md + 1) {
+					display: inline-block;
+					@include rem(margin-right, 7);
+					@include rem(margin-left, 7);
+				}
+			}
+		}
+
+		.contact-info {
+			padding-bottom: 0;
+			display: flex;
+			justify-content: center;
+
+			&:after {
+				content: none;
+			}
+
+			&__item {
+				@include rem(padding, 0 15);
+				vertical-align: middle;
+				border-left: 1px solid $hr-border-bottom-color;
+				border-right: 1px solid $hr-border-color;
+
+				&:first-of-type {
+					border-left: 0;
+				}
+
+				&:last-child {
+					border-right: 0;
+				}
+			}
+
+			&__telephone {
+				@include rem(font-size, $basefont);
+				font-weight: bold;
+			}
+		}
+
+		.address-info,
+		.opening-hours {
+			&__text {
+				padding: 0;
+
+				&:before {
+					position: static;
+					vertical-align: middle;
+				}
+			}
+		}
+
+		.payment-methods {
+			justify-content: center;
+
+			&__type {
+				@include rem(right, 10);
+			}
+		}
+	}
+	
+	// Modifiers
+	&--boxed {
+		@include rem(max-width, $max_width);
+		margin-left: auto;
+		margin-right: auto;
+
+		.footer__line-1 {
+			@include rem(border-radius, 3);
+		}
+		
+		.footer__line-3 {
+			@include rem(border-radius, 3 3 0 0);
+		}
+
+		.footer__line-2,
+		.footer__line-4 {
+			@include rem(border-radius, 0 0 3 3);
+		}
+		
+		.footer__line-2 {
+			@include rem(margin-bottom, 20);			
+		}
+	}
+}

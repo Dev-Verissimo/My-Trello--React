@@ -1,0 +1,125 @@
+.page--busca_noticias {
+	h1.color {
+		@include h2;
+
+		+ br {
+			display: none;
+		}
+	}
+
+	.board {
+		+ hr {
+			display: none;
+
+			+ .board {
+				display: none;
+			}
+		}
+
+		.left {
+			display: none;
+		}
+	}
+}
+
+#listaCategoriasNoticias {
+	font-size: 0;
+	@include rem(margin, 0 0 15);
+
+	li {
+		a {
+			display: inline-block;
+			@include rem(font-size, 12);
+			@include rem(margin, 0 10 10 0);
+			text-transform: uppercase;
+			color: $texto-cinza;
+			
+			// Categoria ativa
+			b {
+				@extend %base_bt_secondary;
+				@include rem(padding, 0 5);
+				@include rem(height, 25);
+				@include rem(line-height, 25);
+				display: block;
+				margin: 0;
+			}
+		}
+	}
+}
+
+.noticias {
+	> li {
+		@extend %clearfix;
+		@extend %base_box;
+		margin: 0;
+		margin-bottom: 2%;
+		@include rem(padding-left, 110);
+		border: none;
+		height: auto;
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(padding-left, 135);
+		}
+	}
+	
+	#noticia_imagem {
+		float: left;
+		@include rem(margin-left, -95);
+		@include square(80);
+		padding: 0;
+		background-color: $bg-cinza;
+		border: none;
+		position: relative;
+		@include rem(border-radius, 3);
+		overflow: hidden;
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(margin-left, -115);
+			@include square(100);
+		}
+		
+		// Ícone de "Sem Imagem"
+		&:before {
+			@extend %icons_theme;
+			content: $icon-camera-off;
+			@include rem(font-size, 50);
+			color: $texto-cinza;
+			position: absolute;
+			z-index: 0;
+			top: 50%;
+			left: 50%;
+			transform: translateX(-50%) translateY(-50%);
+		}
+
+		img {
+			max-width: 100%;
+			position: relative;
+			z-index: 1;
+			
+			// Imagem não disponível
+			&[border="0"] {
+				width: 100%;
+				opacity: 0;
+			}
+		}
+	}
+
+	#noticia_dados {
+		margin-left: 0;
+
+		h3 {
+			font-weight: normal;
+
+			@include bp(min-width, $bp-md + 1) {
+				@include rem(font-size, 17);
+			}
+
+			a {
+				font-weight: normal;
+				color: $texto-escuro;
+				font-family: $fonte-2;
+				@include rem(font-size, 18);
+			}
+		}
+	}
+}

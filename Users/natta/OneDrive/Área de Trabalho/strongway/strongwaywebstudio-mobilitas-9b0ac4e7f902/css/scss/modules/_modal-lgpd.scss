@@ -1,0 +1,40 @@
+.modal-lgpd {
+    position: fixed;
+    bottom: rems(10);
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+    background: white;
+    color: black;
+    z-index: 20000;
+    @include rem(padding, 20);
+
+    &__text {
+        &__link {
+            @include rem(margin-top, 10);
+            color: $link-color;
+
+            &:visited {
+                color: $link-visited-color;
+            }
+        }
+
+        @include bp(min-width, $bp-md) {
+            flex: 1;
+        }
+    }
+    
+    &__btn {
+        @include rem(margin-top, 10);
+        flex: 1 1 100%;
+
+        @include bp(min-width, $bp-md) {
+            flex: unset;
+        }
+    }
+}

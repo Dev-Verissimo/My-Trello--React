@@ -1,0 +1,70 @@
+<nav class="menu-mobile">
+	<ul class="menu-mobile__lista">
+		{% for level1 in categories %}
+			{% if loop.index <= limit or not limit %}
+				{% if level1.children %}
+					<li class="menu-mobile__item menu-mobile__item-lvl1 has-subnivel" role="menuitem" aria-haspopup="true">
+							
+					<a href="{{ level1.link }}" class="menu-mobile__link menu-mobile__link-lvl1" data-tray-tst="categoria_lvl_1">
+						{% if level1.images %}
+							<img src="{{ level1.images.0 }}" aria-hidden="true" alt="" class="menu-mobile__image" />
+						{% endif %}
+
+						{{ level1.name }}
+					</a>
+
+					<button class="menu-mobile__toggle" aria-expanded="false" aria-controls="subnivel-{{ level1.id }}">
+						<span class="icon icon-chevron-right" aria-label="Abrir submenu"></span>
+					</button>
+				{% else %}
+					<li class="menu-mobile__item menu-mobile__item-lvl1" role="menuitem">
+
+					<a href="{{ level1.link }}" class="menu-mobile__link menu-mobile__link-lvl1" data-tray-tst="categoria_lvl_1">
+						{% if level1.images %}
+							<img src="{{ level1.images.0 }}" aria-hidden="true" alt="" class="menu-mobile__image" />
+						{% endif %}
+
+						{{ level1.name }}
+					</a>
+				{% endif %}
+					
+				{% if level1.children %}
+					<ul class="menu-mobile__subnivel-lista" id="subnivel-{{ level1.id }}">
+						{% for level2 in level1.children %}
+							{% if level2.children %}
+								<li class="menu-mobile__item menu-mobile__item-lvl2" aria-haspopup="true">
+							{% else %}
+								<li class="menu-mobile__item menu-mobile__item-lvl2">
+							{% endif %}
+
+								<a href="{{ level2.link }}" class="menu-mobile__link menu-mobile__link-lvl2" data-tray-tst="categoria_lvl_2">
+									{% if level2.images %}
+										<img src="{{ level2.images.0 }}" aria-hidden="true" alt="" class="menu-mobile__image" />
+									{% endif %}
+									{{ level2.name }}
+								</a>
+
+								{% if level2.children %}
+									<ul class="menu-mobile__neto-lista">
+										{% for level3 in level2.children %}
+											<li class="menu-mobile__item menu-mobile__item-lvl3">
+												<a href="{{ level3.link }}" class="menu-mobile__link menu-mobile__link-lvl3" data-tray-tst="categoria_lvl_3">
+													{% if level3.images %}
+														<img src="{{ level3.images.0 }}" aria-hidden="true" alt="" class="menu-mobile__image" />
+													{% endif %}
+
+													{{ level3.name }}
+												</a>
+											</li>
+										{% endfor %}
+									</ul>
+								{% endif %}
+							</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+				</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+</nav>

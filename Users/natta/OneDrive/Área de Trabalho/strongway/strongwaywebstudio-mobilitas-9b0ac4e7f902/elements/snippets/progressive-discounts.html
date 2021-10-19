@@ -1,0 +1,59 @@
+{% if ProgressiveDiscounts %}
+	{% if settings.progressive_discount_desktop != "none" %}
+		<div class="hidden-xs hidden-sm">
+			<div class="discounts">
+				{% for discount in ProgressiveDiscounts %}
+					{% if
+						settings.progressive_discount_desktop == "banner"
+						and discount.banner
+					%}
+						<img
+							class="discounts__banner"
+							src="{{ discount.banner }}"
+							alt="{{ discount.tag ~ ": " ~ discount.description }}"
+							title="{{ discount.tag }}"
+						>
+					{% else %}
+						<div class="discounts__label">
+							<p class="discounts__tag">
+								{{ discount.tag }}
+							</p>
+							<p class="discounts__description">
+								{{ discount.description }}
+							</p>
+						</div>
+					{% endif %}
+				{% endfor %}					
+			</div>
+		</div>
+	{% endif %}
+
+	{% if settings.progressive_discount_mobile != "none" %}
+		<div class="hidden-md hidden-lg hidden-xl">
+			<div class="discounts">
+				{% for discount in ProgressiveDiscounts %}
+					{% if
+						settings.progressive_discount_mobile == "banner"
+						and discount.banner
+					%}
+						<img
+							class="discounts__banner"
+							src="{{ discount.banner }}"
+							alt="{{ discount.tag ~ ": " ~ discount.description }}"
+							title="{{ discount.tag }}"
+						>
+					{% else %}
+						<div class="discounts__label">
+							<p class="discounts__tag">
+								{{ discount.tag }}
+							</p>
+							<p class="discounts__description">
+								{{ discount.description }}
+							</p>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	{% endif %}
+{% endif %}

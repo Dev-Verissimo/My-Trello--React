@@ -1,0 +1,123 @@
+// Preço
+// ========================
+#produto_preco {
+	> br {
+		display: none;
+	}
+
+	@include rem(margin, 0 0 20);
+}
+
+#preco {
+	padding: 0;
+	margin: 0;
+	border: none;
+
+	> br {
+		display: none;
+	}
+}
+
+.precode {
+	@extend .product__price--old;
+	display: block;
+	margin-right: 0;
+}
+
+.txt-por {
+	color: $primaria;
+	display: none;
+}
+
+.PrecoPrincipal {
+	@extend .product__price--special;
+	@include rem(font-size, 25);
+	line-height: 1;
+	display: inline-block;
+
+	@include bp(min-width, $bp-md + 1) {
+		@include rem(font-size, 40);
+	}
+}
+
+.produto-economize {
+	@include rem(font-size, 14);
+	font-weight: normal;
+	font-style: italic;
+	display: block;
+}
+
+#info_preco {
+	@include rem(font-size, 14);
+	display: block;
+
+	.preco-parc2 {
+		@extend .product__payment;
+
+		@include bp(min-width, $bp-md) {
+			@include rem(font-size, $basefont);
+		}
+	}
+}
+
+// Esconde o botão de "Ver todas as formas de pagamento"
+#info {
+	display: none;
+}
+
+.precoAvista,
+.precoparc {
+	font-size: inherit;
+	font-weight: 700
+}
+
+// Sob Consulta
+#produto_preco {
+	.botao-sob-consulta {
+		padding: 0;
+		display: block;
+		font-size: 0;
+		color: inherit;
+		background-color: transparent;
+		border: none;
+		text-align: left;
+		box-shadow: none;
+
+		&:hover {
+			background-color: transparent;
+			border: none;
+			color: inherit;
+		}
+
+		&:before {
+			content: "Pre\00e7o dispon\00edvel apenas sob consulta:";
+			@include rem(font-size, 16);
+			background-color: transparent;
+			color: inherit;
+			text-transform: none;
+		}
+	}
+
+	.botao_tire_duvidas {
+		@extend %base_bt;
+		@extend %base_bt_secondary;
+		@include rem(line-height, $bt-height - 1);
+		@include rem(height, $bt-height);
+		@include rem(margin-top, 10);
+		font-size: 0;
+		font-weight: normal;
+
+		&:hover,
+		&:focus,
+		&:active {
+			border-color: transparent;
+		}
+
+		&:before {
+			@include rem(font-size, 16);
+			content: "Consulte-nos!";
+		}
+	}	
+}
+
+// ========================

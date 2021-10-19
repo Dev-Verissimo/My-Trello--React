@@ -1,0 +1,58 @@
+.social {
+	&__title {
+
+	}
+
+	&__fanpage-container {
+		overflow: hidden;
+		@include rem(margin-bottom, 10);
+	}
+
+	&__icons {
+		font-size: 0;
+	}
+
+	&__item {
+		display: inline-block;
+		@include rem(font-size, 20);
+		@include rem(margin, 0 10 10 0);
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(font-size, 16);
+		}
+	}
+
+	&__link {
+		@extend %base_transition;
+		color: $primaria;
+		text-decoration: none;
+		display: block;
+
+		&:visited {
+			color: $primaria;
+		}
+
+		&:hover {
+			transform: scale(1.2);
+		}
+	}
+
+	&__icon {
+
+	}
+
+	// Modifier
+	&--header {
+		@include rem(margin-left, 15);
+
+		.social__item {
+			margin-bottom: 0;
+			margin-right: 0;
+			@include rem(margin-left, 15);
+
+			&:first-child {
+				margin-left: 0;
+			}
+		}
+	}
+}

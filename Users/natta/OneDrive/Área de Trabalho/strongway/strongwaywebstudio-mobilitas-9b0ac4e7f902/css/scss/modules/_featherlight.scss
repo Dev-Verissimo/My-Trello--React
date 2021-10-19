@@ -1,0 +1,171 @@
+/**
+ * Featherlight – ultra slim jQuery lightbox
+ * Version 1.7.13 - http://noelboss.github.io/featherlight/
+ *
+ * Copyright 2018, Noël Raoul Bossart (http://www.noelboss.com)
+ * MIT Licensed.
+**/
+
+html.with-featherlight {
+	/* disable global scrolling when featherlights are visible */
+	overflow: hidden;
+}
+
+.featherlight-lightbox {
+	display: none;
+}
+
+.featherlight {
+	display: none;
+
+	/* dimensions: spanning the background from edge to edge */
+	position:fixed;
+	top: 0; right: 0; bottom: 0; left: 0;
+	z-index: 2147483647; /* z-index needs to be >= elements on the site. */
+
+	/* position: centering content */
+	text-align: center;
+
+	/* insures that the ::before pseudo element doesn't force wrap with fixed width content; */
+	white-space: nowrap;
+
+	/* styling */
+	cursor: pointer;
+	background: #333;
+	/* IE8 "hack" for nested featherlights */
+	background: rgba(0, 0, 0, 0.6);
+}
+
+
+.featherlight:before {
+	/* position: trick to center content vertically */
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.featherlight .featherlight-content {
+	box-shadow: 0 0 1px 1px rgba(white,0.5), 0 0 5px rgba(0,0,0,0.5);
+
+	/* make content container for positioned elements (close button) */
+	position: relative;
+
+	/* position: centering vertical and horizontal */
+	text-align: left;
+	vertical-align: middle;
+	display: inline-block;
+
+	/* dimensions: cut off images */
+	overflow: auto;
+	padding: 0;
+	border: none;
+
+	/* dimensions: handling large content */
+	margin-left: 5%;
+	margin-right: 5%;
+	max-height: 95%;
+
+	/* styling */
+	background: #fff;
+	@include rem(border-radius, 3);
+	cursor: auto;
+
+	/* reset white-space wrapping */
+	white-space: normal;
+
+	.featherlight-lightbox {
+		display: block; /* For some reason, in this project, the secont time the lightbox is opened the featherlight-inner class is not applied, so we need this to show the content */
+	}
+
+	@include bp(min-width, $bp-md + 1) {
+		@include rem(min-width, 500);
+		@include rem(max-width, 718);
+	}
+}
+
+/* contains the content */
+.featherlight .featherlight-inner {
+	/* make sure its visible */
+	display: block;
+}
+
+/* don't show these though */
+.featherlight script.featherlight-inner,
+.featherlight link.featherlight-inner,
+.featherlight style.featherlight-inner {
+	display: none;
+}
+
+.featherlight .featherlight-close-icon {
+	/* position: centering vertical and horizontal */
+	position: absolute;
+	z-index: 9999;
+	top: 10px;
+	right: 10px;
+
+	/* dimensions: 25px x 25px */
+	line-height: 24px;
+	width: 24px;
+	@include rem(border-radius, 3);
+
+	/* styling */
+	cursor: pointer;
+	text-align: center;
+	font-family: Arial, sans-serif;
+	background: #000; /* Set the background in case it overlaps the content */
+	background: rgba(black, 0.3);
+	color: $texto-claro;
+	border: none;
+	padding: 0;
+}
+
+/* See http://stackoverflow.com/questions/16077341/how-to-reset-all-default-styles-of-the-html5-button-element */
+.featherlight .featherlight-close-icon::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+.featherlight .featherlight-image {
+	/* styling */
+	width: 100%;
+}
+
+
+.featherlight-iframe .featherlight-content {
+	/* removed the border for image croping since iframe is edge to edge */
+	border-bottom: 0;
+	padding: 0;
+	-webkit-overflow-scrolling: touch;
+}
+
+.featherlight iframe {
+	/* styling */
+	border: none;
+}
+
+.featherlight * { /* See https://github.com/noelboss/featherlight/issues/42 */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* handling phones and small screens */
+@media only screen and (max-width: 1024px) {
+	.featherlight .featherlight-content {
+		/* dimensions: maximize lightbox with for small screens */
+		margin-left: 10px;
+		margin-right: 10px;
+		max-height: 98%;
+
+		padding: 0;
+		border: none;
+	}
+}
+
+/* hide non featherlight items when printing */
+@media print {
+	html.with-featherlight > * > :not(.featherlight) {
+		display: none;
+	}
+}

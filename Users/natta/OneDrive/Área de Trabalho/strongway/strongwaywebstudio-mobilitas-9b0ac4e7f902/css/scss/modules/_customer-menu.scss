@@ -1,0 +1,44 @@
+.customer-menu {
+	@include rem(margin-bottom, 15);
+	
+	&__toggle {
+		@extend .smart-filter__toggle;
+
+		&.is-active + .customer-menu__box {
+			@include bp(max-width, $bp-md) {
+				border-top-left-radius: 0;
+				border-top-right-radius: 0;
+			}
+		}
+	}
+
+	&__box {
+		@extend %base_box;
+	}
+
+	&__sub-title {
+		@include h4;
+		@include rem(font-size, 16);
+	}
+
+	&__list {
+		padding-left: 1.5em;
+		@include rem(margin-bottom, 25);
+
+		li {
+			@include rem(margin-bottom, 3);
+		}
+
+		a {
+			color: $primaria;
+			
+			&:visited {
+				color: $primaria
+			}
+
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+	}	
+}

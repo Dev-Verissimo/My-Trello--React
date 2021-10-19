@@ -1,0 +1,98 @@
+{#
+# Este breadcrumb exibe a página em que o usuário se encontra,
+# mesmo estando no primeiro nível da categoria o caminho será exibido.
+# elements/snippets/breadcrumb.html
+#}
+
+<div
+	class="breadcrumb"
+	itemscope
+	itemtype="http://schema.org/BreadcrumbList"
+>
+	<span class="breadcrumb__text">
+		Voc&ecirc; est&aacute; em:
+	</span>
+	<span
+		class="breadcrumb__item"
+		itemprop="itemListElement"
+		itemscope
+		itemtype="http://schema.org/ListItem"
+	>
+		<a
+			href="/"
+			itemprop="item"
+			typeof="WebPage"
+			class="breadcrumb__link"
+		>
+			<span itemprop="name" class="breadcrumb__label">Home</span>
+		</a>
+
+		<meta itemprop="position" content="1">
+	</span>
+	
+	<span class="breadcrumb__separator">/</span>
+
+	{# Define variável fora de escopo para conter o índice do último item #}
+	{% set last = 1 %}
+
+	{% if breadcrumb %}
+		{% for item in breadcrumb %}
+			{# Define o índice como índice atual do loop + 1 #}
+			{% set index = loop.index + 1 %}
+			<span
+				class="breadcrumb__item"
+				itemprop="itemListElement"
+				itemscope itemtype="http://schema.org/ListItem"
+			>
+				<a
+					href="{{ item.link}}"
+					title="{{ item.name }}"
+					itemprop="item"
+					typeof="WebPage"
+					class="breadcrumb__link"
+				>
+					<span itemprop="name" class="breadcrumb__label">{{ item.name }}</span>
+				</a>
+
+				<meta itemprop="position" content="{{ index}}">
+			</span>
+			
+			<span class="breadcrumb__separator">/</span>
+
+			{# Se for o último item, define o índice dele #}
+			{% if loop.last %}
+				{% set last = index %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+
+	<span
+		class="breadcrumb__item"
+		itemprop="itemListElement"
+		itemscope itemtype="http://schema.org/ListItem"
+	>
+		<a
+			href="{{ store.current_url }}"
+			itemprop="item"
+			typeof="WebPage"
+			class="breadcrumb__current"
+		>
+			<span itemprop="name" class="breadcrumb__label">
+				{{ pages.current == 'product' ? product.name : category.name }}
+				{{ pages.current == 'checkout_cart' ? 'Meu carrinho' }}
+				{{ pages.current == 'contact' ? 'Contato' }}
+				{{ pages.current == 'company' ? 'Empresa' }}
+				{{ pages.current == 'search' ? 'Busca' }}
+				{{ pages.current == 'login' ? 'Central do cliente' }}
+
+				{% for custom in pages.custom %}
+					{% if pages.current == custom.slug %}
+						{{ custom.name }}
+					{% endif %}
+				{% endfor %}
+			</span>
+		</a>
+
+		<meta itemprop="position" content="{{ last + 1 }}">
+	</span>
+</div>

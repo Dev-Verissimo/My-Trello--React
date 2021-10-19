@@ -1,0 +1,21 @@
+.floating-whatsapp {
+	position: fixed;
+	@include rem(left, 10);
+	@include rem(bottom, 10);
+	z-index: 998;
+
+	.bt {
+		margin: 0;
+	}
+
+	&--right {
+		left: auto;
+		@include rem(right, 10);
+	}
+	
+	@include bp(min-width, $bp-sm + 1) {
+		&--up {
+			@include rem(bottom, 80);
+		}
+	}
+}

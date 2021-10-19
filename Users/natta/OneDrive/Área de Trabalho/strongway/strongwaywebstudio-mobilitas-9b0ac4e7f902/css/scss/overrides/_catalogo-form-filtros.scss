@@ -1,0 +1,92 @@
+.catalogo-form-filtros {
+	margin: 0;
+	text-align: left;
+	color: $texto-claro;
+	@include rem(font-size, 14);
+	display: inline-block;
+	vertical-align: middle;
+	@include separator-border('left', $color: $hr-border-bottom-color);
+	@include rem(padding-left, 5);
+	
+	@include bp(min-width, $bp-lg + 1) {
+		@include rem(padding-left, 15);
+		text-align: right;
+	}
+
+	.filtros {
+		font-weight: normal;
+		vertical-align: middle;
+		display: inline-block;
+		float: none;
+		@include rem(margin, 0 5);
+	}
+
+	.select {
+		width: auto;
+		display: block;
+		text-transform: none;
+		margin-bottom: 0px;
+		color: inherit;
+
+		@include bp(max-width, $bp-lg) {
+			@include rem(max-width, 140);
+		}
+
+		@include bp(min-width, $bp-lg + 1) {
+			@include rem(margin-left, 5);
+			display: inline-block;
+		}
+
+		option {
+			color: $input-color;
+		}
+	}
+}
+
+.showcase-mode-switcher {
+	vertical-align: middle;
+	display: flex;
+	@include rem(padding-right, 10);
+	@include separator-border('right');
+
+	@include bp(min-width, $bp-lg + 1) {
+		@include rem(padding-right, 15);
+	}
+
+	&__button {
+		border: 1px solid rgba($input-border-color, 0.15);
+		color: $texto-claro;
+		background-color: rgba($input-bg, 0.2);
+		@include rem(border-radius, 3);
+		@include rem(padding, 7);
+		@include rem(margin, 0);
+
+		&:first-child {
+			border-top-right-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+
+		&:last-child {
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+
+		&[disabled] {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
+	}
+}
+
+.catalog-controls {
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-start;
+	@include rem(margin, 0 0 10);
+
+	@include bp(min-width, $bp-lg + 1) {
+		align-items: center;
+		justify-content: flex-end;
+		@include rem(margin, 0 0 15);
+	}
+}

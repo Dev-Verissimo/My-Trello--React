@@ -1,0 +1,139 @@
+// CORES
+// Cores Básicas
+$cinza-frio-1: #3A616D;
+$cinza-1: #F4F4F4;
+$cinza-2: #DDDDDD;
+$cinza-3: #C2C2C2;
+$cinza-4: #AAAAAA;
+$cinza-5: #777777;
+$cinza-6: #666666;
+$cinza-7: #333333;
+$verde-1: #8BC34A;
+$verde-2: #25d366;
+$purpura-1: purple;
+
+// Cores por função básica
+$primaria: $cinza-frio-1;
+$secundaria: #3A313D;
+$terciaria: $cinza-5;
+$destaque: $purpura-1;
+$whatsapp: $verde-2;
+
+$texto-escuro: $cinza-7;
+$texto-cinza: $cinza-4;
+$texto-claro: #FFFFFF;
+
+$bg-escuro: $primaria;
+$bg-escuro-2: $secundaria;
+$bg-escuro-3: #000;
+$bg-cinza: $cinza-1;
+$bg-claro: #FFFFFF;
+
+// MENSAGENS
+$aviso: #FF0;
+$acerto: #4CD964;
+$erro: #FF3B30;
+
+// Filtro / Marcações <mark>
+$filtro: $aviso;
+
+// LINKS
+$link-color: $texto-escuro;
+$link-visited-color: lighten($link-color,15%);
+
+// SELEÇÃO
+$selecao-bg: $secundaria;
+$selecao-color: $texto-claro;
+
+// BOTÕES (+ paginação)
+$bt-height: 35px;
+$bt-color: $texto-claro;
+$bt-bg: $secundaria;
+
+// Botões Secundários
+$sec-bt-color: $texto-escuro;
+$sec-bt-bg: #EEEEEE;
+
+// Botões Destaque
+$dstq-bt-color: $texto-claro;
+$dstq-bt-bg: $destaque;
+
+// Botões Whatsapp
+$whatsapp-bt-color: $texto-claro;
+$whatsapp-bt-bg: $whatsapp;
+
+// Disabled
+$bt-disabled-color: #CCC;
+$bt-disabled-bg: #DDD;
+$bt-disabled-border-color: darken($bt-disabled-bg,5%);
+
+// INPUTS
+$input-height: 35px;
+$input-color: $texto-escuro;
+$input-border-color: black;
+$input-bg: $cinza-2;
+
+$input-placeholder-color: $cinza-4;
+
+// Disabled
+$input-disabled-bg: #eee;
+$input-disabled-color: #BBB;
+$input-disabled-border-color: #CCC;
+
+// Readonly
+$input-readonly-bg: $cinza-1;
+
+// FIELDSET
+$fieldset-border-color: $cinza-1;
+
+// TIPOGRAFIA
+$fonte: 'PT Sans', sans-serif;
+$fonte-2: 'Oswald', sans-serif;
+$basefont: 14; // Esta é o tamanho base da fonte para determinação dos tamanhos de fonte dos demais elementos pelo mixin "ems". Caso se esteja usando o mixin "ems" e haja uma alteração no meio do projeto no tamanho da fonte do body, esta variável não deve mais ser mexida. O que deve ser alterado é a chamada dessa variável na tag body, pois é lá que deve ser aplicada a nova fonte base, mantendo a proporção correta na variação do tamanho de fonte.
+$base-lineheight: 1.4;
+
+// Separadores
+$hr-border-width: 1px;
+$hr-border-style: solid;
+$hr-border-color: rgba(black, 0.1);
+$hr-border-bottom-color: rgba(white, 0.1);
+
+// TRANSITIONS
+$base-transition: (
+	property: all,
+	duration: .5s,
+	timing-function: ease,
+	delay: 0s
+);
+
+// UNIDADES
+$uni:10px;
+$dob:$uni*2;
+$met:$uni/2;
+
+// MEDIDAS (talvez seja obsoleto em face do item abaixo)
+$max_width: 1224.5px;
+$min_width: 960px;
+
+// GRID RESPONSIVO (FLO-CONTROL)
+$column-number: 12; // Number of grid columns
+$column-margin: 1; // Margin from column to column (gutter/2)
+
+// Mudá-los aqui implica em mudá-los no /template/js/script.js
+$breakpoints: (
+	xs: 0,
+	sm: 425px,
+	md: 768px,
+	lg: 1024px,
+	xl: 1224px 
+);
+
+$bp-xs: map-get($breakpoints, 'xs');
+$bp-sm: map-get($breakpoints, 'sm');
+$bp-md: map-get($breakpoints, 'md');
+$bp-lg: map-get($breakpoints, 'lg');
+$bp-xl: map-get($breakpoints, 'xl');
+
+// MISCELÂNEA
+$img-url: "../img/"; // Deve terminar com '/'
+$ie-support: false;

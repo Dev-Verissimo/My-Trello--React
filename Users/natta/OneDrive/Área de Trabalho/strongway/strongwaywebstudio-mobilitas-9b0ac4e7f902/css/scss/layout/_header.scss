@@ -1,0 +1,343 @@
+.header {
+	@extend %clearfix;
+	position: relative;
+	z-index: 4;
+
+	&__line-1 {
+		@extend %base_transition;
+		color: $texto-claro;
+		background-color: $secundaria;
+		@include rem(padding, 7 10 10); // Se trocar aqui é necessário trocar no custom.css
+		position: relative;
+		z-index: 2;
+		display: none;
+
+		@include bp(min-width, $bp-md + 1) {
+			display: block;
+		}
+
+		@include bp(max-width, $bp-lg) {
+			@include rem(font-size, 12);
+		}
+
+		&__content {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+		}
+
+		// Modifier
+		&--model-2 {
+			.header__line-1__content {
+				justify-content: center;
+			}
+
+			.header__links {
+				flex: 0 0 auto;
+			}
+		}
+	}
+
+	&__line-2 {
+		@extend %base_shadow;
+		@include rem(padding, 0 10);
+		background-color: $bg-claro;
+		position: relative;
+		z-index: 3;
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(margin-top, -3);
+			@include rem(margin-bottom, -3);
+		}
+
+		&__content {
+			display: flex;
+			align-items: stretch;
+
+			@include bp(max-width, $bp-md) {
+				flex-wrap: wrap;
+			}
+		}
+
+		// Modifier
+		&--model-2 {
+			.logo__wrapper {
+				order: 2;
+				text-align: center;
+				width: 100%;
+				max-width: none;
+				@include rem(margin-left, 25);
+				@include rem(padding-left, 10);
+				flex: 1;
+
+				@include bp(min-width, $bp-md + 1) {
+					flex: 1 0 auto;
+					width: auto;
+					margin: 0;
+				}
+			}
+
+			.search-form__wrapper {
+				flex: 0 1 auto;
+				
+				@include bp(min-width, $bp-md + 1) {
+					margin-left: 0;
+					@include rem(margin-right, 20);
+					@include rem(width, 280);
+				}
+			}
+
+			.icons__wrapper {
+				justify-content: flex-end;
+				order: 3;
+
+				@include bp(min-width, $bp-md + 1) {
+					@include rem(margin-left, 20);
+					@include rem(width, 280);
+				}
+			}
+
+			.account__wrapper {
+				@include rem(margin-left, 0);
+			}
+
+			.cart__wrapper {
+				order: 4;
+			}
+			
+			.search-form .arrow-up {
+				@include rem(left, 36);
+			}
+
+			.cart__dropdown .arrow-up {
+				@include bp(max-width, $bp-md) {
+					@include rem(right, 2);
+				}
+			}
+
+			.user-account__dropdown .arrow-up {
+				@include bp(max-width, $bp-sm) {
+					@include rem(right, 42);
+				}
+			}
+		}
+
+		&--no-line-1 {
+			margin-top: 0 !important;
+			border-top-left-radius: 0 !important;
+			border-top-right-radius: 0 !important;
+		}
+	}
+
+	&__line-3 {
+		@extend %base_transition;
+		@extend %base_shadow;
+		background-color: $primaria;
+		position: relative;
+		z-index: 1;
+	}
+
+	&__links {
+		display: flex;
+		flex: 1 auto;
+	}
+
+	&__link {
+		color: inherit;
+		@include rem(padding-right, 15);
+		@include rem(padding-left, 15);
+		border-right: 1px solid $hr-border-bottom-color;
+		border-left: 1px solid $hr-border-color;
+		
+		&:visited {
+			color: inherit;
+		}
+
+		&--1 {
+			border-left: 0;
+			padding-left: 0;
+		}
+
+		&--2 {
+			border-right: 0;
+			padding-right: 0;
+		}
+	}
+	
+	// Modifiers
+	&--boxed {
+		@include rem(padding-left, 8);
+		@include rem(padding-right, 8);			
+
+		.header__fixer {
+			@include rem(padding-left, 8);
+			@include rem(padding-right, 8);	
+		}
+
+		.header__line-2 {
+			@include rem(border-radius, 0 0 3 3);
+
+			@include bp(min-width, $bp-md + 1) {
+				@include rem(border-radius, 3);
+			}
+		}
+
+		.header__line-3 {
+			@include rem(border-radius, 0 0 3 3);
+		}
+	}
+
+	&--full-width {
+	}
+	
+	// States
+	&.is-fixed {
+		.header__placeholder {
+			@include rem(height, 90);
+
+			@include bp(min-width, $bp-md + 1) {
+				@include rem(height, 115);
+			}
+		}
+
+		.header__fixer {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			z-index: 1000;
+			@extend %base_transition;
+			
+			// Arruma problema de "flicker"
+			// do navegador chrome ou devido
+			// a performance da máquina
+			-webkit-backface-visibility: hidden;
+			-webkit-perspective: 1000;
+		}
+
+		.header__line-1 {
+		}
+
+		.header__line-2 {
+			transition-property: box-shadow;
+
+			&.has-shadow {
+				box-shadow: 0 0px 6px rgba(0,0,0,0.15), 0 0px 6px rgba(0,0,0,0.15);
+			}
+		}
+	}
+
+	&.is-scrolled {
+		@include bp(max-width, $bp-md) {
+			.header__fixer	{
+				transform: translateY(-100%);
+			}
+		}
+		
+		@include bp(min-width, $bp-md + 1) {
+			.header__line-3	{
+				transform: translateY(-100%);
+			}			
+		}
+	}
+}
+
+
+// Logotipo
+.logo__wrapper {
+	@include rem(padding, 10);
+	@include rem(margin, 0 10);
+	@include rem(max-width, 160);
+	margin-left: 0;
+	padding-left: 0;
+
+	@include bp(min-width, $bp-md + 1) {
+		@include rem(padding, 15 10);
+		margin: 0;
+		padding-left: 0;
+		@include rem(max-width, 245);
+	}
+}
+
+.logo {
+	display: inline-block;
+	@include rem(max-width, 235);
+}
+
+// Busca
+.search-form__wrapper {
+	display: flex;
+	align-items: stretch;
+	padding: 0;
+	width: 100%;
+
+	@include bp(max-width, $bp-md) {
+		order: 6;
+	}
+
+	@include bp(min-width, $bp-md + 1) {
+		@include rem(padding, 15 0);
+		flex: 1 0 auto;
+		align-items: center;
+		width: auto;
+		@include rem(margin-left, 35);
+		@include rem(margin-right, 35);
+	}
+
+	@include bp(min-width, $bp-lg + 1) {
+		@include rem(margin-left, 70);
+		@include rem(margin-right, 70);
+	}
+}
+
+// Ícones
+.icons__wrapper {
+	display: flex;
+	align-items: stretch;
+}
+
+// Conta de Usuário
+.account__wrapper {
+	@include rem(margin-left, 10);
+	@include bp(min-width, $bp-md + 1) {
+		@include rem(margin-right, 30);
+	}
+
+	display: flex;
+	align-items: stretch;
+}
+
+// Toggle do Menu
+.menu-toggle {
+	margin-left: auto;
+	background: transparent;
+	position: relative;
+	border-top: 6px solid transparent;
+	border-bottom: 3px solid transparent;
+	outline: 0;
+
+	@include bp(min-width, $bp-md + 1) {
+		display: none;
+	}
+
+	.icon {
+		@include rem(font-size, 24);
+		color: $primaria;
+	}
+
+	&__wrapper {
+		margin-left: auto;
+		display: flex;
+		align-items: stretch;
+	}
+
+	&.is-opened {
+		border-bottom-color: $primaria;
+	}
+}
+
+.cart__wrapper {
+	@include rem(margin-left, 10);
+	display: flex;
+	align-items: stretch;
+}

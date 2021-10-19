@@ -1,0 +1,74 @@
+.accordion {
+	@include bp(min-width, $bp-md + 1) {
+		@include rem(margin-bottom, 30);
+	}
+
+	&__title {
+		@extend %visuallyhidden;
+	}
+
+	&__panel {
+		@include rem(padding, 15);
+		@include rem(margin-bottom, 10);
+		display: block;
+		overflow: hidden;
+		opacity: 1;
+		visibility: visible;
+		transition-delay: 0s;
+
+		&[aria-hidden=true] {
+			display: block;
+			max-height: 0;
+			opacity: 0;
+			visibility: hidden;
+			margin: 0;
+			padding: 0;
+		}
+	}
+
+	&__header {
+		display: block;
+		width: 100%;
+		text-align: left;
+		line-height: $base_lineheight;
+		border: none;
+		height: auto;
+		@include rem(padding, 10 30 10 0);
+		@include rem(margin-bottom, 5);
+		color: $cinza-3;
+		position: relative;
+		border: none;
+		font-family: $fonte-2;
+		background-color: transparent;
+		@include separator-border('top');
+		@include rem(font-size, 18);
+		outline: none;
+
+		&:hover,
+		&:focus,
+		&:active {
+			background-color: transparent;
+			border-color: $texto-escuro;
+			color: $texto-escuro;
+		}
+
+		&:after {
+			@extend %icons_theme;
+			content: $icon-plus-circle;
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			right: 0;
+		}
+
+		&[aria-expanded="true"] {
+			color: $texto-escuro;
+
+			&:after {
+				content: $icon-minus-circle;
+			}
+		}
+		&[aria-expanded="false"] {
+		}
+	}
+}

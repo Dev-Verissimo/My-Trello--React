@@ -1,0 +1,97 @@
+<div class="user-account">
+	<button class="user-account__toggle" title="Minha Conta">
+		<span class="user-account__icon icon icon-user" aria-hidden="true"></span>
+		<span class="user-account__label">Minha Conta</span>
+	</button>
+	<div class="user-account__dropdown">
+		{# Usuário logado #}
+		<span class="tray-hide" data-logged-user="true">
+			<div class="clearfix">
+				<div class="b-xs-10">
+					<div class="user-account__welcome-message">
+						Bem vindo, <br>
+						<span class="user-account__name" data-customer="name">
+						</span>
+					</div>
+				</div>
+				<div class="b-xs-2 align-right">
+					<button class="user-account__close js-close-dropdown">
+						<span class="icon-x" aria-label="Fechar janela"></span>
+					</button>
+				</div>
+			</div>
+
+			<nav class="user-account__menu">
+				<ul class="user-account__menu-list">
+					<li class="user-account__menu-listItem">
+						<a href="{{ links.central }}" class="user-account__link">
+							Minha Conta
+						</a>
+					</li>
+
+					<li class="user-account__menu-listItem">
+						<a href="{{ links.orders }}" class="user-account__link">
+							Meus Pedidos
+						</a>
+					</li>
+
+					<li class="user-account__menu-listItem">
+						<a href="{{ links.cart }}" class="user-account__link">
+							Meu Carrinho
+						</a>
+					</li>
+
+					<li class="user-account__menu-listItem">
+						<a href="{{ links.logout }}" class="user-account__link">
+							Sair
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</span>
+		
+		{# Usuário deslogado #}
+		<span class="tray-hide" data-logged-user="false">
+			<div class="clearfix">
+				<div class="b-xs-10">
+					<div class="user-account__welcome-message">
+						Seja bem vindo
+					</div>
+				</div>
+				<div class="b-xs-2 align-right">
+					<button class="user-account__close js-close-dropdown">
+						<span class="icon icon-x" aria-label="Fechar janela"></span>
+					</button>
+				</div>
+			</div>
+
+			<nav class="user-account__menu">
+				<ul class="user-account__menu-list">
+					<li class="user-account__menu-listItem">
+						{% if utils.is_https %}
+							<a href="{{ links.login }}" id="login-button" class="user-account__link">
+								Login
+							</a>
+						{% else %}
+							<a href="{{ links.login }}" class="user-account__link">
+								Login
+							</a>
+						{% endif %}
+					</li>
+
+					<li class="user-account__menu-listItem">
+						<a href="{{ links.register }}" class="user-account__link">
+							Cadastre-se
+						</a>
+					</li>
+
+					<li class="user-account__menu-listItem">
+						<a href="{{ links.cart }}" class="user-account__link">
+							Meu Carrinho
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</span>
+	</div>
+</div>

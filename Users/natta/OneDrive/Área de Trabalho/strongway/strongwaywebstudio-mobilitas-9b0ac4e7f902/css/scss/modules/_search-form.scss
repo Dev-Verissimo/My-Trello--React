@@ -1,0 +1,58 @@
+.search-form {
+	width: 100%;
+
+	&__form {
+		position: relative;
+
+		@include bp(max-width, $bp-md) {
+			margin: 0 calc(-1% - 10px);
+		}
+	}
+
+	@at-root {
+		input.search-form__input {
+			@include rem(margin-bottom, 0);
+			width: 100%;
+			color: inherit;
+			@include rem(padding-right, $bt-height);
+
+			@include bp(max-width, $bp-md) {
+				@include rem(padding-right, $bt-height + 5);
+				@include rem(padding-left, 12);
+				border-radius: 0;
+			}
+		}
+	}
+
+	&__container {
+		position: relative;
+	}
+
+	&__button {
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		background-color: transparent;
+		@include square($bt-height);
+
+		@include bp(max-width, $bp-md) {
+			@include rem(right, 3);
+		}
+
+		&:focus {
+			outline: 0;
+		}
+
+		&__icon {
+			color: $primaria;
+			@include rem(font-size, 16);
+		}
+	}
+
+	&__input {
+		&:focus + .search-form__button > .search-form__button__icon {
+			color: $terciaria;
+		}
+	}
+}

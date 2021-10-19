@@ -1,0 +1,138 @@
+{% set image = product.images[0].large ?: tray.paths.system_image ~ "/new_imgoff.png" %}
+
+<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "Product",
+		{%- if product.ranking.count -%}
+		"aggregateRating": {
+			"@type": "AggregateRating",
+			"ratingValue": "{{ product.ranking.rating }}",
+			"reviewCount": "{{ product.ranking.count }}"
+		},
+		{%- endif -%}
+		"description": "{{ product.description_small ? product.description_small : product.description|striptags }}",
+		"name": "{{ product.name ? product.name }}",
+		"image": "{{ image }}",
+		"url": "{{ product.link }}",
+		"gtin14": "{{ product.ean ? product.ean }}",
+		"model": "{{ product.model ? product.model }}",
+		"productID": "{{ product.id }}",
+		"sku": "{{ product.id }}"
+		{%- if product.brand -%}
+		,
+		"brand": {
+			"@type": "Organization",
+			"name": "{{ product.brand }}"
+		}
+		{%- endif -%}
+		{%- if not product.upon_request -%}
+		,
+		"offers":
+			{# Se existem variantes e esta configurado para exibi-las... #}
+			{%-
+				if (product.variants|length > 1 or product.variants.sku|length )
+				and settings.show_schema_for_individual_offers
+			-%}
+			[
+				{# Se nao e o produto principal da pagina de produto... #}
+				{%- if not product.variants.sku -%}
+					{%- for variant in product.variants -%}
+						{% set variant_image = variant.images[0].large ?: image %}
+
+						{
+							"@type": "Offer",
+							"url": "{{ product.link }}",
+							"sku": "{{ variant.id }}",
+							"gtin14": "{{ variant.ean ? variant.ean }}",
+							"name": "{{ product.name ~ ' - ' ~ variant.Sku[0].value }}{{ variant.Sku[1].value ? ' - ' ~ variant.Sku[1].value }}",
+							"image": "{{ variant_image }}",
+							"availability": "{{ settings.without_stock_sale or variant.stock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}",
+							"price": "{{ variant.calculated_price|number_format(2, '.', '') }}",
+							"priceCurrency": "{{ settings.currency == 'R$' ? 'BRL' : 'USD' }}",
+							"priceValidUntil": "{{ (variant.end_promotion != '0000-00-00') ? variant.end_promotion }}"
+						}{{ loop.last ? null : ',' }}
+					{%- endfor -%}
+				{# Se esta na pagina de produto... #}
+				{%- else -%}
+					{# Se e variacao dupla... #}
+					{%- if product.variants.double_variant -%}
+						{%- for sku in product.variants.sku -%}
+							{%- for key, characteristic in sku -%}
+								{%- for secondary_sku in characteristic.sku -%}
+									{%- for secondary_key, variant in secondary_sku -%}
+										{% set variant_image = variant.images[0].large ?: image %}
+
+										{
+											"@type": "Offer",
+											"url": "{{ product.link }}",
+											"sku": "{{ variant.id }}",
+											"gtin14": "{{ variant.ean ? variant.ean }}",
+											"name": "{{ product.name ~ ' - ' ~ key ~ ' - ' ~ secondary_key  }}",
+											"image": "{{ variant_image }}",
+											"availability": "{{ settings.without_stock_sale or variant.stock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}",
+											"price": "{{ variant.calculated_price|number_format(2, '.', '') }}",
+											"priceCurrency": "{{ settings.currency == 'R$' ? 'BRL' : 'USD' }}",
+											"priceValidUntil": "{{ (variant.end_promotion != '0000-00-00') ? variant.end_promotion }}"
+										}{{ loop.last ? null : ',' }}
+									{%- endfor -%}
+								{%- endfor -%}
+								{{ loop.last ? null : ',' }}
+							{%- endfor -%}
+						{%- endfor -%}
+					{# Se e variacao simples... #}
+					{%- else -%}
+						{%- for sku in product.variants.sku -%}
+							{%- for key, variant in sku -%}
+								{% set variant_image = variant.images[0].large ?: image %}
+
+								{
+									"@type": "Offer",
+									"url": "{{ product.link }}",
+									"gtin14": "{{ variant.ean ? variant.ean }}",
+									"sku": "{{ variant.id }}",
+									"name": "{{ product.name ~ ' - ' ~ key }}",
+									"image": "{{ variant_image }}",
+									"availability": "{{ settings.without_stock_sale or variant.stock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}",
+									"price": "{{ variant.calculated_price|number_format(2, '.', '') }}",
+									"priceCurrency": "{{ settings.currency == 'R$' ? 'BRL' : 'USD' }}",
+									"priceValidUntil": "{{ (variant.end_promotion != '0000-00-00') ? variant.end_promotion }}"
+								}{{ loop.last ? null : ',' }}
+							{%- endfor -%}
+						{%- endfor -%}
+					{%- endif -%}
+				{%- endif -%}
+			]
+			{# Se nao existem variantes ou esta configurado para nao mostra-las... #}
+			{%- else -%}
+			{
+			"@type": "Offer",
+			"url": "{{ product.link }}",
+			"availability": "{{ settings.without_stock_sale or product.stock ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock' }}",
+			"price": "{{ product.minimum_price > 0 ? product.minimum_price|number_format(2, '.', '') : product.price|number_format(2, '.', '') }}",
+			"priceCurrency": "{{ settings.currency == 'R$' ? 'BRL' : 'USD' }}",
+			"priceValidUntil": "{{ (product.end_promotion != '0000-00-00') ? product.end_promotion }}"
+			}
+			{%- endif -%}
+		{%- endif -%}
+		{%- if product.comments -%}
+		,
+		"review": [
+			{%- for comment in product.comments -%}
+			{
+				"@type": "Review",
+				"author": "{{ comment.customer.name }}",
+				"datePublished": "{{ comment.date }}",
+				"reviewBody": "{{ comment.comment }}",
+				"reviewRating": {
+					"@type": "Rating",
+					"bestRating": "5",
+					"ratingValue": "{{ comment.rating }}",
+					"worstRating": "1"
+				}
+			}{{ loop.last ? null : ',' }}					
+			{%- endfor -%}
+		]
+		{%- endif -%}
+	}
+</script>

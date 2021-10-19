@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html
+	lang="pt-br"
+	data-store="{{ store.id }}"
+	class="
+		page
+		page--{{ pages.current }}
+		{{ (settings.main_banner_style == 'under_header' and banner.home and pages.current == 'home') ? 'has-banner-under-header' }}
+		{{ (settings.main_banner_style == 'full_width') ? 'has-full-width-banner' }}
+		{{ (settings.layout_style == 'fullwidth_layout') ? 'has-full-width-layout' }}
+		no-js
+	"
+>
+	<head>
+		{{ html.charset() }}
+
+		{% set metatags = tray.meta %}
+
+		{% for metatag in metatags|split('\n') %}
+			{% if 'dns-prefetch' in metatag %}
+				{{ metatag|replace({'dns-prefetch': 'preconnect'}) }}
+			{% endif %}
+			{{ metatag }}
+		{% endfor %}
+
+		<!-- [if IE]<meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		{% if settings.primary_color %}
+			<!-- Chrome, Firefox OS and Opera -->
+			<meta name="theme-color" content="{{ settings.primary_color }}">
+			<!-- Windows Phone -->
+			<meta name="msapplication-navbutton-color" content="{{ settings.primary_color }}">
+			<!-- iOS Safari -->
+			<meta name="apple-mobile-web-app-capable" content="yes">
+			<meta name="apple-mobile-web-app-status-bar-style" content="{{ settings.primary_color }}">
+		{% endif %}
+		
+		{# Preloads e Prefetches #}
+		<link rel="preload" href="{{ asset('css/critical.min.css') }}" as="style">
+		<link rel="preload" href="{{ asset('css/custom.css', {dynamic: true}) }}" as="style">
+		<link rel="preload" href="{{ asset('js/min/slick.min.js') }}" as="script">
+		<link rel="preload" href="{{ asset('js/min/imagesloaded.pkgd.min.js') }}" as="script">
+		<link rel="preload" href="{{ asset('js/min/theme.min.js') }}" as="script">
+		<link rel="preload" href="{{ asset('css/fonts/icotheme.woff') }}" as="font" type="font/woff" crossorigin="anonymous">
+		<link rel="preload" href="{{ asset('css/fonts/pt-sans-v9-latin-regular.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
+		<link rel="preload" href="{{ asset('css/fonts/pt-sans-v9-latin-italic.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
+		<link rel="preload" href="{{ asset('css/fonts/pt-sans-v9-latin-700.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
+		<link rel="preload" href="{{ asset('css/fonts/pt-sans-v9-latin-700italic.woff2') }}" as="font" type="font/woff2" crossorigin="anonymous">
+
+		{% if settings.is_jquery_migrate_enabled %}
+			<link rel="preload" href="{{ asset('js/min/jquery-migrate-3.3.2.min.js') }}" as="script">
+		{% endif %}
+		
+		{% if pages.current == 'catalog' or pages.current == 'search' %}
+			<link rel="preload" href="{{ asset('js/min/page-catalog.min.js') }}" as="script">
+		{% endif %}
+
+		{% if pages.current == 'contact' %}
+			<link rel="preload" href="{{ asset('js/min/page-contact.min.js') }}" as="script">
+		{% endif %}
+
+		{% if pages.current == 'depoimentos' %}
+			<link rel="preload" href="{{ asset('js/min/page-depoimentos.min.js') }}" as="script">
+		{% endif %}
+
+		{% if pages.current == 'noticia' %}
+			<link rel="preload" href="{{ asset('js/min/page-noticia.min.js') }}" as="script">
+		{% endif %}
+
+		{% if settings.is_fast_shopping_enabled %}
+			<link rel="preload" href="{{ asset('js/min/fast-shopping.min.js') }}" as="script">
+		{% endif %}
+
+		{% if settings.show_secondary_image %}
+			<link rel="preload" href="{{ asset('js/min/lazy-load-secondary-image.min.js') }}" as="script">
+		{% endif %}
+
+		{% if settings.is_timer_enabled %}
+			<link rel="prefetch" href="{{ asset('js/min/timer.min.js') }}" as="script">
+		{% endif %}
+		
+		<link rel="prefetch" href="{{ asset('css/icotheme.min.css') }}" as="style">
+		<link rel="prefetch" href="{{ asset('css/theme.min.css') }}" as="style">
+		<link rel="prefetch" href="{{ asset('js/min/page-home.min.js') }}" as="script">
+		<link rel="prefetch" href="{{ asset('js/min/page-product.min.js') }}" as="script">
+		<link rel="prefetch" href="{{ asset('js/min/jquery.fitvids.min.js') }}" as="script">	
+		<link rel="prefetch" href="{{ asset('js/min/jquery.tabs.min.js') }}" as="script">
+		<link rel="prefetch" href="{{ asset('js/min/jquery-accessible-accordion-aria.min.js') }}" as="script">
+		<link rel="preconnect" href="https://images.tcdn.com.br">
+
+		{%
+			if banner.extra12
+			and pages.current != 'newsletter'
+			and is_page_templateable
+		%}
+			<link rel="prefetch" href="{{ asset('js/min/featherlight.min.js') }}" as="script">
+		{% endif %}
+
+		{% set styles = tray.styles|replace({'style><link': 'style>\n<link'})|split('\n') %}
+
+		{% for style in styles %}
+			{# Printa styles da Tray se cumprirem os criterios #}
+			{%
+				if 'mobile-custom' not in style
+			%}
+				{{ style }}
+			{% endif %}
+		{% endfor %}
+
+		{% element 'snippets/font-face' %}
+		
+		<link rel="stylesheet" href="{{ asset('css/icotheme.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/critical.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/theme.min.css') }}">
+		<link rel="stylesheet" href="{{ asset('css/custom.css', {dynamic: true}) }}">
+		
+		{% if settings.custom_css %}
+			<style>
+				{{ settings.custom_css }}
+			</style>
+		{% endif %}
+
+		{% if
+			pages.current == "home"
+			or pages.current == "catalog"
+			or pages.current == "product"
+			or pages.current == "search"
+		%}
+			{% set is_page_templateable = true %}
+		{% else %}
+			{% set is_page_templateable = false %}
+		{% endif %}
+
+		{% set prevent_lazy_load = (settings.is_banner_lazy_load_enabled) ? false : true %}
+		
+		{# Variáveis Globais #}
+		<script>
+			//===============
+			//  VARIÁVEIS GLOBAIS
+			//  Declaradas como propriedades de objeto para
+			//  dar namespace
+			//===============
+			var g = {};
+
+			// Objeto de ações para serem executadas após carregar o jQuery
+			g.actions = {};
+			g.intervals = {};
+		</script>
+
+		{{ tray.analytics }}
+		{{ googleTagManager.header(pages.current, tagManagerData) }}
+		
+		{% if pages.current != 'login' and utils.is_https %}
+			{% element 'snippets/tray_login' %}
+		{% endif %}
+
+		{# Global Javascript settings #}
+		<script type="text/javascript">
+			var settings = {};
+			settings.store_id = {{ store.id }};
+			settings.is_header_fixed = {{ settings.is_header_fixed ? "true" : "false" }};
+			settings.lgpdVersion = {{ settings.privacy_policy_version ? settings.privacy_policy_version : '1.0' }};
+			settings.is_https = {{ utils.is_https ? 'true' : 'false' }};
+		</script>
+
+		{# Indica se JS está ativado #}
+		<script>
+			(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+		</script>
+	</head>
+	<body>
+		{% if settings.site_background_image %}
+			<style type="text/css">
+				@media screen and (min-width: 769px) {
+					body {
+						background-image: url('{{ asset(settings.site_background_image) }} ');;
+					}					
+				}
+			</style>
+		{% endif %}
+
+		{% if settings.is_newsletter_enabled and settings.newsletter_background_image %}
+			<style type="text/css">
+				@media screen and (min-width: 769px) {
+					.footer__line-1 {
+						background-image: url('{{ asset(settings.newsletter_background_image) }} ');;
+					}					
+				}
+			</style>
+		{% endif %}
+
+		{{ googleTagManager.top(pages.current, tagManagerData) }}
+		
+		{% element 'snippets/facebook-like-box-script' %}		
+		
+		{% element 'snippets/messages' %}
+
+		{% element 'header-1' %}
+
+		<div class="wrapper" id="corpo">
+			<main id="conteudo-principal" class="main">
+				{% if pages.current == 'home' %}
+					{#
+						Se estiver na página inicial, alterna entre
+						os banners "home" e "extra6", dependendo de ser
+						ou não "mobile"
+					#}
+					{% if utils.is_mobile %}
+						{% set banner_home = banners.extra6 %}
+					{% else %}
+						{% set banner_home = banners.home %}
+					{% endif %}
+					
+					{% if settings.main_banner_style == "limited_width" %}
+						<div class="centralizado">
+							<div class="b-xs-12">
+					{% endif %}
+						{% element 'snippets/banner' {
+							"banner_data": banner_home,
+							"banner_modifier": "home",
+							"prevent_lazy_load": true
+						} %}
+					{% if settings.main_banner_style == "limited_width" %}
+							</div>
+						</div>
+					{% endif %}
+
+					{#
+						Alterna entre os banners "vitrine" e "extra7",
+						dependendo de ser ou não "mobile"
+					#}
+					{% if utils.is_mobile %}
+						{% set banner_vitrine = banners.extra7 %}
+					{% else %}
+						{% set banner_vitrine = banners.showcase %}
+					{% endif %}
+
+					<div class="centralizado">
+						<div class="b-xs-12">
+							{% if banner_vitrine %}
+								{% element 'snippets/banner' {
+									"banner_data": banner_vitrine,
+									"banner_modifier": "vitrine",
+									"prevent_lazy_load": true
+								} %}
+							{% endif %}
+
+						</div>
+					</div>
+					
+					<div class="centralizado">
+						<div class="b-xs-12">
+							<hr>
+						</div>
+					</div>
+				{% endif %}
+
+				<div class="centralizado">
+					<div class="clearfix">
+						{% if "central" in pages.current %}
+							<div class="b-xs-12 b-md-2">
+								{%  element 'snippets/customer-menu' %}
+							</div>
+						{% endif %}
+
+						<div class="b-xs-12 {{ 'central' in pages.current ? 'b-md-10' : '' }}">
+							{% if not is_page_templateable %}
+								<div class="base-box">
+							{% endif %}
+								{{ content_for_layout }}									
+							{% if not is_page_templateable %}
+								</div>
+							{% endif %}
+							
+							{% if is_page_templateable %}
+								{% if settings.hottags_position == 1 and settings.is_tags_enabled %}
+									{% element 'snippets/tagcloud' %}
+								{% endif %}
+
+								{% if settings.history_position == 1 and settings.is_history_enabled %}
+									<hr>
+									
+									<h6 class="page__title">Produtos Visitados</h6>
+									
+									{% element 'snippets/history' {
+										'store.id': store.id,
+										'pages.current': pages.current,
+										'category.id': category.id
+									} %}
+								{% endif %}
+							{% endif %}
+						</div>
+					</div>
+				</div>
+				
+				{% if is_page_templateable %}
+					<div class="centralizado">
+						<div class="b-xs-12">
+							{% if utils.is_mobile %}
+								{% set banner_bottom = banners.extra9 %}
+							{% else %}
+								{% set banner_bottom = banners.bottom %}
+							{% endif %}
+
+							{% if banner_bottom %}
+								{% element 'snippets/banner' {
+									"banner_data": banner_bottom,
+									"banner_modifier": "bottom",
+									"prevent_lazy_load": prevent_lazy_load
+								} %}
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+			</main>
+			
+			{% set footer_template = settings.footer_template ? settings.footer_template : 1 %}
+			{% element 'footer-' ~ footer_template %}
+		</div>
+		
+		{% if pages.current == 'home' %}
+			{{ banner.popup ~ banner.floating }}
+		{% endif %}
+		
+		{% element 'snippets/credits' %}
+		
+		{% element 'snippets/modal' %}
+
+		{{ googleTagManager.bottom(pages.current, tagManagerData) }}
+
+
+		{% element 'snippets/pageview' %}
+		
+		{% set scripts = tray.scripts|split('\n') %}
+
+		{% for script in scripts %}
+			{# Printa scripts da Tray se cumprirem os criterios #}
+			{% if 'bannerjs' not in script %}
+				{{ script }}
+
+				{%
+					if 'jquery' in script
+					and settings.is_jquery_migrate_enabled
+				%}
+					<script src="{{ asset('js/min/jquery-migrate-3.3.2.min.js') }}"></script>
+				{% endif %}
+			{% endif %}
+		{% endfor %}
+
+		{% set contador_regressivo_enabled = false %}
+		{% for script in scripts|escape|split('\n') %}
+			{% if 'contador-regressivo' in script %}
+				{% set contador_regressivo_enabled = true %}
+			{% endif %}
+		{% endfor %}
+
+		{% if settings.is_floating_whatsapp_enabled %}
+			{% if contador_regressivo_enabled %}
+				{% element 'snippets/floating-whatsapp' {
+					'modifier': 'up'
+				} %}
+			{% else %}
+				{% element 'snippets/floating-whatsapp' %}
+			{% endif %}
+		{% endif %}
+
+		{{ html.script('dist/application.min.js?' ~ utils.assets_version) }}
+
+		{# Variáveis Globais #}
+		<script>
+			g.page = jQuery('html');
+
+			//===============
+			//  BREAKPOINTS UTILIZADOS
+			//  Mudá-los aqui implica em mudá-los no
+			//  /template/scss/_variaveis.scss
+			//===============
+			g.bp = {
+				xs: 0,
+				sm: 425,
+				md: 768,
+				lg: 1024,
+				xl: 1224
+			};
+		</script>
+		
+		<script src="{{ asset('js/min/slick.min.js') }}"></script>
+		<script src="{{ asset('js/min/jquery.fitvids.min.js') }}"></script>	
+		<script src="{{ asset('js/min/jquery.toggleitem.min.js') }}"></script>
+		<script src="{{ asset('js/min/jquery.adjustheights.min.js') }}"></script>
+		<script src="{{ asset('js/min/toastr.min.js') }}"></script>
+		<script src="{{ asset('js/min/imagesloaded.pkgd.min.js') }}"></script>
+
+		<script>
+			jQuery( function () {
+				jQuery.each( g.actions, function (index, action) {
+					action();
+				});
+			})
+		</script>
+		
+		<script src="{{ asset('js/min/theme.min.js') }}"></script>
+
+		{% if settings.is_fast_shopping_enabled %}
+			<script src="{{ asset('js/min/fast-shopping.min.js') }}"></script>
+
+			<template id="fast-shopping-template">
+				<span v-if="variants != null && variants.length > 1">
+					<template v-if="opened">
+						{# Mostra característica primária em formato de imagem #}
+						<div v-if="primary_type_values[0].image || primary_type_values[0].image_secure">
+							<div class="cor_variacao show_size_and_color_type passo1">
+								<label
+									class="product__variant-label"
+									v-text="variant_types[0]"
+								></label>
+								<div v-if="selected_primary" class="product__color">
+									<span v-text="selected_primary"></span>
+									<span v-if="filtered_variants && filtered_variants[1] == undefined && !variant_types[1]" v-text="`(R$ ${filtered_variants[0].price})`"></span>
+								</div>
+								<ul class="lista_cor_variacao">
+									<li v-for="primary_type_value in primary_type_values">
+										<img
+											v-if="primary_type_value.image || primary_type_value.image_secure"
+											v-bind:src="(is_https) ? primary_type_value.image_secure : primary_type_value.image"
+											v-bind:alt="primary_type_value.value"
+											v-on:click="showVariantsByPrimaryType( variant_types[0], primary_type_value.value )"
+											v-bind:class="(selected_primary != null && selected_primary == primary_type_value.value) ? 'cor_selecionada' : null"
+										>
+
+										<div
+											v-if="!primary_type_value.image && !primary_type_value.image"
+											v-text="primary_type_value.value"
+											v-on:click="showVariantsByPrimaryType( variant_types[0], primary_type_value.value )"
+										></div>
+									</li>					
+								</ul>
+							</div>
+						</div>
+						{# Mostra característica primária em formato de select #}
+						<div v-else>
+							<label
+								class="product__variant-label"
+								for="primary-{{ product_random_id }}"
+								v-text="variant_types[0]"
+							></label>
+
+							{# Se há variação dupla #}
+							<template v-if="variant_types[1]">
+								<select
+									id="primary-{{ product_random_id }}"
+									v-model="selected_primary_value"
+									v-on:change="showVariantsByPrimaryType( variant_types[0], selected_primary_value )"
+									class="select"
+								>
+									<option disabled value="" selected="selected">-- Selecione --</option>
+									<option
+										v-for="primary_type_value in primary_type_values"
+										v-text="primary_type_value.value"
+										v-bind:value="primary_type_value.value"
+									></option>
+								</select>
+							</template>
+							{# Se há variação simples apenas #}
+							<template v-else>
+								<select
+									id="primary-{{ product_random_id }}"
+									v-model="selected_variant"
+									class="select"
+								>
+									<option disabled value="" selected="selected">-- Selecione --</option>
+									<option
+										v-for="variant in variants"
+										v-if="variant.stock > 0"
+										v-text="`${variant.Sku[0].value} (R$ ${variant.price}) `"
+										v-bind:value="variant.id"
+									></option>
+								</select>										
+							</template>
+						</div>
+
+						{# Mostra característica secundária, se houver #}
+						<div v-if="variant_types[1] && filtered_variants">
+							<label
+								class="product__variant-label"
+								for="secondary-{{ product_random_id }}"
+								v-text="variant_types[1]"
+							></label>
+							<select
+								id="secondary-{{ product_random_id }}"
+								v-model="selected_variant"
+								class="select"
+							>
+								<option disabled value="" selected="selected">-- Selecione --</option>
+								<option
+									v-for="filtered_variant in filtered_variants"
+									v-text="`${filtered_variant.Sku[1].value} (R$ ${filtered_variant.price}) `"
+									v-bind:value="filtered_variant.id"
+								></option>
+							</select>
+						</div>
+
+						{# Compra #}
+						<div class="product__form">
+							<label
+								for="quantity-{{ product_random_id }}"
+								class="hidden-sm hidden-md hidden-lg hidden-xl"
+							>Quantidade</label>
+							<input
+								class="product__quantity text"
+								v-model="quantity"
+								type="number"
+								id="quantity-{{ product_random_id }}"
+							>
+							<button
+								class="bt bt--highlight product__button"
+								v-on:click="addToCart(quantity, product_id, selected_variant)"
+								v-bind:disabled="(selected_variant) ? false : 'disabled'"
+							>Adicionar</button>
+						</div>
+					</template>
+
+					<template v-else>
+						<div class="product__form">
+							<button
+								class="bt bt--highlight product__button"
+								v-on:click="openInterface"
+							><span class="hidden-xs">Configurar e </span>Comprar</button>
+						</div>
+					</template>							
+				</span>
+				
+				<span v-else>
+					{# Compra sem varições #}
+					<div class="product__form">
+						<label
+							for="quantity-{{ product_random_id }}"
+							class="visuallyhidden"
+						>Quantidade</label>
+						<input
+							class="product__quantity text"
+							v-model="quantity"
+							type="number"
+							id="quantity-{{ product_random_id }}"
+						>
+						<button
+							class="bt bt--highlight product__button"
+							v-on:click="addToCart(quantity, product_id)"
+						>Adicionar</button>
+					</div>
+				</span>
+			</template>
+		{% endif %}
+
+		{% if settings.show_secondary_image %}
+			<script src="{{ asset('js/min/lazy-load-secondary-image.min.js') }}"></script>
+		{% endif %}
+
+		{% if pages.current == 'home' %}
+			<script src="{{ asset('js/min/page-home.min.js') }}"></script>
+		{% endif %}
+
+		{% if pages.current == 'product' %}
+			<script src="{{ asset('js/min/jquery.tabs.min.js') }}"></script>
+			<script src="{{ asset('js/min/jquery-accessible-accordion-aria.min.js') }}"></script>
+			<script src="{{ asset('js/min/page-product.min.js') }}"></script>
+		{% endif %}
+
+		{% if pages.current == 'catalog' or pages.current == 'search' %}
+			<script src="{{ asset('js/min/page-catalog.min.js') }}"></script>
+		{% endif %}
+
+		{% if pages.current == 'contact' %}
+			<script src="{{ asset('js/min/page-contact.min.js') }}"></script>
+		{% endif %}
+
+		{% if pages.current == 'depoimentos' %}
+			<script src="{{ asset('js/min/page-depoimentos.min.js') }}"></script>
+		{% endif %}
+
+		{% if pages.current == 'noticia' %}
+			<script src="{{ asset('js/min/page-noticia.min.js') }}"></script>
+		{% endif %}
+
+		{% if settings.is_timer_enabled %}
+			<script src="{{ asset('js/min/timer.min.js') }}"></script>			
+			{% element 'snippets/timer-template' %}
+		{% endif %}
+
+		{%
+			if banner.extra12
+			and pages.current != 'newsletter'
+			and is_page_templateable
+		%}
+			<script src="{{ asset('js/min/featherlight.min.js') }}"></script>
+
+			<div id="popup-newsletter" class="featherlight-lightbox">
+				<div class="popup-newsletter">
+					<div class="popup-newsletter__banner">
+						{{ banner.extra12 }}                        
+					</div>
+
+					{% if settings.is_newsletter_modal_enabled %}
+						<div class="popup-newsletter__form-container">
+							<form action="{{ links.newsletter }}" method="POST" class="popup-newsletter__form">
+								<input type="hidden" name="loja" value="{{ store.id }}">
+
+								<h4 class="visuallyhidden">Newsletter</h4>
+
+								<p class="popup-newsletter__cta">
+									{% if settings.newsletter_cta_text %}
+										{{ settings.newsletter_cta_text }}
+									{% else %}
+										Assine nossa Newsletter!
+									{% endif %}
+								</p>
+
+								<input class="popup-newsletter__input" name="name" type="text" aria-label="Nome" placeholder="Digite seu nome" required> 
+
+								<input class="popup-newsletter__input" name="email" type="text" aria-label="E-mail" placeholder="Digite seu e-mail" required> 
+
+								<button class="popup-newsletter__button bt">
+									{% if settings.newsletter_button_text %}
+										{{ settings.newsletter_button_text }}
+									{% else %}
+										Assinar
+									{% endif %}
+								</button>
+							</form>
+						</div>
+					{% endif %}
+				</div>
+			</div>
+
+		    <script type="text/javascript">
+		        jQuery( function ($) {
+					if (!localStorage.newsletter_subscribed && !sessionStorage.newsletter_closed){
+						$.featherlight($("#popup-newsletter"), {
+			            	afterOpen: function() {
+								var count = 1;
+
+								if ($('.popup-newsletter__form').length > 0) {
+									$('.popup-newsletter__form')
+									.find('input, select, textarea, button')
+									.each( function() {
+										$( this ).attr( 'tabindex', count++ );
+									});									
+								}
+							},
+							afterClose: function () {
+								// Se a pessoa fechar a newsletter, ela 
+								// não será perturbada até fechar o navegador
+		            			sessionStorage.newsletter_closed = 1;
+							}
+			            });
+		        	};
+		        });
+		    </script>
+		{% endif %}
+
+		{% if pages.current == 'newsletter' %}
+			<script type="text/javascript">
+				jQuery( function ($) {
+					// Se a pessoa se cadastrar, não será perturbada
+					// neste computador a não ser que seja limpa a localStorage
+					localStorage.newsletter_subscribed = 1
+				});
+			</script>
+		{% endif %}
+
+		{% if settings.is_privacy_policy_enabled %}
+			{% element 'snippets/modal-lgpd' %}
+		{% endif %}
+
+		{{ store.chat }}
+
+		{% if settings.custom_js %}
+			<script>
+				{{ settings.custom_js }}
+			</script>
+		{% endif %}
+	</body>
+</html>

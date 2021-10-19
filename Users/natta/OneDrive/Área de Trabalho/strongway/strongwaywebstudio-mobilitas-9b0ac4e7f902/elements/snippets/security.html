@@ -1,0 +1,14 @@
+{% if seals.ebit or seals.hackersafe %}
+	<aside class="security">
+		<h4 class="footer__title security__title">Seguran&ccedil;a</h4>
+		<ul class="security__seals">
+			<li class="security__seal">
+				{{ seals.ebit }}
+			</li>
+			
+			<li class="security__seal">
+				{{ seals.hackersafe }}
+			</li>
+		</ul>
+	</aside>
+{% endif %}

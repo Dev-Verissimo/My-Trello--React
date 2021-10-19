@@ -1,0 +1,70 @@
+{% if settings['is_showcase_' ~ showcase_number ~ '_enabled'] %}
+	{% if settings['showcase_' ~ showcase_number ~ '_limit_products'] %}
+		{% set showcase_limit_products = settings['showcase_' ~ showcase_number ~ '_limit_products'] %}
+	{% else %}
+		{% set showcase_limit_products = 8 %}
+	{% endif %}
+
+	{% if settings['showcase_' ~ showcase_number ~ '_filter'] %}
+		{% set showcase_filter = settings['showcase_' ~ showcase_number ~ '_filter'] %}
+	{% else %}
+		{% set showcase_filter = "featured" %}
+	{% endif %}
+
+	{% if settings['showcase_' ~ showcase_number ~ '_order'] %}
+		{% set showcase_order = settings['showcase_' ~ showcase_number ~ '_order'] %}
+	{% else %}
+		{% set showcase_order = {
+			'id': 'desc'
+		} %}
+	{% endif %}
+	
+	{% if showcase_order == "new" %}
+		{% set showcase_order = {'id': 'desc'} %}
+	{% elseif showcase_order == "random" %}
+		{% set showcase_order = 'rand'  %}
+	{% elseif showcase_order == "top_seller" %}
+		{% set showcase_order = {
+			'quantity_sold': 'desc'
+		}  %}
+	{% endif %}
+
+	{% if settings['showcase_' ~ showcase_number ~ '_brand'] %}
+		{% set showcase_brand = settings['showcase_' ~ showcase_number ~ '_brand'] %}
+	{% else %}
+		{% set showcase_brand = null %}
+	{% endif %}
+
+	{% if settings['showcase_' ~ showcase_number ~ '_category'] %}
+		{% set showcase_category = [settings['showcase_' ~ showcase_number ~ '_category']] %}
+	{% else %}
+		{% set showcase_category = null %}
+	{% endif %}
+
+	{% if settings['showcase_' ~ showcase_number ~ '_filter'] == "any" %}
+		{% set showcase_products = Products({
+			'limit': showcase_limit_products,
+			'order': showcase_order,
+			'brands': showcase_brand,
+			'categories': showcase_category
+		}) %}
+	{% else %}
+		{% set showcase_products = Products({
+			'filter': showcase_filter,
+			'limit': showcase_limit_products,
+			'order': showcase_order,
+			'brands': showcase_brand,
+			'categories': showcase_category
+		}) %}
+	{% endif %}
+	
+	{% if showcase_products|length > 0 %}
+		{% element 'snippets/showcase' {
+			"products": showcase_products,
+			"showcase_title": settings['showcase_' ~ showcase_number ~ '_title'],
+			"grid_container": true,
+			"column_size": "small",
+			"is_slider": settings['is_showcase_' ~ showcase_number ~ '_slider']
+		} %}
+	{% endif %}
+{% endif %}

@@ -1,0 +1,53 @@
+.payment-methods {
+	display: flex;
+	flex-flow: row wrap;
+
+	@include bp(max-width, $bp-md) {
+		@include rem(margin-bottom, 15);
+	}
+	
+	&__title {
+		width: 100%;
+		flex-shrink: 0;
+	}
+
+	&__block {
+		position: relative;
+		@include rem(padding-right, 10);
+		@include rem(margin-bottom, 10);
+		display: flex;
+		flex-flow: row;
+		align-items: center;
+
+		@include bp(max-width, $bp-md) {
+			@include rem(padding-bottom, 15);			
+		}
+	}
+
+	&__type {
+		@include rem(font-size, 10);
+		@include rem(margin-right, 7);
+		@include rem(margin-bottom, 5);
+
+		@include bp(max-width, $bp-md) {
+			position: absolute;
+			bottom: 0;
+			left: 0;		
+		}
+	}
+
+	&__options {
+		font-size: 0;
+	}
+
+	&__option {
+		@include rem(font-size, $basefont);
+		@include rem(margin-right, 5);
+		@include rem(margin-bottom, 5);
+		display: inline-block;
+	}
+
+	&__icon {
+		@include rem(max-height, 20);
+	}
+}

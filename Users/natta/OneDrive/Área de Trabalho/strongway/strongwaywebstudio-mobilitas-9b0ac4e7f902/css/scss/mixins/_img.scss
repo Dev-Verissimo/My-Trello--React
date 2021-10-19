@@ -1,0 +1,11 @@
+@function img ($img-name, $subfolder: '', $folder:$img-url) {
+	$url: $img-url;
+
+	@if $subfolder != '' {
+		$url: $url + $subfolder + '/';
+	}
+
+	$url: $url + $img-name;
+
+	@return url($url);
+}

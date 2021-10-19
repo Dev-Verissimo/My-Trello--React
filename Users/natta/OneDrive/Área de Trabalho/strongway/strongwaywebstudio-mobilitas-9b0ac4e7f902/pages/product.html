@@ -1,0 +1,339 @@
+{% set product_random_id = random() %}
+
+{% set show_schema = true %}
+
+{% set is_product_available = (
+	product.stock > 0
+	and product.available == 1 
+	and product.available_for_purchase == 1
+) %}
+
+{%
+	if (
+		product.upon_request
+		and not settings.show_schema_for_upon_request_products
+	) or (
+		not is_product_available
+		and not settings.show_schema_for_unavailable_products
+	)
+%}
+	{% set show_schema = false %}
+{% endif %}
+
+<div class="clearfix">
+	<div class="hidden-xs hidden-sm">
+		{% element 'snippets/breadcrumb' %}
+	</div>
+</div>
+
+<div class="product-scope">
+	<div id="product-container" class="product-details">
+		<span id="span_erro_carrinho"></span>
+	
+		<div id="loading-product-container">
+			<img src='{{ tray.paths.system_image }}/big-loading.svg' />
+		</div>
+		
+		<div class="product-details__gallery-container">
+			{% if product.images %}
+				<div
+					id="visualBlock"
+					class="product-gallery product-details__gallery"
+				>
+					{{ productHelper.gallery() }}
+				</div>
+			{% elseif product.video %}
+				<div class="product-details__video fitvids">
+					<iframe width="854" height="480" src="{{ product.video }}" frameborder="0" allowfullscreen></iframe>
+				</div>
+			{% else %}
+				<span class="icon-camera-off product-details__no-image"></span>
+				<p class="product-details__no-image-message">
+					Nenhuma imagem cadastrada
+				</p>
+			{% endif %}
+	
+			{# Bloco de redes sociais #}
+			{% if settings.social_position == 0 %}
+				<div class="product-details__social">
+					{{ productHelper.social() }}
+				</div>
+			{% endif %}		
+		</div>
+		
+	
+		<div class="product-details__shop-container">
+			{% if settings.headings == "1" %}
+				<h2 class="product-details__name">
+					{{ product.name }}
+				</h2>
+				{% else %}
+				<h1 class="product-details__name">
+					{{ product.name }}
+				</h1>			
+			{% endif %}
+			
+			{% element 'snippets/rating' { "product": product } %}
+
+			{# Descontos Progressivos #}
+			{% element 'snippets/progressive-discounts' %}
+			
+			{% element 'snippets/labels' {
+				"product": product,
+				"modifier": 'inline'
+			} %}
+			
+			{# Mensagem adicional #}
+			{% if product.additional_message %}
+				<div class="product-details__additional-message">
+					{{ product.additional_message }}
+				</div>
+			{% endif %}
+			
+			{# M�dulo de Iconografia #}
+			<div class="product-details__icons">
+				{{ productHelper.icons() }}        
+			</div>
+			
+			{{ productHelper.bonus() }}
+			
+			<form
+				id="form_comprar"
+				method="post"
+				data-app="product.buy-form"
+				action="{{ links.cart_add ~ product.id }}"
+				class="product-details__form"
+			>
+				{% if settings.is_ajax_price_enabled %}
+					<div data-module="pricing" data-snippet="snippets/product-price" data-product-id="{{ product.id }}">
+						<img src="{{ asset('img/loading.gif') }}" class="product-details__price__loader" alt="carregando pre&ccedil;os">
+					</div>
+				{% else %}
+					{% element 'snippets/product-price' %}
+				{% endif %}
+
+				{% if not prevent_timer
+					and settings.is_timer_enabled
+					and product.price_offer
+					and product.end_promotion != '0000-00-00'
+					and product.price_offer != '0.00'
+					and product.stock > 0
+					and product.available == 1
+					and product.available_for_purchase == 1
+					and product.upon_request != 1
+				%}
+
+					<div id="vue-timer-{{ product_random_id }}" >
+						<vue-timer
+							:timer_id= "timer_id"
+							:end_promotion = "end_promotion"
+						></vue-timer>
+					</div>
+
+					<script>
+						g.actions['vue-timer-{{ product_random_id }}'] = function () {
+							jQuery(window).on('load', function ($) {
+								new Vue({
+									el: '#vue-timer-{{ product_random_id }}',
+									data: {
+										end_promotion: "{{ product.end_promotion }}",
+										timer_id: "{{ product_random_id }}"
+									}
+								})
+							})
+						}
+					</script>
+				{% endif %}
+			
+				{{ productHelper.variants() }}
+			
+				{{ productHelper.kit() }}
+			
+				{{ product.additional_information }}
+			
+				{# M�dulo de Brindes #}
+				{{ productHelper.gifts() }}
+			
+				{{ productHelper.form() }}
+				
+				{{ productHelper.shipping() }}
+				
+				{# Lista de Presentes #}
+				{% if not product.upon_request and product.available %}
+					{{ productHelper.wishlist() }}
+				{% endif %}
+				
+				{% if show_schema %}
+					{% element 'snippets/schema-product' {'product': product} %}
+				{% endif %}
+			</form>
+			
+			{# Bloco de redes sociais #}
+			{% if settings.social_position == 1 %}
+				<div class="product-details__social product-details__social--2">
+					{{ productHelper.social() }}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+	{# Abas em desktop, accordion em mobile #}
+	<div class="product-details__tabs">
+		<div
+			class="{{ (utils.is_mobile) ? 'js-accordion' : 'tabs' }}"
+			{{ (utils.is_mobile) ? 'data-accordion-prefix-classes="accordion"' : null }}
+		>
+			{%
+				for key, tab in productTabs
+				if key != 'custom'
+			%}
+				{# Deixa a primeira aba aberta por padr�o #}
+				{% if settings.headings == "1" %}
+				<h3
+					class="{{ (utils.is_mobile) ? 'js-accordion__header' : 'tab__header' }}"
+					{{ loop.first ? 'data-accordion-opened="true"' : null }}
+				>
+					{{ ( key == 'payment_methods' ) ? 'Pagamento' : tab.description }}
+				</h3>				
+				{% else %}
+				<h2
+				class="{{ (utils.is_mobile) ? 'js-accordion__header' : 'tab__header' }}"
+					{{ loop.first ? 'data-accordion-opened="true"' : null }}
+				>
+					{{ ( key == 'payment_methods' ) ? 'Pagamento' : tab.description }}
+				</h2>				
+				{% endif %}
+		
+				<div class="{{ (utils.is_mobile) ? 'js-accordion__panel' : 'tab__body' }}">
+					{# Tratamentos diferenciados de acordo com o tipo de aba #}
+					{% if key == 'description' %}
+						<div class="board_htm" itemprop="description">
+							{{ product.description ? product.description : product.description_small }}
+						</div>
+					{% elseif key == 'included_items' %}
+						{{ product.included_items }}
+					{% elseif key == 'comments' %}
+						{% if settings.is_facebook_comments_enabled %}
+							<div class="fb-comments" data-width="100%" data-numposts="5"></div>
+						{% else %}
+							{% element 'product/comments' %}
+						{% endif %}
+					{% elseif key == 'properties' %}
+						{% element 'product/properties' %}
+					{% elseif key == 'downloads' %}
+						<div id="downloads_holder"></div>
+					{% elseif key == 'warranty' %}
+						<div class="board_htm" id="warranty_holder"></div>
+					{% elseif key == 'payment_methods' %}
+						{# Link cuja data-tab-url se altera ao selecionar uma variacao e permite recarregar as formas de pagamento #}
+						<a href="#" class="hidden" data-tab-container-id="{{ tab.container_id }}" data-tab-url="{{ tab.url }}">{{ tab.description }}</a>
+						<div data-app="product.payment-methods" id="formasPagto" class="prodBox"></div>
+					{% else %}
+						{#
+							As abas personalizadas criam um container com
+							data-target para receber conte�do via JS
+						#}
+						<div
+							class="board_htm"
+							data-target="{{ tab.container_id|replace({ '#': '' }) }}"
+						></div>
+					{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+		
+		{#
+			Imprime o conte�do das abas personalizadas para extra�-los e
+			coloc�-los nos data-target
+		#}
+		<div style="display:none">{{ productTabs.custom.content }}</div>
+		
+		<script>
+			g.actions['product-tabs'] = function () {
+				jQuery( function ($) {
+					var formasPagtoLink = document.querySelector('[data-tab-container-id="#formasPagto"]');
+
+					// Inclui conteudos por ajax nas abas de garantia e metodos de pagamento
+					$('#warranty_holder').load('{{ productTabs['warranty']['url'] }}');
+					$('#formasPagto').load($(formasPagtoLink).data('tab-url'));
+					$('#downloads_holder').load('{{ productTabs['downloads']['url'] }}');
+			
+					// Transpoe conteudo das abas personalizadas para seus destinos
+					$('.prodBox').each( function () {
+						var content = $(this).find('.board').html();
+						var target_id = $(this).attr('id');
+			
+						$('[data-target="'+target_id+'"]').html( content );
+					})
+
+					// Observer para recarregar as formas de pagamento quando uma variante e selecionada
+					if (formasPagtoLink) {
+						var observer = new MutationObserver(function(mutations) {
+							mutations.forEach(function(mutation) {
+								if (mutation.type == "attributes") {
+									$('#formasPagto').load(mutation.target.dataset.tabUrl);
+								}
+							});
+						});
+
+						observer.observe(formasPagtoLink, {
+							attributes: true,
+							attributeFilter: ['data-tab-url'],
+							characterData: true
+						});
+					}
+
+				});
+			};
+		</script>
+	</div>
+</div>
+
+{% if productHelper.details() %}
+	<hr>
+
+	{% if settings.headings == "1" %}
+	<h3 class="page__subtitle">Detalhes</h3>
+	{% else %}
+	<h2 class="page__subtitle">Detalhes</h3>
+	{% endif %}
+	<div class="base-box">
+		<div class="product-details__details">
+			{{ productHelper.details() }}
+		</div>
+	</div>
+{% endif %}
+
+<hr>
+
+{# Compre Junto #}
+{% if productHelper.bundle() %}
+	
+	<div class="clearfix">
+		{% if settings.headings == "1" %}
+		<h3 class="page__subtitle">Compre Junto</h3>
+		{% else %}
+		<h2 class="page__subtitle">Compre Junto</h2>
+		{% endif %}
+		{{ productHelper.bundle() }}
+	</div>
+{% endif %}
+
+{# Produtos Relacionados #}
+{% if product.related_products %}
+	<div class="products-related">
+		{% if settings.headings == "1" %}
+		<h3 class="page__subtitle">Produtos Relacionados</h3>
+		{% else %}
+		<h2 class="page__subtitle">Produtos Relacionados</h2>
+		{% endif %}
+		{% element 'snippets/showcase' {
+			"products": product.related_products,
+			"grid_container": true,
+			"column_size": "small",
+			"showcase_heading_level": 3,
+			"prevent_buy": false,
+			"prevent_schema": true
+		} %}
+	</div>
+{% endif %}

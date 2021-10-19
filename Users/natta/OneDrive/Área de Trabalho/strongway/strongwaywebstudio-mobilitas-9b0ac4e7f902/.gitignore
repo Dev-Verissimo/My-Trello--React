@@ -1,0 +1,32 @@
+# WINDOWS SPECIFIC
+Thumbs.db
+
+# SOFTWARE SPECIFIC
+.sass-cache
+*.sublime-workspace
+*.sublime-project
+prepros.json
+node_modules
+debug.log
+
+# TRAY SPECIFIC
+config.yml
+
+# PROJECT SPECIFIC
+prepros-6.config
+js/min/theme.min.js
+css/theme.min.css
+css/critical.min.css
+css/icotheme.min.css
+css/css/*
+js/min/jquery.toggleitem.min.js
+js/min/jquery.adjustheights.min.js
+js/min/page-catalog.min.js
+js/min/page-contact.min.js
+js/min/page-depoimentos.min.js
+js/min/page-home.min.js
+js/min/page-noticia.min.js
+js/min/page-product.min.js
+js/min/lazy-load-secondary-image.min.js
+js/min/fast-shopping.min.js
+js/min/timer.min.js

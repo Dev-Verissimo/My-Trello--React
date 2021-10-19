@@ -1,0 +1,9 @@
+// Mixin para opacidade que inclui suporte para IE
+@mixin opacity($valor) {
+	// Converte valor em float para inteiro, para usar nos filters
+	$valor2: $valor*100;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$valor2})";
+	filter: alpha(opacity=$valor2);
+	opacity: $valor;
+}

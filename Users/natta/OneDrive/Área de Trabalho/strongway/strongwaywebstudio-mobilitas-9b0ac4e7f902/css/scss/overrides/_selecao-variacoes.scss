@@ -1,0 +1,277 @@
+// Atributos gerais
+.passo1 {
+
+}
+
+.passo2 {
+
+}
+
+#menuVars {
+	font-size: 100%;
+}
+
+.varTit {
+	background: none;
+	font-weight: bold;
+	text-transform: none;
+	color: $bt-disabled-color;
+	@include rem(font-size, $basefont);
+	padding: 0;
+	visibility: hidden;
+	height: 0;
+
+	&:hover {
+		background: none;		
+	}
+
+	&.onVar {
+		font-weight: bold;
+		background: none;
+		color: $texto-escuro;
+		visibility: visible;
+		height: auto;
+	}
+}
+
+.varCont {
+	ul {
+		width: 100%;
+		padding-bottom: 0;
+
+		li,
+		li ul li {
+			margin: 0;
+			border: none;
+			@include rem(font-size, 13);
+			@include rem(padding, 0 0 3);
+			@include rem(margin, 0 0 3);
+			color: inherit;
+			@include separator-border;
+			font-weight: normal;
+			font-style: normal;
+		}
+	}
+
+	> div.obriga {
+		border-left: 0!important;
+
+		select,
+		.select {
+			border-left: 3px solid $input-border-color !important;
+		}
+	}
+}
+
+// Variações em lista aberta (com radios)
+.lista_radios {
+}
+
+.variacao- {
+	.lista_radios {
+		border: 0;
+		padding-bottom: 0;
+		@include rem(margin-bottom, 10);
+
+		li {
+			color: $texto-cinza;
+			@include rem(font-size, $basefont);
+			border: none;
+			background-color: transparent;
+			@include rem(margin-bottom, 1);
+		}
+
+		[type="radio"] {
+			@include rem(margin-top, -2);
+		}
+	}
+}
+
+.lista-radios-input {
+}
+
+// Variações em Lista Fechada
+// Compensações de margem por causa de margens aplicadas inline
+#variation_first_select {
+	margin-bottom: 0;
+
+	+ .varTit {
+		@include rem(margin-bottom, -10);
+	}
+}
+
+// Variações em blocos de cor
+.texto_variacao {
+	@include rem(margin-bottom, 3);
+
+	h2 {
+		@extend .varTit.onVar;
+	}
+}
+
+#cor_nome {
+	@include rem(font-size, 12);
+}
+
+.lista_cor_variacao {
+	font-size: 0;
+
+	> li {
+		display: inline-block;
+		@include rem(font-size, $basefont);
+		@include rem(margin, 0 7 7 0);
+		float: none;
+
+		&.sem_estoque {
+			position: relative;
+
+			&:after {
+				content: "";
+				@include overlay;
+				background: repeating-linear-gradient(
+					-45deg,
+					rgba(black, 0.2),
+					rgba(black, 0.2) 1px,
+					rgba(white, 0.15) 2px,
+					rgba(white, 0.15) 2px,
+					rgba(white, 0) 3px,
+					rgba(white, 0) 6px
+				);
+			}
+		}
+		
+		// Caixa para variações de tamanho
+		div {
+			@include rem(min-width, 38);
+			@include rem(height, 38);
+			line-height: 30px;
+		}
+
+		img {
+			width: auto;
+			height: auto;
+		}
+
+		div,
+		img {
+			border: 2px solid $cinza-2;
+			@include rem(border-radius, 3);
+			@include rem(padding, 2);
+			
+			&:hover {
+				border-color: $cinza-3;			
+			}
+
+			&.cor_selecionada {
+				color: $texto-escuro;
+				border: 2px solid $secundaria !important;
+			}
+		}
+
+		div {
+			@include rem(padding, 2 5);
+		}
+	}
+}
+
+// Compra de múltiplas variações
+.lista_radios.listaVarMultipla {
+	li {
+		display: flex;
+		align-items: center;
+		flex-flow: row wrap;
+		@include rem(margin-bottom, 5);
+
+		li {
+			border: 0;
+			@include separator-border;
+			@include rem(padding, 5 0);
+		}
+	}
+
+	.inputQuantVariacao {
+		margin: 0;
+	}
+
+	.labelMultiVariacao,
+	.labelQuantVariacao {
+		float: none;
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.labelMultiVariacao {
+		width: 80%;
+	}
+
+	.labelQuantVariacao {
+		text-align: right;
+		width: 20%;
+		margin: 0;
+	}
+}
+
+.label-quant-var {
+	@extend %visuallyhidden;
+}
+
+// Informação Adicional
+.productAdditionalInformation {
+	.varCont {
+		margin-bottom: 0;
+	}
+}
+
+.varContAdd {
+	> span {
+		display: inline-block;
+		vertical-align: middle;
+		@include rem(margin-bottom, 10);
+	}
+
+	.dd {
+		.ddTitle {
+			@include rem(margin-bottom, 0);
+			@include rem(padding, 10);
+			@include rem(border-radius, 3);
+			@include rem(height, $input-height);
+			background-image: img('select-arrow.png');
+			background-repeat: no-repeat;
+			background-position: 98% center;
+			background-position: calc(100% - 5px) center;
+			box-sizing: border-box;
+			border: 1px solid rgba($input-border-color, 0.15);
+			background-color: rgba($input-bg, 0.2);
+			line-height: normal;
+			-webkit-appearance : none;
+			-moz-appearance : none;
+
+			&:focus {
+				border-color: rgba($input-border-color, 0.75);
+			}
+			
+			span.arrow {
+				background-image: none;
+			}
+
+			span.ddTitleText {
+				@include rem(font-size, $basefont);
+				font-weight: normal;
+				font-family: $fonte;
+				color: #000000;
+			}
+		}
+
+		.ddChild {
+			width: 100% !important;
+			overflow-y: auto;
+			@include rem(max-height, 300);
+
+			img {
+				width: auto !important;
+				height: auto !important;
+				max-width: 100% !important;
+			}
+		}
+	}
+}

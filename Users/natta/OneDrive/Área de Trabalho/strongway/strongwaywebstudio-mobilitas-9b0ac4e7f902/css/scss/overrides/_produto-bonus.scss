@@ -1,0 +1,36 @@
+.produto-bonus {
+	@include rem(margin, 10 0);
+	padding: 0;
+	border: none;
+	overflow: visible;
+	clear: both;
+
+	strong {
+		background-color: transparent;
+		border: 1px solid $primaria;
+		color: $primaria;
+		display: inline-block;
+		@include rem(padding, 3 6);
+		text-transform: uppercase;
+		font-weight: bold;
+		font-size: inherit;
+		vertical-align: middle;
+		font-family: $fonte;
+		line-height: 1;
+
+		&.code,
+		&.color {
+			border-width: 1px;
+			@include rem(border-radius, 3);
+		}
+
+		&.color {
+			font-weight: normal;
+		}
+	}
+}
+
+.bonus_produto:not(:empty) {
+	border: 0;
+	padding: 0;
+}

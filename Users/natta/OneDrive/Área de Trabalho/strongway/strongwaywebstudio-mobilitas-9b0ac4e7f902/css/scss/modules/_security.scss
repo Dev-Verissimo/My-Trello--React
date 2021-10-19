@@ -1,0 +1,16 @@
+.security {
+	&__title {
+
+	}
+
+	&__seals {
+		font-size: 0;
+	}
+
+	&__seal {
+		@include rem(font-size, $basefont);
+		display: inline-block;
+		@include rem(margin, 0 10 10 0);
+		vertical-align: top;
+	}
+}

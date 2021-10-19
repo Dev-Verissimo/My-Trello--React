@@ -1,0 +1,29 @@
+{
+  "name": "mobilitas",
+  "version": "1.0.0",
+  "description": "Tema para a Tray, por Strongway Webstudio",
+  "main": "index.js",
+  "scripts": {
+    "test": "mobilitas-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/strongwaywebstudio/mobilitas.git"
+  },
+  "keywords": [
+    "tray-opencode",
+    "opencode"
+  ],
+  "author": "Leonardo Baptista Lopes - Strongway Webstudio",
+  "license": "Pode ser utilizado e modificado apenas por clientes Tray Commerce que o tenham adquirido",
+  "homepage": "https://bitbucket.org/strongwaywebstudio/mobilitas#readme",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-clean-css": "^4.0.0",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2"
+  }
+}

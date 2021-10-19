@@ -1,0 +1,93 @@
+.latest-news {
+	padding: 0;
+	position: relative;	
+	@include rem(margin-bottom, 30);
+
+	&__header {
+		display: flex;
+		align-items: center;
+		color: $texto-claro;
+	}
+
+	&__title {
+		@extend .page__title;
+		padding: 0;
+		text-align: left;
+		height: auto;
+		color: inherit;
+	}
+
+	&__link {
+		color: inherit;
+		@include rem(margin-left, 15);
+		@include rem(margin-bottom, 5);
+
+		&:visited {
+			color: inherit;
+		}
+
+		&__text,
+		&__icon {
+			vertical-align: middle;
+		}
+
+		&__icon {
+			font-size: 1.2em;
+		}
+	}
+}
+
+#ultimasNoticias {
+	margin: 0;
+	
+	> h2 {
+		display: none;
+	}
+}
+
+#listaUltimasNoticias {
+	@extend %base_box;
+	@include rem(font-size, 16);
+
+	> li {
+		@include rem(padding, 0 0 15);
+		@include rem(margin-bottom, 15);
+		@include separator-border;
+
+		a {
+			font-weight: bold;
+			color: $texto-escuro;
+
+			&:visited {
+				color: $texto-escuro;
+			}
+		}
+
+		&:last-child {
+			border: none;
+			margin-bottom: 0;
+			padding-bottom: 0;
+		}
+	}
+}
+
+// Lista das ultimas noticias renderizadas via Ajax
+.news-ajax {
+	@include rem(margin-top, 5);
+	
+	.noticias {
+		@include bp(min-width, $bp-md + 1) {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-items: stretch;
+		}
+
+		li {
+			@include bp(min-width, $bp-md + 1) {	
+				width: 49%;
+				border: 0;
+			}
+		}
+	}
+}

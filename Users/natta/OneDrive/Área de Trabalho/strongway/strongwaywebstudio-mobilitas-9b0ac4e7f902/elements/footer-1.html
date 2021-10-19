@@ -1,0 +1,109 @@
+{% set prevent_lazy_load = (settings.is_banner_lazy_load_enabled) ? false : true %}
+
+<footer class="footer footer--1 {{ settings.layout_style == "boxed_layout" ? 'footer--boxed' }}">
+	{% if settings.layout_style != "fullwidth_layout" %}
+		<div class="b-xs-12">
+	{% endif %}
+		{% if settings.is_newsletter_enabled %}
+			<div class="footer__line-1">
+				<div class="centralizado">
+					{% element 'snippets/newsletter' %}
+				</div>
+			</div>
+		{% endif %}
+		
+		<div class="footer__line-2">
+			<div class="centralizado">
+				{% if "central" not in pages.current %}
+					<div class="clearfix">
+						<div class="b-xs-12">
+							{% if utils.is_mobile %}
+								{% set banner_footer = banners.extra10 %}
+							{% else %}
+								{% set banner_footer = banners.footer %}
+							{% endif %}
+
+							{% if banner_footer %}
+								{% element 'snippets/banner' {
+									"banner_data": banner_footer,
+									"banner_modifier": "footer",
+									"prevent_lazy_load": prevent_lazy_load
+								} %}
+							{% endif %}
+						</div>
+					</div>
+				{% endif %}
+		
+				<div class="b-xs-12 b-sm-6 b-md-3 b-sm-c">
+					{% element 'snippets/pages-menu' %}
+				</div>
+		
+				<div class="b-xs-12 b-sm-6 b-md-3">
+					{% element 'snippets/contact-info' %}
+					{% element 'snippets/social' %}
+				</div>
+		
+				<div class="b-xs-12 b-sm-6 b-md-3 b-sm-c">
+					{% element 'snippets/address-info' %}
+					{% element 'snippets/opening-hours' %}
+				</div>
+		
+				<div class="b-xs-12 b-sm-6 b-md-3">
+					{% element 'snippets/facebook-like-box' { 'facebook_url': facebook_url } %}
+				</div>
+			</div>		
+		</div>
+		
+		<div class="footer__line-3">
+			<div class="centralizado">
+				<div class="b-xs-12 b-md-7">
+					{% element 'snippets/payment-methods' %}
+				</div>
+		
+				<div class="b-xs-12 b-md-5">
+					{% element 'snippets/security' %}
+				</div>
+			</div>
+		</div>
+		
+		{% if Translation('ag_mensagem_rodape') %}
+			{% set footer_message = Translation('ag_mensagem_rodape') %}
+		{% endif %}
+		{% if settings.footer_message %}
+			{% set footer_message = settings.footer_message %}
+		{% endif %}
+		
+		{% if footer_message %}
+			<div class="footer__line-4">
+				{{ footer_message|nl2br }}
+			</div>
+		{% endif %}
+		
+		{% if 
+			settings.hottags_position == 2
+			or settings.history_position == 2
+		%}
+			<div class="footer__line-5">
+				<div class="centralizado">
+					<div class="b-xs-12">
+						{% if settings.hottags_position == 2 and settings.is_tags_enabled %}
+							{% element 'snippets/tagcloud' %}			
+						{% endif %}
+						
+						{% if settings.history_position == 2 and settings.is_history_enabled %}
+							<h6 class="page__title">Produtos Visitados</h6>
+							
+							{% element 'snippets/history' {
+								'store.id': store.id,
+								'pages.current': pages.current,
+								'category.id': category.id
+							} %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	{% if settings.layout_style != "fullwidth_layout" %}
+		</div>
+	{% endif %}
+</footer>

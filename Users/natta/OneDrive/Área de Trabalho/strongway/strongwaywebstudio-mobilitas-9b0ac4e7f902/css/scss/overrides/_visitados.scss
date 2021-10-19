@@ -1,0 +1,190 @@
+// visited
+#NavVisitados {
+	@extend %base_box;
+	@include rem(margin-bottom, 30);
+}
+
+.visitados {
+	position: relative;
+}
+
+.visitados_produtos {
+	position: relative;
+	overflow: hidden;
+	@include rem(padding-bottom, 85);
+}
+
+.paginacao_ajax {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	
+	@include bp(max-width, $bp-md) {
+		@include rem(padding-top, 15);
+		width: 100%;
+	}
+}
+
+.clearVisiteds {
+	@extend %base_bt_secondary;
+	position: absolute;
+	text-decoration: none;
+	@include rem(right, 10);
+	bottom: 0;
+	
+	@include bp(max-width, $bp-md) {
+		position: static;
+		width: 100%;
+	}
+	
+	@include bp(max-device-width, $bp-lg) {
+		@include rem(bottom, 35);
+	}
+}
+
+.myNavigation {
+	display: none;
+}
+
+.total_produtos {
+	@include rem(margin-right, 30);
+	@include rem(font-size, 12);
+	font-weight: normal;
+	
+	@include bp(max-width, $bp-md) {
+		display: block;
+		margin: 0;
+	}
+}
+
+.paginacao_ajax_prod {
+	@include rem(font-size, 12);
+	font-weight: normal;
+	
+	#linksPag {
+		a {
+			@extend .pagination__link;
+			color: $texto-cinza;
+			display: inline-block;
+			padding: 0;
+			@include rem(height, 28);
+			@include rem(line-height, 28);
+			@include rem(min-width, 28);
+			@include rem(border-radius, 28);
+			@include rem(font-size, 14);
+
+			&:visited {
+				color: $texto-cinza;
+			}
+
+			&:hover {
+				background-color: $bg-cinza;
+			}
+		}    
+		
+		.pageON{
+			@extend .pagination__link--active;
+
+			&:hover {
+				@extend .pagination__link--active;
+			}
+		}
+	}
+}
+
+.visitados_itens {
+	@include separator-border('left');
+	float: right;
+	min-height: 0;
+	@include rem(min-width, 280);
+	@include rem(padding-left, 15);
+	@include rem(margin-bottom, 15);
+		
+	@include bp(max-width, $bp-xl) {
+		border: none;
+		float: none;
+		min-width: 100%;
+		padding: 0;
+	}
+	
+	h4 {
+		@include base-headings;
+		@include h4;
+	}
+	
+	.itens {
+		@include separator-border('top');
+		height: auto;
+		@include rem(margin-bottom, 20);
+		@include rem(padding-bottom, 20);
+		
+		&:first-child {
+			border-top: none;
+		}
+		
+		&:nth-child(2) {
+			margin-bottom: 0;
+			@include rem(padding-top, 15);
+		}
+	}
+}
+
+#produtos {
+	> ul {
+		float: left;
+		@include rem(padding, 0 15);
+		width: 33%;
+		
+		@include bp(max-width, $bp-md) {
+			float: none;
+			@include rem(padding, 15);
+			width: 100%;
+			text-align: center;
+			@include separator-border();
+		}
+	}
+}
+
+.FotoLista{
+	font-size: 0;
+	height: auto;
+	@include rem(margin-bottom, 15);
+	margin-bottom: 15px;
+	text-align: center;
+	
+	img {
+		display: inline-block;
+		max-width: 99%;
+		vertical-align: middle;
+	}
+}
+
+.NomeProdLista {
+	@extend .product__name;
+	@include rem(margin-bottom, 10);
+
+	@include bp(max-width, $bp-md) {
+		text-align: center;
+	}
+}
+
+.ValoresLista {
+	.oculta_destaque {
+		display: none;
+	}
+	
+	.precoAvista{
+		@extend .product__price;
+		
+		& + br{
+			display: none;
+		}
+	}
+	
+	span,
+	strong{
+	}
+}
+
+.precode {
+}

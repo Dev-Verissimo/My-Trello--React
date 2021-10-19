@@ -1,0 +1,5 @@
+// Quadrado: Depende do rem()
+@mixin square($side) {
+	@include rem(width, $side);
+	@include rem(height, $side);
+}

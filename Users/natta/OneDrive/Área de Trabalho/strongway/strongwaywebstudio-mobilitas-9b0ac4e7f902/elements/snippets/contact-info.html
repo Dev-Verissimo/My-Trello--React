@@ -1,0 +1,105 @@
+<aside class="contact-info {{ modifier ? 'contact-info--' ~ modifier }}">
+	<h4 class="visuallyhidden">
+		Contato
+	</h4>
+	
+	{#
+		Padrões que são removidos dos números de
+		telefone para colocá-los como atributos
+	#}
+	{% set phone_replacements = {
+		' ':'',
+		'-':'',
+		'.':'',
+		'+':'',
+		'(':'',
+		')':'',
+		'{':'',
+		'}':'',
+		'[':'',
+		']':'',
+		'"':'',
+		'\'':''
+	} %}
+	
+	{# Telefone 1 #}
+	{% if Translation('ag_telefone_1') %}
+		{% set telephone_number_1 = Translation('ag_telefone_1') %}
+	{% endif %}
+	{% if settings.telephone_number_1 %}
+		{% set telephone_number_1 = settings.telephone_number_1 %}
+	{% endif %}
+
+	{% if telephone_number_1 %}
+		<a href="tel:{{ telephone_number_1|replace(phone_replacements) }}" class="contact-info__item">
+			<span class="contact-info__icon icon-phone"></span>
+			<span class="contact-info__telephone">{{ telephone_number_1 }}</span>
+		</a>
+	{% endif %}
+
+	{# Telefone 2 #}
+	{% if Translation('ag_telefone_2') %}
+		{% set telephone_number_2 = Translation('ag_telefone_2') %}
+	{% endif %}
+	{% if settings.telephone_number_2 %}
+		{% set telephone_number_2 = settings.telephone_number_2 %}
+	{% endif %}
+
+	{% if telephone_number_2 and modifier != 'header' %}
+		<a href="tel:{{ telephone_number_2|replace(phone_replacements) }}" class="contact-info__item">
+			<span class="contact-info__icon icon-phone"></span>
+			<span class="contact-info__telephone">{{ telephone_number_2 }}</span>
+		</a>
+	{% endif %}	
+
+	{# Whatsapp #}
+	{% if settings.whatsapp_number %}
+		{% if settings.country_code %}
+			<a
+				href="https://api.whatsapp.com/send?phone={{ settings.country_code|replace(phone_replacements) ~ settings.whatsapp_number|replace(phone_replacements) }}"
+				class="contact-info__item"
+				target="_blank"
+				rel="noreferrer external"
+			>
+		{% else %}
+			<span class="contact-info__item">
+		{% endif %}
+			<span class="contact-info__icon icon-whatsapp"></span>
+			<span class="contact-info__telephone">{{ settings.whatsapp_number }}</span>
+		{% if settings.country_code %}
+			</a>
+		{% else %}
+			</span>
+		{% endif %}
+	{% endif %}		
+
+	{# E-mail 1 #}
+	{% if Translation('ag_email_1') %}
+		{% set email_1 = Translation('ag_email_1') %}
+	{% endif %}
+	{% if settings.email_1 %}
+		{% set email_1 = settings.email_1 %}
+	{% endif %}
+
+	{% if email_1 %}
+		<a href="mailto:{{ email_1 }}" class="contact-info__item">
+			<span class="contact-info__icon icon-mail"></span>
+			<span class="contact-info__email">{{ email_1 }}</span>
+		</a>
+	{% endif %}
+
+	{# E-mail 2 #}
+	{% if Translation('ag_email_2') %}
+		{% set email_2 = Translation('ag_email_2') %}
+	{% endif %}
+	{% if settings.email_2 %}
+		{% set email_2 = settings.email_2 %}
+	{% endif %}
+
+	{% if email_2 and modifier != 'header' %}
+		<a href="mailto:{{ email_2 }}" class="contact-info__item">
+			<span class="contact-info__icon icon-mail"></span>
+			<span class="contact-info__email">{{ email_2 }}</span>
+		</a>
+	{% endif %}	
+</aside>

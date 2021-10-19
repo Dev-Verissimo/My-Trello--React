@@ -1,0 +1,223 @@
+// Este arquivo contém classes placeholder, que servem apenas para 
+// serem extendidas
+
+// Botão Básico
+%base_bt {
+	@extend %base_transition;
+	@extend %base_shadow;
+	@include rem(line-height, $bt-height);
+	@include rem(height, $bt-height);
+	@include rem(padding, 0 25);
+	@include rem(margin, 0 3 3 0);
+	@include rem(border-radius, 3);
+	@include rem(font-size, $basefont);
+	color: $bt-color;
+	border: none;
+	background: $bt-bg;
+	font-weight: normal;
+	font-family: $fonte-2;
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-appearance: none;
+	text-transform: none;
+	white-space: nowrap;
+
+	&:hover,
+	&:focus {
+		background: lighten($bt-bg,20%);
+		text-transform: none;
+	}
+
+	&:active {
+		background: lighten($bt-bg,10%);
+	}
+
+	&[disabled="disabled"],
+	&[disabled="disabled"]:hover,
+	fieldset[disabled] & {
+		cursor: not-allowed;
+		pointer-events: none;
+		color: $bt-disabled-color;
+		background: $bt-disabled-bg;
+		cursor: default;
+		border: 1px solid $bt-disabled-border-color;
+	}
+}
+
+%base_bt_no_states {
+	@extend %base_transition;
+	@extend %base_shadow;
+	@include rem(line-height, $bt-height);
+	@include rem(height, $bt-height);
+	@include rem(padding, 0 25);
+	@include rem(margin, 0 3 3 0);
+	@include rem(border-radius, 3);
+	@include rem(font-size, $basefont);
+	color: $bt-color;
+	border: none;
+	background: $bt-bg;
+	font-weight: normal;
+	font-family: $fonte-2;
+	display: inline-block;
+	text-decoration: none;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	-webkit-appearance: none;
+	text-transform: none;
+	white-space: nowrap;
+}
+
+%base_bt_secondary {
+	@extend %base_bt_no_states;
+	color: $sec-bt-color;
+	background-color: $sec-bt-bg;
+
+	&:hover,
+	&:focus {
+		background-color: lighten($sec-bt-bg, 5%);
+		text-transform: none;
+	}
+	
+	&:active {
+		background-color: darken($sec-bt-bg, 5%);
+	}	
+}
+
+%base_bt_secondary_no_states {
+	@extend %base_bt_no_states;
+	color: $sec-bt-color;
+	background-color: $sec-bt-bg;
+}
+
+%base_bt_highlight {
+	@extend %base_bt_no_states;
+	color: $dstq-bt-color;
+	background-color: $dstq-bt-bg;
+
+	&:hover,
+	&:focus {
+		background-color: lighten($dstq-bt-bg, 10%);
+		text-transform: none;
+	}
+	
+	&:active {
+		background-color: darken($dstq-bt-bg, 10%);
+	}		
+}
+
+%base_bt_highlight_no_states {
+	@extend %base_bt_no_states;
+	color: $dstq-bt-color;
+	background-color: $dstq-bt-bg;
+}
+
+%base_bt_whatsapp {
+	@extend %base_bt_no_states;
+	color: $whatsapp-bt-color!important;
+	background-color: $whatsapp-bt-bg!important;
+	@include rem(padding, 0 12);
+
+	&:hover,
+	&:focus {
+		background-color: lighten($whatsapp-bt-bg, 10%)!important;
+		text-transform: none;
+	}
+	
+	&:active {
+		background-color: darken($whatsapp-bt-bg, 10%)!important;
+	}		
+}
+
+// Avisos da Interface
+%base_msg {
+	@include rem(padding, 10 10 10 40);
+	@include rem(margin-bottom, 5);
+	@include rem(border-radius, 5);
+	@include rem(background-position, 10 10);
+	clear: both;
+	background-repeat: no-repeat;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #CCC;
+}
+
+// Padrão de Caixa
+%base_box {
+	@extend %base_shadow;
+	background-color: $bg-claro;
+	@include rem(padding, 15);
+	@include rem(border-radius, 3);
+	color: $texto-escuro;
+
+	@include bp(min-width, $bp-xl + 1) {
+		@include rem(padding, 20);
+	}
+}
+
+// Placeholder de transições
+%base_transition {
+	@include transition();
+}
+
+// Sombra básica
+%base_shadow {
+	box-shadow: 0 0 5px rgba(0,0,0,0.15), inset 0 0 0 1px rgba(white,0.08);
+}
+
+%base_dropdown_shadow {
+	box-shadow: 0 2px 5px rgba(0,0,0,0.15), inset 0 2px 3px rgba(0,0,0,0.1);
+}
+
+// Elementos com sombra que muda no :hover
+%hoverable_shadow {
+	@extend %base_shadow;
+
+	&:hover {
+		box-shadow: rgba(#000000, 0.2) 1px 2px 3px;
+	}
+}
+
+// Clearfixes
+%clearfix {
+	*zoom: 1;
+
+	&:before, &:after {
+		content: ""; display: table;
+	}
+
+	&:after {
+		clear: both;
+	}
+}
+
+// Esconde visualmente
+%visuallyhidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+}
+
+// Ícones do Tema
+%icons_theme {
+	/* use !important to prevent issues with browser extensions that change fonts */
+	font-family: '#{$icomoon-font-family}' !important;
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}

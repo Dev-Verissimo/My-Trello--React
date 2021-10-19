@@ -1,0 +1,39 @@
+@mixin transition ($options:$base-transition) {
+	// Se tem as três propriedades essenciais...
+	@if map-has-key( $options, property ) and
+		map-has-key( $options, duration ) and
+		map-has-key( $options, timing-function ) {
+		
+		$shorthand: '';
+
+		@each $key, $value in $options {
+			@if $key != delay {
+				$shorthand: $shorthand + ' ' + $value;				
+			}
+		}
+		
+		// Declara de forma resumida
+		transition: #{$shorthand};
+		// Separa a propriedade "delay", pois não funciona a resumida no Firefox
+		transition-delay: map-get( $options, delay );
+	} 
+	
+	// Senão, declara uma propriedade em cada linha
+	@else {
+		@if map-has-key( $options, property ) {
+			transition-property: map-get( $options, property );
+		}
+
+		@if map-has-key( $options, duration ) {
+			transition-duration: map-get( $options, duration );
+		}
+
+		@if map-has-key( $options, timing-function ) {
+			transition-timing-function: map-get( $options, timing-function );
+		}
+
+		@if map-has-key( $options, delay ) {
+			transition-delay: map-get( $options, delay );
+		}
+	}
+}

@@ -1,0 +1,9 @@
+// Centraliza usando margin auto. Recebe uma largura para definir a centralização do elemento. Caso ele já tenha uma largura, deixe o parâmetro em branco.
+@mixin centralizado($larg:false) {
+	margin-left:auto;
+	margin-right:auto;
+
+	@if $larg != false {
+		width:$larg;
+	}
+}

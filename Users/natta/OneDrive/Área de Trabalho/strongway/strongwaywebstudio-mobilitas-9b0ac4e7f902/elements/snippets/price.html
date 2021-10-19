@@ -1,0 +1,62 @@
+<div class="product__offer">
+	{%
+		if product.available
+		and product.available_for_purchase
+	%}
+		{% if product.stock > 0 %}
+			{% if product.upon_request %}
+				<a
+					href="{{ product.link }}"
+					class="product__status product__status--upon-request"
+				>
+					Pre&ccedil;o sob consulta
+				</a>
+			{% elseif product.show_price %}
+				{% if product.has_variation and product.has_other_prices %}
+					{# Mostra "A partir de" se houver precos diferentes #}
+					<span class="product__from">A partir de:</span>
+				{% endif %}
+				
+				{# Se nao ha qualquer tipo de preco diferente, mostra os valores antigos  #}
+				{% if product.price_offer > 0 and product.has_other_prices == false %}
+					{% set old_price = product.price %}
+
+					<span class="product__price product__price--old">
+						<span class="product__price__label">De:</span>
+						{{ settings.currency }}
+						<span class="product__price__value">{{ old_price|currency }}</span>
+					</span>
+				{% endif %}
+				
+				{# Determina se o preco e o preco de oferta ou o normal #}
+				{% set price = product.price_offer > 0 ? product.price_offer : product.price %}
+				
+				<span class="product__price product__price--{{ product.price_offer > 0 ? 'special' : 'regular' }}" >
+					{#
+						Nao mostra o "Por:" se nao houver oferta ou se as
+						variacoes tiverem precos diferentes
+					#}
+					{% if product.price_offer > 0 and product.has_other_prices == false %}
+						<span class="product__price__label">Por:</span>
+					{% endif %}
+					{{ settings.currency }}
+					<span class="product__price__value">
+						<span>
+							{{ price|currency }}
+						</span>
+					</span>
+				</span>
+
+				{% element 'snippets/sale-label' { product: product, modifier: 'hidden-xs hidden-sm' } %}
+
+				{% if product.payment %}
+					<div class="product__payment">{{ product.payment }}</div>
+				{% endif %}
+			{% endif %}
+		{% else %}
+			<p class="product__status product__status--out-of-stock">Esgotado!</p>
+		{% endif %}
+	{% else %}
+		<p class="product__status product__status--unavailable">Produto indispon&iacute;vel</p>
+	{% endif %}
+</div>

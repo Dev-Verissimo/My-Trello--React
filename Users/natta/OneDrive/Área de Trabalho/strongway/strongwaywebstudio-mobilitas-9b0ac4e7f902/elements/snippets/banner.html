@@ -1,0 +1,94 @@
+{% set random_id = random() %}
+
+{% if banner_data %}
+	{% set loading = asset('img/loading.gif') %}
+
+	<div class="banner__container banner__container--{{ banner_modifier }}">
+		{# Se o banner existir e for slider... #}
+		{% if banner_data.type == "javascript" %}
+			<div class="banner banner--slider" id="banner-{{ random_id }}">
+				{% for slide in banner_data.slides %}
+					<div
+						class="
+							banner__slide
+							{{ loop.first ? 'banner__slide--first' : null }}
+						"
+					>
+						{% if slide.link %}
+							<a
+								href="{{ slide.link }}"
+								target="{{ slide.target }}"
+								class="banner__link"
+							>
+						{% endif %}
+							<img
+								{% if prevent_lazy_load %}
+									src="{{ slide.image }}"
+								{% else %}
+									data-lazy="{{ slide.image }}"
+								{% endif %}
+								alt="{{ slide.label }}"
+								title="{{ slide.label }}"
+								width="{{ slide.width }}"
+								height="{{ slide.height }}"
+								class="banner__image"
+							>
+						{% if slide.link %}
+							</a>
+						{% endif %}
+					</div>
+				{% endfor %}
+			</div>
+			
+			<script>
+				g.actions['banner-{{ random_id }}'] = function () {
+					jQuery( function ($) {
+						if ( $('.banner__slide').length > 1 ) {
+							$('#banner-{{ random_id }}').slick({
+								prevArrow: '<button type="button" class="slick-prev" aria-label="Anterior"><span class="icon icon-chevron-left slick-prev-icon"></span></button>',
+								nextArrow: '<button type="button" class="slick-next" aria-label="Pr&oacute;ximo"><span class="icon icon-chevron-right slick-prev-icon"></span></button>',
+								adaptiveHeight: true,
+								lazyLoad: 'progressive',
+								mobileFirst: true,
+								autoplay: true,
+								autoplaySpeed: {{ banner_data.interval }},
+								speed: {{ banner_data.velocity * 1000 }},
+								{{ ( banner_data.animation == "fade" ) ? "fade: true," : null }}
+								{{ ( banner_data.navigation == 2 ) ? "dots: true," : null }}
+								{{ ( banner_data.stop_over == 1 ) ? "pauseOnHover: true," : null }}
+							});
+						}
+					});
+				};
+			</script>
+			
+		{# Se o banner não for slider... #}
+		{% else %}
+			<div class="banner">
+				{% if banner_data.link %}
+					<a
+						href="{{ banner_data.tracked_link }}"
+						target="{{ banner_data.target }}"
+						class="banner__link"
+					>
+				{% endif %}
+					<img
+						{% if prevent_lazy_load %}
+							src="{{ banner_data.src }}"
+						{% else %}
+							src="{{ loading }}"
+							data-original="{{ banner_data.src }}"
+						{% endif %}
+						alt="{{ banner_data.alt }}"
+						title="{{ banner_data.alt }}"
+						width="{{ banner_data.width }}"
+						height="{{ banner_data.height }}"
+						class="banner__image {{ (prevent_lazy_load) ? null: 'lazy' }}"
+					>
+				{% if banner_data.link %}
+					</a>
+				{% endif %}
+			</div>
+		{% endif %}
+	</div>
+{% endif %}

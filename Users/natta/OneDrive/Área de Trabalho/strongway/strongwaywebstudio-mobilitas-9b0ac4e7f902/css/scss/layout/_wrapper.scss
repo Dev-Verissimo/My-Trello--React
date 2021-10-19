@@ -1,0 +1,49 @@
+// ATRIBUTOS GERAIS
+html {
+	font-family: $fonte;
+	line-height: $base-lineheight;
+	font-size: #{$basefont}px; // Caso haja uma alteração do tamanho da fonte base no meio do projeto, é aqui que deve ser alterada a fonte base, não mais fazendo referência à variável $basefont
+	color: $texto-escuro;
+}
+
+body {
+	line-height: $base-lineheight;
+	background-color: $bg-escuro-3;
+	overflow-x: hidden;
+	
+	// Remove padding forçosamente incluído pela janela modal
+	&.modal-open {
+		padding-right: 0 !important;
+	}
+}
+
+// CORPO
+.wrapper {
+	@include centralizado(100%);
+	overflow-x: hidden; // Evita que elementos com .extendfull (ou outros extends) criem rolagem horizontal
+	position: relative;
+	@include rem(padding-top, 10);
+	@include rem(padding-left, 8);
+	@include rem(padding-right, 8);
+
+	@include bp(min-width, $bp-md + 1) {
+		@include rem(padding-top, 20);
+	}
+
+	&__overlay {
+		@include bp(max-width, $bp-md) {
+			background-color: $primaria;
+			position: absolute;
+			height: 100%;
+			top: 0;
+			bottom: 0;
+			width: 100%;
+			z-index: 9;
+			display: none;
+		}
+	}
+}
+
+.centralizado {
+	@include rem(max-width, $max_width);
+}

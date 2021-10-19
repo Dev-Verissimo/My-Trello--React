@@ -1,0 +1,9 @@
+// Posiciona um elemento de modo a cobrir todo o elemento pai,
+// Ainda é necessário dar um tipo de posicionamento, fixed ou absolute
+@mixin overlay($position: 'absolute') {
+	position: #{$position};
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+}

@@ -1,0 +1,13 @@
+@include flo-control-create($breakpoints, false, '-');
+
+// Container class, used to remove added margins in nested grids.
+.grid-container {
+	@extend %clearfix;
+	margin-left: percentage(-($column_margin)/100);
+	margin-right: percentage(-($column_margin)/100);
+}
+
+// Proportional vertical spacer. Applied directly to elements holding grid classes (eg. b-xs-1)
+.grid-spacer {
+	margin-bottom: percentage((($column_margin)*2)/100);
+}

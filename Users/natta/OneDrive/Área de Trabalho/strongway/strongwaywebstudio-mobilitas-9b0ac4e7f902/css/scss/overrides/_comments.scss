@@ -1,0 +1,148 @@
+#coments {
+	h2.color {
+		@include base-headings;
+		@include h3;
+	}
+	
+	br {
+		display: none;
+	}
+}
+
+#comentario_cliente {
+	display: block;
+	@include rem(margin-bottom, 20);
+
+	> a:first-child {
+		@extend %base_bt_secondary;
+	}
+}
+
+#form-comments {
+	@include rem(margin-bottom, 20);
+
+	> br {
+		display: none;
+	}
+
+	[type="checkbox"] {
+		@include rem(margin-top, -1);
+	}
+
+	label {
+		.text {
+			display: block;
+		}
+	}
+	
+	// label da mensagem e caixa de avaliação
+	h3 {
+		@include rem(margin-top, 15);
+
+		+ br {
+			display: none;
+		}
+	}
+}
+
+.rateBlock {
+	border: none;
+	padding: 0;
+	font-size: 100%;
+	@include rem(margin-bottom, 20);
+
+	.stars {
+		li {
+			vertical-align: middle;
+		}
+	}
+}
+
+.starn {
+	width: auto;
+	height: auto;
+	background: none;
+	@include rem(font-size, 20);
+	color: tint($texto-cinza, 80%);
+
+	&:after {
+		@extend %icons_theme;
+		content: $icon-star;		
+	}
+}
+
+.star-on {
+	color: $texto-escuro;
+}
+
+.star0, .star1, .star2, .star3, .star4, .star5 {
+	background: none;
+	width: auto;
+	height: auto;
+	color: $texto-escuro;
+
+	&:after {
+		@extend %icons_theme;
+	}
+}
+
+.ajuste-nota {
+	@include rem(font-size, 16);
+
+	#rate {
+		font-weight: bold;
+	}
+}
+
+.star5 {
+	&:after {
+		content: $icon-star $icon-star $icon-star $icon-star $icon-star;
+	}
+}
+.star4 {
+	&:after {
+		content: $icon-star $icon-star $icon-star $icon-star;
+	}
+}
+.star3 {
+	&:after {
+		content: $icon-star $icon-star $icon-star;
+	}
+}
+.star2 {
+	&:after {
+		content: $icon-star $icon-star;
+	}
+}
+.star1 {
+	&:after {
+		content: $icon-star;
+	}
+}
+.star0 {
+	&:after {
+		content: $icon-x;
+	}
+}
+
+.hreview-comentarios {
+	@include rem(margin-bottom, 20);
+	@include rem(padding-bottom, 20);
+	@include separator-border;
+
+	.reviewer {
+		h3 {
+			font-weight: bold;
+		}
+	}
+}
+
+.ranking {
+	padding: 0;
+	@include rem(margin, 5 0);
+	border: 0;
+
+	@include bp(max-width, $bp-md) {
+		@include rem(font-size, 14);
+	}
+}

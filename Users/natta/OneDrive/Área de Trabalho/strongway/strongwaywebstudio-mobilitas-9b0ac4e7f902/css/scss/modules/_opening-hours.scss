@@ -1,0 +1,11 @@
+.opening-hours {
+	@include rem(margin-bottom, 20);
+
+	&__text {
+		@extend .address-info__text;
+		
+		&:before {
+			content: $icon-clock;
+		}
+	}
+}

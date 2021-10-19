@@ -1,0 +1,99 @@
+// Caixa de Compra
+// ========================
+#product-form-box {
+	display: flex;
+	align-items: flex-end;
+	vertical-align: middle;
+	width: 100%;
+	// table-layout: fixed;
+	@include rem(margin, 10 0);
+
+	#product-form-box {
+		padding: 0;
+		margin: 0;
+		border: 0;
+	}
+}
+
+#estoque_variacao {
+	position: absolute;
+	display: block;
+	@include rem(left, 5);
+	top: 100%;
+	top: calc(100% + 3px);
+	border-radius: 100%;
+	@include rem(font-size, 11);
+	@include rem(line-height, 16);
+	text-align: center;
+	pointer-events: none;
+}
+
+#quantidade {
+	// display: table-cell;
+	width: auto;
+	max-width: 25%;
+	vertical-align: bottom;
+	@include rem(max-width, 100);
+	border: none;
+	@include rem(font-size, 14);
+	text-transform: none;
+	position: relative;
+	font-weight: bold;
+
+	@include bp(min-width, $bp-lg + 1) {
+		max-width: 12%;
+	}
+
+	label {
+		display: block;
+	}
+}
+
+#quant {
+	width: 100%;
+	width: calc(100% - 10px);
+	margin: 0;
+	@include rem(height, 50);
+	@include rem(font-size, 14);
+	@include rem(margin-top, 7);
+	text-align: center;
+
+	@include bp(min-width, $bp-lg + 1) {
+		@include rem(font-size, 18);
+	}
+}
+
+#bt_comprar {
+	// display: table-cell;
+	vertical-align: bottom;
+
+	.botao-comprar {
+		@extend %base_bt_highlight;
+		@include rem(height, 50);
+		@include rem(line-height, 50);
+		@include rem(font-size, 20);
+		font-weight: normal;
+		margin: 0;
+		
+		.botao-commerce-img {
+			background: none;
+			text-transform: none;
+			padding: 0;
+			font-weight: normal;
+			position: relative;
+		}
+
+		&:before {
+			@extend %icons_theme;
+			content: $icon-plus-square;
+			font-weight: normal;
+			@include rem(margin-right, 10);
+			@include rem(font-size, 24);
+			vertical-align: middle;
+			position: relative;
+			@include rem(top, -3);
+		}
+	}
+}
+
+// ========================

@@ -1,0 +1,116 @@
+// * HTML5 Boilerplate
+// * What follows is the result of much research on cross-browser styling.
+// * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal, Kroc Camen, and the H5BP dev community and team.
+// * Detailed information about this CSS: h5bp.com/css
+// *
+// * Normalize
+
+// HTML5 display definitions
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+main {
+	display: block;
+}
+
+audio,
+canvas,
+img,
+video {
+	vertical-align: middle;
+}
+
+audio,
+canvas,
+video {
+	display: inline-block;
+	*display: inline;
+	*zoom: 1;
+}
+
+audio:not([controls]) {
+	display: none;
+}
+
+[hidden] {
+	display: none;
+}
+
+// Resets
+* {
+	margin:0;
+	padding:0;
+	border:0;
+	font-family:inherit;
+	font-size:100%;
+	font-style:inherit;
+	font-weight:inherit;
+	vertical-align:baseline;
+	box-sizing:border-box;
+	list-style: none;
+}
+
+button,
+input[type="submit"],
+input[type="button"] {
+	cursor:pointer;
+}
+
+
+html {
+	font-size: 100%;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+html,
+button,
+input,
+select,
+textarea,
+input[type="submit"],
+input[type="button"] {
+	font-family: $fonte;
+	color: $texto-escuro;
+}
+
+body { 
+	margin: 0;
+	font-size: 1em;
+	line-height: 1.4;
+}
+
+::-moz-selection {
+	background: $selecao-bg;
+	color: $selecao-color;
+	text-shadow: none;
+}
+
+::selection {
+	background: $selecao-bg;
+	color: $selecao-color;
+	text-shadow: none;
+}
+
+img {
+	border: 0;
+	-ms-interpolation-mode: bicubic;
+	vertical-align: middle;
+	height:auto;
+	max-width: 100%;
+}
+
+svg:not(:root) {
+	overflow: hidden;
+}
+
+figure {
+	margin: 0;
+}

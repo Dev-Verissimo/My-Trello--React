@@ -1,0 +1,524 @@
+/**
+ * Product
+ */
+$module-name: ".product";
+
+#{$module-name} {
+	@extend %base_box;
+	text-align: left;
+	background-color: $bg-claro;
+	@include rem(font-size, 14);
+	padding: 0;
+
+	@include bp(min-width, $bp-md + 1) {
+		margin-bottom: 0;
+	}
+
+	&__link {
+		color: inherit;
+		text-decoration: none;
+
+		&:visited {
+			color: inherit;
+		}
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&__image-outline {
+		display: block;
+		overflow: hidden;
+		@include rem(border-radius, 3);
+	}
+
+	&.has-secondary-image {
+		.product__image-container {
+			&:hover {
+				.product__image {
+					&--first {
+						visibility: hidden;
+						opacity: 0;
+						backface-visibility: hidden;
+					}
+
+					&--sec {
+						visibility: visible;
+						opacity: 1;
+
+						&:not([src]) {
+							color: transparent;
+						}
+					} 
+				}
+			}
+		}
+	}
+
+	&__image-container {
+		@extend %base_transition;
+		@extend #{$module-name}__link;
+		display: block;
+		position: relative;
+		padding-top: 100%;
+		overflow: hidden;
+	}
+
+	&__image {
+		@extend %base_transition;
+		display: block;
+		margin: 0 auto;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		backface-visibility: hidden;
+		width: auto;
+		
+		// Lazy Loading
+		&[src*='img/loading.gif'] {
+			width: 24px;
+			padding: 0;
+		}
+
+		&--first {
+			visibility: visible;
+			opacity: 1;
+		}
+
+		&--sec {
+			visibility: hidden;
+			opacity: 0;
+
+			&:not([src]) {
+				color: transparent;
+			}
+		}
+	}
+
+	&__no-image {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		@include rem(font-size, 70);
+		color: $bg-cinza;
+
+		&--small {
+			@include rem(font-size, 35);
+		}
+	}
+
+	&__name {
+		color: $texto-escuro;
+		font-family: $fonte-2;
+		@include rem(margin-bottom, 10);
+		@include rem(font-size, 16);
+	}
+
+	&__info {
+		@include rem(padding, 10);
+
+		@include bp(min-width, $bp-lg + 1) {
+			@include rem(padding, 20);
+		}
+	}
+
+	&__additional-message {
+		@include rem(margin-bottom, 10);
+		display: none;
+	}
+
+	&__offer {
+		@include rem(margin, 0 0 7);
+
+		#{$module-name}__label--sale {
+			@extend %base_shadow;
+			margin-bottom: 0;
+			position: relative;
+			vertical-align: text-bottom;
+			margin-left: 0.5em;
+			@include rem(top, -1);
+
+			&:before {
+				position: absolute;
+				content: "";
+				left: 0;
+				top: 50%;
+				transform: translateY(-50%) translateX(-48%) rotate(45deg);
+				@include square(7);
+				background-color: $primaria;
+				@include rem(border-radius, 2 0 0 0);
+				z-index: 0;
+			}
+		}
+	}
+
+	&__price {
+		display: block;
+		font-weight: normal;
+		@include rem(font-size, 16);
+
+		&__label {
+			@extend %visuallyhidden;
+		}
+
+		&__loader {
+			@include rem(max-width, 16);
+			@include rem(margin, 7 0);
+		}
+
+		// Variants
+		&--old {
+			color: $texto-cinza;
+			text-decoration: line-through;
+			display: inline-block;
+			margin-right: 0.25em;
+			@include rem(font-size, 12);
+		}
+
+		&--regular {
+			color: $primaria;
+			font-family: $fonte-2;
+		}
+		
+		&--special {
+			color: $primaria;
+			display: inline-block;
+			font-family: $fonte-2;
+		}
+	}
+
+	&__from {
+		display: inline-block;
+
+		+ #{$module-name}__price--regular {
+			display: inline-block;
+		}
+	}
+
+	&__payment {
+		@include rem(margin-top, 0);
+		@include rem(font-size, 12);
+		
+		.txt-corparcelas {
+		}
+
+		.preco-parc2 {
+		}
+
+		.color {
+		}
+
+		.preco-de {
+		}
+
+		.txt-cadaparcela,
+		.txt-cadaparcelas {
+		}
+
+		.operadora {
+		}
+
+		> br:first-child {
+			display: none;
+		}
+	}
+
+	&__status {
+		// Variants
+		&--upon-request {
+			color: $primaria;
+			font-weight: bold;
+
+			&:visited {
+				color: $primaria;
+			}
+		}
+
+		&--out-of-stock {
+			font-style: italic;
+			color: $texto-cinza;
+		}
+
+		&--unavailable {
+			font-style: italic;
+		}
+	}
+
+	&__labels {
+		position: absolute;
+		@include rem(top, 20);
+		z-index: 3;	
+		pointer-events: none;		
+		
+		@include bp(max-width, $bp-md) {
+			@include rem(top, 10);
+			transform: scale(0.8);
+		}
+
+		&--left {
+			@include rem(left, 20);
+			
+			@include bp(max-width, $bp-md) {
+				@include rem(left, 10);
+				transform-origin: top left;
+			}
+		}
+
+		&--right {
+			@include rem(right, 20);
+
+			.product__label {
+				margin-right: 0;
+				margin-left: auto;
+			}
+
+			@include bp(max-width, $bp-md) {
+				@include rem(right, 10);
+				transform-origin: top right;
+			}
+		}
+
+		// Versão inline, para página de produto
+		&--inline {
+			position: static;
+			font-size: 0;
+			display: none;
+
+			&.product__labels--right {
+				@include rem(margin-bottom, 15);
+			}
+
+			.product__label {
+				@include rem(font-size, 12);
+				display: inline-block;
+				@include rem(margin, 0 5 5 0);
+				vertical-align: top;
+			}
+		}
+	}
+
+	&__label {
+		display: block;
+		@include rem(margin-bottom, 5);
+		width: max-content;
+		
+		img {
+			width: auto;
+			display: block;
+		}
+
+		// Variants
+		&--additional {
+		}
+
+		&--featured {
+		}
+
+		&--new {
+		}
+
+		&--free-shipping {
+		}
+
+		&--sale {
+			text-align: center;
+			@include rem(border-radius, 3);
+			@include rem(font-size, 12);
+			@include rem(padding, 2 8 2);
+			color: $texto-claro;
+			background-color: $primaria;
+			position: relative;
+			display: inline-block;
+		}
+	}
+
+	&__rating {
+		font-size: 0;
+		@include rem(margin, 7 0);
+	}
+	
+	&__star {
+		color: tint($texto-cinza, 30%);
+		@include rem(font-size, 12);
+		@include rem(margin-right, 2);			
+
+		&.is-active {
+			color: $primaria;	
+		}
+	}
+
+	&__buy {
+		@include rem(margin-top, 10);
+		@include rem(padding-top, 10);
+
+		@include separator-border('top');
+
+		.lista_cor_variacao {
+			> li {
+				img {
+					@include rem(max-width, 38);
+
+					@include bp(max-width, $bp-md) {
+						@include rem(max-width, 24);
+						@include rem(padding, 1)
+					}
+				}
+			}
+		}
+
+		.select {
+			width: 100%;
+			background-color: $bg-claro;
+		}
+	}
+	
+	&__form {
+		margin: 0;
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		flex-flow: row wrap;
+		vertical-align: middle;
+		width: 100%;
+
+		label {
+			width: 100%;
+		}
+	}
+
+	&__quantity {
+		background-color: $bg-claro;
+		@include rem(margin, 0 7 0 0);
+		max-width: 35%;
+		padding-right: 0;
+
+		@include bp(min-width, $bp-md + 1) {
+			max-width: 25%;
+		}
+	}
+
+	&__button {
+		margin: 0;
+		max-width: 100%;
+		flex: 1 auto;
+		@include rem(padding, 0 5);
+	}
+
+	&__view {
+		margin: 0;
+		width: 100%;
+		@include rem(padding, 0 5);
+	}
+
+	&__color {
+		@extend #cor_nome;
+	}
+
+	&__variant-label {
+		color: $texto-escuro;
+		@include rem(font-size, 16);
+	}
+
+	// Modifier
+	&--compact {
+		box-shadow: none;
+
+		#{$module-name}__image-outline {
+			padding: 0;
+		}
+		
+		#{$module-name}__info {
+			@include rem(padding, 10 0);
+		}
+
+		#{$module-name}__labels {
+			@include rem(top, 10);
+			transform: scale(0.8);
+
+			&--left {
+				@include rem(left, 10);
+				transform-origin: top left;
+			}
+
+			&--right {
+				@include rem(right, 10);
+				transform-origin: top right;
+			}
+		}
+	}
+
+	&--list {
+		display: flex;
+		flex-flow: row;
+
+		#{$module-name}__image-outline {
+			flex: 0 0 100px;
+			margin-bottom: 0;
+
+			@include bp(min-width, $bp-sm + 1) {
+				flex: 0 0 180px;
+			}
+
+			@include bp(min-width, $bp-md + 1) {
+				flex: 0 0 240px;
+			}
+			
+			#{$module-name}__labels {
+				@include bp(max-width, $bp-md) {
+					display: none;					
+				}
+			}
+		}
+
+		#{$module-name}__labels--inline {
+			@include bp(max-width, $bp-md) {
+				display: block;
+			}
+		}
+
+		#{$module-name}__info {
+			flex: 1 auto;
+		}
+
+		#{$module-name}__additional-message {
+			display: block;
+		}
+
+		#{$module-name}__buy {
+			@include bp(min-width, $bp-md + 1) {
+				@include rem(max-width, 260);				
+			}
+		}
+	}
+
+	&__compare-link {
+		width: 100%;
+		@include rem(margin, 7 0 0 0);
+		display: block;
+		color: inherit;
+		
+		&:visited {
+			color: inherit;
+		}
+
+		&:before {
+			@extend .smart-filter__text:before;
+		}
+
+		&--checked {
+			color: $primaria;
+
+			&:before {
+				content: $icon-check-square;
+			}
+		}
+		
+		&.compare-hidden {
+			display: none;
+		}
+	}
+}
+

@@ -1,0 +1,22 @@
+// Este arquivo serve para importar todos os módulos básicos da folha
+// de estilo, como resets, elementos básicos de interface, etc.
+
+// Resets
+@import "core/reset-tray";
+@import "core/resets";
+
+// Classes Acessórias
+@import "core/classes-acessorias";
+
+// Elementos Básicos
+@import "core/forms";
+@import "core/botoes";
+
+// Tipografia Básica
+@import "core/tipografia";
+
+// Inicialização de Grids
+@import "core/grids";
+
+// Estilos para impressão
+@import "core/print";

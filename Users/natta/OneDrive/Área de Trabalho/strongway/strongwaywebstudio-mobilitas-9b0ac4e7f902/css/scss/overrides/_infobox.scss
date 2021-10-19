@@ -1,0 +1,44 @@
+.tray-messages {
+	position: fixed;
+	@include rem(left, 10);
+	@include rem(right, 10);
+	@include rem(bottom, 10);
+	z-index: 98;
+
+	@include bp(min-width, 391px) {
+		left: auto;
+		@include rem(right, 20);
+		@include rem(bottom, 20);
+		@include rem(max-width, 350);
+		width: 100%;
+	}
+
+	.infobox {
+		@extend %base_shadow;
+		@include rem(padding, 10);
+		@include rem(border-radius, 3);
+		@include rem(font-size, 13);
+		@include rem(margin-top, 10);
+		border: none;
+
+		&.danger {
+			background-color: $bg-cinza;
+			color: $texto-escuro;
+		}
+
+		span {
+			@include rem(font-size, 13);
+		}
+
+		a,
+		a:visited {
+			color: $link-color;
+			font-weight: bold;
+			text-decoration: underline;
+
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+}

@@ -1,0 +1,35 @@
+// Escreve propriedades em rems, com fallback para pixels
+// Depende de: _rems.scss, _strip-unit.scss 
+@mixin rem($property, $values) {
+	$max: length($values);
+	$pxValues: ();
+	$remValues: ();
+
+	@each $value in $values {
+		@if $value == 0 or $value == auto {
+			// Apenas dá fallback se o IE 8- é suportado
+			@if $ie-support == true {
+				$pxValues: append($pxValues, $value);
+			}
+			
+			$remValues: append($remValues, $value);
+		}
+
+		@else {
+			$value: strip-unit($value);
+			
+			// Apenas dá fallback se o IE 8- é suportado
+			@if $ie-support == true {
+				$pxValues: append($pxValues, $value + px);
+			}
+			
+			$remValues: append($remValues, rems($value,$basefont));
+		}
+	}		
+
+	@if $ie-support == true {
+		#{$property}: $pxValues; 
+	}
+	
+	#{$property}: $remValues; 
+}

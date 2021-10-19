@@ -1,0 +1,96 @@
+//Abas
+.tabs {
+	width: 100%;
+	@include rem(margin, 0 auto 15);
+
+	ul.tabs-list {
+		margin: 0 0 0;
+		list-style: none;
+		font-family: $fonte-2;
+
+		display: flex;
+		align-items: flex-start;
+		flex-flow: column wrap;			
+
+		@include bp(min-width, $bp-sm + 1) {
+			align-items: flex-end;
+			flex-flow: row wrap;			
+		}
+
+		li {
+			margin: 0;
+			text-align: left;
+			float: left;
+			width: 100%;
+			@include rem(font-size, 14);
+
+			@include bp(min-width, $bp-md + 1) {
+				@include rem(font-size, 20);
+				width: auto;
+
+				&:first-child {
+					a {
+						padding-left: 0;
+					}
+				}			
+
+				&:nth-child(5n+1) {
+					clear: left;
+				}
+			}
+
+			a {
+				display: block;
+				color: $texto-cinza;
+				@include rem(padding, 15 10);
+				text-decoration: none;
+				font-weight: normal;
+				cursor: pointer;
+				font-size: 100%;
+				position: relative;
+				border: none;
+				border-width: 0;
+				@include separator-border('top');
+
+				@include bp(min-width, $bp-md + 1) {
+					@include rem(padding, 10 20 10 0);
+					border-top: 0;
+				}
+				
+				&:hover {
+					color: $texto-escuro;
+				}
+			}
+
+			&.is-active {
+				a {
+					color: $texto-escuro;
+				}
+			}
+		}
+	}
+	
+	&__container {
+		margin: 0;
+		@include rem(padding-top, 10);
+	}
+}
+
+.tab {
+	&__header {
+	}
+
+	&__body {
+		
+	}
+}
+
+
+.js {
+	.tabs .current-info,
+	.tabs .accessibletabsanchor,
+	.tabs .tabhead /*position each individual tab's heading (default class .tabhead) off-screen*/ {
+		position: absolute;
+		left: -999em;
+	}
+}

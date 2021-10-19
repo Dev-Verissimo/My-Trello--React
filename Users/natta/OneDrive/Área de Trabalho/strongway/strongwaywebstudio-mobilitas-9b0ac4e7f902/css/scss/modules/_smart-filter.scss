@@ -1,0 +1,206 @@
+.smart-filter {
+	@include rem(margin-bottom, 15);
+
+	@include bp(min-width, $bp-md + 1) {
+		@include rem(margin-bottom, 30);
+	}
+
+	&__applied {
+		@extend %base_box;
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+
+		@include bp(max-width, $bp-md) {
+			border-top-right-radius: 0;
+			border-top-left-radius: 0;
+		}
+	}
+
+	&__not-applied {
+		@extend %base_box;
+		background-color: rgba($cinza-1, 0.9);
+	}
+
+	&__applied + &__not-applied {
+		border-top-right-radius: 0;
+		border-top-left-radius: 0;
+	}
+
+	&__form {
+		@include rem(margin-bottom, 10);
+
+		@include bp(min-width, $bp-md + 1) {
+			margin: 0;
+			border: none;
+			padding: 0;
+		}
+
+		&.is-hidden {
+			display: none;
+		}	
+	}
+
+	&__toggle {
+		width: 100%;
+		margin-bottom: 0;
+
+		@include bp(min-width, $bp-md + 1) {
+			height: 0;
+			opacity: 0;
+			overflow: hidden;
+			position: absolute;
+		}
+
+		&.is-active,
+		&.is-active:hover,
+		&.is-active:focus,
+		&.is-active:active {
+			background-color: $bg-cinza;
+			border-color: $bg-cinza;
+			color: $texto-cinza;
+			border-bottom-right-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+	}
+
+	&__box {
+		@include rem(padding-top, 20);
+		@include rem(margin-bottom, 20);
+		@include separator-border('top');
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+
+	&__title {
+		@include base-headings;
+		@include h4;
+	}
+
+	&__sub-title {
+		@include rem(font-size, 14);
+		text-transform: none;
+		@include rem(margin-bottom, 10);
+		color: $texto-escuro;
+		font-family: $fonte-2;
+	}
+
+	&__label {
+		vertical-align: baseline;
+	}
+
+	&__thumb {
+		@include rem(max-width, 30);
+		border: 2px solid $cinza-4;
+		@include rem(border-radius, 3);
+		@include rem(margin, 0 5 5 0);
+		vertical-align: middle;
+		height: auto;
+		overflow: hidden;
+	}
+	
+	&__text {
+		vertical-align: middle;
+		
+		// Fake Checkbox
+		&:before {
+			@extend %icons_theme;
+			content: $icon-square;
+			vertical-align: middle;
+			position: relative;
+			@include rem(top, -1);
+			@include rem(margin-right, 5);
+			text-align: center;
+			@include rem(font-size, 16);
+		}
+	}
+
+	&__applied-list {
+	}
+
+	&__applied-item {
+		@include rem(margin-bottom, 5);
+		text-transform: uppercase;
+		font-weight: bold;
+		color: $primaria;
+
+		&:visited {
+			color: $primaria;
+		}
+	}
+
+	&__remove {
+		color: inherit;
+		font-weight: bold;
+		@include rem(margin-left, 3);
+		@include rem(padding, 1);
+		display: inline-block;
+		text-align: center;
+
+		&:visited {
+			color: inherit
+		}
+
+		&:hover {
+			color: inherit;
+			background-color: $bg-cinza;
+		}
+	}
+
+	&__list {
+	}
+	
+	&__item {
+		@include rem(margin-bottom, 5);
+
+		&:hover {
+			.smart-filter__text {
+				color: $texto-cinza;
+
+				&:before {
+				}
+			}
+		}
+	}
+	
+	&__link {
+		color: $primaria;
+		text-decoration: underline;
+
+		&:visited {
+			color: $primaria;
+		}
+		
+		&:hover {
+			text-decoration: none;
+		}
+	}
+
+	&__checkbox {
+		@extend %visuallyhidden;
+
+		&:focus {
+			+ .smart-filter__text {
+				color: $primaria;
+				
+				&:before {
+				}
+			}
+		}
+
+		&:checked {
+			+ .smart-filter__text {
+				color: $primaria;
+				
+				&:before {
+					content: $icon-check-square;
+				}
+			}
+		}
+	}
+
+	&__button {
+		margin: 0;
+	}
+}

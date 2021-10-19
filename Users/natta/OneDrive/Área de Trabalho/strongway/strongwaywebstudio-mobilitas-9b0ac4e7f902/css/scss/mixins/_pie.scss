@@ -1,0 +1,9 @@
+// Mixin para adição do PIE.htc
+@mixin pie($position: relative) {
+	behavior: '#{$url}/template/htc/PIE.htc';
+	
+	// Permite escolher que tipo de posicionamento o elemento terá. No mínimo "relative" ele deve ser
+	@if $position != relative {
+		position: $position;		
+	}
+}

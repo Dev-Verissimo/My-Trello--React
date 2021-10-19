@@ -1,0 +1,262 @@
+// Compre Junto
+// ===================
+.comprejunto_title {
+	text-align: center;
+	font-weight: bold;
+	@include rem(margin-bottom, 10);
+	@include rem(font-size, 16);
+}
+
+#ProdBlockCompreJunto {
+	@include rem(margin-bottom, 30);
+
+	#ProdAbas {
+		display: none;
+	}
+}
+
+.compreJunto {
+	padding-left: 0;
+	margin: 0 auto;
+
+	> li {
+		@extend %base_box;
+		@include rem(margin-bottom, 15);
+
+		.cpClear {
+			display: none;
+		}
+
+		div.plus {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 3%;
+			@include rem(font-size, 30);
+			padding: 0;
+			font-weight: normal;
+			margin-top: 0;
+			vertical-align: middle;
+			float: none;
+			color: $texto-escuro;
+
+			@include bp(max-width, $bp-md) {
+				display: none;
+			}
+
+			&:nth-child(7n-1) {
+				display: none;
+			}
+		}
+
+		div.produto {
+			display: flex;
+			flex-flow: row wrap;
+			flex: 1 0 29.33333%;
+			vertical-align: top;
+			float: none;
+			border: 1px solid tint($cinza-2, 50%);
+			@include rem(padding, 15);
+			@include rem(border-radius, 3);
+			margin: 1%;
+
+			@include bp(max-width, $bp-md) {
+				@include rem(padding, 10);
+				width: 48%;
+			}
+
+			> span {
+				height: auto;
+				display: block;
+				@include rem(margin-bottom, 5);
+				width: 100%;
+				
+				// Container da imagem do produto
+				> div {
+					@include rem(max-width, 240);
+					@include rem(margin, 0 auto);
+					height: auto;
+					position: relative;
+					background-color: $bg-claro;
+				}
+			}
+
+			> div {
+				text-align: left;
+				margin: 0 auto;
+				@include rem(margin-top, 5); 
+				width: 100%;
+				@include rem(max-width, 240);
+			}
+
+			.select, .text {
+				@include rem(height, 35);
+			}
+
+			img {
+			}
+		}
+		
+		&:last-child {
+			margin-bottom: 0;
+			border-bottom: 0;
+		}
+	}
+}
+
+.fotosCompreJunto {
+	@extend %clearfix;
+	width: auto;
+	float: none;
+	margin-bottom: 0;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: stretch;
+	justify-content: center;
+
+	@include bp(max-width, $bp-md) {
+		@include rem(padding, 10);
+		@include rem(border-radius, 3);
+		border: 2px solid $bg-cinza;
+	}
+
+	.onVar {
+		@include rem(font-size, 14);
+	}
+
+	.select {
+		
+	}
+
+	.cpClear {
+		@include bp(max-width, $bp-md) {
+			display: none;
+		}
+	}
+
+	@include bp(min-width, $bp-md) {
+		float: left;
+		width: 64.66667%;
+	}
+
+	.produto {
+		
+	}
+
+	.unidades_topo {
+		margin: 0;
+		font-size: 0;
+	}
+
+	.unidades_valor,
+	.unidades_desc {
+		@include rem(font-size, $basefont);
+		color: $texto-cinza;
+	}
+}
+
+.precoCompreJunto {
+	width: auto;
+	padding: 0;
+	border: 0;
+	height: auto;
+	float: none;
+	@include rem(font-size, 16);
+
+	@include bp(max-width, $bp-md) {
+		margin-top: #{$base_lineheight}em;
+	}
+	
+	@include bp(min-width, $bp-md) {
+		width: 31.33333%;
+		float: right;
+	}
+	
+	// Título do Combo
+	> div > strong {
+		font-weight: normal;
+		font-family: $fonte-2;
+		@include rem(font-size, 20);
+		display: block;
+		text-transform: none;
+		color: $texto-escuro;
+	}
+
+	.unidades_valor {
+		font-weight: bold;
+	}
+
+	a {
+		font-weight: normal;
+	}
+
+	ul {
+		padding: 0;
+		font-weight: bold;
+
+		strong {
+		   font-size: 100%;
+		}
+
+		span {
+			font-weight: bold;
+		}
+		
+		li {
+			text-align: right;
+			color: $texto-escuro;
+
+			&.comprejuto_preco { // é com erro de ortografia mesmo
+				span {
+				}
+			}
+
+			&.comprejunto_preco2 {
+				strong {
+					&.PrecoPrincipal {
+						color: $texto-escuro;
+						font-family: $fonte;
+					}                   
+				}
+			}
+
+			&.comprejunto_economize {
+				color: $primaria;
+				
+				span {
+				}
+			}
+		}
+	}
+	
+	.comprejunto_botao {
+		@include rem(margin-top, 10);
+		@extend %clearfix;
+		
+		.botao-commerce {
+			@extend %base_bt;
+			font-weight: normal;
+			@include rem(font-size, $basefont);
+			margin-right: 0;
+			
+			.botao-commerce-img {
+				font-weight: normal;
+			}
+
+			&:before {
+			}
+			
+			&:hover {
+			}
+		}
+	}
+}
+
+.precosCompreJunto {
+	@include rem(margin-top, 30);
+
+	li {
+		color: $cinza-3;
+	}
+}
+// ===================

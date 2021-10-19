@@ -1,0 +1,129 @@
+{% if products|length > 0 %}
+	{# Se não é declarado o nível do cabeçalho do showcase, assume-se que é do nivel 2 #}
+	{% if not showcase_heading_level %}
+		{% set showcase_heading_level = 2 %}
+	{% endif %}
+	
+	{# Se o nível do cabeçalho for menor que 6... #}
+	{% if showcase_heading_level < 6 %}
+		{# ... o nível do cabeçalho do produto ainda pode ser numérico #}
+		{% set product_heading_level = 'h' ~ (showcase_heading_level + 1) %}
+	{% else %}
+		{# Se for maior que 6, não há um h7, então o cabeçalho do produto é 'strong' #}
+		{% set product_heading_level = 'strong' %}
+	{% endif %}
+
+	{% set showcase_id = random() %}
+
+	<div class="showcase" id="showcase-{{ showcase_id }}-container">
+		{% if showcase_title %}
+			<h{{ showcase_heading_level }} class="showcase__title">
+				{{ showcase_title }}
+			</h{{ showcase_heading_level }}>
+		{% endif %}
+
+		<div class="clearfix {{ (grid_container and not is_slider) ? 'grid-container' : null }}">
+			{% if column_size == 'small' %}
+				{% set column_classes = 'b-xs-6 b-md-3' %}
+			{% else %}
+				{% set column_classes = 'b-xs-6 b-md-4' %}
+			{% endif %}
+
+			{% if is_slider %}
+				<div class="showcase__slider" id="showcase-{{ showcase_id }}">
+			{% endif %}
+			
+				{% for product in products %}
+					{% set clear_classes = '' %}
+					
+					{% if loop.index % 2 == 1 %}
+						{% set clear_classes = clear_classes ~ ' b-xs-c b-sm-c' %}
+					{% endif %}
+					
+					{% if column_size == 'small' %}
+						{% if loop.index % 4 == 1 %}
+							{% set clear_classes = clear_classes ~ ' b-md-c b-lg-c b-xl-c' %}
+						{% endif %}
+					{% else %}
+						{% if loop.index % 3 == 1 %}
+							{% set clear_classes = clear_classes ~ ' b-md-c b-lg-c b-xl-c' %}
+						{% endif %}
+					{% endif %}
+					
+					{% if not is_slider %}
+						<div class="grid-spacer {{ column_classes }} {{ clear_classes }}">
+					{% else %}
+						<div class="showcase__slide grid-spacer {{ column_classes }} {{ clear_classes }}">
+							{% set prevent_lazy_load = true %}
+					{% endif %}
+						{% element 'snippets/product' {
+							"product": product,
+							"heading_level": product_heading_level,
+							"prevent_lazy_load": prevent_lazy_load,
+							"prevent_buy": prevent_buy,
+							"prevent_timer": prevent_timer,
+							"prevent_schema": prevent_schema,
+							"is_slider": is_slider
+						} %}
+					</div>
+				{% endfor %}
+
+			{% if is_slider %}
+				</div>
+
+				<script>
+					g.actions['showcase-{{ showcase_id }}'] = function () {
+						jQuery( function ($) {
+							//===============
+							//  SLIDER DE PRODUTOS
+							//===============
+							if ( $('#showcase-{{ showcase_id }} .showcase__slide').length > 0 ) {
+								$('#showcase-{{ showcase_id }}').on('init', function (slick) {
+									$(slick.currentTarget).find('.showcase__slide').removeClass('grid-spacer b-xs-c b-sm-c b-md-c b-lg-c b-xl-c');
+
+									setTimeout( function () {
+										$(slick.currentTarget).adjustHeights({
+											selector: '.product__info-inner'
+										});
+									}, 1000)
+								})
+
+								$('#showcase-{{ showcase_id }}').slick({
+									slide: '.showcase__slide',
+									slidesToShow: 2,
+									slidesToScroll: 2,
+									adaptiveHeight: true,
+									mobileFirst: true,
+									respondTo: 'window',
+									infinite: false,
+									dots: true,
+									lazyload: 'ondemand',
+									prevArrow: '<button type="button" class="slick-prev" aria-label="Anterior"><span class="icon icon-chevron-left slick-prev-icon"></span></button>',
+									nextArrow: '<button type="button" class="slick-next" aria-label="Pr&oacute;ximo"><span class="icon icon-chevron-right slick-prev-icon"></span></button>',
+
+									responsive: [
+										{
+											breakpoint: g.bp['sm'],
+											settings: {
+												slidesToShow: 2,
+												slidesToScroll: 2,
+											}
+										},
+										{
+											breakpoint: g.bp['md'],
+											settings: {
+												slidesToShow: 4,
+												slidesToScroll: 4,
+											}
+										},
+									]
+								});
+							}
+						});						
+					};
+				</script>
+			{% endif %}
+		</div>
+	</div>
+
+{% endif %}

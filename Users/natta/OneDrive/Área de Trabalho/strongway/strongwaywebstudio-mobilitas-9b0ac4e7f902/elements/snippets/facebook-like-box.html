@@ -1,0 +1,31 @@
+{# Facebook Like Box #}
+{% if Translation('ag_facebook') or settings.social_facebook_url %}
+	{% if Translation('ag_facebook') %}
+		{% set facebook_url = Translation('ag_facebook') %}
+	{% endif %}
+	{% if settings.social_facebook_url %}
+		{% set facebook_url = settings.social_facebook_url %}
+	{% endif %}
+{% endif %}
+
+{%
+	if facebook_url
+%}
+	<aside class="social">
+		<h4 class="visuallyhidden">
+			Fanpage no Facebook
+		</h4>
+
+		{% if settings.is_fanpage_enabled and facebook_url %}
+			<div class="social__fanpage-container">
+				<div class="fb-page" data-href="{{ facebook_url }}" data-small-header="true" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+					<blockquote cite="{{ facebook_url }}" class="fb-xfbml-parse-ignore">
+						<a href="{{ facebook_url }}">
+							Fanpage {{ store.name }}
+						</a>
+					</blockquote>
+				</div>
+			</div>
+		{% endif %}
+	</aside>
+{% endif %}

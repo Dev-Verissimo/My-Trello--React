@@ -1,0 +1,87 @@
+.featured-categories-slider {
+	@include rem(margin-bottom, 30);
+	display: flex;
+	flex-flow: row wrap;
+	align-items: stretch;
+	justify-content: flex-start;
+
+	&.slick-initialized {
+		@include rem(margin, 0 -10 50);
+		display: block;
+
+		.slick-track {
+			@include rem(padding, 5 0);
+		}
+
+		.slick-prev {
+			@include rem(left, 20);
+		}
+
+		.slick-next {
+			@include rem(right, 20);
+		}
+	}
+}
+
+.featured-category {
+	@extend %base_box;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	overflow: hidden;
+	width: percentage((1200-(24*2))/1200);
+	margin-right: percentage(24/1200);
+	margin-bottom: percentage(24/1200);
+	
+	@include bp(min-width, $bp-md + 1) {
+		@include bp(max-width, $bp-lg) {
+			width: percentage(((1200-(24))/2)/1200);
+			flex: 0 0 auto;
+		
+			&:nth-child(2n) {
+				margin-right: 0;
+			}
+		}
+	}
+
+	@include bp(min-width, $bp-lg + 1) {
+		width: percentage(((1200-(24*2))/3)/1200);
+		flex: 0 0 auto;
+		
+		&:nth-child(3n) {
+			margin-right: 0;
+		}
+	}
+
+	.slick-initialized & {
+		@include rem(margin, 0 11 10);
+		display: flex;
+	}
+
+	&__info {
+		flex: 1 auto;
+		@include rem(padding-right, 15);
+	}
+
+	&__name {
+		@include h4;
+		color: $texto-escuro;
+	}
+
+	&__excerpt {
+		margin-bottom: 1.5em;
+	}
+
+	&__button {
+		
+	}
+
+	&__image {
+		max-width: 100px;
+		flex: 0 0 auto;
+
+		@include bp(min-width, $bp-sm + 1) {
+			max-width: 140px;
+		}
+	}
+}

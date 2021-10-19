@@ -1,0 +1,83 @@
+{# Facebook Like Box #}
+{% if Translation('ag_facebook') or settings.social_facebook_url %}
+	{% if Translation('ag_facebook') %}
+		{% set facebook_url = Translation('ag_facebook') %}
+	{% endif %}
+	{% if settings.social_facebook_url %}
+		{% set facebook_url = settings.social_facebook_url %}
+	{% endif %}
+{% endif %}
+
+{%
+	if facebook_url
+	or Translation('ag_twitter')
+	or settings.social_twitter_url
+	or settings.social_youtube_url
+	or settings.social_instagram_url
+	or settings.social_pinterest_url 
+%}
+	<aside class="social {{ modifier ? 'social--' ~ modifier }}">
+		<h4 class="visuallyhidden">
+			Redes Sociais
+		</h4>
+
+		<ul class="social__icons">
+			{# Facebook #}
+			{% if facebook_url %}
+				<li class="social__item">
+					<a class="social__link" href="{{ facebook_url }}" target="_blank" rel="noreferrer external">
+						<span class="social__icon icon-facebook-official"></span>
+						<span class="visuallyhidden">Facebook</span>
+					</a>
+				</li>
+			{% endif %}
+
+			{# Twitter #}
+			{% if Translation('ag_twitter') %}
+				{% set twitter_url = Translation('ag_twitter') %}
+			{% endif %}
+			{% if settings.social_twitter_url %}
+				{% set twitter_url = settings.social_twitter_url %}
+			{% endif %}
+
+			{% if twitter_url %}
+				<li class="social__item">
+					<a class="social__link" href="{{ twitter_url }}" target="_blank" rel="noreferrer external">
+						<span class="social__icon icon-twitter"></span>
+						<span class="visuallyhidden">Twitter</span>
+					</a>
+				</li>
+			{% endif %}
+
+			{# Pinterest #}
+			{% if settings.social_pinterest_url %}
+			<li class="social__item">
+				<a class="social__link" href="{{ settings.social_pinterest_url }}" target="_blank" rel="noreferrer external">
+					<span class="social__icon icon-pinterest-p"></span>
+					<span class="visuallyhidden">Pinterest</span>
+				</a>
+			</li>
+			{% endif %}
+		
+			{# Youtube #}
+			{% if settings.social_youtube_url %}
+				<li class="social__item">
+					<a class="social__link" href="{{ settings.social_youtube_url }}" target="_blank" rel="noreferrer external">
+						<span class="social__icon icon-youtube-play"></span>
+						<span class="visuallyhidden">Youtube</span>
+					</a>
+				</li>
+			{% endif %}
+
+			{# Instagram #}
+			{% if settings.social_instagram_url %}
+				<li class="social__item">
+					<a class="social__link" href="{{ settings.social_instagram_url }}" target="_blank" rel="noreferrer external">
+						<span class="social__icon icon-instagram"></span>
+						<span class="visuallyhidden">Instagram</span>
+					</a>
+				</li>
+			{% endif %}
+		</ul>
+	</aside>
+{% endif %}

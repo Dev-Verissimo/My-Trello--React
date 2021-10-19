@@ -1,0 +1,140 @@
+.page--depoimentos {
+	h1.color {
+		@include h2;
+
+		+ br {
+			display: none;
+		}
+	}
+
+	.board {
+		+ hr {
+			display: none;
+		}
+	}
+
+	hr {
+		+ .board {
+			display: none;
+		}
+	}
+
+	// Caixa e título de depoimento
+	br + h2.color {
+		@extend %base_bt_secondary;
+		@include rem(margin, 0 0 20);
+	}
+
+	.container3 {
+		+ br {
+			display: none;
+		}
+	}
+	
+	#comentario_cliente {
+		@extend %base_box;
+
+		&.is-hidden {
+			height: 0;
+			opacity: 0;
+			overflow: hidden;
+			padding: 0;
+			margin: 0;
+			display: none;
+		}
+
+		br {
+			display: none;
+		}
+
+		.nota_dep,
+		h5 {
+			@include rem(margin-bottom, 5);
+		}
+
+		input[type="text"] {
+			display: block;
+			max-width: 100%;
+		}
+
+		.radio {
+			@include rem(margin-top, -2);
+		}
+	}
+
+	// Botão de Enviar
+	#aviso_depoimento {
+		+ a {
+			@extend %base_bt;
+
+			&:before {
+				content: "Enviar";
+			}
+
+			img {
+				@extend %visuallyhidden;
+			}
+		}
+	}
+
+	// Lista de Depoimentos
+	h2.color {
+		display: none;
+	}
+
+	.editDep {
+		> li {
+			@extend %base_box;
+			border: none;
+
+			h3.color {
+				@extend .dep_nome;
+
+				img {
+					display: block;
+					@include rem(margin-bottom, 5);
+
+					@include bp(min-width, $bp-md + 1) {
+						@include rem(margin-bottom, 10);
+					}
+				}
+			}
+
+			> ul {
+				> li {
+					padding: 0;
+
+					> strong {
+						@extend %visuallyhidden;
+					}
+					
+					// Avaliação
+					&:first-child {
+						@extend .dep_nota;
+						margin-bottom: 0;
+					}
+					
+					// Data
+					&:nth-child(2) {
+						@extend .dep_data;
+						@include rem(margin-bottom, 5);
+
+						@include bp(min-width, $bp-md + 1) {
+							@include rem(margin-bottom, 10);
+						}
+					}
+
+					// Depoimento em si
+					&.dep {
+						padding: 0;
+						border: none;
+					}
+				}
+			}
+		}
+	}
+
+	#texto_captcha{
+		@include rem(width, 130);
+	}
+}

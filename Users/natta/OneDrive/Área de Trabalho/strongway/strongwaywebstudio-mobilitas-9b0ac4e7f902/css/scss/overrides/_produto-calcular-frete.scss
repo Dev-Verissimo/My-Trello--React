@@ -1,0 +1,55 @@
+// Cálculo de Frete
+// ========================
+.produto-calcular-frete {
+	@include rem(padding-top, 20);
+	@include rem(margin-top, 30);
+	@include separator-border('top');
+}
+
+#cepbox {
+	@include rem(padding, 0 0 10);
+	@include rem(margin, 0);
+	border: none;
+	@include rem(font-size, 16);
+	font-weight: normal;
+
+	label {
+		display: inline-block;
+		vertical-align: middle;
+		@include rem(margin-bottom, 7);
+	}
+	
+	.botao-simular-frete {
+		@extend %base_bt_secondary;
+		margin: 0;
+		@include rem(margin, 0 0 7 5);
+	}
+
+	.text,
+	[type="text"],
+	.text:focus,
+	[type="text"]:focus {
+		display: inline-block;
+		width: auto;
+		@include rem(margin-bottom, 7);
+	}
+}
+
+#cep_1 {
+	@supports (-webkit-touch-callout: none) {
+		@include rem(min-width, 72);
+	}
+}
+	
+#cep_2 {
+	@supports (-webkit-touch-callout: none) {
+		@include rem(min-width, 58);
+	}
+}
+
+.cepbox-text {
+	@include rem(font-size, 16);
+	font-weight: normal;
+	@include rem(margin-bottom, 7);
+}
+// ========================

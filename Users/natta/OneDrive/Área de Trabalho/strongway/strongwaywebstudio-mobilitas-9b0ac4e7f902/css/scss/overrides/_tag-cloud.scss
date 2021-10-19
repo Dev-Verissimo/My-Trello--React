@@ -1,0 +1,17 @@
+#NavTagCloud {
+	position: relative;
+
+	.fundo_nuvem {
+		@extend .page__title;
+	}
+
+	span {
+		text-align: inherit;
+		@extend %base_box;
+		@include rem(margin-bottom, 30);
+	}
+
+	a:first-child {
+		margin-left: 0;
+	}
+}

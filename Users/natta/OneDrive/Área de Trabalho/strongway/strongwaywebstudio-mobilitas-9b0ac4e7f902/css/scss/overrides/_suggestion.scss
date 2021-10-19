@@ -1,0 +1,133 @@
+.slcted {
+	background-color: $bg-cinza;
+}
+.cl {
+	clear: both;
+	margin: 0!important
+}
+.idp {
+	font-weight: normal;
+}
+
+.is-hidden {
+	display: none
+}
+
+.titlep {
+	font-weight: normal;
+}
+
+.suggestion {
+	@extend %base_box;
+	border: none;
+	border-top: 0;
+	z-index: 999;
+	max-width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
+	position: absolute;
+	@include rem(right, 10);
+	@include rem(left, 10);
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	overflow-y: auto;		
+	
+	span {
+		display: block;
+		cursor: pointer;
+		@include rem(padding, 4 6);
+		@include rem(margin, 0 -6);
+	}
+
+	@include bp(max-width, $bp-md) {
+		@include rem(margin-bottom, 10);
+	}
+}
+
+.suggestion-words {
+	@include rem(font-size, $basefont);
+	background-color: $bg-claro;
+	@include rem(padding, 0 0 20);
+	@include separator-border();
+		
+	span {
+		border: none;
+		color: $primaria;
+
+		&:hover {
+			background: $bg-cinza;
+		}
+	}
+
+	strong {
+		padding: 0;
+		text-indent: 0;
+		background-color: transparent;
+		text-transform: uppercase;
+	}
+}
+
+.suggestion-products {
+	@extend .suggestion-words;
+	border: 0;
+
+	a {
+		color: $texto-escuro;
+		font-weight: normal
+	}
+	
+	.suggestion-img {
+		@include rem(max-width, 90);
+		width: percentage(120/581);
+		float: left;
+		margin-right: percentage(10/581);
+		height: auto;
+
+		img {
+			border: 1px solid $hr-border-color;
+		}
+	}
+
+	.suggestion-desc {
+		float: left;
+		width: percentage(451/581);
+	}
+
+	span {
+		&:hover {
+			background-color: transparent;
+		}
+	}
+	
+	strong {
+		padding: 0;
+		text-indent: 0;
+		background-color: transparent;
+		text-transform: uppercase;
+	}
+}
+
+.suggestion-title {
+	background-color: transparent;
+	color: $texto-escuro;
+	text-transform: uppercase;
+	display: block;
+	padding: 0;
+	@include rem(margin-bottom, 7);
+	@include rem(font-size, 20);
+	font-family: $fonte-2;
+	font-weight: normal;
+}
+
+.suggestion-product {
+	@include rem(margin-bottom, 20);
+	@include rem(font-size, $basefont);
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+	
+	&:hover {
+		background: transparent;
+	}
+}

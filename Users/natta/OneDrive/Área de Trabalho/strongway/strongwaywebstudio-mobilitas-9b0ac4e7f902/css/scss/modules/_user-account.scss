@@ -1,0 +1,153 @@
+.user-account {
+	display: inline-block; // Fallback
+	display: flex;
+	align-items: stretch;
+
+	@include bp(min-width, $bp-md + 1) {
+		position: relative;
+	}
+
+	&__label {
+		display: none;
+		@include rem(margin-left, 7);
+		font-family: $fonte-2;
+		color: inherit;
+
+		@include bp(min-width, $bp-md + 1) {
+			display: block;
+		}
+	}
+
+	&__close {
+		@extend .cart__close;
+	}
+
+	&__toggle {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: transparent;
+		padding: 0;
+		color: inherit;
+		border-bottom: 3px solid transparent;
+		border-top: 3px solid transparent;
+
+		&:focus {
+			outline: 0;
+		}
+
+		&.is-opened {
+			border-bottom-color: $primaria;
+
+			+ .user-account__dropdown {
+   				transform: translateY(0);
+				visibility: visible;
+				opacity: 1;
+				transition: all 200ms ease-in-out;
+			}
+		}
+	}
+	
+	&__icon {
+		@include rem(font-size, 24);
+		color: $primaria;
+	}
+
+	&__dropdown {
+		@extend %base_dropdown_shadow;
+		background-color: $bg-claro;
+		@include rem(border-radius, 0 0 3 3);
+		@include rem(padding, 20);
+		@include rem(right, 10);
+		@include rem(left, 10);
+		top: 100%;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(20px);
+		transition: all 200ms ease-in-out;
+		position: absolute;
+		z-index: 999;
+
+		@include bp(min-width, $bp-md + 1) {
+			@include rem(width, 300);
+			left: auto;
+			right: 0;
+		}
+
+		@include bp(max-width, $bp-md) {
+			top: calc(100% - 35px);
+		}
+	}
+
+	&__title {
+		color: $texto-escuro;
+		@include rem(font-size, 16);
+		font-family: $fonte-2;
+	}
+	
+	@at-root {
+		input.user-account__input {
+			border-radius: 0;
+			border-color: transparent;
+			border: 0;
+			border-bottom: 1px solid $cinza-2;
+			margin-bottom: 0;
+			color: $texto-escuro;
+			width: 100%;
+
+			&:focus {
+				border-color: $cinza-4;
+			}
+		}
+	}
+
+	&__welcome-message {
+		color: $texto-escuro;
+		@include rem(font-size, 16);
+		font-family: $fonte-2;
+	}
+
+	&__menu {
+		margin-top: 1em;
+		padding-top: 1em;
+		@include separator-border('top');
+	}
+
+	&__menu-listItem {
+		&:not(:last-child) {
+			@include rem(margin-bottom, 10);
+		}
+	}
+
+	&__name {
+		color: $primaria;
+	}
+
+	&__form-wrapper {
+		@include rem(margin-top, 30);
+	}
+
+	&__submit-wrapper {
+		@include rem(margin-top, 20);
+		@include rem(margin-bottom, 0);
+	}
+
+	&__link {
+		color: $texto-escuro;
+		@include rem(font-size, 14);
+
+		&:visited {
+			color: $texto-escuro;
+		}
+
+		&:hover {
+			color: $cinza-5;
+		}
+	}
+
+	&__footer {
+		@include rem(margin-top, 20);
+		@include rem(padding-top, 20);
+		@include separator-border('top');
+	}
+}

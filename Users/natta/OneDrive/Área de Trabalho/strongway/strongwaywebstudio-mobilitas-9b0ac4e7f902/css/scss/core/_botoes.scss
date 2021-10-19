@@ -1,0 +1,47 @@
+// Botões Primários
+.bt {
+	@extend %base_bt;
+
+	&__icon,
+	&__text {
+	}
+
+	&__icon {
+		transform: scale(1.25);
+		display: inline-block;
+		margin-right: 0.25em;
+	}
+
+	&__text + &__icon {
+		margin-left: 0.25em;
+		margin-right: 0;
+	}
+
+	&:visited {
+		color: $bt-color;
+	}
+
+	&--secondary {
+		@extend %base_bt_secondary;
+
+		&:visited {
+			color: $sec-bt-color;
+		}
+	}
+
+	&--highlight {
+		@extend %base_bt_highlight;
+
+		&:visited {
+			color: $dstq-bt-color;
+		}
+	}
+
+	&--whatsapp {
+		@extend %base_bt_whatsapp;
+
+		&:visited {
+			color: $whatsapp-bt-color;
+		}
+	}
+}

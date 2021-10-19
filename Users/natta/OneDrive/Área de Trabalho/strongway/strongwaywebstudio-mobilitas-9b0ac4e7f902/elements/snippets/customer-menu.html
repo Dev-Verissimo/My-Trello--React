@@ -1,0 +1,93 @@
+<nav class="customer-menu">
+	{% if settings.headings == "1" %}
+		<h2 class="visuallyhidden">Menu de Cliente</h2>
+		{% else %}
+		<h1 class="visuallyhidden">Menu de Cliente</h1>
+	{% endif %}
+	
+	{# Toggle usado para abrir e fechar em mobile #}
+	<button
+		class="bt bt--secondary bt--transparent customer-menu__toggle"
+		aria-label="Menu do Cliente"
+		aria-controls="customer-menu"
+		data-expanded="true"
+	>
+		<span class="icon icon-user"></span>
+		<span aria-hidden="true">Menu do Cliente</span>
+	</button>
+
+	<div
+		class="customer-menu__box"
+		id="customer-menu"
+	>
+		{% if settings.headings == "1" %}
+			<h3 class="customer-menu__sub-title">
+				<span class="icon-home"></span>
+				In&iacute;cio
+			</h3>		
+		{% else %}
+			<h2 class="customer-menu__sub-title">
+				<span class="icon-home"></span>
+				In&iacute;cio
+			</h2>		
+		{% endif %}
+
+		<ul class="customer-menu__list">
+			<li><a href="{{ links.central }}">{{ Translation('central_cliente') }}</a></li>
+		</ul>
+
+		{% if settings.headings == "1" %}
+		<h3 class="customer-menu__sub-title">
+			<span class="icon-shopping-cart"></span>
+			{{ Translation('pedidos') }}
+		</h3>
+		{% else %}
+		<h2 class="customer-menu__sub-title">
+			<span class="icon-shopping-cart"></span>
+			{{ Translation('pedidos') }}
+		</h2>
+		{% endif %}
+		
+		<ul class="customer-menu__list">
+			<li><a href="{{ links.orders }}">{{ Translation('central_anteriores') }}</a></li>
+			<li><a href="{{ links.payment_confirm }}">{{ Translation('confirma_pag') }}</a></li>
+			<li><a href="{{ links.orders_tracking }}">{{ Translation('rastrear_pedido') }}</a></li>
+			<li><a href="{{ links.orders_return }}">{{ Translation('central_troca_devolucao') }}</a></li>
+		</ul>
+		
+		{% if settings.headings == "1" %}
+		<h3 class="customer-menu__sub-title">
+			<span class="icon-user"></span>
+			{{ Translation('seu_cadastro') }}
+		</h3>		
+		{% else %}
+		<h2 class="customer-menu__sub-title">
+			<span class="icon-user"></span>
+			{{ Translation('seu_cadastro') }}
+		</h2>		
+		{% endif %}
+		
+
+		<ul class="customer-menu__list">
+			<li><a href="{{ links.account }}">{{ Translation('alterar_cadastro') }}</a></li>
+			<li><a href="{{ links.account_password }}">{{ Translation('central_alterar_senha') }}</a></li>
+		</ul>
+		
+		{% if settings.headings == "1" %}
+		<h3 class="customer-menu__sub-title">
+			<span class="icon-help-circle"></span>
+			{{ Translation('atendimento') }}
+		</h3>		
+		{% else %}
+		<h2 class="customer-menu__sub-title">
+			<span class="icon-help-circle"></span>
+			{{ Translation('atendimento') }}
+		</h2>		
+		{% endif %}
+		
+
+		<ul class="customer-menu__list">
+			<li><a href="{{ links.contact }}">{{ Translation('fale_conosco') }}</a></li>
+		</ul>
+	</div>
+</nav>

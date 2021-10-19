@@ -1,0 +1,92 @@
+// Este arquivo contém classes acessórias, para uso inline. Elas podem
+// ser extendidas também.
+.chromeframe {
+	margin: 0.2em 0;
+	background: #ccc;
+	color: black;
+	padding: 0.2em 0;
+}
+
+// Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p 
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
+	clip: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+	position: static;
+	width: auto;
+}
+
+.clearfix {
+	@extend %clearfix;
+}
+
+.clear {
+	clear: both;	
+}
+
+// Tamanho de fonte
+.extragrande {
+	font-size: 1.5em!important;	
+}
+.grande {
+	font-size: 1.2em!important;	
+}
+.pequeno {
+	font-size: 0.85em!important;	
+}
+
+.extragrande, .grande, .pequeno {
+	line-height:1.5;
+}
+
+// Gera classes utilitárias responsivas
+@include responsive-utilities();
+
+// Serve para centralizar elementos que tenham largura definida
+.centralizado {
+	@extend %clearfix;
+	margin-right: auto!important;
+	margin-left: auto!important;	
+}
+
+// Classes para extender além dos limites da tela
+.extendleft {
+	@include bp(min-width, $bp-md) {
+	    padding-left: 2000px;
+	    margin-left: -2000px;		
+	}
+}
+
+.extendright {
+	@include bp(min-width, $bp-md) {
+    	padding-right: 2000px;
+    	margin-right: -2000px;
+    }
+}
+
+.extendfull {
+    @extend .extendleft;
+    @extend .extendright;
+}
+
+.flex-vcenter {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.arrow-up {
+	@include rem(height, 14);
+    @include rem(width, 26);
+    @include rem(right, 25);
+    @include rem(top, -14);
+	background-image: url('../img/dropdown_arrow-up.png');
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+}
+
+.base-box {
+	@extend %base_box;
+}

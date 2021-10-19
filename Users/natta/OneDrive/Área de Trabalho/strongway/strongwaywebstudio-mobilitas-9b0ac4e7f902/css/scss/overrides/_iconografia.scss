@@ -1,0 +1,29 @@
+.iconografia {
+	@include rem(margin, 15 0);
+	font-size: 0;
+}
+
+.icones {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+	@include rem(margin-right, 5);
+	float: none !important;
+
+	img,
+	.carac-descricao {
+		display: block;
+		@include rem(font-size, 12);
+		@include rem(padding, 3);
+		@include rem(margin, 0 auto 3);
+		border: 1px solid $cinza-2;
+		@include rem(border-radius, 3);
+	}
+}
+
+.carac-descricao {
+}
+
+.carac-valor {
+	@include rem(font-size, 12);
+}

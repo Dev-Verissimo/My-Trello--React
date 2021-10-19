@@ -1,0 +1,49 @@
+.newsletter-form {
+	text-align: left;
+	
+	&__cta {
+		@include rem(font-size, 20);
+		font-family: $fonte-2;
+		
+		@include bp(max-width, $bp-md) {
+			@include rem(font-size, 16);
+			@include rem(margin-bottom, 5);
+		}
+	}
+
+	@at-root {
+		input.newsletter-form__input {
+			margin-bottom: 0;
+			color: $texto-claro;
+			width: 100%;
+
+			@include bp(max-width, $bp-md) {
+				@include rem(margin-bottom, 7);
+			}
+
+			&::-webkit-input-placeholder {
+			   color: $texto-claro;
+			}
+			&:-moz-placeholder {
+			   color: $texto-claro;
+			}
+			&::-moz-placeholder {
+			   color: $texto-claro;
+			}
+			&:-ms-input-placeholder {  
+			   color: $texto-claro;
+			}
+		}
+	}
+
+	&__pot {
+		@extend %visuallyhidden;
+	}
+
+	&__button {
+		@extend %base_bt;
+		@include rem(height, 35);
+		@include rem(line-height, 35);
+		width: 100%;
+	}
+}

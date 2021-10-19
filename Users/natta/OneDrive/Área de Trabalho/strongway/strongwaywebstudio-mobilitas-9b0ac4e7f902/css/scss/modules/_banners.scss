@@ -1,0 +1,83 @@
+.banner {
+	text-align: center;
+
+	&__container {
+		@include rem(margin-bottom, 30);
+		
+		// Modificadores
+		&--home {
+			@include rem(max-width, 1920);
+			@include rem(margin, 0 auto 20);
+			
+			.has-full-width-banner & {
+				@include bp(max-width, 1920px) {
+					@include rem(margin-left, -8);
+					@include rem(margin-right, -8);
+				}
+				
+				.banner__image {
+					border-radius: 0;
+				}
+			}
+
+			.has-banner-under-header & {
+				@include bp(max-width, 1920px) {
+					@include rem(margin-left, -8);
+					@include rem(margin-right, -8);
+				}
+
+				.banner__image {
+					border-radius: 0;
+				}
+			}
+		}
+
+		&--vitrine {
+			margin-bottom: 0;
+		}
+
+		&--titulos {
+			@include rem(margin-bottom, 15);
+		}
+
+		&--bottom {
+			margin-bottom: 0;
+		}	
+	}
+
+	&__slide {
+		display: none;
+
+		&--first {
+			display: block;
+		}
+
+		.slick-initialized & {
+			display: block;
+		}
+	}
+
+	&__link {
+		display: block;
+	}
+
+	&__image {
+		width: 100%;
+		margin: 0 auto;
+		@include rem(border-radius, 3);
+
+		// Lazy Loading
+		&[src*='img/loading.gif'] {
+			width: 44px;
+			@include rem(padding, 10);
+			margin: auto;
+			background-color: #fff;
+			border-radius: 100%!important;
+		}
+	}
+
+	.slick-dots {
+		@include rem(bottom, 15);
+	}
+}
+

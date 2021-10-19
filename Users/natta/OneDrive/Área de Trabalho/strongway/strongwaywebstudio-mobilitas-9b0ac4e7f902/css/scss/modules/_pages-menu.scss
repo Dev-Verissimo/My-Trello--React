@@ -1,0 +1,34 @@
+.pages-menu {
+	@include rem(margin-bottom, 20);
+
+	&__title {
+
+	}
+
+	&__list {
+		@include rem(padding-left, 7);
+		border-left-width: 2px;
+		border-style: solid;
+		border-color: $primaria;
+	}
+
+	&__item {
+		@include rem(margin-bottom, 5);
+		line-height: 1.2;
+	}
+
+	&__link {
+		color: inherit;
+		text-decoration: none;
+		opacity: 0.6;
+		
+		&:visited {
+			color: inherit;
+		}
+
+		&:hover {
+			opacity: 1;
+			text-decoration: underline;
+		}
+	}
+}

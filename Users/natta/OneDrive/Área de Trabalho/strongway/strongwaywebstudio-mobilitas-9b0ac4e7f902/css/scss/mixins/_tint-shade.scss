@@ -1,0 +1,15 @@
+@function tint($color, $percentage:false) {
+	@if $percentage {
+		@return mix(#fff, $color, $percentage);
+	} @else {
+		@return mix(#fff, $color);		
+	}
+}
+
+@function shade($color, $percentage:false) {
+	@if $percentage {
+		@return mix(#000, $color, $percentage);
+	} @else {
+		@return mix(#000, $color);		
+	}
+}

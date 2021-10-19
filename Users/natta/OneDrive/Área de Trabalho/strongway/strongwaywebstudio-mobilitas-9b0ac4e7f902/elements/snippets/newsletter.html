@@ -1,0 +1,56 @@
+<form class="newsletter-form" action="{{ links.newsletter }}" method="POST">
+	<input type="hidden" name="loja" value="{{ store.id }}">
+	
+	<div class="b-xs-12 b-md-4">
+		<h4 class="visuallyhidden">Newsletter</h4>
+		<p class="newsletter-form__cta">
+			{% if settings.newsletter_cta_text %}
+				{{ settings.newsletter_cta_text }}
+			{% else %}
+				Assine nossa Newsletter!
+			{% endif %}
+		</p>
+	</div>
+	
+	<div class="b-xs-12 b-md-3 b-sm-c">
+		<input
+			class="newsletter-form__input"
+			name="name"
+			type="text"
+			aria-label="Nome"
+			placeholder="Digite seu nome"
+			required
+		>      
+	</div>
+	
+	<div class="b-xs-12 b-md-3">
+		<input
+			class="newsletter-form__input"
+			name="email"
+			type="email"
+			aria-label="E-mail"
+			placeholder="Digite seu e-mail"
+			required
+		>
+	</div>
+
+	<input
+		type="text"
+		name="phone"
+		id="phone"
+		autocomplete="off"
+		aria-label="N&atilde;o preencha este campo; mantenha-o vazio para o formul&aacute;rio ser devidamente enviado."
+		class="newsletter-form__pot"
+		tabindex="-1"
+	>
+	
+	<div class="b-xs-12 b-md-2">
+		<button class="newsletter-form__button bt">
+			{% if settings.newsletter_button_text %}
+				{{ settings.newsletter_button_text }}
+			{% else %}
+				Assinar
+			{% endif %}
+		</button>
+	</div>
+</form>

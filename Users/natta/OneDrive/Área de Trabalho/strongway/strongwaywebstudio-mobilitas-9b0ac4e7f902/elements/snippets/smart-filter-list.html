@@ -1,0 +1,83 @@
+<ul class="smart-filter__list">
+	{% for item in filter_values.items %}
+		<li class="smart-filter__item">
+			{# Guarda o título/nome do filtro #}
+			{% set title = item.title %}
+											
+			{# Se for uma faixa de preço... #}
+			{% if item.name == 'range' %}
+				{# Altera o texto da primeira faixa para "Até R$ XX" #}
+				{% if loop.index == 1 %}
+					{%
+						set title =
+						'At&eacute; '
+						~ settings.currency
+						~ item.to|round(0, 'ceil')|number_format(0, ',', '.')
+					%}
+				{# As demais, formata para "De R$ XX a R$ XX" #}
+				{% else %}
+					{%
+						set title =
+						'De '
+						~ settings.currency
+						~ ' '
+						~ item.from|round(0, 'ceil')|number_format(0, ',', '.')
+						~ ' a '
+						~ settings.currency
+						~ item.to|round(0, 'ceil')|number_format(0, ',', '.') %}
+				{% endif %}
+			{% endif %}
+			
+			{% if item.type == "link" %}
+				<span class="smart-filter__color">
+					{%
+						if item.image_color
+						or item.image_color_secure
+					%}
+						{% if utils.is_https %}
+							{% set image_url = item.image_color_secure %}
+						{% else %}
+							{% set image_url = item.image_color %}
+						{% endif %}
+
+						<img src="{{ image_url }}" class="smart-filter__thumb" alt="">
+					{% endif %}
+				</span>
+				
+				<a href="{{ item.url }}" class="smart-filter__link">{{ title }}</a>
+			{% endif %}
+
+			{% if item.type == "checkbox" %}
+				<label class="smart-filter__label">
+					{% set checked = item.applied ? 'checked="checked"' %}
+						
+					<input
+						class="smart-filter__checkbox"
+						type="checkbox"
+						name="{{ item.name }}"
+						value="{{ item.value }}"
+						{{ checked }}
+					/>
+					
+
+					<span class="smart-filter__text">
+						{%
+							if item.image_color
+							or item.image_color_secure
+						%}
+							{% if utils.is_https %}
+								{% set image_url = item.image_color_secure %}
+							{% else %}
+								{% set image_url = item.image_color %}
+							{% endif %}
+
+							<img src="{{ image_url }}" class="smart-filter__thumb" alt="">
+						{% endif %}
+						
+						{{ title }}
+					</span>
+				</label>
+			{% endif %}
+		</li>
+	{% endfor %}
+</ul>

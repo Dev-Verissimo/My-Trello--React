@@ -1,0 +1,34 @@
+// Este arquivo serve para importar todos os módulos básicos da folha
+// de estilos, como variáveis, mixins, resets, elementos básicos de
+// interface, etc.
+
+// Variáveis globais
+@import "variaveis";
+
+// Funções
+@import "mixins/ems";
+@import "mixins/rems";
+@import "mixins/strip-unit";
+
+// Variáveis dos ícones
+@import "icons-theme/variables";
+
+// Mixins
+@import "mixins/flo-control";
+@import "mixins/centralizado";
+@import "mixins/resetbox";
+@import "mixins/opacity";
+@import "mixins/pie";
+@import "mixins/overlay";
+@import "mixins/rem"; // Depende de _rems.scss & _strip-unit.scss
+@import "mixins/bp"; // Depende de _strip-unit.scss
+@import "mixins/square"; // Depende de _rem.scss
+@import "mixins/headings";
+@import "mixins/img";
+@import "mixins/transition";
+@import "mixins/tint-shade";
+@import "mixins/utilities"; // Depende de _bp.scss
+@import "mixins/separator-border";
+
+// Classes Extensíveis (placeholders)
+@import "core/placeholders";

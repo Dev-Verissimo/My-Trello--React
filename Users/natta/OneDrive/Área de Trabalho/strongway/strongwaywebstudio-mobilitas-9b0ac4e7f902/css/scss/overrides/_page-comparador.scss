@@ -1,0 +1,155 @@
+.page--comparador {
+	h1.color{
+		@include h2;
+	}
+
+	.comparatorTabs {
+		ul {
+			li {
+				display: inline-block;
+				@include rem(margin-right, 7);
+
+				a {
+					font-weight: bold;
+					color: $cinza-3;
+					display: inline-block;
+					vertical-align: middle;
+				}
+				
+				&.aberta {
+					a {
+						color: $texto-escuro;
+					}
+				}
+
+				.closeCat {
+					display: inline-block;
+					@include square(20);
+					border-radius: 100%;
+					background-color: $bg-cinza;
+					text-align: center;
+					line-height: 20px;
+					vertical-align: middle;
+
+					&:hover {
+						text-decoration: none;
+						background-color: shade($bg-cinza, 10%);
+					}
+				}
+			}
+		}
+
+		@include rem(margin-bottom, 15);
+	}
+
+	.comparator {
+		overflow-x: auto;
+		width: 100%;
+		@include separator-border('top');
+		@include rem(padding-bottom, 20);
+		@include rem(margin-bottom, 15);
+
+		> ul {
+			> li {
+				&.Labels {
+					font-weight: bold;
+				}
+
+				> ul {
+					display: table;
+					table-layout: fixed;
+
+					> li {
+						display: table-cell;
+						@include rem(width, 100);
+						@include rem(padding, 10);
+						@include separator-border('right');
+						@include separator-border();
+						vertical-align: top;
+
+						&:nth-child(odd) {
+							background-color: $bg-cinza;
+						}
+
+						&:first-child {
+							@include separator-border('left');
+						}
+
+						&:last-child {
+						}
+
+						&.comparsionFoto {
+							@include rem(width, 250);
+
+							[alt="Comprar"] {
+								@extend %base_bt_highlight;
+								
+								&:before {
+									content: "Comprar";
+								}
+
+								img {
+									@extend %visuallyhidden;
+								}
+							}
+							
+							[title="Escolher"] {
+								@extend %base_bt_secondary;
+
+								&:before {
+									content: "Escolher";
+								}
+
+								img {
+									@extend %visuallyhidden;
+								}
+							}
+						}
+
+						&.comparsionInfoPreco,
+						&.comparsionRate,
+						&.comparsionDescricao,
+						{
+							@include rem(width, 200);
+						}
+
+						.closeComp {
+							@include square(20);
+							border-radius: 100%;
+							background-color: $bg-cinza;
+							text-align: center;
+							line-height: 20px;
+							@include rem(top, 10);
+							@include rem(right, 10);
+							color: $texto-escuro;
+							border: none;
+
+							&:hover {
+								text-decoration: none;
+								background-color: shade($bg-cinza, 10%);
+								color: $texto-escuro;
+							}
+						}
+					}					
+				}
+			}			
+		}
+
+		.ranking {
+			height: auto;
+
+			[class^="star"] {
+				display: block;
+				color: $primaria;
+				width: 100%;
+			}
+
+			br,
+			.item,
+			.count,
+			.rating {
+				display: none;
+			}
+		}
+	}
+}

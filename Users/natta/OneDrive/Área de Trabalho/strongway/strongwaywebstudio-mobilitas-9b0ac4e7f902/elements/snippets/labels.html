@@ -1,0 +1,63 @@
+{% if 
+	product.featured
+	or product.new
+	or product.free_shipping
+	or product.additional_button
+%}
+	<div
+		class="product__labels product__labels--left
+		{{ modifier ? 'product__labels--' ~ modifier : null }}
+	">
+		{% if product.new %}
+			{% if settings.selo_lancamento %}
+				<span class="product__label product__label--new">
+					<img src="{{ asset(settings.selo_lancamento) }}" class="" alt="{{ settings.selo_lancamento_alt }}" title="{{ settings.selo_lancamento_alt }}">
+				</span>
+			{% else %}
+				<span class="product__label product__label--new">{{ Image('new') }}</span>	
+			{% endif %}	
+		{% endif %}
+		
+		{% if product.featured %}
+			{% if settings.selo_destaque %}
+				<span class="product__label product__label--featured">
+					<img src="{{ asset(settings.selo_destaque) }}" class="" alt="{{ settings.selo_destaque_alt }}" title="{{ settings.selo_destaque_alt }}">
+				</span>
+			{% else %}
+				<span class="product__label product__label--featured">{{ Image('featured') }}</span>	
+			{% endif %}	
+		{% endif %}
+
+		{% if product.additional_button %}
+			{% if settings.selo_adicional %}
+				<span class="product__label product__label--additional">
+					<img src="{{ asset(settings.selo_adicional) }}" class="" alt="{{ settings.selo_adicional_alt }}" title="{{ settings.selo_adicional_alt }}">
+				</span>
+			{% else %}
+				<span class="product__label product__label--additional">{{ Image('additional_button') }}</span>	
+			{% endif %}      
+		{% endif %}
+
+	
+	{% if modifier != 'inline' %}
+		</div>
+		
+		<div
+			class="product__labels product__labels--right
+			{{ modifier ? 'product__labels--' ~ modifier : null }}
+		">
+	{% endif %}
+	
+		{% if product.free_shipping %}
+			{% if settings.selo_frete %}
+				<span class="product__label product__label--free-shipping">
+					<img src="{{ asset(settings.selo_frete) }}" class="" alt="{{ settings.selo_frete_alt }}" title="{{ settings.selo_frete_alt }}">
+				</span>
+			{% else %}
+				<span class="product__label product__label--free-shipping">
+					{{ Image('free_shipping') }}
+				</span>
+			{% endif %}
+		{% endif %}
+	</div>   
+{% endif %}

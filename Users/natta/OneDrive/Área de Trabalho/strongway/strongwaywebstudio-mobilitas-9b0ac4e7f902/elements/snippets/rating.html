@@ -1,0 +1,12 @@
+{% if product.ranking.count > 0 %}
+	<div class="product__rating">
+		<span class="visuallyhidden">Nota do produto:</span>
+		<span class="visuallyhidden">{{ product.ranking.rating }}</span>
+		<span class="visuallyhidden">. Quantidade de avalia&ccedil;&otilde;es:</span>
+		<span class="visuallyhidden">{{ product.ranking.count }}</span>
+
+		{% for i in 1..5 %}
+			<span class="icon-star product__star {{ i > product.ranking.rating ? '' : 'is-active' }}"></span>
+		{% endfor %}
+	</div>
+{% endif %}

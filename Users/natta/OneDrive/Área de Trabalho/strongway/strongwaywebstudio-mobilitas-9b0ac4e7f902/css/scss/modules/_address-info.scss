@@ -1,0 +1,36 @@
+.address-info {
+	@include rem(margin-bottom, 20);
+
+	&__text {
+		@include rem(padding-left, 25);
+		position: relative;
+		
+		&:before {
+			@extend %icons_theme;
+			content: $icon-map-pin;
+			position: absolute;
+			left: 0;
+			top: 0;
+			color: $primaria;
+			@include rem(font-size, 16);
+		}
+	}
+	
+	&__map-link {
+		color: inherit;
+
+		&:visited {
+			color: inherit;
+		}
+	}
+
+	&__icon {
+		color: inherit;
+		position: relative;
+		top: 0.1em;
+
+		&:visited {
+			color: inherit;
+		}
+	}
+}

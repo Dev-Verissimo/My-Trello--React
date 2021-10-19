@@ -1,0 +1,21 @@
+.page--downloads {
+	.container3 {
+		> .container2 {
+			> .board {
+				h1.color {
+					@include h2;
+
+					+ br {
+						display: none;
+					}
+				}
+
+				+ hr {
+					+ .board {
+						@include rem(margin-bottom, 15);
+					}
+				}
+			}
+		}
+	}
+}

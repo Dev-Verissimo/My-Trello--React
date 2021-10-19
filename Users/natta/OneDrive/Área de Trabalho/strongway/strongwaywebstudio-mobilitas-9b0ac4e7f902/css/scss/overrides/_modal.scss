@@ -1,0 +1,250 @@
+// Override Geral das Modais
+.modal {
+	.modal-title {
+		@include rem(font-size, 20);
+		font-weight: normal;
+		text-transform: uppercase;
+		color: $texto-escuro;
+	}
+
+	.modal-content {
+		@extend %base_shadow;
+		border: 0;
+	}
+
+	.modal-header {
+		.close {
+			top: 0;
+		}
+	}	
+	
+	.modal-body {
+		@include rem(min-height, 80);
+		@include rem(max-height, 400);
+		overflow-y: auto;
+
+		// Table Override
+		.tablePage {
+			border-collapse: collapse;
+			
+			th, td {
+				@include separator-border;
+				@include separator-border('right');
+				text-align: left;
+				@include rem(padding, 10);
+				@include rem(font-size, 14);
+
+				&:last-child {
+					border-right: 0;
+				}
+			}
+
+			th {
+				background-color: $bg-cinza;
+			}
+
+			td {
+			}
+		}
+
+		span.color {
+			font-weight: bold;
+		}
+	}
+
+	img.loader {
+		display: block;
+		margin: 0 auto;
+	}
+
+	// Corrige modal de produtos no mobile
+	&.in:not(.cart-preview) {
+		.modal-dialog {
+			@include bp(max-width, $bp-md) {
+				top: 5% !important;
+				left: 5% !important;
+				right: 5% !important;
+				bottom: 5% !important;
+				margin: 0 !important;
+				width: 90% !important;
+				height: 90% !important;
+				overflow: auto;
+			}
+		}
+	}
+}
+
+// Modal Form (Caso especial para modais com formulários
+// como Cotação, Termo de aceitação...
+#modal-form {
+	br {
+		display: none;
+	}
+
+	form {
+		@include rem(font-size, $basefont);
+	}
+
+	label {
+		display: block;
+		@include rem(margin-bottom, 10);
+	}
+
+	.text,
+	.textarea {
+		display: block;
+		@include rem(font-size, $basefont);
+	}
+
+	.text {
+		@include rem(margin-bottom, 5);
+	}
+
+	.textarea {
+		font-weight: normal;
+	}
+
+	fieldset {
+		margin-bottom: 0;
+
+		> p {
+			@include rem(margin-top, 10);
+		}
+	}
+
+	.perguntasProdutoBTimg {
+		@extend %base_bt_secondary;
+		float: none;
+		height: $bt-height;
+		width: auto;
+
+		.botao-commerce-img {
+			font-weight: inherit;
+			text-transform: inherit;
+		}
+	}
+
+	#div_atualiza {
+		label {
+			display: flex;
+			flex-direction: column;
+			@include rem(margin-top, 10);
+		}
+		.text {
+			height: 35px !important;
+			@include rem(margin-top, 5);
+			@include rem(padding, 0 0 0 5);
+		}
+	}
+
+	#spanTextarea {
+		border-left: 0 !important;
+
+		textarea {
+			@extend .obriga;
+			width: 100%;
+		}
+	}
+	
+	.modal-body {
+		button {
+			@extend %base_bt_secondary;
+			width: auto;
+			float: none;
+		}		
+	}
+}
+
+// Modal Carrinho na página de produto
+.cart-preview {
+}
+
+.cart-preview-footer {
+	.botao-prosseguir-compra, 
+	.botao-continuar-comprando {
+		@include bp(max-width, $bp-sm) {
+			width: 100%;
+			padding: 0;
+			float: none;
+			@include rem(margin-bottom, 10);
+		}
+	}
+
+	.botao-continuar-comprando {
+		// @extend %base_bt_secondary;
+	}
+
+	.botao-prosseguir-compra {
+		@extend %base_bt_highlight;;
+		margin-right: 0;
+		@include rem(border-radius, 3);
+	}
+
+	.botao-commerce-img {
+		display: block;
+		font-weight: normal;
+	}
+}
+
+.cart-preview-quantity-tag-box {
+	background-color: $cinza-5;
+	color: $texto-claro;
+}
+
+.cart-preview-item-delete {
+	font-size: 0;
+	text-decoration: none;
+
+	&:before {
+		@extend %icons_theme;
+		content: $icon-trash-2;
+		@include rem(font-size, 22);
+
+		@supports (-webkit-touch-callout: none) {
+			font-family: $fonte;
+			content: "x"; 
+		}
+	}
+}
+
+.cart-preview-subtotal {
+	color: $texto-escuro;
+	@include rem(font-size, 20);
+}
+
+// Modal Simulação de Frete
+.page-simula-frete {
+	p[align="right"] {
+		text-align: left;
+		text-transform: uppercase;
+		@include rem(margin, 15 0);
+	}
+}
+
+// Modal Termo de aceitação
+#concorda-termo {
+	@include rem(margin-top, 20);
+}
+
+#acceptTerm {
+	@extend %base_bt;
+	@include rem(margin-top, 10);
+	display: block;
+}
+
+// Modal na página de busca quando não encontra nenhum produto
+// o cliente tem a opção de abrir um modal com formulário
+.page--search {
+	#modal-form {
+		.modal-title {
+			&:before {
+				content: "Fale conosco";
+			}
+		}
+
+		.advancedSearchFormBTimg {
+			@include rem(padding, 0 10);
+			width: auto;
+		}
+	}
+}

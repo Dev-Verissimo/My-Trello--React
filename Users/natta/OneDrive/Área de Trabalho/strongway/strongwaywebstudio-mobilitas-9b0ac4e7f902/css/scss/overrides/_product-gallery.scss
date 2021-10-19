@@ -1,0 +1,330 @@
+#visualAbas.produto-imagem-abas {
+	background-color: transparent;
+	
+	ul {
+		padding: 0;
+		border-bottom: 0;
+
+		li {
+			padding: 0;
+			margin: 0;
+
+			a {
+				@include rem(padding, 5 12 5 0);
+				@include rem(font-size, $basefont);
+				text-transform: lowercase;
+				font-weight: bold;
+				color: $cinza-3;
+
+				&:first-letter {
+					text-transform: uppercase;
+				}
+
+				&:hover {
+					color: $texto-cinza;
+				}
+			}
+
+			&.aberta {
+				a {
+					color: $texto-escuro;						
+				}
+			}
+		}
+	}
+}
+
+#colFotos,
+#colVideo {
+	border-top: 0;
+}
+
+#colFotos {
+	position: relative;
+	z-index: 1;
+
+	.produto-imagem {
+		position: relative;
+		@include rem(min-height, 350);
+		padding: 0;
+		background-color: $bg-claro;
+		display: flex;
+		flex-flow: column wrap;
+		width: 100%;
+		text-align: center;
+		align-items: center;
+		justify-content: center;
+		@include rem(border-radius, 3);
+
+		&.zoom-on {
+			#wrap {
+				.container_thumb {
+					&:after {
+						@extend %icons_theme;
+						content: $icon-zoom_in;
+						position: absolute;
+						@include square(24);
+						line-height: 24px;
+						background-color: rgba($bg-claro, 0.75);
+						@include rem(border-radius, 3);
+						text-align: center;
+						@include rem(padding, 3);
+						@include rem(bottom, 5);
+						@include rem(right, 5);
+						@include rem(font-size, 24);
+						pointer-events: none;
+					}
+				}
+			}
+
+			a {
+				overflow: hidden;
+				@include rem(border-radius, 3);
+			}
+		}
+	}
+
+	.fluid-width-video-wrapper {
+		position: static;
+	}
+}
+
+// Botão "Galeria"
+#add {
+	display: none;
+	position: absolute;
+	@include rem(top, -26);
+	right: 0;
+	@include rem(font-size, 20);
+	z-index: 3;
+
+	@include bp(min-width, $bp-md + 1) {
+		display: block;
+	}
+	
+	.imgLinks {
+		cursor: pointer;
+
+		&:after {
+			@extend %icons_theme;
+			content: $icon-image;
+			@include square(20);
+			line-height: 20px;
+			@include rem(font-size, 20);
+			background-color: transparent;
+			@include rem(border-radius, 3);
+			text-align: center;
+			padding: 0;
+			pointer-events: none;
+		}
+	}
+
+	img {
+		@extend %visuallyhidden;
+	}
+}
+
+#wrap {
+	display: block;
+	margin: 0 auto;
+}
+
+// Conteúdo da Galeria em Lightbox
+#fotoabas {
+	border: 1px solid $hr-border-color;
+}
+
+#fotoBlock > tbody > tr > td:first-child {
+	vertical-align: top;
+}
+
+#foto_p img {
+	max-width: 100%!important;
+}
+
+// Galeria slider
+#foto_a {
+	@include rem(padding, 7 0 0);
+	margin-top: 0;
+	
+	a {
+		background-image: none;
+		float: none;
+		max-height: none;
+		height: 100%;
+		max-height: 100%;
+		text-align: center;
+		width: auto;
+		margin-right: 0;
+		overflow: hidden;
+	}
+
+	li {
+		background-color: $bg-claro;
+		width: percentage(82/452);
+		margin-right: percentage(((452 - (82*5))/4)/452);
+		@include rem(max-width, 82);
+		overflow: hidden;
+		@include rem(border-radius, 3);
+		float: left;
+
+		&:not(.jcarousel-item):nth-child(5n) {
+			margin-right: 0;
+		}
+	}
+
+	.produto-imagem-miniatura {
+		display: block;
+		padding-top: 100%;
+		position: relative;
+
+		a {
+			@extend %base_transition;
+			display: block;
+			@include overlay;
+			background-color: $bg-cinza;
+			
+			&:hover {
+				background-color: shade($bg-cinza, 5%);
+			}
+		}
+	}
+
+	.jcarousel-item a {
+		width: 100%;
+	}
+
+	img {
+		max-width: 100%;
+		max-height: 100%;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+ }
+
+.icon-video {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	@include rem(font-size, 40);
+	text-decoration: none;
+	padding: 0;
+	color: $secundaria;
+
+	&:before {
+		@extend %icons_theme;
+		content: $icon-video;
+	}
+}
+
+.icone-video-cor {
+	position: relative;
+
+	.icon-video {
+		@include rem(font-size, 30);
+	}
+}
+
+.jcarousel-skin-tango .jcarousel-clip-horizontal {
+ 	width: auto;
+	@include rem(max-width, 280);
+	@include rem(height, 82);
+
+	@include bp(min-width, $bp-sm + 1) {
+		@include rem(max-width, 366);
+	}
+
+	@include bp(min-width, $bp-md + 1) {
+		@include rem(max-width, 390);  
+	}
+
+	@include bp(min-width, $bp-lg + 1) {
+		@include rem(max-width, 452);
+	}
+}
+
+.jcarousel-skin-tango .jcarousel-container-horizontal {
+	@include rem(max-width, 461);
+	@include rem(padding, 0);
+}
+
+#foto_a .jcarousel-skin-tango .jcarousel-item {
+	@include rem(width, 82);
+	@include rem(height, 82);
+	@include rem(margin-right, 10);
+}
+
+.jcarousel-skin-tango .jcarousel-next-horizontal,
+.jcarousel-skin-tango .jcarousel-prev-horizontal {
+	top: 50%;
+	transform: translateY(-50%);
+	@include rem(height, 24);
+	width: auto;
+	background: none;
+
+	&[disabled],
+	&[disabled="disabled"] {
+		opacity: 0;
+	}
+
+	&:after {
+		@extend %base_shadow;
+		@extend %base_transition;
+		@extend %icons_theme;
+		content: $icon-chevron-right;
+		@include rem(font-size, 24);
+		@include square(24);
+		line-height: 24px;
+		@include rem(border-radius, 3);
+		text-align: center;
+		@include rem(padding, 3);
+		color: $texto-escuro;
+		background-color: $cinza-2;
+		border: 1px solid rgba(black, 0.15);
+	}
+
+	&:hover {
+		&:after {
+			background-color: $cinza-5;
+			color: $texto-claro;
+		}
+	}
+}
+
+.jcarousel-skin-tango .jcarousel-next-horizontal {
+	@include rem(right, -5);
+
+	&:after {
+		content: $icon-chevron-right;
+	}
+}
+
+.jcarousel-skin-tango .jcarousel-prev-horizontal {
+	@include rem(left, -5);
+	&:after {
+		content: $icon-chevron-left;
+	}
+}
+
+// Ajustes do vídeo
+#colVideo {
+	.bloco {
+		width: 100%;
+		@include rem(padding, 20 0);
+		margin: 0;
+		border: none;
+	}
+
+	iframe {
+		display: block;
+		margin: 0 auto;
+	}
+} 
+
+.produto-video {
+	display: block;
+	margin: 0 auto;
+}

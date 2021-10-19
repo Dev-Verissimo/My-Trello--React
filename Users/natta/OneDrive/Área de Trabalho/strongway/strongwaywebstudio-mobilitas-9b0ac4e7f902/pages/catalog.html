@@ -1,0 +1,97 @@
+{% if utils.is_mobile %}
+	{% set banner_title = banners.extra8 %}
+{% else %}
+	{% set banner_title = banners.title %}
+{% endif %}
+
+{% if banner_title %}
+	{% element 'snippets/banner' {
+		"banner_data": banner_title,
+		"banner_modifier": "titulos",
+		"prevent_lazy_load": true
+	} %}
+{% endif %}
+
+<div class="clearfix">
+	<div class="hidden-xs hidden-sm">
+		{% element 'snippets/breadcrumb' %}
+	</div>
+</div>
+	
+<div class="grid-container">
+	<div class="b-xs-12 {{ (products|length > 0) ? 'b-lg-3' }}">
+		{% if settings.headings == "1" %}
+			<h2 class="page__title">{{ category.name }}</h2>
+		{% else %}
+			<h1 class="page__title">{{ category.name }}</h1>
+		{% endif %}
+	</div>
+	
+	{% if products|length > 0 %}
+		<div class="b-xs-12 b-lg-9">
+			<div class="catalog-controls">
+				{% element 'snippets/showcase-mode-switcher' %}
+				{% element 'snippets/filter' %}
+			</div>
+		</div>
+	{% endif %}
+</div>
+	
+{% if category.small_description %}
+	{% if settings.is_category_description_truncated %}
+		<div class="page__description__limiter is-limited">
+	{% endif %}
+		<div class="page__description board_htm">{{ category.small_description }}</div>
+	{% if settings.is_category_description_truncated %}
+			<button class="page__description__toggle">Ver mais</button>
+		</div>
+	{% endif %}
+{% endif %}
+
+<div class="grid-container">
+	{% set column_size = (filters or (filter_options and settings.show_new_filters) or banners.side) ? 'big' : 'small' %}
+
+	{% if filters or (filter_options and settings.show_new_filters) or banners.side %}
+		<div class="b-xs-12 b-md-3">
+			{% if filters %}
+				{% element 'snippets/smart-filter' %}
+			{% endif %}
+
+			{% if filter_options and settings.show_new_filters %}
+				{% element 'snippets/new-smart-filter' %}
+			{% endif %}
+
+			{% if banner.side and not utils.is_mobile %}
+				<div class="hidden-xs hidden-sm">
+					{% element 'snippets/banner' {
+						"banner_data": banners.side,
+						"prevent_lazy_load": true
+					} %}
+				</div>
+			{% endif %}
+		</div> 
+	{% endif %}
+
+	<div class="b-xs-12 {{ (filters or (filter_options and settings.show_new_filters) or banners.side) ? 'b-md-9' : null }}">
+		{% if products|length > 0 %}
+			{% element 'snippets/compare-button' %}
+
+			{% element 'snippets/showcase' {
+				"products": products,
+				"grid_container": true,
+				"column_size": column_size
+			} %}
+			
+			{% element 'snippets/compare-button' %}
+			
+			{% element 'snippets/pagination' %}
+		{% else %}
+	
+			<div class="base-box">
+				<p>Nenhum produto encontrado nessa categoria.</p>
+			</div>
+	
+		{% endif %}	
+	</div>
+</div>
+

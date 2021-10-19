@@ -1,0 +1,58 @@
+.site-brands {
+	@include rem(margin-bottom, 50);
+
+	&__title {
+		@extend .page__title;
+	}
+
+	&__slider {
+		width: 100%;
+		display: flex;
+		flex-flow: row wrap;
+		
+		&.slick-initialized {
+			display: block;
+		}
+	}
+}
+
+.site-brand {
+	width: percentage(140/348);
+	margin: percentage( (((348 - (140*2))/2)/2)/348 );
+	text-align: center;
+
+	@include bp(min-width, $bp-sm + 1) {
+		width: percentage(140/425);
+		margin: percentage( (((425 - (140*3))/3)/2)/425 );
+	}
+
+	@include bp(min-width, $bp-md + 1) {
+		width: percentage(140/1200);
+		margin: percentage( (((1200 - (140*8))/8)/2)/1200 );		
+	}
+
+	.slick-initialized & {
+		width: auto;
+		@include rem(margin, 0 10 0 0);
+	}
+
+	&__logo {
+		width: 100%;
+	}
+	
+	&__placeholder {
+		padding-top: percentage(160/230);
+		position: relative;
+	}
+
+	&__name {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translateY(-50%) translateX(-50%);
+	}
+
+	&--no-image {
+		background-color: $bg-cinza;
+	}
+}

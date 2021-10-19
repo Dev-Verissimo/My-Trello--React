@@ -1,0 +1,71 @@
+.btns-paginator {
+	@extend .pagination__link;
+	@include rem(margin-left, 3);
+
+	&.selectedPg {
+		@extend .pagination__link--active;
+		color: $texto-claro;
+
+		&:hover {
+			@extend .pagination__link--active;			
+		}
+	}
+}
+
+.btns-paginator {
+	color: $texto-escuro;
+	display: inline-block;
+	padding: 0;
+	@include rem(height, $bt-height);
+	@include rem(line-height, $bt-height);
+	@include rem(min-width, 28);
+	@include rem(font-size, 14);
+
+	&:visited {
+		color: $texto-escuro;
+	}
+
+	&:hover {
+		background-color: $bg-cinza;
+	}
+}
+
+.separador-paginas {
+	display: none;
+}
+
+.btn-primeira-pagina,
+.btn-pagina-anterior,
+.btn-proxima-pagina,
+.btn-ultima-pagina {
+	@extend .pagination__link;
+	font-weight: normal;
+	color: $texto-escuro;
+	font-family: $fonte !important;
+	@include rem(padding, 0 10);
+
+	&:visited {
+		color: $texto-escuro;
+	}
+
+	img {
+		display: none;
+	}
+
+	@include bp(max-width, $bp-sm) {
+		display: none;
+	}
+}
+
+.btn-pagina-anterior {
+	@include rem(padding, 0 10 0 4);
+}
+.btn-primeira-pagina {
+	@include rem(padding, 0 10 0 4);
+}
+.btn-proxima-pagina{
+	@include rem(padding, 0 10 0 4);
+}
+.btn-ultima-pagina {
+	@include rem(padding, 0 4 0 10);
+}
